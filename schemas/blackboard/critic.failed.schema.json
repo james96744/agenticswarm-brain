@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["event_type", "task_id", "agent_id", "artifact_id", "timestamp"],
+  "properties": {
+    "event_type": { "const": "critic.failed" },
+    "task_id": { "type": "string" },
+    "agent_id": { "type": "string" },
+    "artifact_id": { "type": "string" },
+    "failure_reasons": { "type": "array", "items": { "type": "string" } },
+    "timestamp": { "type": "string" }
+  },
+  "additionalProperties": true
+}

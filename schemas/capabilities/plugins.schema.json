@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "registry_defaults", "selection_policy", "plugin_templates", "plugins"],
+  "properties": {
+    "version": { "type": "string" },
+    "registry_defaults": { "type": "object", "additionalProperties": true },
+    "selection_policy": { "type": "object", "additionalProperties": true },
+    "plugin_templates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["plugin_id", "type", "enabled", "source"],
+        "properties": {
+          "plugin_id": { "type": "string" },
+          "type": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "source": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "plugins": { "type": "array", "items": { "type": "object", "additionalProperties": true } }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "state"],
+  "properties": {
+    "version": { "type": "string" },
+    "state": {
+      "type": "object",
+      "required": ["enabled", "autostart_installed", "last_install_status", "last_maintenance_summary"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "autostart_installed": { "type": "boolean" },
+        "autostart_platform": { "type": ["string", "null"] },
+        "autostart_label": { "type": ["string", "null"] },
+        "autostart_path": { "type": ["string", "null"] },
+        "last_install_attempt_at": { "type": ["string", "null"] },
+        "last_install_status": { "type": "string" },
+        "last_install_error": { "type": ["string", "null"] },
+        "last_maintenance_run_at": { "type": ["string", "null"] },
+        "last_maintenance_summary": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

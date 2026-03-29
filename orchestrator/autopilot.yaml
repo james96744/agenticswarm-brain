@@ -1,0 +1,28 @@
+version: "1.0"
+last_updated: "2026-03-29"
+description: Autopilot policy for self-running audits, startup rechecks, maintenance, and OS autostart integration.
+
+autopilot:
+  enabled: true
+  install_autostart_on_manual_audit: true
+  startup_recheck_enabled: true
+  startup_recheck_interval_seconds: 900
+  runtime_checks_on_manual_audit: true
+  runtime_checks_on_startup_recheck: false
+  maintenance:
+    reconcile_memory: true
+    prune_topology: true
+    prepare_distillation: true
+    seed_simulation_if_routes_empty: true
+  autostart:
+    strategy: auto
+    supported_platforms:
+      - darwin
+    darwin:
+      mode: launchd
+      run_at_load: true
+      keep_alive: false
+
+notes:
+  - The manual auditor bootstraps this autopilot policy and installs autostart when supported.
+  - Startup rechecks should be lightweight and only escalate to a full audit when watched roots change.

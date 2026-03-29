@@ -1,0 +1,709 @@
+version: '1.0'
+last_updated: '2026-03-29'
+description: Portable registry for repository-local and globally installed MCP servers,
+  configs, and resources.
+registry_defaults:
+  enabled: true
+  auto_discover: true
+  prefer_repo_local_mcp: true
+  allow_global_mcp: true
+  parse_server_definitions_when_possible: true
+  discover_executable_wrappers: true
+selection_policy:
+  require_transport_metadata: true
+  require_provenance: true
+  prefer_verified_configs: true
+  require_secret_inventory_for_remote_servers: true
+  precedence_order:
+  - repository_declared
+  - repository_discovered
+  - portable_template
+  - global_mcp
+mcp_templates:
+- mcp_id: filesystem
+  enabled: true
+  source: built_in
+  kind: stdio_server
+  transport: stdio
+  capabilities:
+  - file_read
+  - file_write
+  - directory_listing
+  auth_required: false
+  secret_requirements: []
+  trustworthiness: 0.9
+  verification_coverage: 0.85
+- mcp_id: docs
+  enabled: true
+  source: built_in
+  kind: http_server
+  transport: http
+  capabilities:
+  - document_lookup
+  - reference_search
+  - structured_context
+  auth_required: depends
+  secret_requirements: []
+  trustworthiness: 0.85
+  verification_coverage: 0.8
+mcp_entries:
+- mcp_id: uvxmcp-server-fetch-results
+  enabled: true
+  kind: config_file
+  path: /Users/j/.claude/plugins/goose-main/crates/goose/tests/mcp_replays/uvxmcp-server-fetch.results.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: github-mcp-serverstdio-results
+  enabled: true
+  kind: config_file
+  path: /Users/j/.claude/plugins/goose-main/crates/goose/tests/mcp_replays/github-mcp-serverstdio.results.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: uvrun-withfastmcp-2-14-4fastmcpruntests-fastmcp-test-server-py-results
+  enabled: true
+  kind: config_file
+  path: /Users/j/.claude/plugins/goose-main/crates/goose/tests/mcp_replays/uvrun--withfastmcp==2.14.4fastmcpruntests_fastmcp_test_server.py.results.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: graphiti
+  enabled: true
+  kind: server_definition
+  transport: stdio
+  path: /Users/j/.claude/plugins/graphiti-main/mcp_server/config/mcp_config_stdio_example.json
+  command: uv
+  args:
+  - run
+  - /ABSOLUTE/PATH/TO/main.py
+  - --transport
+  - stdio
+  scope: global
+  source: global_mcp_config
+- mcp_id: vercel
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/.codex/.tmp/plugins/plugins/build-web-apps/.mcp.json
+  url: https://mcp.vercel.com
+  scope: global
+  source: global_mcp_config
+- mcp_id: stripe
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/.claude/plugins/cache/claude-plugins-official/stripe/0.1.0/.mcp.json
+  url: https://mcp.stripe.com
+  scope: global
+  source: global_mcp_config
+- mcp_id: supabase
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/.codex/.tmp/plugins/plugins/build-web-apps/.mcp.json
+  url: https://mcp.supabase.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: cloudflare-api
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/.codex/.tmp/plugins/plugins/cloudflare/.mcp.json
+  url: https://mcp.cloudflare.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: hf-mcp-server
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/.codex/.tmp/plugins/plugins/hugging-face/.mcp.json
+  url: https://huggingface.co/mcp?login
+  scope: global
+  source: global_mcp_config
+- mcp_id: add-mcp-server
+  enabled: true
+  kind: config_file
+  path: /Users/j/.claude/plugins/goose-main/documentation/src/pages/recipes/data/recipes/add-mcp-server.yaml
+  scope: global
+  source: global_mcp_config
+- mcp_id: release-mcp-server
+  enabled: true
+  kind: config_file
+  path: /Users/j/.claude/plugins/graphiti-main/.github/workflows/release-mcp-server.yml
+  scope: global
+  source: global_mcp_config
+- mcp_id: mcp-tools
+  enabled: true
+  kind: config_file
+  path: /Users/j/.claude/skills/voltagent--voltagent-core-2.6.4/examples/with-cerbos/policies/mcp_tools.yaml
+  scope: global
+  source: global_mcp_config
+- mcp_id: mcp
+  enabled: true
+  kind: config_file
+  path: /Users/j/.claude/plugins/cache/claude-plugins-official/playwright/d5c15b861cd2/.mcp.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: cline-mcp-settings
+  enabled: true
+  kind: config_file
+  path: /Users/j/Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: mcp-auth
+  enabled: true
+  kind: config_file
+  path: /Users/j/.cursor/projects/var-folders-4k-n41g-qzd39vdsqh0-phybjm0000gn-T-6b53a819-54ac-4f82-963a-9cae47cd31a9/mcps/plugin-adspirer-ads-agent-adspirer/tools/mcp_auth.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: mcp-needs-auth-cache
+  enabled: true
+  kind: config_file
+  path: /Users/j/.claude/mcp-needs-auth-cache.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: discord
+  enabled: true
+  kind: server_definition
+  transport: stdio
+  path: /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/discord/.mcp.json
+  command: bun
+  args:
+  - run
+  - --cwd
+  - ${CLAUDE_PLUGIN_ROOT}
+  - --shell=bun
+  - --silent
+  - start
+  scope: global
+  source: global_mcp_config
+- mcp_id: fakechat
+  enabled: true
+  kind: server_definition
+  transport: stdio
+  path: /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/fakechat/.mcp.json
+  command: bun
+  args:
+  - run
+  - --cwd
+  - ${CLAUDE_PLUGIN_ROOT}
+  - --shell=bun
+  - --silent
+  - start
+  scope: global
+  source: global_mcp_config
+- mcp_id: telegram
+  enabled: true
+  kind: server_definition
+  transport: stdio
+  path: /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/telegram/.mcp.json
+  command: bun
+  args:
+  - run
+  - --cwd
+  - ${CLAUDE_PLUGIN_ROOT}
+  - --shell=bun
+  - --silent
+  - start
+  scope: global
+  source: global_mcp_config
+- mcp_id: huggingface-skills
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/.claude/plugins/cache/claude-plugins-official/huggingface-skills/1.0.1/.mcp.json
+  url: https://huggingface.co/mcp?login
+  scope: global
+  source: global_mcp_config
+- mcp_id: adspirer
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/.claude/plugins/cache/claude-plugins-official/adspirer-ads-agent/1.1.0/.mcp.json
+  url: https://mcp.adspirer.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: semgrep
+  enabled: true
+  kind: server_definition
+  transport: stdio
+  path: /Users/j/.claude/plugins/cache/claude-plugins-official/semgrep/6f3962351041/plugin/.mcp.json
+  command: semgrep
+  args:
+  - mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: claude
+  enabled: true
+  kind: config_file
+  path: /Users/j/.claude/plugins/marketplaces/local-desktop-app-uploads/ui-ux-pro-max/cli/assets/templates/platforms/claude.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: ant-dir-gh-jpisnice-shadcn-ui-mcp
+  enabled: true
+  kind: config_file
+  path: /Users/j/Library/Application Support/Claude/Claude Extensions Settings/ant.dir.gh.jpisnice.shadcn-ui-mcp.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: ant-dir-gh-tomtom-tomtom-mcp
+  enabled: true
+  kind: config_file
+  path: /Users/j/Library/Application Support/Claude/Claude Extensions Settings/ant.dir.gh.tomtom.tomtom-mcp.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: ant-dir-gh-vendr-vendr-mcp
+  enabled: true
+  kind: config_file
+  path: /Users/j/Library/Application Support/Claude/Claude Extensions Settings/ant.dir.gh.vendr.vendr-mcp.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: slack
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/design/1.1.0/.mcp.json
+  url: https://mcp.slack.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: canva
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/marketing/.mcp.json
+  url: https://mcp.canva.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: figma
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/brand-voice/1.0.0/.mcp.json
+  url: https://mcp.figma.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: hubspot
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/marketing/.mcp.json
+  url: https://mcp.hubspot.com/anthropic
+  scope: global
+  source: global_mcp_config
+- mcp_id: amplitude
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/data/.mcp.json
+  url: https://mcp.amplitude.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: notion
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/brand-voice/1.0.0/.mcp.json
+  url: https://mcp.notion.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: ahrefs
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/marketing/.mcp.json
+  url: https://api.ahrefs.com/mcp/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: similarweb
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/marketing/.mcp.json
+  url: https://mcp.similarweb.com
+  scope: global
+  source: global_mcp_config
+- mcp_id: klaviyo
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/marketing/.mcp.json
+  url: https://mcp.klaviyo.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: google-calendar
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/design/1.1.0/.mcp.json
+  url: https://gcal.mcp.claude.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: gmail
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/design/1.1.0/.mcp.json
+  url: https://gmail.mcp.claude.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: close
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/sales/.mcp.json
+  url: https://mcp.close.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: clay
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/sales/.mcp.json
+  url: https://api.clay.com/v3/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: zoominfo
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/sales/.mcp.json
+  url: https://mcp.zoominfo.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: atlassian
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/brand-voice/1.0.0/.mcp.json
+  url: https://mcp.atlassian.com/v1/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: fireflies
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/product-management/.mcp.json
+  url: https://api.fireflies.ai/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: ms365
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/operations/1.1.0/.mcp.json
+  url: https://microsoft365.mcp.claude.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: apollo
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/partner-built/apollo/.mcp.json
+  url: https://mcp.apollo.io/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: outreach
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/sales/.mcp.json
+  url: https://mcp.outreach.io/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: asana
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/design/1.1.0/.mcp.json
+  url: https://mcp.asana.com/v2/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: linear
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/design/1.1.0/.mcp.json
+  url: https://mcp.linear.app/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: monday
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/productivity/.mcp.json
+  url: https://mcp.monday.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: clickup
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/productivity/.mcp.json
+  url: https://mcp.clickup.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: pendo
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/product-management/.mcp.json
+  url: https://app.pendo.io/mcp/v0/shttp
+  scope: global
+  source: global_mcp_config
+- mcp_id: intercom
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/design/1.1.0/.mcp.json
+  url: https://mcp.intercom.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: snowflake
+  enabled: true
+  kind: server_definition
+  transport: unknown
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/data/.mcp.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: databricks
+  enabled: true
+  kind: server_definition
+  transport: unknown
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/data/.mcp.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: bigquery
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/data/.mcp.json
+  url: https://bigquery.googleapis.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: hex
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/data/.mcp.json
+  url: https://app.hex.tech/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: box
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/brand-voice/1.0.0/.mcp.json
+  url: https://mcp.box.com
+  scope: global
+  source: global_mcp_config
+- mcp_id: egnyte
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/legal/.mcp.json
+  url: https://mcp-server.egnyte.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: docusign
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/legal/.mcp.json
+  url: https://mcp.docusign.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: guru
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/enterprise-search/.mcp.json
+  url: https://mcp.api.getguru.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: github
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/cowork-plugin-management/0.2.2/skills/cowork-plugin-customizer/examples/customized-mcp.json
+  url: https://api.githubcopilot.com/mcp/
+  scope: global
+  source: global_mcp_config
+- mcp_id: pagerduty
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/engineering/.mcp.json
+  url: https://mcp.pagerduty.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: datadog
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/cowork-plugin-management/0.2.2/skills/cowork-plugin-customizer/examples/customized-mcp.json
+  url: https://api.datadoghq.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: pubmed
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research/.mcp.json
+  url: https://pubmed.mcp.claude.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: biorender
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research/.mcp.json
+  url: https://mcp.services.biorender.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: biorxiv
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research/.mcp.json
+  url: https://mcp.deepsense.ai/biorxiv/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: c-trials
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research/.mcp.json
+  url: https://mcp.deepsense.ai/clinical_trials/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: chembl
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research/.mcp.json
+  url: https://mcp.deepsense.ai/chembl/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: synapse
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research/.mcp.json
+  url: https://mcp.synapse.org/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: wiley
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research/.mcp.json
+  url: https://connector.scholargateway.ai/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: owkin
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research/.mcp.json
+  url: https://mcp.k.owkin.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: ot
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research/.mcp.json
+  url: https://mcp.platform.opentargets.org/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: benchling
+  enabled: true
+  kind: server_definition
+  transport: unknown
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research/.mcp.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: servicenow
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/operations/1.1.0/.mcp.json
+  url: https://mcp.servicenow.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: gong
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/brand-voice/1.0.0/.mcp.json
+  url: https://mcp.gong.io/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: microsoft-365
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/brand-voice/1.0.0/.mcp.json
+  url: https://microsoft365.mcp.claude.com/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: granola
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/brand-voice/1.0.0/.mcp.json
+  url: https://mcp.granola.ai/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: common-room
+  enabled: true
+  kind: server_definition
+  transport: http
+  path: /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/partner-built/common-room/.mcp.json
+  url: https://mcp.commonroom.io/mcp
+  scope: global
+  source: global_mcp_config
+- mcp_id: mcpb-manifest-v0-2-schema
+  enabled: true
+  kind: config_file
+  path: /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/schemas/mcpb-manifest-v0.2.schema.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: mcpb-manifest-v1-0-schema
+  enabled: true
+  kind: config_file
+  path: /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/dist/mcpb-manifest-v1.0.schema.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: mcpb-manifest-v0-1-schema
+  enabled: true
+  kind: config_file
+  path: /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/schemas/mcpb-manifest-v0.1.schema.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: mcpb-signature-info-schema
+  enabled: true
+  kind: config_file
+  path: /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/dist/mcpb-signature-info.schema.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: mcpb-manifest-latest-schema
+  enabled: true
+  kind: config_file
+  path: /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/schemas/mcpb-manifest-latest.schema.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: mcpb-manifest-v0-3-schema
+  enabled: true
+  kind: config_file
+  path: /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/schemas/mcpb-manifest-v0.3.schema.json
+  scope: global
+  source: global_mcp_config
+- mcp_id: claude-desktop-config
+  enabled: true
+  kind: config_file
+  path: /Users/j/Library/Application Support/Claude/claude_desktop_config.json
+  scope: global
+  source: global_mcp_config
+notes:
+- Populate `mcp_entries` with discovered config-backed MCP servers and executable
+  MCP adapters.
+- Prefer parsed server definitions over opaque config file records when the structure
+  can be extracted safely.

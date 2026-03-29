@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "task_family_benchmarks", "model_benchmarks", "agent_pair_metrics", "agent_value_metrics", "adapter_benchmarks"],
+  "properties": {
+    "version": { "type": "string" },
+    "task_family_benchmarks": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "model_benchmarks": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "agent_pair_metrics": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "agent_value_metrics": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "adapter_benchmarks": { "type": "array", "items": { "type": "object", "additionalProperties": true } }
+  },
+  "additionalProperties": true
+}

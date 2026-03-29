@@ -1,0 +1,6 @@
+version: '1.0'
+last_updated: '2026-03-28'
+description: Detected memory conflicts awaiting reconciliation or archived with resolution.
+conflicts: []
+notes:
+- Populate from truth-maintenance scans and reconciliation sub-swarms.

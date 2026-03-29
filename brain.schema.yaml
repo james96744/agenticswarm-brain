@@ -1,0 +1,137 @@
+brain_manifest:
+  version: '1.0'
+  repository_profile:
+    name: agenticswarm creation
+    stack: []
+    risk_level: medium
+    orchestration_profile: adaptive
+  discovery:
+    enabled: true
+    inspect_repo_docs: true
+    inspect_local_agents: true
+    inspect_global_agents: true
+    inspect_local_skills: true
+    inspect_global_skills: true
+    inspect_plugins: true
+    inspect_global_plugins: true
+    inspect_mcp: true
+    inspect_global_mcp: true
+    inspect_clis: true
+    inspect_global_clis: true
+    inspect_models: true
+    inspect_tests: true
+    inspect_build: true
+    inspect_deploy: true
+    inspect_memory: true
+  validation:
+    schema_validation_enabled: true
+    audit_script: scripts/run_audit.py
+    bootstrap_script: scripts/bootstrap_brain.py
+    validator_script: scripts/validate_brain.py
+    simulation_script: scripts/simulate_swarm.py
+    startup_recheck_enabled: true
+    startup_recheck_mode: watch_roots_fingerprint
+  routing:
+    semantic_router_enabled: true
+    draft_verify_enabled: true
+    threshold_escalation_enabled: true
+    dynamic_dag_enabled: true
+    route_replay_enabled: true
+    context_compression_enabled: true
+    predictive_prefetch_enabled: true
+  model_tiers:
+    tier_0_router: []
+    tier_1_worker: []
+    tier_2_critic: []
+    tier_3_expert: []
+  policies:
+    require_human_approval_for:
+    - destructive_actions
+    - production_deployment
+    - financial_recommendations
+    - legal_or_medical_advice
+    - security_sensitive_operations
+    - low_confidence_outputs
+    require_critic_for:
+    - code_changes
+    - architecture_decisions
+    - deployment_plans
+    - security_outputs
+    - high_stakes_analysis
+    confidence_thresholds:
+      worker_min: 0.7
+      critic_pass: 0.8
+      escalate_to_expert: 0.6
+    memory_replay_enabled: true
+  capability_merge_policy:
+    precedence_order:
+    - repository_declared
+    - repository_discovered
+    - portable_template
+    - global_fallback
+    conflict_resolution: prefer_higher_precedence
+    preserve_provenance: true
+  communication_optimization:
+    soft_prompt_injection_enabled: conditional
+    predictive_prefetch_enabled: true
+    vector_message_passing_enabled: optional
+    textual_decision_trace_required: true
+  structural_plasticity:
+    enabled: true
+    agent_merging_enabled: true
+    zombie_agent_pruning_enabled: true
+    merge_recommendation_only_by_default: true
+    protect_safety_critical_agents: true
+  training:
+    meta_critic_enabled: true
+    on_the_fly_distillation_enabled: true
+    synthetic_dataset_generation_enabled: true
+    lora_hot_swap_enabled: conditional
+    triplet_trigger_count: 50
+    synthetic_expansion_target: 500
+    require_benchmark_before_activation: true
+  truth_maintenance:
+    enabled: true
+    contradiction_detection_enabled: true
+    reconciliation_subswarm_enabled: true
+    garbage_collection_enabled: true
+  memory:
+    episodic_store: ''
+    semantic_store: ''
+    route_store: ''
+    blackboard_store: ''
+    replay_minimum_quality_score: 0.75
+    confidence_decay_half_life_days: 30
+  capability_scoring:
+    weights:
+      task_relevance: 0.3
+      trustworthiness: 0.2
+      verification_coverage: 0.15
+      cost_efficiency: 0.1
+      latency_efficiency: 0.1
+      context_fit: 0.1
+      permission_risk_penalty: -0.15
+    normalization: weighted_sum_clamped_0_1
+  discovery_summary:
+    local_counts:
+      agents: 2
+      skills: 0
+      plugins: 0
+      mcp_entries: 0
+      cli_entries: 8
+      models: 0
+    global_counts:
+      agents: 140
+      skills: 96
+      plugins: 0
+      mcp_entries: 84
+      cli_entries: 17
+      models: 13
+    combined_counts:
+      agents: 142
+      skills: 96
+      plugins: 0
+      mcp_entries: 84
+      cli_entries: 25
+      models: 13
+    generated_at: '2026-03-29T02:56:14.681835+00:00'

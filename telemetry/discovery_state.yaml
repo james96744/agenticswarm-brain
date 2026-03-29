@@ -1,0 +1,496 @@
+version: '1.0'
+last_updated: '2026-03-29'
+description: Persistent discovery watch state used for startup rechecks and new-install
+  detection.
+state:
+  repo_root: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation
+  last_full_audit_at: '2026-03-29T02:55:51.905678+00:00'
+  last_startup_check_at: '2026-03-29T02:56:31.005016+00:00'
+  watch_roots:
+  - /Applications/Codex.app/Contents/Resources
+  - /Library/Apple/usr/bin
+  - /Library/Frameworks/Python.framework/Versions/3.10/bin
+  - /Library/Frameworks/Python.framework/Versions/3.11/bin
+  - /Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home/bin
+  - /System/Volumes/Preboot/Cryptexes/App/usr/bin
+  - /Users/j/.agents
+  - /Users/j/.agents/skills
+  - /Users/j/.agents/skills/appinsights-instrumentation
+  - /Users/j/.agents/skills/azure-ai
+  - /Users/j/.agents/skills/azure-aigateway
+  - /Users/j/.agents/skills/azure-cloud-migrate
+  - /Users/j/.agents/skills/azure-compliance
+  - /Users/j/.agents/skills/azure-compute
+  - /Users/j/.agents/skills/azure-cost-optimization
+  - /Users/j/.agents/skills/azure-deploy
+  - /Users/j/.agents/skills/azure-diagnostics
+  - /Users/j/.agents/skills/azure-hosted-copilot-sdk
+  - /Users/j/.agents/skills/azure-kusto
+  - /Users/j/.agents/skills/azure-messaging
+  - /Users/j/.agents/skills/azure-prepare
+  - /Users/j/.agents/skills/azure-quotas
+  - /Users/j/.agents/skills/azure-rbac
+  - /Users/j/.agents/skills/azure-resource-lookup
+  - /Users/j/.agents/skills/azure-resource-visualizer
+  - /Users/j/.agents/skills/azure-storage
+  - /Users/j/.agents/skills/azure-upgrade
+  - /Users/j/.agents/skills/azure-validate
+  - /Users/j/.agents/skills/claude_telemetry-main/.claude/agents
+  - /Users/j/.agents/skills/entra-app-registration
+  - /Users/j/.agents/skills/frontend-design
+  - /Users/j/.agents/skills/microsoft-foundry
+  - /Users/j/.agents/skills/microsoft-foundry/foundry-agent/create/references
+  - /Users/j/.agents/skills/microsoft-foundry/models/deploy-model
+  - /Users/j/.agents/skills/microsoft-foundry/models/deploy-model/capacity
+  - /Users/j/.agents/skills/microsoft-foundry/models/deploy-model/customize
+  - /Users/j/.agents/skills/microsoft-foundry/models/deploy-model/preset
+  - /Users/j/.agents/skills/microsoft-foundry/references
+  - /Users/j/.agents/skills/nano-banana-2-skill-main/plugins/nano-banana/skills/nano-banana
+  - /Users/j/.agents/skills/stitch-mcp-main/.gemini/skills/typed-service-contract
+  - /Users/j/.agents/skills/stitch-mcp-main/docs
+  - /Users/j/.agents/skills/threejs-master
+  - /Users/j/.agents/skills/top-tier-ui
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/examples/with-nextjs-resumable-stream
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/examples/with-workspace/workspace/skills/data-analysis
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/examples/with-workspace/workspace/skills/playwright-cli
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/agents
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/agents/a2a
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/agents/mcp
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/agents/memory
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/api/endpoints
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/rag
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/workflows/steps
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/recipes
+  - /Users/j/.bun/bin
+  - /Users/j/.claude
+  - /Users/j/.claude/plugins/cache/claude-plugins-official/adspirer-ads-agent/1.1.0
+  - /Users/j/.claude/plugins/cache/claude-plugins-official/huggingface-skills/1.0.1
+  - /Users/j/.claude/plugins/cache/claude-plugins-official/playwright/d5c15b861cd2
+  - /Users/j/.claude/plugins/cache/claude-plugins-official/semgrep/6f3962351041/plugin
+  - /Users/j/.claude/plugins/cache/claude-plugins-official/stripe/0.1.0
+  - /Users/j/.claude/plugins/goose-main/crates/goose/tests/mcp_replays
+  - /Users/j/.claude/plugins/goose-main/documentation/src/pages/recipes/data/recipes
+  - /Users/j/.claude/plugins/graphiti-main/.github/workflows
+  - /Users/j/.claude/plugins/graphiti-main/mcp_server/config
+  - /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/discord
+  - /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/fakechat
+  - /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/telegram
+  - /Users/j/.claude/plugins/marketplaces/local-desktop-app-uploads/ui-ux-pro-max/cli/assets/templates/platforms
+  - /Users/j/.claude/skills/voltagent--voltagent-core-2.6.4/examples/with-cerbos/policies
+  - /Users/j/.codex
+  - /Users/j/.codex/.tmp/plugins/plugins/build-web-apps
+  - /Users/j/.codex/.tmp/plugins/plugins/cloudflare
+  - /Users/j/.codex/.tmp/plugins/plugins/hugging-face
+  - /Users/j/.codex/skills
+  - /Users/j/.codex/skills/.system/imagegen
+  - /Users/j/.codex/skills/.system/openai-docs
+  - /Users/j/.codex/skills/.system/plugin-creator
+  - /Users/j/.codex/skills/.system/skill-creator
+  - /Users/j/.codex/skills/.system/skill-installer
+  - /Users/j/.codex/skills/AReaL-main
+  - /Users/j/.codex/skills/AReaL-main/.claude/agents
+  - /Users/j/.codex/skills/AReaL-main/.opencode/agents
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-archon-model
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-dataset
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-reward
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-unit-tests
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-workflow
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/commit-conventions
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/debug-distributed
+  - /Users/j/.codex/skills/AReaL-main/docs/zh/customization
+  - /Users/j/.codex/skills/AReaL-main/docs/zh/reference
+  - /Users/j/.codex/skills/AReaL-main/docs/zh/tutorial
+  - /Users/j/.codex/skills/EvoAgentX-main/docs/modules
+  - /Users/j/.codex/skills/EvoAgentX-main/docs/tutorial
+  - /Users/j/.codex/skills/EvoAgentX-main/docs/zh/modules
+  - /Users/j/.codex/skills/EvoAgentX-main/docs/zh/tutorial
+  - /Users/j/.codex/skills/agno-main
+  - /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/dash/knowledge/business
+  - /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/dash/knowledge/tables
+  - /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/scout/knowledge/patterns
+  - /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/scout/knowledge/routing
+  - /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/scout/knowledge/sources
+  - /Users/j/.codex/skills/agno-main/cookbook/02_agents/16_skills/sample_skills/code-review
+  - /Users/j/.codex/skills/agno-main/cookbook/02_agents/16_skills/sample_skills/git-workflow
+  - /Users/j/.codex/skills/agno-main/cookbook/05_agent_os/skills/sample_skills/system-info
+  - /Users/j/.codex/skills/agno-main/cookbook/10_reasoning/agents
+  - /Users/j/.codex/skills/aspnet-core
+  - /Users/j/.codex/skills/auditing-terraform-infrastructure-for-security
+  - /Users/j/.codex/skills/browser-use-main
+  - /Users/j/.codex/skills/browser-use-main/skills/browser-use
+  - /Users/j/.codex/skills/browser-use-main/skills/remote-browser
+  - /Users/j/.codex/skills/chatgpt-apps
+  - /Users/j/.codex/skills/dify-main
+  - /Users/j/.codex/skills/dify-main/.agents/skills/backend-code-review
+  - /Users/j/.codex/skills/dify-main/.agents/skills/component-refactoring
+  - /Users/j/.codex/skills/dify-main/.agents/skills/frontend-code-review
+  - /Users/j/.codex/skills/dify-main/.agents/skills/frontend-testing
+  - /Users/j/.codex/skills/dify-main/.agents/skills/orpc-contract-first
+  - /Users/j/.codex/skills/dify-main/.github/workflows
+  - /Users/j/.codex/skills/dify-main/api
+  - /Users/j/.codex/skills/dify-main/web
+  - /Users/j/.codex/skills/dify-main/web/app/components/base/icons/src/vender/workflow
+  - /Users/j/.codex/skills/figma
+  - /Users/j/.codex/skills/figma-implement-design
+  - /Users/j/.codex/skills/gh-address-comments
+  - /Users/j/.codex/skills/gh-fix-ci
+  - /Users/j/.codex/skills/goose-main
+  - /Users/j/.codex/skills/goose-main/crates/goose/src/agents/builtin_skills/skills
+  - /Users/j/.codex/skills/goose-main/crates/goose/src/prompts
+  - /Users/j/.codex/skills/goose-main/documentation
+  - /Users/j/.codex/skills/goose-main/documentation/docs/mcp
+  - /Users/j/.codex/skills/goose-main/documentation/docs/tutorials
+  - /Users/j/.codex/skills/graphiti-main
+  - /Users/j/.codex/skills/implementing-secrets-scanning-in-ci-cd
+  - /Users/j/.codex/skills/instructor-main
+  - /Users/j/.codex/skills/instructor-main/docs
+  - /Users/j/.codex/skills/jupyter-notebook
+  - /Users/j/.codex/skills/linear
+  - /Users/j/.codex/skills/meeting-notes-and-actions
+  - /Users/j/.codex/skills/notion-knowledge-capture
+  - /Users/j/.codex/skills/notion-meeting-intelligence
+  - /Users/j/.codex/skills/notion-research-documentation
+  - /Users/j/.codex/skills/notion-spec-to-implementation
+  - /Users/j/.codex/skills/openai-agents-python-main
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/code-change-verification
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/docs-sync
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/examples-auto-run
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/final-release-review
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/implementation-strategy
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/openai-knowledge
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/pr-draft-summary
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/test-coverage-improver
+  - /Users/j/.codex/skills/openai-agents-python-main/docs
+  - /Users/j/.codex/skills/openai-agents-python-main/docs/ja
+  - /Users/j/.codex/skills/openai-agents-python-main/docs/ko
+  - /Users/j/.codex/skills/openai-agents-python-main/docs/ref
+  - /Users/j/.codex/skills/openai-agents-python-main/docs/ref/realtime
+  - /Users/j/.codex/skills/openai-agents-python-main/docs/ref/run_internal
+  - /Users/j/.codex/skills/openai-agents-python-main/docs/zh
+  - /Users/j/.codex/skills/openai-agents-python-main/examples/tools/skills/csv-workbench
+  - /Users/j/.codex/skills/openai-agents-python-main/src/agents/realtime
+  - /Users/j/.codex/skills/pdf
+  - /Users/j/.codex/skills/performing-vulnerability-scanning-with-nessus
+  - /Users/j/.codex/skills/performing-web-application-vulnerability-triage
+  - /Users/j/.codex/skills/ragas-main/docs/concepts/metrics/available_metrics
+  - /Users/j/.codex/skills/ragas-main/docs/concepts/test_data_generation
+  - /Users/j/.codex/skills/ragas-main/docs/howtos/cli
+  - /Users/j/.codex/skills/ragas-main/docs/howtos/integrations
+  - /Users/j/.codex/skills/ragas-main/docs/tutorials
+  - /Users/j/.codex/skills/ray-master/python/ray/autoscaler/aws/cloudwatch
+  - /Users/j/.codex/skills/ray-master/release/dashboard
+  - /Users/j/.codex/skills/scanning-docker-images-with-trivy
+  - /Users/j/.codex/skills/scanning-kubernetes-manifests-with-kubesec
+  - /Users/j/.codex/skills/security-best-practices
+  - /Users/j/.codex/skills/security-ownership-map
+  - /Users/j/.codex/skills/security-threat-model
+  - /Users/j/.codex/skills/security-threat-model/agents
+  - /Users/j/.codex/skills/sora
+  - /Users/j/.codex/skills/speech
+  - /Users/j/.codex/skills/speech-to-text
+  - /Users/j/.codex/skills/spreadsheet
+  - /Users/j/.codex/skills/testing-api-security-with-owasp-top-10
+  - /Users/j/.codex/skills/transcribe
+  - /Users/j/.codex/skills/triaging-security-incident
+  - /Users/j/.codex/skills/vercel-deploy
+  - /Users/j/.codex/tmp/arg0/codex-arg0xxwt1u
+  - /Users/j/.config
+  - /Users/j/.cursor
+  - /Users/j/.cursor/projects/var-folders-4k-n41g-qzd39vdsqh0-phybjm0000gn-T-6b53a819-54ac-4f82-963a-9cae47cd31a9/mcps/plugin-adspirer-ads-agent-adspirer/tools
+  - /Users/j/.foundry/bin
+  - /Users/j/.local/bin
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/scripts
+  - /Users/j/Library/Application Support/Claude
+  - /Users/j/Library/Application Support/Claude/Claude Extensions Settings
+  - /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/dist
+  - /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/schemas
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/brand-voice/1.0.0
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/cowork-plugin-management/0.2.2/skills/cowork-plugin-customizer/examples
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/design/1.1.0
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/operations/1.1.0
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/data
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/engineering
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/enterprise-search
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/legal
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/marketing
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/partner-built/apollo
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/partner-built/common-room
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/product-management
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/productivity
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/sales
+  - /Users/j/Library/Application Support/Codex
+  - /Users/j/Library/Application Support/Cursor
+  - /Users/j/Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings
+  - /bin
+  - /opt/homebrew/bin
+  - /opt/homebrew/sbin
+  - /opt/metasploit-framework/bin
+  - /sbin
+  - /usr/bin
+  - /usr/local/MacGPG2/bin
+  - /usr/local/bin
+  - /usr/local/share/dotnet
+  - /usr/sbin
+  fingerprints:
+    /Applications/Codex.app/Contents/Resources: 1773707608000000000
+    /Library/Apple/usr/bin: 1667076707000000000
+    /Library/Frameworks/Python.framework/Versions/3.10/bin: 1772874604846497909
+    /Library/Frameworks/Python.framework/Versions/3.11/bin: 1773381400552578532
+    /Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home/bin: 1768946594000000000
+    /System/Volumes/Preboot/Cryptexes/App/usr/bin: 1771905734000000000
+    /Users/j/.agents: 1774042857550757068
+    /Users/j/.agents/skills: 1774049888644355210
+    /Users/j/.agents/skills/appinsights-instrumentation: 1774038644626020680
+    /Users/j/.agents/skills/azure-ai: 1774038644629192007
+    /Users/j/.agents/skills/azure-aigateway: 1774038644640031733
+    /Users/j/.agents/skills/azure-cloud-migrate: 1774038644642943227
+    /Users/j/.agents/skills/azure-compliance: 1774038644650021837
+    /Users/j/.agents/skills/azure-compute: 1774038644656147448
+    /Users/j/.agents/skills/azure-cost-optimization: 1774038644658808359
+    /Users/j/.agents/skills/azure-deploy: 1774038644662202435
+    /Users/j/.agents/skills/azure-diagnostics: 1774038644676806320
+    /Users/j/.agents/skills/azure-hosted-copilot-sdk: 1774038644680853145
+    /Users/j/.agents/skills/azure-kusto: 1774038644683801763
+    /Users/j/.agents/skills/azure-messaging: 1774038644684591887
+    /Users/j/.agents/skills/azure-prepare: 1774038644688665878
+    /Users/j/.agents/skills/azure-quotas: 1774038644769772660
+    /Users/j/.agents/skills/azure-rbac: 1774038644772055321
+    /Users/j/.agents/skills/azure-resource-lookup: 1774038644773384777
+    /Users/j/.agents/skills/azure-resource-visualizer: 1774038644775488730
+    /Users/j/.agents/skills/azure-storage: 1774038644778389558
+    /Users/j/.agents/skills/azure-upgrade: 1774038644784357295
+    /Users/j/.agents/skills/azure-validate: 1774038644787193580
+    /Users/j/.agents/skills/claude_telemetry-main/.claude/agents: 1773781592225956575
+    /Users/j/.agents/skills/entra-app-registration: 1774038644793817149
+    /Users/j/.agents/skills/frontend-design: 1773781592135422987
+    /Users/j/.agents/skills/microsoft-foundry: 1774038644804751959
+    /Users/j/.agents/skills/microsoft-foundry/foundry-agent/create/references: 1774038644825384706
+    /Users/j/.agents/skills/microsoft-foundry/models/deploy-model: 1774038644816130726
+    /Users/j/.agents/skills/microsoft-foundry/models/deploy-model/capacity: 1774038644826275787
+    /Users/j/.agents/skills/microsoft-foundry/models/deploy-model/customize: 1774038644826447328
+    /Users/j/.agents/skills/microsoft-foundry/models/deploy-model/preset: 1774038644830637069
+    /Users/j/.agents/skills/microsoft-foundry/references: 1774038644809245282
+    /Users/j/.agents/skills/nano-banana-2-skill-main/plugins/nano-banana/skills/nano-banana: 1773781591636921295
+    /Users/j/.agents/skills/stitch-mcp-main/.gemini/skills/typed-service-contract: 1773781591653992389
+    /Users/j/.agents/skills/stitch-mcp-main/docs: 1773781591708173417
+    /Users/j/.agents/skills/threejs-master: 1773781591649962230
+    /Users/j/.agents/skills/top-tier-ui: 1773781592136786068
+    /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4: 1773781596281483950
+    /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/examples/with-nextjs-resumable-stream: 1773781593938381471
+    /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/examples/with-workspace/workspace/skills/data-analysis: 1773781594514862108
+    /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/examples/with-workspace/workspace/skills/playwright-cli: 1773781594513156611
+    /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/agents: 1773781592683424590
+    /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/agents/a2a: 1773781592642882621
+    /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/agents/mcp: 1773781592654222559
+    /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/agents/memory: 1773781592633272013
+    /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/api/endpoints: 1773781592787593113
+    /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/rag: 1773781592744627398
+    /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/workflows/steps: 1773781592609320348
+    /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/recipes: 1773781592997613654
+    /Users/j/.bun/bin: 1772652839125223420
+    /Users/j/.claude: 1774701786106436770
+    /Users/j/.claude/plugins/cache/claude-plugins-official/adspirer-ads-agent/1.1.0: 1773658509537225735
+    /Users/j/.claude/plugins/cache/claude-plugins-official/huggingface-skills/1.0.1: 1773658362347543153
+    /Users/j/.claude/plugins/cache/claude-plugins-official/playwright/d5c15b861cd2: 1773658222749709293
+    /Users/j/.claude/plugins/cache/claude-plugins-official/semgrep/6f3962351041/plugin: 1772837160359148739
+    /Users/j/.claude/plugins/cache/claude-plugins-official/stripe/0.1.0: 1772837024181555818
+    /Users/j/.claude/plugins/goose-main/crates/goose/tests/mcp_replays: 1772931268000000000
+    /Users/j/.claude/plugins/goose-main/documentation/src/pages/recipes/data/recipes: 1772931268000000000
+    /Users/j/.claude/plugins/graphiti-main/.github/workflows: 1772924376000000000
+    /Users/j/.claude/plugins/graphiti-main/mcp_server/config: 1772924376000000000
+    /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/discord: 1774034749624342939
+    /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/fakechat: 1774034749626445266
+    /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/telegram: 1774034749628105386
+    /Users/j/.claude/plugins/marketplaces/local-desktop-app-uploads/ui-ux-pro-max/cli/assets/templates/platforms: 1772652643276188765
+    /Users/j/.claude/skills/voltagent--voltagent-core-2.6.4/examples/with-cerbos/policies: 1772662942000000000
+    /Users/j/.codex: 1774752205480722447
+    /Users/j/.codex/.tmp/plugins/plugins/build-web-apps: 1774667707906047638
+    /Users/j/.codex/.tmp/plugins/plugins/cloudflare: 1774667707986467821
+    /Users/j/.codex/.tmp/plugins/plugins/hugging-face: 1774667708271198231
+    /Users/j/.codex/skills: 1774744580603320474
+    /Users/j/.codex/skills/.system/imagegen: 1774744580604748680
+    /Users/j/.codex/skills/.system/openai-docs: 1774744580605441930
+    /Users/j/.codex/skills/.system/plugin-creator: 1774744580606517095
+    /Users/j/.codex/skills/.system/skill-creator: 1774744580607417220
+    /Users/j/.codex/skills/.system/skill-installer: 1774744580608284219
+    /Users/j/.codex/skills/AReaL-main: 1772830744000000000
+    /Users/j/.codex/skills/AReaL-main/.claude/agents: 1772830744000000000
+    /Users/j/.codex/skills/AReaL-main/.opencode/agents: 1772830744000000000
+    /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-archon-model: 1772830744000000000
+    /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-dataset: 1772830744000000000
+    /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-reward: 1772830744000000000
+    /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-unit-tests: 1772830744000000000
+    /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-workflow: 1772830744000000000
+    /Users/j/.codex/skills/AReaL-main/.opencode/skills/commit-conventions: 1772830744000000000
+    /Users/j/.codex/skills/AReaL-main/.opencode/skills/debug-distributed: 1772830744000000000
+    /Users/j/.codex/skills/AReaL-main/docs/zh/customization: 1772830744000000000
+    /Users/j/.codex/skills/AReaL-main/docs/zh/reference: 1772830744000000000
+    /Users/j/.codex/skills/AReaL-main/docs/zh/tutorial: 1772830744000000000
+    /Users/j/.codex/skills/EvoAgentX-main/docs/modules: 1767775770000000000
+    /Users/j/.codex/skills/EvoAgentX-main/docs/tutorial: 1767775770000000000
+    /Users/j/.codex/skills/EvoAgentX-main/docs/zh/modules: 1767775770000000000
+    /Users/j/.codex/skills/EvoAgentX-main/docs/zh/tutorial: 1767775770000000000
+    /Users/j/.codex/skills/agno-main: 1772905288000000000
+    /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/dash/knowledge/business: 1772905288000000000
+    /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/dash/knowledge/tables: 1772905288000000000
+    /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/scout/knowledge/patterns: 1772905288000000000
+    /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/scout/knowledge/routing: 1772905288000000000
+    /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/scout/knowledge/sources: 1772905288000000000
+    /Users/j/.codex/skills/agno-main/cookbook/02_agents/16_skills/sample_skills/code-review: 1772905288000000000
+    /Users/j/.codex/skills/agno-main/cookbook/02_agents/16_skills/sample_skills/git-workflow: 1772905288000000000
+    /Users/j/.codex/skills/agno-main/cookbook/05_agent_os/skills/sample_skills/system-info: 1772905288000000000
+    /Users/j/.codex/skills/agno-main/cookbook/10_reasoning/agents: 1772905288000000000
+    /Users/j/.codex/skills/aspnet-core: 1772830011674285640
+    /Users/j/.codex/skills/auditing-terraform-infrastructure-for-security: 1773783052513496861
+    /Users/j/.codex/skills/browser-use-main: 1772937374000000000
+    /Users/j/.codex/skills/browser-use-main/skills/browser-use: 1772937374000000000
+    /Users/j/.codex/skills/browser-use-main/skills/remote-browser: 1772937374000000000
+    /Users/j/.codex/skills/chatgpt-apps: 1773804402794455216
+    /Users/j/.codex/skills/dify-main: 1772938456348499894
+    /Users/j/.codex/skills/dify-main/.agents/skills/backend-code-review: 1772928232000000000
+    /Users/j/.codex/skills/dify-main/.agents/skills/component-refactoring: 1772928232000000000
+    /Users/j/.codex/skills/dify-main/.agents/skills/frontend-code-review: 1772928232000000000
+    /Users/j/.codex/skills/dify-main/.agents/skills/frontend-testing: 1772928232000000000
+    /Users/j/.codex/skills/dify-main/.agents/skills/orpc-contract-first: 1772928232000000000
+    /Users/j/.codex/skills/dify-main/.github/workflows: 1772928232000000000
+    /Users/j/.codex/skills/dify-main/api: 1772928232000000000
+    /Users/j/.codex/skills/dify-main/web: 1772938456475681305
+    /Users/j/.codex/skills/dify-main/web/app/components/base/icons/src/vender/workflow: 1772928232000000000
+    /Users/j/.codex/skills/figma: 1772830051611627647
+    /Users/j/.codex/skills/figma-implement-design: 1772830053021379272
+    /Users/j/.codex/skills/gh-address-comments: 1773804396620052617
+    /Users/j/.codex/skills/gh-fix-ci: 1772830024227501701
+    /Users/j/.codex/skills/goose-main: 1772931268000000000
+    /Users/j/.codex/skills/goose-main/crates/goose/src/agents/builtin_skills/skills: 1772931268000000000
+    /Users/j/.codex/skills/goose-main/crates/goose/src/prompts: 1772931268000000000
+    /Users/j/.codex/skills/goose-main/documentation: 1772931268000000000
+    /Users/j/.codex/skills/goose-main/documentation/docs/mcp: 1772931268000000000
+    /Users/j/.codex/skills/goose-main/documentation/docs/tutorials: 1772931268000000000
+    /Users/j/.codex/skills/graphiti-main: 1772924376000000000
+    /Users/j/.codex/skills/implementing-secrets-scanning-in-ci-cd: 1773783053260976872
+    /Users/j/.codex/skills/instructor-main: 1772854196000000000
+    /Users/j/.codex/skills/instructor-main/docs: 1772854196000000000
+    /Users/j/.codex/skills/jupyter-notebook: 1773825152432107858
+    /Users/j/.codex/skills/linear: 1772830036467555716
+    /Users/j/.codex/skills/meeting-notes-and-actions: 1773783187642529330
+    /Users/j/.codex/skills/notion-knowledge-capture: 1772830070968857361
+    /Users/j/.codex/skills/notion-meeting-intelligence: 1772830073083826757
+    /Users/j/.codex/skills/notion-research-documentation: 1772830073664361566
+    /Users/j/.codex/skills/notion-spec-to-implementation: 1772830074297567520
+    /Users/j/.codex/skills/openai-agents-python-main: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/code-change-verification: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/docs-sync: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/examples-auto-run: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/final-release-review: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/implementation-strategy: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/openai-knowledge: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/pr-draft-summary: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/test-coverage-improver: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/docs: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/docs/ja: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/docs/ko: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/docs/ref: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/docs/ref/realtime: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/docs/ref/run_internal: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/docs/zh: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/examples/tools/skills/csv-workbench: 1772943724000000000
+    /Users/j/.codex/skills/openai-agents-python-main/src/agents/realtime: 1772943724000000000
+    /Users/j/.codex/skills/pdf: 1772830088250653059
+    /Users/j/.codex/skills/performing-vulnerability-scanning-with-nessus: 1773783053603307659
+    /Users/j/.codex/skills/performing-web-application-vulnerability-triage: 1773783053607037906
+    /Users/j/.codex/skills/ragas-main/docs/concepts/metrics/available_metrics: 1771926438000000000
+    /Users/j/.codex/skills/ragas-main/docs/concepts/test_data_generation: 1771926438000000000
+    /Users/j/.codex/skills/ragas-main/docs/howtos/cli: 1771926438000000000
+    /Users/j/.codex/skills/ragas-main/docs/howtos/integrations: 1771926438000000000
+    /Users/j/.codex/skills/ragas-main/docs/tutorials: 1771926438000000000
+    /Users/j/.codex/skills/ray-master/python/ray/autoscaler/aws/cloudwatch: 1772930968000000000
+    /Users/j/.codex/skills/ray-master/release/dashboard: 1772930968000000000
+    /Users/j/.codex/skills/scanning-docker-images-with-trivy: 1773783053646735324
+    /Users/j/.codex/skills/scanning-kubernetes-manifests-with-kubesec: 1773783053653250943
+    /Users/j/.codex/skills/security-best-practices: 1772830113238128667
+    /Users/j/.codex/skills/security-ownership-map: 1772830116854739506
+    /Users/j/.codex/skills/security-threat-model: 1772830119269092851
+    /Users/j/.codex/skills/security-threat-model/agents: 1772830119254635671
+    /Users/j/.codex/skills/sora: 1772830136195351337
+    /Users/j/.codex/skills/speech: 1772830134066018219
+    /Users/j/.codex/skills/speech-to-text: 1773782662208845325
+    /Users/j/.codex/skills/spreadsheet: 1772830137644652800
+    /Users/j/.codex/skills/testing-api-security-with-owasp-top-10: 1773783053687130368
+    /Users/j/.codex/skills/transcribe: 1772830140373494647
+    /Users/j/.codex/skills/triaging-security-incident: 1773783053717359296
+    /Users/j/.codex/skills/vercel-deploy: 1773782706289949413
+    /Users/j/.codex/tmp/arg0/codex-arg0xxwt1u: 1774744580562340804
+    /Users/j/.config: 1772827417756953612
+    /Users/j/.cursor: 1773862185257099817
+    ? /Users/j/.cursor/projects/var-folders-4k-n41g-qzd39vdsqh0-phybjm0000gn-T-6b53a819-54ac-4f82-963a-9cae47cd31a9/mcps/plugin-adspirer-ads-agent-adspirer/tools
+    : 1774743584369847084
+    /Users/j/.foundry/bin: 1770768342515155786
+    /Users/j/.local/bin: 1770238910853332441
+    /Users/j/Desktop/Lahaolesolutions/agenticswarm creation: 1774752915926774761
+    /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/scripts: 1774752839935975000
+    /Users/j/Library/Application Support/Claude: 1774752478137643263
+    /Users/j/Library/Application Support/Claude/Claude Extensions Settings: 1773965237601757073
+    ? /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/dist
+    : 1773643504632767846
+    ? /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/schemas
+    : 1773643504649023747
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/brand-voice/1.0.0
+    : 1772651510822303966
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/cowork-plugin-management/0.2.2/skills/cowork-plugin-customizer/examples
+    : 1772651409417871921
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/design/1.1.0
+    : 1772651506398572391
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/operations/1.1.0
+    : 1772651487530987896
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research
+    : 1772765156519098154
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/data
+    : 1772765156703023958
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/engineering
+    : 1772765156755834907
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/enterprise-search
+    : 1772765156771394589
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/legal
+    : 1772765156836818808
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/marketing
+    : 1772765156863975969
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/partner-built/apollo
+    : 1772765156900246114
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/partner-built/common-room
+    : 1772765156945481785
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/product-management
+    : 1772765156994398157
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/productivity
+    : 1772765157010237255
+    ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/sales
+    : 1772765157025525520
+    /Users/j/Library/Application Support/Codex: 1774752941244160305
+    /Users/j/Library/Application Support/Cursor: 1774752550178791303
+    /Users/j/Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings: 1773862569423298761
+    /bin: 1771990892000000000
+    /opt/homebrew/bin: 1774437958758724001
+    /opt/homebrew/sbin: 1774437958759374750
+    /opt/metasploit-framework/bin: 1772307792192396972
+    /sbin: 1771990892000000000
+    /usr/bin: 1771990892000000000
+    /usr/local/MacGPG2/bin: 1774431782710801067
+    /usr/local/bin: 1774670069143098889
+    /usr/local/share/dotnet: 1773102133074440330
+    /usr/sbin: 1771990892000000000
+  discovery_counts:
+    agents: 142
+    skills: 96
+    plugins: 0
+    mcp_entries: 84
+    cli_entries: 25
+    models: 13
+  last_change_detected: false
+  last_change_summary: []
+notes:
+- run_audit.py --startup-check compares current watch-root fingerprints with this
+  state.
+- If a watched path changes, the audit runner performs a full refresh and repopulates
+  the registries.

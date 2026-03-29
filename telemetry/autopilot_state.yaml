@@ -1,0 +1,20 @@
+version: '1.0'
+last_updated: '2026-03-29'
+description: Persisted autopilot installation and maintenance state.
+state:
+  enabled: true
+  autostart_installed: true
+  autostart_platform: darwin
+  autostart_label: com.lahaolesolutions.agenticswarm.748fe4ec744a
+  autostart_path: /Users/j/Library/LaunchAgents/com.lahaolesolutions.agenticswarm.748fe4ec744a.plist
+  last_install_attempt_at: '2026-03-29T02:56:25.864010+00:00'
+  last_install_status: installed
+  last_install_error: null
+  last_maintenance_run_at: '2026-03-29T02:56:31.528130+00:00'
+  last_maintenance_summary:
+  - scripts/reconcile_memory.py:passed
+  - scripts/prune_topology.py:passed
+  - scripts/prepare_distillation.py:passed
+notes:
+- This file records whether the brain successfully installed a background startup
+  recheck adapter.

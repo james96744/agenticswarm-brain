@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["brain_manifest"],
+  "properties": {
+    "brain_manifest": {
+      "type": "object",
+      "required": ["version", "repository_profile", "discovery", "routing", "model_tiers", "policies", "memory"],
+      "properties": {
+        "version": { "type": "string" },
+        "repository_profile": {
+          "type": "object",
+          "required": ["name", "stack", "risk_level"],
+          "properties": {
+            "name": { "type": "string" },
+            "stack": { "type": "array", "items": { "type": "string" } },
+            "risk_level": { "type": "string" }
+          },
+          "additionalProperties": true
+        },
+        "discovery": { "type": "object", "additionalProperties": true },
+        "routing": { "type": "object", "additionalProperties": true },
+        "model_tiers": { "type": "object", "additionalProperties": true },
+        "policies": { "type": "object", "additionalProperties": true },
+        "memory": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

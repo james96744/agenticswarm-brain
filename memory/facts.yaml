@@ -1,0 +1,8 @@
+version: "1.0"
+last_updated: "2026-03-28"
+description: Canonical fact store for truth-maintenance and contradiction detection.
+
+facts: []
+
+notes:
+  - Each fact should include subject, predicate, object, confidence, source, and timestamp.

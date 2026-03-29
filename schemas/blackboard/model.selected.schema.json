@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["event_type", "task_id", "model_id", "model_tier", "timestamp"],
+  "properties": {
+    "event_type": { "const": "model.selected" },
+    "task_id": { "type": "string" },
+    "model_id": { "type": "string" },
+    "model_tier": { "type": "string" },
+    "timestamp": { "type": "string" }
+  },
+  "additionalProperties": true
+}

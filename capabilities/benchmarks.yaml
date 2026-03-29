@@ -1,0 +1,17 @@
+version: "1.0"
+last_updated: "2026-03-28"
+description: Benchmark and telemetry rollup store for task-family routing, pruning, and adapter activation.
+
+task_family_benchmarks: []
+
+model_benchmarks: []
+
+agent_pair_metrics: []
+
+agent_value_metrics: []
+
+adapter_benchmarks: []
+
+notes:
+  - Store observed quality, cost, latency, and critic-pass rates by task family.
+  - Use `agent_pair_metrics` to drive merge recommendations and zombie-agent pruning.

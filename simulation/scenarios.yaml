@@ -1,0 +1,38 @@
+version: "1.0"
+last_updated: "2026-03-28"
+description: Synthetic scenarios for exercising routing, escalation, and verification policy.
+
+scenarios:
+  - scenario_id: boilerplate-api
+    task_family: boilerplate_code
+    complexity: low
+    risk_level: low
+    requires_code: true
+    requires_tools: false
+    high_stakes: false
+    quality_target: fast
+  - scenario_id: schema-migration
+    task_family: data_migration
+    complexity: medium
+    risk_level: medium
+    requires_code: true
+    requires_tools: true
+    high_stakes: false
+    quality_target: balanced
+  - scenario_id: security-review
+    task_family: security_sensitive
+    complexity: high
+    risk_level: high
+    requires_code: false
+    requires_tools: true
+    high_stakes: true
+    quality_target: critical
+  - scenario_id: architecture-arbitration
+    task_family: architecture_decision
+    complexity: high
+    risk_level: high
+    requires_code: false
+    requires_tools: false
+    high_stakes: true
+    force_expert: true
+    quality_target: deep

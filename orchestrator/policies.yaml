@@ -1,0 +1,181 @@
+version: "1.0"
+last_updated: "2026-03-28"
+description: Portable orchestration policies for routing, safety, memory, verification, and escalation.
+
+global_policy:
+  inspect_before_act: true
+  prefer_discovery_over_assumption: true
+  dynamic_planning_required_for_nontrivial_tasks: true
+  centralized_coordination_required: true
+  minimal_viable_context: true
+  memory_replay_enabled: true
+  route_scoring_enabled: true
+  context_compression_enabled: true
+
+human_in_the_loop:
+  required_for:
+    - destructive_actions
+    - production_deployment
+    - legal_or_medical_advice
+    - financial_recommendations
+    - security_sensitive_operations
+    - low_confidence_outputs
+  optional_for:
+    - architecture_tradeoffs
+    - major_scope_changes
+
+verification_policy:
+  critic_required_for:
+    - code_changes
+    - architecture_decisions
+    - security_outputs
+    - deployment_plans
+    - high_stakes_analysis
+  draft_verify_default: true
+  delta_only_verification_preferred: true
+  disagreement_requires_escalation: true
+
+capability_merge_policy:
+  precedence_order:
+    - repository_declared
+    - repository_discovered
+    - portable_template
+    - global_fallback
+  conflict_resolution: prefer_higher_precedence
+  preserve_provenance: true
+  never_weaken_safety_flags: true
+
+routing_policy:
+  semantic_router_enabled: true
+  shortest_safe_path_preferred: true
+  dynamic_dag_enabled: true
+  prune_unnecessary_nodes: true
+  use_historical_routes_when_similarity_high: true
+  similarity_threshold_for_replay: 0.95
+
+model_tier_policy:
+  enabled: true
+  router_tier: tier_0_router
+  worker_tier: tier_1_worker
+  critic_tier: tier_2_critic
+  expert_tier: tier_3_expert
+  escalation_triggers:
+    - confidence_below_threshold
+    - critic_failure
+    - schema_failure
+    - compliance_flag
+    - security_flag
+    - high_stakes_task
+  de_escalation_triggers:
+    - high_route_similarity
+    - repeated_successful_task_family
+    - low_risk_boilerplate
+  thresholds:
+    worker_min_confidence: 0.70
+    critic_pass_confidence: 0.80
+    escalate_to_expert_confidence: 0.60
+
+communication_optimization_policy:
+  soft_prompt_injection_enabled: conditional
+  predictive_prefetch_enabled: true
+  vector_message_passing_enabled: optional
+  prefer_artifact_delta_over_full_context: true
+  textual_decision_trace_required: true
+
+structural_plasticity_policy:
+  enabled: true
+  agent_merging_enabled: true
+  zombie_agent_pruning_enabled: true
+  protect_safety_critical_agents: true
+  merge_when:
+    mean_handoff_count_gte: 3
+    mean_round_trip_latency_ratio_gte: 0.30
+    task_family_success_rate_gte: 0.80
+  prune_when:
+    value_add_per_token_lte: 0.05
+    critic_rejection_rate_gte: 0.60
+    ignored_edit_rate_gte: 0.50
+
+meta_critic_fine_tuning_policy:
+  enabled: true
+  collect_training_triplets: true
+  triplet_fields:
+    - initial_prompt
+    - bad_output
+    - expert_correction
+  lora_trigger_min_examples: 50
+  synthetic_expansion_target: 500
+  require_eval_before_activation: true
+  hot_swap_enabled: conditional
+
+capability_selection_policy:
+  score_threshold: 0.55
+  permission_risk_requires_review: 0.70
+  prefer_repo_local_agents: true
+  prefer_repo_local_skills: true
+  prefer_verified_plugins: true
+  prefer_lowest_safe_cost: true
+
+memory_policy:
+  store_successful_routes: true
+  store_failed_routes: true
+  store_human_feedback: true
+  store_critic_outcomes: true
+  store_context_snapshots: true
+  compress_after_major_phase: true
+  artifact_first_memory: true
+  replay_minimum_quality_score: 0.75
+  confidence_decay_enabled: true
+  confidence_decay_half_life_days: 30
+  expire_low_confidence_facts: true
+
+truth_maintenance_policy:
+  enabled: true
+  contradiction_detection_enabled: true
+  reconciliation_subswarm_enabled: true
+  garbage_collection_interval: daily
+  lock_conflicting_state_from_replay: true
+  preserve_conflict_audit_trail: true
+
+plugin_trust_policy:
+  require_secret_inventory: true
+  require_auth_scopes: true
+  require_destructive_capability_flags: true
+  require_data_classification: true
+  human_approval_for_destructive_plugins: true
+
+blackboard_policy:
+  required_fields:
+    - event_type
+    - task_id
+    - agent_id
+    - summary
+    - confidence
+    - timestamp
+  event_types:
+    - task.created
+    - task.decomposed
+    - capability.mapped
+    - model.selected
+    - artifact.ready
+    - critic.failed
+    - critic.passed
+    - human.approval.required
+    - task.completed
+  event_schema_refs:
+    task.created: schemas/blackboard/task.created.schema.json
+    model.selected: schemas/blackboard/model.selected.schema.json
+    artifact.ready: schemas/blackboard/artifact.ready.schema.json
+    critic.failed: schemas/blackboard/critic.failed.schema.json
+    critic.passed: schemas/blackboard/critic.passed.schema.json
+    human.approval.required: schemas/blackboard/human.approval.required.schema.json
+
+simulation_policy:
+  benchmark_harness_enabled: true
+  synthetic_task_generation_enabled: true
+  store_route_metrics: true
+  regression_scenarios_required: true
+
+notes:
+  - Override these policies per repository only when local constraints require it.
+  - Keep policy changes auditable so route behavior can be explained later.

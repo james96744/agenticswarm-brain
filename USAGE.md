@@ -1,0 +1,232 @@
+# Usage
+
+This project is a portable orchestration scaffold. It is designed to be copied into a repository, pointed at that repository, and then used to discover capabilities, validate contracts, simulate routing, reconcile memory, and prepare optimization workflows.
+
+## 1. Create A Local Environment
+
+From the repository root:
+
+```bash
+python3 -m venv .venv
+./.venv/bin/pip install pyyaml jsonschema
+```
+
+These packages are required for YAML loading and schema validation.
+
+## 2. Run The Auditor Once
+
+Use this first:
+
+```bash
+./.venv/bin/python scripts/run_audit.py --repo-root . --dry-run
+```
+
+This performs one full audit pass without changing files:
+
+- discovers repository-local agents, skills, plugins, MCPs, and CLIs
+- discovers globally installed agents, skills, plugins, MCP configs, MCP executables, models, and CLIs
+- compiles every Python script under `scripts/`
+- validates all YAML registries and semantic cross-file rules
+- dry-runs the runtime sanity checks for simulation, reconciliation, pruning, and distillation prep
+
+When the report looks correct, populate the registries and write an audit report:
+
+```bash
+./.venv/bin/python scripts/run_audit.py --repo-root .
+```
+
+This updates:
+
+- [`brain.schema.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/brain.schema.yaml)
+- [`capabilities/agents.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/agents.yaml)
+- [`capabilities/skills.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/skills.yaml)
+- [`capabilities/plugins.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/plugins.yaml)
+- [`capabilities/mcp.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/mcp.yaml)
+- [`capabilities/cli.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/cli.yaml)
+- [`capabilities/models.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/models.yaml)
+- [`telemetry/audit_report.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/audit_report.yaml)
+- [`telemetry/discovery_state.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/discovery_state.yaml)
+- [`telemetry/autopilot_state.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/autopilot_state.yaml)
+
+After that first non-dry run, the brain takes over:
+
+- it installs automatic startup rechecks on supported platforms
+- it rechecks previously discovered install roots automatically
+- it triggers a full refresh when new installs or removed integrations are detected
+- it runs maintenance phases automatically without separate commands
+
+Use `--skip-runtime-checks` only for a lighter first pass. Use `--no-autostart` only for CI or testing.
+
+## 3. Startup Behavior
+
+After the first full audit, the runner records discovery watch roots in [`telemetry/discovery_state.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/discovery_state.yaml) and autopilot installation state in [`telemetry/autopilot_state.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/autopilot_state.yaml).
+
+What it does:
+
+- rechecks the previously discovered repo-local and global watch directories
+- detects new installs, removed integrations, or modified capability roots
+- runs a full repopulating audit automatically if something changed
+- skips the heavy full discovery pass when nothing changed
+- runs memory reconciliation, topology pruning, and distillation preparation automatically
+
+The internal `--startup-check` mode is now meant for the installed autopilot adapter rather than normal manual use.
+
+## 4. Validate The Portable Contracts
+
+Run:
+
+```bash
+./.venv/bin/python scripts/validate_brain.py --repo-root .
+```
+
+Expected result:
+
+- `Validation passed.`
+
+This checks the YAML registries against the JSON Schemas and verifies that the root manifest and runtime policy stay aligned.
+
+## 5. Inspect A Repository Without Changing It
+
+Use a dry run first:
+
+```bash
+./.venv/bin/python scripts/bootstrap_brain.py --repo-root . --dry-run
+```
+
+This reports:
+
+- detected repository name
+- inferred stack
+- inferred risk level
+- counts for discovered agents, skills, plugins, MCPs, CLIs, and models
+
+Use this first whenever you are pointing the orchestrator at a new repository.
+
+## 6. Populate The Capability Registries
+
+When the dry run looks correct, write the discovered state into the portable registries:
+
+```bash
+./.venv/bin/python scripts/bootstrap_brain.py --repo-root .
+```
+
+This updates:
+
+- [`brain.schema.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/brain.schema.yaml)
+- [`capabilities/agents.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/agents.yaml)
+- [`capabilities/skills.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/skills.yaml)
+- [`capabilities/plugins.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/plugins.yaml)
+- [`capabilities/mcp.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/mcp.yaml)
+- [`capabilities/cli.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/cli.yaml)
+- [`capabilities/models.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/models.yaml)
+
+## 7. Re-Validate After Discovery
+
+Run:
+
+```bash
+./.venv/bin/python scripts/validate_brain.py --repo-root .
+```
+
+This confirms the discovered output is still schema-safe.
+
+## 8. Exercise The Routing Policy
+
+Use the simulation harness first:
+
+```bash
+./.venv/bin/python scripts/simulate_swarm.py --repo-root . --dry-run
+```
+
+When the routes look reasonable, write them into telemetry:
+
+```bash
+./.venv/bin/python scripts/simulate_swarm.py --repo-root .
+```
+
+This appends simulated route records into [`telemetry/routes.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/routes.yaml).
+
+## 9. Reconcile Memory Conflicts
+
+Populate [`memory/facts.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/memory/facts.yaml) with fact records, then run:
+
+```bash
+./.venv/bin/python scripts/reconcile_memory.py --repo-root .
+```
+
+Detected contradictions are written to [`memory/conflicts.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/memory/conflicts.yaml).
+
+Use this when:
+
+- two agents disagree about a variable or artifact state
+- route memory conflicts with recent telemetry
+- capability metadata contradicts runtime policy
+
+## 10. Generate Merge And Prune Recommendations
+
+Populate benchmark telemetry in [`capabilities/benchmarks.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/benchmarks.yaml), then run:
+
+```bash
+./.venv/bin/python scripts/prune_topology.py --repo-root .
+```
+
+This writes merge or prune recommendations into [`telemetry/routes.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/routes.yaml).
+
+Use this to:
+
+- merge agents with excessive handoff overhead
+- identify zombie agents with poor value-add per token
+
+## 11. Prepare Distillation And Adapter Jobs
+
+Populate verified expert-correction triplets inside [`telemetry/routes.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/routes.yaml) under `training_triplets`, then run:
+
+```bash
+./.venv/bin/python scripts/prepare_distillation.py --repo-root .
+```
+
+This updates:
+
+- [`training/jobs.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/training/jobs.yaml)
+- [`training/adapters.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/training/adapters.yaml)
+
+Use this when enough verified Tier 3 corrections exist to justify LoRA or adapter training for a task family.
+
+## 12. Run The Full Local Audit Sequence
+
+Use this sequence when adopting the system in a new repository:
+
+```bash
+./.venv/bin/python scripts/run_audit.py --repo-root . --dry-run
+./.venv/bin/python scripts/run_audit.py --repo-root .
+```
+
+Everything after that is automated by the brain.
+
+## 13. Use CI For Ongoing Safety
+
+The repository includes [`.github/workflows/brain-validate.yml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/.github/workflows/brain-validate.yml).
+
+That workflow:
+
+- installs validation dependencies
+- runs the single audit entrypoint in dry-run mode
+- disables autostart so CI does not register a background service
+
+## 14. Recommended Operating Pattern
+
+Use this order in practice:
+
+1. Dry-run the single audit.
+2. Run the single audit without `--dry-run` to populate registries, establish watch roots, and install autopilot.
+3. Commit discovered registries if they look correct.
+4. Let the brain handle startup rechecks and maintenance automatically.
+5. Feed real telemetry into benchmarks and memory stores when you want richer optimization.
+
+## Notes
+
+- `run_audit.py` is the main entrypoint for discovery, population, compile checks, validation, maintenance, and autostart installation.
+- `bootstrap_brain.py` is the lower-level discovery engine used by the audit runner.
+- `simulate_swarm.py` exercises policy logic; it does not call real models.
+- `prepare_distillation.py` prepares jobs; it does not train adapters itself.
+- Keep dry-run as the default for first contact with any unfamiliar repository.

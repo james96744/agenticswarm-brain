@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "registry_defaults", "selection_policy", "mcp_templates", "mcp_entries"],
+  "properties": {
+    "version": { "type": "string" },
+    "registry_defaults": { "type": "object", "additionalProperties": true },
+    "selection_policy": { "type": "object", "additionalProperties": true },
+    "mcp_templates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["mcp_id", "enabled", "source", "kind"],
+        "properties": {
+          "mcp_id": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "source": { "type": "string" },
+          "kind": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "mcp_entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["mcp_id", "enabled", "kind", "source", "scope"],
+        "properties": {
+          "mcp_id": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "kind": { "type": "string" },
+          "source": { "type": "string" },
+          "scope": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

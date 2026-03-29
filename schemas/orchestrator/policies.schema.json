@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "global_policy", "human_in_the_loop", "verification_policy", "routing_policy", "model_tier_policy", "capability_selection_policy", "memory_policy", "blackboard_policy"],
+  "properties": {
+    "version": { "type": "string" },
+    "global_policy": { "type": "object", "additionalProperties": true },
+    "human_in_the_loop": { "type": "object", "additionalProperties": true },
+    "verification_policy": { "type": "object", "additionalProperties": true },
+    "routing_policy": { "type": "object", "additionalProperties": true },
+    "model_tier_policy": { "type": "object", "additionalProperties": true },
+    "capability_selection_policy": { "type": "object", "additionalProperties": true },
+    "memory_policy": { "type": "object", "additionalProperties": true },
+    "blackboard_policy": { "type": "object", "additionalProperties": true }
+  },
+  "additionalProperties": true
+}

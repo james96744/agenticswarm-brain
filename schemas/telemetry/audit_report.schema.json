@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "reports"],
+  "properties": {
+    "version": { "type": "string" },
+    "reports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["audit_id", "timestamp", "repo_root", "dry_run", "phases", "validation", "discovery_counts"],
+        "properties": {
+          "audit_id": { "type": "string" },
+          "timestamp": { "type": "string" },
+          "repo_root": { "type": "string" },
+          "dry_run": { "type": "boolean" },
+          "phases": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+          "validation": { "type": "object", "additionalProperties": true },
+          "discovery_counts": { "type": "object", "additionalProperties": true }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

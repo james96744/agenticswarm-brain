@@ -1,0 +1,4 @@
+version: '1.0'
+last_updated: '2026-03-28'
+description: Adapter registry for hot-swappable task-family knowledge patches.
+adapters: []

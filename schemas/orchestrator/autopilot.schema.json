@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "autopilot"],
+  "properties": {
+    "version": { "type": "string" },
+    "autopilot": {
+      "type": "object",
+      "required": ["enabled", "maintenance", "autostart"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "install_autostart_on_manual_audit": { "type": "boolean" },
+        "startup_recheck_enabled": { "type": "boolean" },
+        "startup_recheck_interval_seconds": { "type": "integer" },
+        "runtime_checks_on_manual_audit": { "type": "boolean" },
+        "runtime_checks_on_startup_recheck": { "type": "boolean" },
+        "maintenance": { "type": "object", "additionalProperties": true },
+        "autostart": { "type": "object", "additionalProperties": true }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

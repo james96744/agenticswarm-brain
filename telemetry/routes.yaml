@@ -1,0 +1,49 @@
+version: '1.0'
+last_updated: '2026-03-28'
+description: Route telemetry store for replay, structural plasticity, and model-tier
+  optimization.
+routes:
+- task_id: boilerplate-api
+  task_family: boilerplate_code
+  simulated: true
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  - tier_2_critic
+  quality_target: fast
+  timestamp: '2026-03-29T02:02:29.426640+00:00'
+- task_id: schema-migration
+  task_family: data_migration
+  simulated: true
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  - tier_2_critic
+  quality_target: balanced
+  timestamp: '2026-03-29T02:02:29.427040+00:00'
+- task_id: security-review
+  task_family: security_sensitive
+  simulated: true
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  - tier_2_critic
+  - tier_3_expert
+  quality_target: critical
+  timestamp: '2026-03-29T02:02:29.427044+00:00'
+- task_id: architecture-arbitration
+  task_family: architecture_decision
+  simulated: true
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  - tier_2_critic
+  - tier_3_expert
+  quality_target: deep
+  timestamp: '2026-03-29T02:02:29.427046+00:00'
+plasticity_recommendations: []
+training_triplets: []
+notes:
+- Append route records here or partition by date in larger repositories.
+- Use `plasticity_recommendations` for merge and prune proposals before applying topology
+  changes.

@@ -1,0 +1,311 @@
+version: '1.0'
+last_updated: '2026-03-29'
+description: Portable model inventory for tier-based routing, semantic gating, and
+  draft-and-verify loops.
+registry_defaults:
+  enabled: true
+  auto_discover: true
+  prefer_lowest_safe_tier: true
+  draft_verify_enabled: true
+  threshold_escalation_enabled: true
+  semantic_router_enabled: true
+  prefer_numeric_benchmarks: true
+tier_policy:
+  tier_0_router:
+    purpose:
+    - semantic_routing
+    - complexity_classification
+    - task_tagging
+    max_cost_band: low
+  tier_1_worker:
+    purpose:
+    - drafting
+    - extraction
+    - boilerplate
+    - transformations
+    max_cost_band: low
+  tier_2_critic:
+    purpose:
+    - verification
+    - schema_validation
+    - hallucination_checks
+    - policy_review
+    max_cost_band: medium
+  tier_3_expert:
+    purpose:
+    - arbitration
+    - high_stakes_reasoning
+    - unresolved_failures
+    - architecture_decisions
+    max_cost_band: high
+selection_rules:
+  use_semantic_router_first: true
+  verify_drafts_by_default: true
+  escalate_only_on_threshold_failure: true
+  send_smallest_possible_delta_to_higher_tier: true
+  prefer_best_observed_task_family_score: true
+thresholds:
+  worker_min_confidence: 0.7
+  critic_pass_confidence: 0.8
+  expert_escalation_confidence: 0.6
+  high_stakes_force_expert: true
+model_templates:
+- model_id: semantic-router-default
+  provider: unassigned
+  type: embedding_or_small_llm
+  tier: tier_0_router
+  enabled: true
+  strengths:
+  - classification
+  - routing
+  - context_pruning
+  weaknesses:
+  - weak_deep_reasoning
+  latency_band: low
+  cost_band: low
+  input_cost_per_million_tokens: null
+  output_cost_per_million_tokens: null
+  throughput_tokens_per_second: null
+  context_window: small
+  max_output_tokens: null
+  modalities:
+  - text
+  supports_tools: false
+  supports_json: true
+  supports_streaming: false
+  supports_soft_prompt_injection: conditional
+  supports_lora_hot_swap: false
+  preferred_task_families:
+  - routing
+  - classification
+  verification_fit: medium
+  status: template
+- model_id: worker-default
+  provider: unassigned
+  type: llm
+  tier: tier_1_worker
+  enabled: true
+  strengths:
+  - drafting
+  - rewriting
+  - extraction
+  - boilerplate_generation
+  weaknesses:
+  - weak_arbitration
+  latency_band: low
+  cost_band: low
+  input_cost_per_million_tokens: null
+  output_cost_per_million_tokens: null
+  throughput_tokens_per_second: null
+  context_window: medium
+  max_output_tokens: null
+  modalities:
+  - text
+  supports_tools: true
+  supports_json: true
+  supports_streaming: true
+  supports_soft_prompt_injection: conditional
+  supports_lora_hot_swap: conditional
+  preferred_task_families:
+  - drafting
+  - extraction
+  - routine_transforms
+  verification_fit: medium
+  status: template
+- model_id: critic-default
+  provider: unassigned
+  type: llm
+  tier: tier_2_critic
+  enabled: true
+  strengths:
+  - validation
+  - error_detection
+  - structural_review
+  - hallucination_checks
+  weaknesses:
+  - higher_cost_than_worker
+  latency_band: medium
+  cost_band: medium
+  input_cost_per_million_tokens: null
+  output_cost_per_million_tokens: null
+  throughput_tokens_per_second: null
+  context_window: medium
+  max_output_tokens: null
+  modalities:
+  - text
+  supports_tools: true
+  supports_json: true
+  supports_streaming: true
+  supports_soft_prompt_injection: false
+  supports_lora_hot_swap: false
+  preferred_task_families:
+  - verification
+  - critique
+  - policy_review
+  verification_fit: high
+  status: template
+- model_id: expert-default
+  provider: unassigned
+  type: llm
+  tier: tier_3_expert
+  enabled: true
+  strengths:
+  - ambiguity_resolution
+  - high_stakes_reasoning
+  - architecture
+  - arbitration
+  weaknesses:
+  - high_cost
+  - higher_latency
+  latency_band: high
+  cost_band: high
+  input_cost_per_million_tokens: null
+  output_cost_per_million_tokens: null
+  throughput_tokens_per_second: null
+  context_window: large
+  max_output_tokens: null
+  modalities:
+  - text
+  supports_tools: true
+  supports_json: true
+  supports_streaming: true
+  supports_soft_prompt_injection: conditional
+  supports_lora_hot_swap: conditional
+  preferred_task_families:
+  - high_stakes_reasoning
+  - architecture
+  - arbitration
+  verification_fit: high
+  status: template
+models:
+- model_id: anthropic-auto
+  provider: anthropic
+  type: llm_provider
+  tier: tier_1_worker
+  enabled: true
+  status: available
+  scope: global
+  source: environment
+- model_id: gpt-5.4
+  provider: codex_cache
+  type: cached_catalog_model
+  tier: tier_3_expert
+  enabled: true
+  status: catalogued
+  display_name: gpt-5.4
+  supported_in_api: true
+  scope: global
+  source: global_model_cache
+- model_id: gpt-5.4-mini
+  provider: codex_cache
+  type: cached_catalog_model
+  tier: tier_3_expert
+  enabled: true
+  status: catalogued
+  display_name: GPT-5.4-Mini
+  supported_in_api: true
+  scope: global
+  source: global_model_cache
+- model_id: gpt-5.3-codex
+  provider: codex_cache
+  type: cached_catalog_model
+  tier: tier_3_expert
+  enabled: true
+  status: catalogued
+  display_name: gpt-5.3-codex
+  supported_in_api: true
+  scope: global
+  source: global_model_cache
+- model_id: gpt-5.2-codex
+  provider: codex_cache
+  type: cached_catalog_model
+  tier: tier_3_expert
+  enabled: true
+  status: catalogued
+  display_name: gpt-5.2-codex
+  supported_in_api: true
+  scope: global
+  source: global_model_cache
+- model_id: gpt-5.2
+  provider: codex_cache
+  type: cached_catalog_model
+  tier: tier_3_expert
+  enabled: true
+  status: catalogued
+  display_name: gpt-5.2
+  supported_in_api: true
+  scope: global
+  source: global_model_cache
+- model_id: gpt-5.1-codex-max
+  provider: codex_cache
+  type: cached_catalog_model
+  tier: tier_3_expert
+  enabled: true
+  status: catalogued
+  display_name: gpt-5.1-codex-max
+  supported_in_api: true
+  scope: global
+  source: global_model_cache
+- model_id: gpt-5.1-codex
+  provider: codex_cache
+  type: cached_catalog_model
+  tier: tier_3_expert
+  enabled: true
+  status: catalogued
+  display_name: gpt-5.1-codex
+  supported_in_api: true
+  scope: global
+  source: global_model_cache
+- model_id: gpt-5.1
+  provider: codex_cache
+  type: cached_catalog_model
+  tier: tier_3_expert
+  enabled: true
+  status: catalogued
+  display_name: gpt-5.1
+  supported_in_api: true
+  scope: global
+  source: global_model_cache
+- model_id: gpt-5-codex
+  provider: codex_cache
+  type: cached_catalog_model
+  tier: tier_3_expert
+  enabled: true
+  status: catalogued
+  display_name: gpt-5-codex
+  supported_in_api: true
+  scope: global
+  source: global_model_cache
+- model_id: gpt-5
+  provider: codex_cache
+  type: cached_catalog_model
+  tier: tier_3_expert
+  enabled: true
+  status: catalogued
+  display_name: gpt-5
+  supported_in_api: true
+  scope: global
+  source: global_model_cache
+- model_id: gpt-5.1-codex-mini
+  provider: codex_cache
+  type: cached_catalog_model
+  tier: tier_3_expert
+  enabled: true
+  status: catalogued
+  display_name: gpt-5.1-codex-mini
+  supported_in_api: true
+  scope: global
+  source: global_model_cache
+- model_id: gpt-5-codex-mini
+  provider: codex_cache
+  type: cached_catalog_model
+  tier: tier_3_expert
+  enabled: true
+  status: catalogued
+  display_name: gpt-5-codex-mini
+  supported_in_api: true
+  scope: global
+  source: global_model_cache
+notes:
+- Populate `models` with discovered local or remote models and map each to a tier.
+- Prefer task-family-specific ranking over a single global default model.

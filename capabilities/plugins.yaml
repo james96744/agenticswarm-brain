@@ -1,0 +1,102 @@
+version: '1.0'
+last_updated: '2026-03-29'
+description: Portable plugin and MCP capability registry for just-in-time provisioning.
+registry_defaults:
+  enabled: true
+  auto_discover: true
+  inject_just_in_time: true
+  revoke_after_step: true
+  prefer_minimum_surface_area: true
+plugin_categories:
+- mcp
+- browser
+- code_execution
+- storage
+- deployment
+- observability
+- data
+- vector_memory
+selection_policy:
+  require_auth_metadata: true
+  require_permission_scope: true
+  prefer_repo_local_integrations: true
+  require_fallback_plan: true
+  require_secret_inventory: true
+  require_destructive_capabilities: true
+plugin_templates:
+- plugin_id: mcp-gateway
+  type: mcp
+  enabled: true
+  source: discovered
+  category: mcp
+  capabilities:
+  - resource_lookup
+  - tool_invocation
+  - context_access
+  permission_scope: scoped
+  auth_required: depends
+  auth_scopes: []
+  secret_requirements: []
+  destructive_capabilities: []
+  data_classification: mixed
+  auditability: high
+  latency_band: medium
+  cost_band: low
+  trustworthiness: 0.85
+  verification_coverage: 0.7
+  invocation_policy:
+    jit_only: true
+    human_approval_required: false
+    high_risk_only: false
+- plugin_id: browser-automation
+  type: plugin
+  enabled: true
+  source: discovered
+  category: browser
+  capabilities:
+  - page_navigation
+  - form_interaction
+  - screenshot_capture
+  permission_scope: medium
+  auth_required: depends
+  auth_scopes: []
+  secret_requirements: []
+  destructive_capabilities: []
+  data_classification: external
+  auditability: medium
+  latency_band: medium
+  cost_band: low
+  trustworthiness: 0.8
+  verification_coverage: 0.75
+  invocation_policy:
+    jit_only: true
+    human_approval_required: false
+    high_risk_only: false
+- plugin_id: vector-store
+  type: plugin
+  enabled: true
+  source: discovered
+  category: vector_memory
+  capabilities:
+  - embeddings_storage
+  - semantic_search
+  - route_replay
+  permission_scope: low
+  auth_required: depends
+  auth_scopes: []
+  secret_requirements: []
+  destructive_capabilities: []
+  data_classification: internal
+  auditability: high
+  latency_band: low
+  cost_band: medium
+  trustworthiness: 0.9
+  verification_coverage: 0.85
+  invocation_policy:
+    jit_only: false
+    human_approval_required: false
+    high_risk_only: false
+plugins: []
+notes:
+- Populate `plugins` with discovered plugin manifests, adapters, and MCP surfaces.
+- The Tool Broker should select only the smallest plugin surface needed for the micro-step.

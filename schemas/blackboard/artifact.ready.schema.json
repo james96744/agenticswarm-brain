@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["event_type", "task_id", "agent_id", "artifact_id", "summary", "confidence", "model_tier", "critic_required", "next_step", "dependencies_satisfied", "timestamp"],
+  "properties": {
+    "event_type": { "const": "artifact.ready" },
+    "task_id": { "type": "string" },
+    "agent_id": { "type": "string" },
+    "artifact_id": { "type": "string" },
+    "summary": { "type": "string" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "model_tier": { "type": "string" },
+    "critic_required": { "type": "boolean" },
+    "next_step": { "type": "string" },
+    "dependencies_satisfied": { "type": "boolean" },
+    "timestamp": { "type": "string" }
+  },
+  "additionalProperties": true
+}

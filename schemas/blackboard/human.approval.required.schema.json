@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["event_type", "task_id", "reason", "risk_level", "timestamp"],
+  "properties": {
+    "event_type": { "const": "human.approval.required" },
+    "task_id": { "type": "string" },
+    "reason": { "type": "string" },
+    "risk_level": { "type": "string" },
+    "timestamp": { "type": "string" }
+  },
+  "additionalProperties": true
+}
