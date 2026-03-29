@@ -1,5 +1,5 @@
 version: '1.0'
-last_updated: '2026-03-28'
+last_updated: '2026-03-29'
 description: Route telemetry store for replay, structural plasticity, and model-tier
   optimization.
 routes:
@@ -41,6 +41,80 @@ routes:
   - tier_3_expert
   quality_target: deep
   timestamp: '2026-03-29T02:02:29.427046+00:00'
+- task_id: safe-exec-demo
+  run_id: run-e82c7349f7f9
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  - tier_2_critic
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  quality_target: balanced
+  risk_level: low
+  confidence: 1.0
+  critic_status: passed
+  replay_eligible: true
+  timestamp: '2026-03-29T22:57:21.050928+00:00'
+- task_id: safe-exec-demo
+  run_id: run-8d2d49374c4d
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  - tier_2_critic
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  quality_target: balanced
+  risk_level: low
+  confidence: 1.0
+  critic_status: passed
+  replay_eligible: true
+  timestamp: '2026-03-29T23:08:42.090462+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-12d11bf577f6
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.84
+  critic_status: passed
+  replay_eligible: true
+  timestamp: '2026-03-29T23:26:37.044283+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-c455fbb9f7f0
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.84
+  critic_status: passed
+  replay_eligible: true
+  timestamp: '2026-03-29T23:26:39.705145+00:00'
 plasticity_recommendations: []
 training_triplets: []
 notes:

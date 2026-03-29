@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["event_type", "task_id", "run_id", "status", "timestamp"],
+  "properties": {
+    "event_type": { "const": "task.completed" },
+    "task_id": { "type": "string" },
+    "run_id": { "type": "string" },
+    "status": { "type": "string" },
+    "summary": { "type": "string" },
+    "timestamp": { "type": "string" }
+  },
+  "additionalProperties": true
+}

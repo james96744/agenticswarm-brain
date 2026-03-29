@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "tasks", "runs", "approvals", "artifacts", "leases"],
+  "properties": {
+    "version": { "type": "string" },
+    "tasks": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "runs": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "approvals": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "artifacts": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "leases": { "type": "array", "items": { "type": "object", "additionalProperties": true } }
+  },
+  "additionalProperties": true
+}

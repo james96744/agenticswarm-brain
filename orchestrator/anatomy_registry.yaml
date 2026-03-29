@@ -1,0 +1,129 @@
+version: "1.0"
+last_updated: "2026-03-29"
+description: Stable anatomy-to-module registry and wrapper entrypoints for brain-oriented orchestration.
+
+anatomy_modules:
+  cerebrum:
+    label: Cerebrum
+    description: Primary orchestration cortex for planning, routing, and whole-brain authority.
+    wrapper_entrypoint: scripts/cerebrum.py
+    module_refs:
+      - path: scripts/run_audit.py
+        role: audit_runner
+      - path: scripts/bootstrap_brain.py
+        role: discovery_engine
+      - path: scripts/runtime_bridge.py
+        role: route_planner
+    actions:
+      audit:
+        target: scripts/run_audit.py
+        description: Run the primary orchestration audit.
+      discover:
+        target: scripts/bootstrap_brain.py
+        description: Discover and populate repository capabilities.
+      plan:
+        target: scripts/runtime_bridge.py
+        description: Build executable plans from the runtime registry.
+
+  cerebellum:
+    label: Cerebellum
+    description: Secondary decision and refinement cortex for review, simulation, and optimization.
+    wrapper_entrypoint: scripts/cerebellum.py
+    module_refs:
+      - path: scripts/validate_brain.py
+        role: validation_loop
+      - path: scripts/simulate_swarm.py
+        role: route_simulation
+      - path: scripts/prune_topology.py
+        role: topology_refinement
+      - path: scripts/prepare_distillation.py
+        role: learning_refinement
+    actions:
+      validate:
+        target: scripts/validate_brain.py
+        description: Validate contracts and structural coherence.
+      simulate:
+        target: scripts/simulate_swarm.py
+        description: Simulate route behavior before live execution.
+      prune:
+        target: scripts/prune_topology.py
+        description: Recommend merge and prune changes for topology efficiency.
+      distill:
+        target: scripts/prepare_distillation.py
+        description: Prepare verified distillation and adapter jobs.
+
+  limbic_system:
+    label: Limbic System
+    description: Memory and risk context layer for facts, contradictions, and replay.
+    wrapper_entrypoint: scripts/limbic_system.py
+    module_refs:
+      - path: scripts/reconcile_memory.py
+        role: contradiction_reconciliation
+      - path: memory/facts.yaml
+        role: semantic_memory
+      - path: memory/conflicts.yaml
+        role: contradiction_store
+    actions:
+      reconcile:
+        target: scripts/reconcile_memory.py
+        description: Reconcile contradictory memory state.
+
+  neurons:
+    label: Neurons
+    description: Specialist bounded execution units that perform work through the execution engine.
+    wrapper_entrypoint: scripts/neurons.py
+    module_refs:
+      - path: scripts/execution_engine.py
+        role: execution_engine
+      - path: scripts/execute_task.py
+        role: task_execution_entrypoint
+    actions:
+      execute:
+        target: scripts/execute_task.py
+        description: Execute a normalized task request through the live runtime.
+
+  dendrites:
+    label: Dendrites
+    description: Connector surfaces for skills, plugins, MCP, CLI tools, and backend routing.
+    wrapper_entrypoint: scripts/dendrites.py
+    module_refs:
+      - path: capabilities/skills.yaml
+        role: skill_connectors
+      - path: capabilities/plugins.yaml
+        role: plugin_connectors
+      - path: capabilities/mcp.yaml
+        role: mcp_connectors
+      - path: capabilities/cli.yaml
+        role: cli_connectors
+      - path: capabilities/runtime.yaml
+        role: backend_connectors
+      - path: scripts/runtime_bridge.py
+        role: connector_resolver
+    actions:
+      map:
+        target: scripts/runtime_bridge.py
+        description: Resolve connector surfaces into executable runtime backends.
+      refresh:
+        target: scripts/update_featureset.py
+        description: Refresh connector-discovery state from git and environment changes.
+
+  brainstem:
+    label: Brainstem
+    description: Runtime bridge for execution transport, approvals, artifacts, and operator visibility.
+    wrapper_entrypoint: scripts/brainstem.py
+    module_refs:
+      - path: scripts/control_plane.py
+        role: control_plane_bridge
+      - path: scripts/operator_status.py
+        role: operator_status
+      - path: telemetry/blackboard.yaml
+        role: event_transport
+      - path: telemetry/control_plane.yaml
+        role: durable_runtime_state
+    actions:
+      execute:
+        target: scripts/execute_task.py
+        description: Execute through the runtime bridge.
+      status:
+        target: scripts/operator_status.py
+        description: Summarize runtime readiness, approvals, and route quality.

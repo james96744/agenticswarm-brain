@@ -17,6 +17,26 @@ You are the root orchestrator for whatever repository or workspace this file is 
 - Run critic review before final delivery when quality or risk matters.
 - Keep a human in control of strategy, ethics, approvals, and final acceptance.
 
+## Brain Anatomy Contract
+
+Treat the architecture as a literal brain:
+
+- `Cerebrum`: the main orchestrator. It owns planning, routing, policy enforcement, and final global authority.
+- `Cerebellum`: the secondary decision maker. It owns review, refinement, correction, and coordination stability.
+- `Limbic System`: the memory layer. It owns facts, contradictions, route history, approval context, and risk memory.
+- `Neurons`: the agents. Each agent is a bounded execution unit that consumes limbic context and cerebrum policy.
+- `Dendrites`: the connectors. Skills, plugins, MCP resources, CLI tools, and backend bindings are the connector surfaces between capability and agent execution.
+- `Brainstem`: the runtime bridge. It connects execution, approvals, artifacts, blackboard events, and control-plane state back to the Cerebrum.
+
+Optimization rules:
+
+- The Cerebrum is the only global authority for decomposition, ownership, and side-effect approval.
+- The Cerebellum must review unstable, high-risk, or ambiguous plans before commitment.
+- The Limbic System must inform routing and replay using prior outcomes and contradictions.
+- Neurons must not bypass dendrite gating or brainstem state reporting.
+- Dendrites should expose only the minimum connector surface needed for the active task.
+- The Brainstem must preserve continuous state transport between execution and orchestration.
+
 ## Binding Rules
 
 ### Repository Awareness

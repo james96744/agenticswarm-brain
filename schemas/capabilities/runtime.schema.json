@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "version",
+    "registry_defaults",
+    "selection_policy",
+    "executor_templates",
+    "router_templates",
+    "backend_templates",
+    "agent_executors",
+    "model_routers",
+    "tool_backends"
+  ],
+  "properties": {
+    "version": { "type": "string" },
+    "registry_defaults": { "type": "object", "additionalProperties": true },
+    "selection_policy": { "type": "object", "additionalProperties": true },
+    "executor_templates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["executor_id", "enabled", "source", "kind", "command"],
+        "properties": {
+          "executor_id": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "source": { "type": "string" },
+          "kind": { "type": "string" },
+          "command": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "router_templates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["router_id", "enabled", "source", "kind"],
+        "properties": {
+          "router_id": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "source": { "type": "string" },
+          "kind": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "backend_templates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["backend_id", "enabled", "source", "kind", "category"],
+        "properties": {
+          "backend_id": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "source": { "type": "string" },
+          "kind": { "type": "string" },
+          "category": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "agent_executors": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "model_routers": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "tool_backends": { "type": "array", "items": { "type": "object", "additionalProperties": true } }
+  },
+  "additionalProperties": true
+}

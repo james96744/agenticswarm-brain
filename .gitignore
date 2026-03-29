@@ -5,5 +5,7 @@ __pycache__/
 venv/
 .agenticswarm-backups/
 telemetry/audit.lock
+telemetry/blackboard.lock
+telemetry/control_plane.lock
 telemetry/autopilot.stdout.log
 telemetry/autopilot.stderr.log

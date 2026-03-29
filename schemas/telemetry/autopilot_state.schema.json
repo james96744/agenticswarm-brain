@@ -17,7 +17,18 @@
         "last_install_status": { "type": "string" },
         "last_install_error": { "type": ["string", "null"] },
         "last_maintenance_run_at": { "type": ["string", "null"] },
-        "last_maintenance_summary": { "type": "array", "items": { "type": "string" } }
+        "last_maintenance_summary": { "type": "array", "items": { "type": "string" } },
+        "last_git_check_at": { "type": ["string", "null"] },
+        "last_git_branch": { "type": ["string", "null"] },
+        "last_git_head_sha": { "type": ["string", "null"] },
+        "last_git_upstream_ref": { "type": ["string", "null"] },
+        "last_git_upstream_head_sha": { "type": ["string", "null"] },
+        "last_git_ahead_count": { "type": "integer" },
+        "last_git_behind_count": { "type": "integer" },
+        "last_git_dirty": { "type": "boolean" },
+        "last_featureset_update_at": { "type": ["string", "null"] },
+        "last_featureset_update_status": { "type": "string" },
+        "last_featureset_update_reason": { "type": ["string", "null"] }
       },
       "additionalProperties": true
     }

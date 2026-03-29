@@ -5,32 +5,10 @@ from datetime import datetime, timezone
 
 try:
     from brain_utils import dump_yaml_file, load_yaml_file, repo_root_from
+    from runtime_bridge import build_runtime_registry, plan_execution
 except ModuleNotFoundError:
     from scripts.brain_utils import dump_yaml_file, load_yaml_file, repo_root_from
-
-
-RISK_ORDER = {"low": 0, "medium": 1, "high": 2, "critical": 3}
-COMPLEXITY_ORDER = {"low": 0, "medium": 1, "high": 2}
-
-
-def build_route(scenario: dict, policies: dict) -> list[str]:
-    route = []
-    if policies.get("routing_policy", {}).get("semantic_router_enabled", False):
-        route.append("tier_0_router")
-    route.append("tier_1_worker")
-
-    risk = RISK_ORDER.get(scenario.get("risk_level", "medium"), 1)
-    complexity = COMPLEXITY_ORDER.get(scenario.get("complexity", "medium"), 1)
-
-    critic_needed = scenario.get("requires_code", False) or scenario.get("requires_tools", False) or risk >= 1
-    if critic_needed:
-        route.append("tier_2_critic")
-
-    expert_needed = scenario.get("force_expert", False) or scenario.get("high_stakes", False) or risk >= 2 or complexity >= 2
-    if expert_needed:
-        route.append("tier_3_expert")
-
-    return route
+    from scripts.runtime_bridge import build_runtime_registry, plan_execution
 
 
 def main() -> int:
@@ -42,18 +20,24 @@ def main() -> int:
     root = repo_root_from(args.repo_root)
     scenarios = load_yaml_file(root / "simulation/scenarios.yaml").get("scenarios", [])
     policies = load_yaml_file(root / "orchestrator/policies.yaml")
+    runtime_registry = build_runtime_registry(root, write=not args.dry_run)
     telemetry = load_yaml_file(root / "telemetry/routes.yaml")
     routes = telemetry.setdefault("routes", [])
 
     simulated = []
     for scenario in scenarios:
-        route = build_route(scenario, policies)
+        plan = plan_execution(root, scenario, runtime_registry=runtime_registry, policies=policies)
         simulated.append(
             {
                 "task_id": scenario["scenario_id"],
                 "task_family": scenario["task_family"],
                 "simulated": True,
-                "model_tier_path": route,
+                "model_tier_path": plan["model_tier_path"],
+                "executor_id": plan["selected_executor"]["executor_id"] if plan.get("selected_executor") else None,
+                "router_id": plan["selected_router"]["router_id"] if plan.get("selected_router") else None,
+                "backend_ids": [backend["backend_id"] for backend in plan.get("backend_bundle", [])],
+                "plan_confidence": plan.get("confidence"),
+                "unresolved": plan.get("unresolved", []),
                 "quality_target": scenario.get("quality_target", "balanced"),
                 "timestamp": datetime.now(timezone.utc).isoformat(),
             }

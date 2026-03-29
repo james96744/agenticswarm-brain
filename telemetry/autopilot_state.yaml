@@ -15,6 +15,17 @@ state:
   - scripts/reconcile_memory.py:passed
   - scripts/prune_topology.py:passed
   - scripts/prepare_distillation.py:passed
+  last_git_check_at: null
+  last_git_branch: null
+  last_git_head_sha: null
+  last_git_upstream_ref: null
+  last_git_upstream_head_sha: null
+  last_git_ahead_count: 0
+  last_git_behind_count: 0
+  last_git_dirty: false
+  last_featureset_update_at: null
+  last_featureset_update_status: never_checked
+  last_featureset_update_reason: null
 notes:
 - This file records whether the brain successfully installed a background startup
   recheck adapter.

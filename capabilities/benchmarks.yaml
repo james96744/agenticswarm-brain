@@ -1,17 +1,37 @@
-version: "1.0"
-last_updated: "2026-03-28"
-description: Benchmark and telemetry rollup store for task-family routing, pruning, and adapter activation.
-
-task_family_benchmarks: []
-
-model_benchmarks: []
-
+version: '1.0'
+last_updated: '2026-03-29'
+description: Benchmark and telemetry rollup store for task-family routing, pruning,
+  and adapter activation.
+task_family_benchmarks:
+- task_family: boilerplate_code
+  run_count: 4
+  success_count: 4
+  critic_pass_count: 4
+  replay_candidate_count: 4
+  avg_confidence: 0.92
+  last_executor_id: python-workflow-runner
+  last_router_id: anthropic-router
+  updated_at: '2026-03-29T23:26:39.711604+00:00'
+model_benchmarks:
+- model_id: anthropic-router
+  task_family: boilerplate_code
+  run_count: 4
+  success_count: 4
+  last_used_at: '2026-03-29T23:26:39.711610+00:00'
 agent_pair_metrics: []
-
-agent_value_metrics: []
-
+agent_value_metrics:
+- agent_id: python-workflow-runner
+  task_family: boilerplate_code
+  run_count: 4
+  success_count: 4
+  critic_failure_count: 0
+  avg_confidence: 0.92
+  prune_protected: false
+  value_add_per_token: 0.84
+  critic_rejection_rate: 0.0
+  ignored_edit_rate: 0.0
+  updated_at: '2026-03-29T23:26:39.711618+00:00'
 adapter_benchmarks: []
-
 notes:
-  - Store observed quality, cost, latency, and critic-pass rates by task family.
-  - Use `agent_pair_metrics` to drive merge recommendations and zombie-agent pruning.
+- Store observed quality, cost, latency, and critic-pass rates by task family.
+- Use `agent_pair_metrics` to drive merge recommendations and zombie-agent pruning.

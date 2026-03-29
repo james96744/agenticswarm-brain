@@ -17,14 +17,18 @@ FILE_SCHEMA_MAP = {
     "capabilities/mcp.yaml": "schemas/capabilities/mcp.schema.json",
     "capabilities/models.yaml": "schemas/capabilities/models.schema.json",
     "capabilities/plugins.yaml": "schemas/capabilities/plugins.schema.json",
+    "capabilities/runtime.yaml": "schemas/capabilities/runtime.schema.json",
     "capabilities/skills.yaml": "schemas/capabilities/skills.schema.json",
     "memory/conflicts.yaml": "schemas/memory/conflicts.schema.json",
     "memory/facts.yaml": "schemas/memory/facts.schema.json",
     "orchestrator/autopilot.yaml": "schemas/orchestrator/autopilot.schema.json",
+    "orchestrator/anatomy_registry.yaml": "schemas/orchestrator/anatomy_registry.schema.json",
     "orchestrator/policies.yaml": "schemas/orchestrator/policies.schema.json",
     "simulation/scenarios.yaml": "schemas/simulation/scenarios.schema.json",
     "telemetry/audit_report.yaml": "schemas/telemetry/audit_report.schema.json",
     "telemetry/autopilot_state.yaml": "schemas/telemetry/autopilot_state.schema.json",
+    "telemetry/blackboard.yaml": "schemas/telemetry/blackboard.schema.json",
+    "telemetry/control_plane.yaml": "schemas/telemetry/control_plane.schema.json",
     "telemetry/discovery_state.yaml": "schemas/telemetry/discovery_state.schema.json",
     "telemetry/routes.yaml": "schemas/telemetry/routes.schema.json",
     "training/adapters.yaml": "schemas/training/adapters.schema.json",
@@ -40,6 +44,7 @@ DISCOVERED_PATH_CHECKS = (
 )
 
 MODEL_TIERS = {"tier_0_router", "tier_1_worker", "tier_2_critic", "tier_3_expert"}
+ANATOMY_KEYS = {"cerebrum", "cerebellum", "limbic_system", "neurons", "dendrites", "brainstem"}
 
 
 def require_jsonschema():
@@ -96,7 +101,48 @@ def semantic_checks(root: Path) -> list[str]:
     errors = []
     brain_data = load_yaml_file(root / "brain.schema.yaml")
     brain = brain_data.get("brain_manifest", {})
+    anatomy_registry_ref = brain.get("anatomy_registry", {}).get("path", "orchestrator/anatomy_registry.yaml")
+    anatomy_registry = load_yaml_file(root / anatomy_registry_ref)
     policies = load_yaml_file(root / "orchestrator/policies.yaml")
+
+    brain_anatomy = set(brain.get("anatomy_map", {}).keys())
+    policy_anatomy = set(policies.get("anatomy_policy", {}).keys()) & ANATOMY_KEYS
+    registry_anatomy = set(anatomy_registry.get("anatomy_modules", {}).keys())
+    if brain_anatomy and brain_anatomy != ANATOMY_KEYS:
+        errors.append("brain.schema.yaml:anatomy_map must define cerebrum, cerebellum, limbic_system, neurons, dendrites, and brainstem")
+    if policy_anatomy and policy_anatomy != ANATOMY_KEYS:
+        errors.append("orchestrator/policies.yaml:anatomy_policy must define cerebrum, cerebellum, limbic_system, neurons, dendrites, and brainstem")
+    if registry_anatomy and registry_anatomy != ANATOMY_KEYS:
+        errors.append("orchestrator/anatomy_registry.yaml:anatomy_modules must define cerebrum, cerebellum, limbic_system, neurons, dendrites, and brainstem")
+    if brain_anatomy and policy_anatomy and brain_anatomy != policy_anatomy:
+        errors.append("brain.schema.yaml:anatomy_map must match orchestrator/policies.yaml anatomy_policy core anatomy keys")
+    if brain_anatomy and registry_anatomy and brain_anatomy != registry_anatomy:
+        errors.append("brain.schema.yaml:anatomy_map must match orchestrator/anatomy_registry.yaml anatomy_modules keys")
+
+    wrapper_entrypoints = brain.get("anatomy_registry", {}).get("wrapper_entrypoints", {})
+    for anatomy_key, wrapper_path in wrapper_entrypoints.items():
+        if anatomy_key not in ANATOMY_KEYS:
+            errors.append(f"brain.schema.yaml:anatomy_registry.wrapper_entrypoints includes unsupported anatomy key `{anatomy_key}`")
+            continue
+        if not (root / wrapper_path).exists():
+            errors.append(f"brain.schema.yaml:anatomy_registry.wrapper_entrypoints.{anatomy_key} points to missing file `{wrapper_path}`")
+
+    for anatomy_key, module in anatomy_registry.get("anatomy_modules", {}).items():
+        wrapper_path = module.get("wrapper_entrypoint")
+        if wrapper_path and not (root / wrapper_path).exists():
+            errors.append(f"orchestrator/anatomy_registry.yaml:{anatomy_key}.wrapper_entrypoint points to missing file `{wrapper_path}`")
+        if wrapper_entrypoints.get(anatomy_key) and wrapper_entrypoints.get(anatomy_key) != wrapper_path:
+            errors.append(
+                f"brain.schema.yaml:anatomy_registry.wrapper_entrypoints.{anatomy_key} must match orchestrator/anatomy_registry.yaml wrapper_entrypoint"
+            )
+        for ref in module.get("module_refs", []):
+            path_value = ref.get("path")
+            if path_value and not (root / path_value).exists():
+                errors.append(f"orchestrator/anatomy_registry.yaml:{anatomy_key}.module_refs points to missing path `{path_value}`")
+        for action, action_config in module.get("actions", {}).items():
+            target = action_config.get("target")
+            if target and not (root / target).exists():
+                errors.append(f"orchestrator/anatomy_registry.yaml:{anatomy_key}.actions.{action}.target points to missing file `{target}`")
 
     brain_critic = set(brain.get("policies", {}).get("require_critic_for", []))
     policy_critic = set(policies.get("verification_policy", {}).get("critic_required_for", []))

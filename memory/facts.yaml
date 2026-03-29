@@ -1,8 +1,90 @@
-version: "1.0"
-last_updated: "2026-03-28"
+version: '1.0'
+last_updated: '2026-03-29'
 description: Canonical fact store for truth-maintenance and contradiction detection.
-
-facts: []
-
+facts:
+- fact_id: fact-e9422e1c2b
+  subject: task_family:boilerplate_code
+  predicate: last_successful_executor
+  object: python-workflow-runner
+  confidence: 1.0
+  source: run-e82c7349f7f9
+  timestamp: '2026-03-29T22:57:21.067075+00:00'
+- fact_id: fact-38deff8f96
+  subject: task_family:boilerplate_code
+  predicate: last_successful_router
+  object: anthropic-router
+  confidence: 1.0
+  source: run-e82c7349f7f9
+  timestamp: '2026-03-29T22:57:21.067104+00:00'
+- fact_id: fact-60e3850d89
+  subject: backend:cli-rg
+  predicate: last_seen_status
+  object: success
+  confidence: 1.0
+  source: run-e82c7349f7f9
+  timestamp: '2026-03-29T22:57:21.067117+00:00'
+- fact_id: fact-bda629b081
+  subject: task_family:boilerplate_code
+  predicate: last_successful_executor
+  object: python-workflow-runner
+  confidence: 1.0
+  source: run-8d2d49374c4d
+  timestamp: '2026-03-29T23:08:42.103750+00:00'
+- fact_id: fact-a11617e236
+  subject: task_family:boilerplate_code
+  predicate: last_successful_router
+  object: anthropic-router
+  confidence: 1.0
+  source: run-8d2d49374c4d
+  timestamp: '2026-03-29T23:08:42.103771+00:00'
+- fact_id: fact-1d336adaaf
+  subject: backend:cli-rg
+  predicate: last_seen_status
+  object: success
+  confidence: 1.0
+  source: run-8d2d49374c4d
+  timestamp: '2026-03-29T23:08:42.103783+00:00'
+- fact_id: fact-563da21d47
+  subject: task_family:boilerplate_code
+  predicate: last_successful_executor
+  object: python-workflow-runner
+  confidence: 0.84
+  source: run-12d11bf577f6
+  timestamp: '2026-03-29T23:26:37.055361+00:00'
+- fact_id: fact-4cfa7e12b6
+  subject: task_family:boilerplate_code
+  predicate: last_successful_router
+  object: anthropic-router
+  confidence: 0.84
+  source: run-12d11bf577f6
+  timestamp: '2026-03-29T23:26:37.055374+00:00'
+- fact_id: fact-f593bd879f
+  subject: backend:cli-rg
+  predicate: last_seen_status
+  object: success
+  confidence: 0.84
+  source: run-12d11bf577f6
+  timestamp: '2026-03-29T23:26:37.055383+00:00'
+- fact_id: fact-45faee309e
+  subject: task_family:boilerplate_code
+  predicate: last_successful_executor
+  object: python-workflow-runner
+  confidence: 0.84
+  source: run-c455fbb9f7f0
+  timestamp: '2026-03-29T23:26:39.718261+00:00'
+- fact_id: fact-1d5bc422a8
+  subject: task_family:boilerplate_code
+  predicate: last_successful_router
+  object: anthropic-router
+  confidence: 0.84
+  source: run-c455fbb9f7f0
+  timestamp: '2026-03-29T23:26:39.718274+00:00'
+- fact_id: fact-b27f330348
+  subject: backend:cli-rg
+  predicate: last_seen_status
+  object: success
+  confidence: 0.84
+  source: run-c455fbb9f7f0
+  timestamp: '2026-03-29T23:26:39.718283+00:00'
 notes:
-  - Each fact should include subject, predicate, object, confidence, source, and timestamp.
+- Each fact should include subject, predicate, object, confidence, source, and timestamp.

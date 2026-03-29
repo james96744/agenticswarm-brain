@@ -27,6 +27,9 @@ except ModuleNotFoundError:
 
 
 RUNTIME_CHECKS = (
+    "scripts/update_featureset.py",
+    "scripts/runtime_bridge.py",
+    "scripts/operator_status.py",
     "scripts/simulate_swarm.py",
     "scripts/reconcile_memory.py",
     "scripts/prune_topology.py",
@@ -34,10 +37,15 @@ RUNTIME_CHECKS = (
 )
 
 MAINTENANCE_SCRIPTS = (
+    ("scripts/update_featureset.py", "update_featureset"),
     ("scripts/reconcile_memory.py", "reconcile_memory"),
     ("scripts/prune_topology.py", "prune_topology"),
     ("scripts/prepare_distillation.py", "prepare_distillation"),
 )
+
+
+class AuditLockedError(RuntimeError):
+    pass
 
 
 @contextmanager
@@ -46,7 +54,11 @@ def audit_lock(root: Path):
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     handle = lock_path.open("w", encoding="utf-8")
     if fcntl is not None:
-        fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+        try:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            handle.close()
+            raise AuditLockedError(f"audit already running: {lock_path}") from exc
     try:
         yield
     finally:
@@ -545,23 +557,34 @@ def main() -> int:
 
     root = repo_root_from(args.repo_root)
 
-    with audit_lock(root):
-        if args.startup_check:
-            report, success = perform_startup_check(
-                root,
-                dry_run=args.dry_run,
-                explicit_skip_runtime_checks=args.skip_runtime_checks,
-                no_autostart=args.no_autostart,
-            )
-        else:
-            report, success = perform_full_audit(
-                root,
-                dry_run=args.dry_run,
-                explicit_skip_runtime_checks=args.skip_runtime_checks,
-                no_autostart=args.no_autostart,
-                reason="manual_audit",
-                startup_mode=False,
-            )
+    try:
+        with audit_lock(root):
+            if args.startup_check:
+                report, success = perform_startup_check(
+                    root,
+                    dry_run=args.dry_run,
+                    explicit_skip_runtime_checks=args.skip_runtime_checks,
+                    no_autostart=args.no_autostart,
+                )
+            else:
+                report, success = perform_full_audit(
+                    root,
+                    dry_run=args.dry_run,
+                    explicit_skip_runtime_checks=args.skip_runtime_checks,
+                    no_autostart=args.no_autostart,
+                    reason="manual_audit",
+                    startup_mode=False,
+                )
+    except AuditLockedError as exc:
+        dump_json_stdout(
+            {
+                "repo_root": str(root),
+                "status": "skipped",
+                "reason": "audit_locked",
+                "detail": str(exc),
+            }
+        )
+        return 1
 
     dump_json_stdout(report)
     return 0 if success else 1

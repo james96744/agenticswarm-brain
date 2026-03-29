@@ -1,68 +1,163 @@
 # AgenticSwarm Brain
 
-Portable, repo-aware orchestration scaffold for building a self-maintaining multi-agent brain inside any codebase.
+Portable, repo-aware orchestration infrastructure for turning a codebase into a self-maintaining multi-agent brain.
 
-AgenticSwarm Brain is designed to be dropped into a repository, inspect that repository plus the globally installed agent/skill/MCP/CLI/model surface, populate a portable capability graph, and keep itself updated through automated startup rechecks and maintenance.
+This project is not just a prompt pack or a tool list. It is a file-first orchestration system that discovers the capabilities around a repository, maps them into a runtime, executes work through guarded control-plane flows, learns from route outcomes, and keeps the whole system inspectable.
 
-## What It Does
+## What This Repository Is
 
-- Audits any repository it is installed into
-- Discovers local and global agents, skills, plugins, MCPs, CLIs, and model surfaces
-- Builds portable registries the orchestrator can route against
-- Validates schemas and cross-file contract consistency
-- Runs maintenance automatically: memory reconciliation, topology pruning, and distillation prep
-- Installs background startup rechecks on supported platforms so new installs are detected without manual intervention
+AgenticSwarm Brain is designed to be copied into another repository and used as that repository's orchestration substrate.
 
-## Why This Exists
+It provides:
 
-Most agent frameworks stop at prompts, tools, or task routing. This project is meant to operate more like a reusable orchestration layer:
+- repository and environment discovery
+- capability registries for agents, skills, plugins, MCP, CLI tools, and models
+- runtime planning and direct execution adapters
+- a blackboard and control plane for events, runs, approvals, artifacts, and leases
+- git-aware self-maintenance and featureset refresh
+- learning surfaces for route replay, benchmark scoring, and training triplets
+- anatomy-based wrapper entrypoints so the system can think in brain terms without renaming the real implementation
 
-- portable across repos
-- aware of its environment
-- able to prefer the cheapest safe execution path
-- capable of learning from route history
-- structured enough to validate, version, and automate
+The result is a reusable brain scaffold that can be installed into many repos and then adapt itself to each one.
 
-The goal is not just “run agents.” The goal is to give a repository a persistent, inspectable, self-updating brain.
+## Core Idea
 
-## Core Capabilities
+The architecture is organized as a literal brain model and enforced in the manifest, policy layer, validation rules, and wrapper registry.
 
-### Repo-Aware Discovery
+- `Cerebrum`: primary orchestration, planning, routing, and final authority
+- `Cerebellum`: secondary decision-making, critique, refinement, and route correction
+- `Limbic System`: memory, contradiction tracking, replay, and approval context
+- `Neurons`: bounded specialist agents and execution workers
+- `Dendrites`: skills, plugins, MCP servers, CLI tools, and backend connectors
+- `Brainstem`: runtime bridge, blackboard, control plane, approvals, and artifact transport back to orchestration
 
-The brain inspects:
+This model is backed by:
 
-- repository-local agent definitions
-- repository-local skills and scripts
-- plugin manifests
-- MCP configs and MCP executables
-- installed CLI tools
-- available model runtimes and cached model catalogs
+- [`brain.schema.yaml`](./brain.schema.yaml)
+- [`orchestrator/policies.yaml`](./orchestrator/policies.yaml)
+- [`orchestrator/anatomy_registry.yaml`](./orchestrator/anatomy_registry.yaml)
 
-### Tiered Orchestration
+## What It Can Do Today
 
-The system is built around:
+### Discovery And Registry Building
 
-- semantic routing
-- draft-and-verify loops
-- worker / critic / expert escalation
-- dynamic DAG generation
-- historical route replay
-- context compression
+The brain can inspect:
 
-### Self-Maintenance
+- repository-local agents and skills
+- global agent and skill surfaces
+- plugins and MCP configurations
+- CLI tools and execution backends
+- model inventory and runtime candidates
+- repository memory, test, build, and deployment signals
 
-After bootstrap, the brain can:
+It writes those findings into portable registries under [`capabilities/`](./capabilities).
 
-- recheck watched install roots on startup
-- detect newly installed capabilities
-- refresh capability registries when the environment changes
-- reconcile contradictory memory
-- recommend topology merges and pruning
-- prepare distillation and adapter jobs from correction history
+### Runtime Planning And Execution
 
-## Install
+The runtime layer can:
 
-### One-Line Bootstrap
+- resolve discovered inventory into executor, router, and backend candidates
+- plan task-family-specific execution bundles
+- invoke selected executors and backends directly
+- gate risky or high-impact execution behind approvals
+- record runs, artifacts, backend calls, and critic outcomes
+
+Key runtime components:
+
+- [`scripts/runtime_bridge.py`](./scripts/runtime_bridge.py)
+- [`scripts/execution_engine.py`](./scripts/execution_engine.py)
+- [`scripts/execute_task.py`](./scripts/execute_task.py)
+- [`capabilities/runtime.yaml`](./capabilities/runtime.yaml)
+
+### Control Plane And Blackboard
+
+The system includes a durable file-first coordination layer:
+
+- [`telemetry/blackboard.yaml`](./telemetry/blackboard.yaml): append-only event log
+- [`telemetry/control_plane.yaml`](./telemetry/control_plane.yaml): tasks, runs, approvals, artifacts, leases
+- [`scripts/control_plane.py`](./scripts/control_plane.py): store interfaces and lease handling
+- [`scripts/operator_status.py`](./scripts/operator_status.py): compact operator view
+
+This gives the brain stable coordination even before Redis/Postgres adapters exist.
+
+### Git-Aware Self-Maintenance
+
+The updater can:
+
+- inspect branch, head, upstream, ahead/behind, and dirty state
+- ignore generated brain artifacts via explicit dirty-policy rules
+- refresh the featureset when git state changes
+- fast-forward safely when the repo is behind and clean
+
+Relevant files:
+
+- [`scripts/update_featureset.py`](./scripts/update_featureset.py)
+- [`orchestrator/autopilot.yaml`](./orchestrator/autopilot.yaml)
+- [`telemetry/autopilot_state.yaml`](./telemetry/autopilot_state.yaml)
+
+### Learning And Replay
+
+The current scaffold records enough information to support:
+
+- route replay
+- benchmark rollups by task family
+- critic pass/fail tracking
+- contradiction-aware memory updates
+- training triplet accumulation
+
+Relevant files:
+
+- [`telemetry/routes.yaml`](./telemetry/routes.yaml)
+- [`capabilities/benchmarks.yaml`](./capabilities/benchmarks.yaml)
+- [`memory/facts.yaml`](./memory/facts.yaml)
+- [`memory/conflicts.yaml`](./memory/conflicts.yaml)
+
+## Repository Layout
+
+```text
+capabilities/   discovered and portable registries
+memory/         facts, contradictions, and memory state
+orchestrator/   root policy, autopilot, anatomy registry
+schemas/        JSON Schemas for every portable contract
+scripts/        discovery, runtime, execution, validation, maintenance
+simulation/     synthetic scenario inputs
+telemetry/      route history, control plane, blackboard, audit state
+training/       adapter and distillation job planning
+```
+
+## Main Entry Points
+
+### Core
+
+- [`bootstrap.sh`](./bootstrap.sh): installer bootstrap
+- [`install_brain.py`](./install_brain.py): copies the scaffold into a target repo
+- [`scripts/run_audit.py`](./scripts/run_audit.py): top-level audit, validation, maintenance, and autostart flow
+- [`scripts/bootstrap_brain.py`](./scripts/bootstrap_brain.py): discovery and registry population engine
+- [`scripts/validate_brain.py`](./scripts/validate_brain.py): schema and semantic validation
+
+### Runtime
+
+- [`scripts/runtime_bridge.py`](./scripts/runtime_bridge.py): runtime registry and planning
+- [`scripts/execute_task.py`](./scripts/execute_task.py): live execution entrypoint
+- [`scripts/operator_status.py`](./scripts/operator_status.py): runtime and learning summary
+- [`scripts/update_featureset.py`](./scripts/update_featureset.py): git-aware featureset refresh
+
+### Anatomy Wrappers
+
+The project includes stable anatomy-named wrappers over the implementation modules:
+
+- [`scripts/cerebrum.py`](./scripts/cerebrum.py)
+- [`scripts/cerebellum.py`](./scripts/cerebellum.py)
+- [`scripts/limbic_system.py`](./scripts/limbic_system.py)
+- [`scripts/neurons.py`](./scripts/neurons.py)
+- [`scripts/dendrites.py`](./scripts/dendrites.py)
+- [`scripts/brainstem.py`](./scripts/brainstem.py)
+
+The wrapper-to-module mapping is declared in [`orchestrator/anatomy_registry.yaml`](./orchestrator/anatomy_registry.yaml), and all wrapper actions can be exercised end-to-end with [`scripts/verify_anatomy_wrappers.py`](./scripts/verify_anatomy_wrappers.py).
+
+## Quick Start
+
+### 1. Install Into A Repository
 
 Install into the current directory:
 
@@ -70,100 +165,148 @@ Install into the current directory:
 curl -fsSL https://raw.githubusercontent.com/james96744/agenticswarm-brain/main/bootstrap.sh | bash -s -- .
 ```
 
-Install into a specific repository path:
+Install into another repository:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/james96744/agenticswarm-brain/main/bootstrap.sh | bash -s -- /path/to/your/repo
+curl -fsSL https://raw.githubusercontent.com/james96744/agenticswarm-brain/main/bootstrap.sh | bash -s -- /path/to/repo
 ```
 
-### Manual Install
-
-From a local clone of this repository:
+Or from a local clone:
 
 ```bash
-python3 install_brain.py --target /path/to/your/repo
+python3 install_brain.py --target /path/to/repo
 ```
 
-## First Run
+### 2. Create A Local Environment
 
-Inside the target repo:
+Inside the target repository:
 
 ```bash
 python3 -m venv .venv
 ./.venv/bin/pip install pyyaml jsonschema
+```
+
+### 3. Run The First Audit
+
+Dry-run first:
+
+```bash
+./.venv/bin/python scripts/run_audit.py --repo-root . --dry-run --no-autostart
+```
+
+Then populate:
+
+```bash
 ./.venv/bin/python scripts/run_audit.py --repo-root .
 ```
 
-That first real audit:
+That first audit handles discovery, validation, runtime checks, maintenance, telemetry initialization, and supported autostart installation.
 
-- installs the scaffold
-- performs discovery
-- populates capability registries
-- validates the system
-- runs maintenance
-- stores discovery watch roots
-- installs background startup rechecks on supported platforms
+## Typical Workflows
 
-After that, the brain handles ongoing startup rechecks and maintenance automatically.
+### Plan Runtime Paths
 
-## Project Layout
-
-```text
-capabilities/   portable registries for agents, skills, plugins, MCPs, CLIs, and models
-memory/         fact store and contradiction tracking
-orchestrator/   orchestration and autopilot policy
-schemas/        JSON Schemas for validation
-scripts/        auditor, discovery, validation, maintenance, and simulation tooling
-simulation/     synthetic scenario inputs
-telemetry/      route history, audit reports, discovery state, autopilot state
-training/       adapter and distillation job planning
+```bash
+./.venv/bin/python scripts/runtime_bridge.py --repo-root . --dry-run
 ```
 
-## Main Entry Points
+### Execute A Real Task
 
-- [`bootstrap.sh`](./bootstrap.sh): one-line installer entrypoint
-- [`install_brain.py`](./install_brain.py): copies the scaffold into a target repo and resets machine-specific state
-- [`scripts/run_audit.py`](./scripts/run_audit.py): primary orchestrator bootstrap and maintenance command
+```bash
+./.venv/bin/python scripts/execute_task.py --repo-root . --request-file request.yaml
+```
 
-## Portable Design
+### Check Operator State
 
-This repository is meant to be copied into other repositories, not treated as a project-specific config dump. The installer resets machine-specific state such as:
+```bash
+./.venv/bin/python scripts/operator_status.py --repo-root .
+```
 
-- discovered capability lists
-- discovery watch roots
-- local audit history
-- autopilot installation state
-- route telemetry artifacts
+### Refresh The Featureset Safely
 
-That lets every target repository build its own environment-specific brain from a clean base.
+```bash
+./.venv/bin/python scripts/update_featureset.py --repo-root . --dry-run
+```
 
-## Typical Lifecycle
+### Exercise Anatomy Wrappers
 
-1. Install the scaffold into a target repo.
-2. Run the first audit.
-3. Let the brain discover and register capabilities.
-4. Let startup rechecks detect new installs automatically.
-5. Feed telemetry back into pruning, replay, and distillation workflows.
+```bash
+./.venv/bin/python scripts/verify_anatomy_wrappers.py --repo-root .
+```
+
+## Anatomy Wrapper Examples
+
+Use anatomy terms directly:
+
+```bash
+./.venv/bin/python scripts/cerebrum.py audit --repo-root . --dry-run --no-autostart
+./.venv/bin/python scripts/cerebrum.py plan --repo-root . --dry-run
+./.venv/bin/python scripts/cerebellum.py validate --repo-root .
+./.venv/bin/python scripts/dendrites.py refresh --repo-root . --dry-run
+./.venv/bin/python scripts/neurons.py execute --repo-root . --request-file request.yaml
+./.venv/bin/python scripts/brainstem.py status --repo-root .
+```
+
+These wrappers are aliases, not alternate implementations. The real logic still lives in the underlying modules, which keeps the implementation stable while allowing the orchestration layer to reason in anatomy terms.
+
+## Safety Model
+
+The scaffold defaults to guarded autonomy.
+
+- destructive, high-risk, deployment, and security-sensitive paths can require approval
+- critic review is enforced for important task families
+- capability selection is policy-driven and provenance-aware
+- memory contradictions are tracked instead of silently reused
+- generated state is separated from source state so auto-update behavior remains safe
+
+The main safety and behavior contracts live in:
+
+- [`orchestrator/policies.yaml`](./orchestrator/policies.yaml)
+- [`orchestrator/autopilot.yaml`](./orchestrator/autopilot.yaml)
+- [`scripts/validate_brain.py`](./scripts/validate_brain.py)
 
 ## Validation And CI
 
-The project includes:
+The project validates:
 
-- JSON Schema validation for all portable registries and state files
-- semantic validation across manifest, policies, and runtime contracts
-- a GitHub Actions workflow that dry-runs the auditor safely for CI
+- all portable YAML registries against JSON Schema
+- semantic alignment between manifest, policy, and anatomy layers
+- runtime wrapper registration and module existence
+- blackboard event schema references and script path integrity
+
+Use:
+
+```bash
+./.venv/bin/python scripts/validate_brain.py --repo-root .
+```
+
+The repository also includes CI validation via [`.github/workflows/brain-validate.yml`](./.github/workflows/brain-validate.yml).
+
+## Why The Design Is File-First
+
+The current implementation uses files as the system of record because it is:
+
+- portable across repos
+- easy to inspect and diff
+- simple to validate
+- low-friction for local development
+- a clean foundation for later storage adapters
+
+Redis/Postgres-style backends can be added later behind the same interfaces without changing the top-level contracts.
+
+## Current Status
+
+The repository currently provides:
+
+- a portable orchestration scaffold
+- a capability inventory system
+- a live runtime planning and execution layer
+- a durable blackboard and control plane
+- an anatomy-based orchestration model with wrapper entrypoints
+- git-aware self-maintenance and route-learning surfaces
+
+The main expansion areas from here are broader backend coverage, richer remote-worker scheduling, and deeper learning loops built from larger volumes of verified execution telemetry.
 
 ## Repository
 
 GitHub: [james96744/agenticswarm-brain](https://github.com/james96744/agenticswarm-brain)
-
-## Status
-
-This project is functional as a portable orchestration scaffold and installer. It is strongest today as:
-
-- a repo bootstrapper
-- a capability inventory system
-- a policy-driven orchestration contract
-- an automated maintenance backbone
-
-The next layer beyond this is deeper runtime integration with real agent executors, model routers, and external tool backends.

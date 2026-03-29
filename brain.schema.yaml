@@ -5,6 +5,82 @@ brain_manifest:
     stack: []
     risk_level: medium
     orchestration_profile: adaptive
+  anatomy_registry:
+    path: orchestrator/anatomy_registry.yaml
+    wrapper_entrypoints:
+      cerebrum: scripts/cerebrum.py
+      cerebellum: scripts/cerebellum.py
+      limbic_system: scripts/limbic_system.py
+      neurons: scripts/neurons.py
+      dendrites: scripts/dendrites.py
+      brainstem: scripts/brainstem.py
+  anatomy_map:
+    cerebrum:
+      role: Primary orchestration cortex
+      owns:
+      - orchestrator
+      - routing
+      - planning
+      - global_policy
+      responsibilities:
+      - Interpret goals
+      - Build DAGs
+      - Select routes
+      - Approve or defer high-impact actions
+    cerebellum:
+      role: Secondary decision and refinement cortex
+      owns:
+      - verification
+      - critic_loops
+      - route_refinement
+      responsibilities:
+      - Challenge initial plans
+      - Improve coordination precision
+      - Catch instability before side effects
+    limbic_system:
+      role: Memory and emotional-risk layer
+      owns:
+      - memory
+      - truth_maintenance
+      - replay
+      - approval_context
+      responsibilities:
+      - Store facts and contradictions
+      - Retain successful and failed routes
+      - Surface risk and prior outcomes to planners
+    neurons:
+      role: Specialist execution units
+      owns:
+      - agents
+      - worker_roles
+      - task_execution
+      responsibilities:
+      - Perform bounded work
+      - Consume memory context from the limbic system
+      - Publish outputs to the blackboard
+    dendrites:
+      role: Capability connectors
+      owns:
+      - skills
+      - plugins
+      - mcp
+      - cli
+      - tool_backends
+      responsibilities:
+      - Connect neurons to external capability surfaces
+      - Keep activation scoped to the current task
+      - Minimize unnecessary tool exposure
+    brainstem:
+      role: Runtime and control-plane bridge
+      owns:
+      - execution_engine
+      - control_plane
+      - blackboard
+      - runtime_registry
+      responsibilities:
+      - Connect capability signals back to the cerebrum
+      - Coordinate leases approvals and artifacts
+      - Maintain whole-brain operational continuity
   discovery:
     enabled: true
     inspect_repo_docs: true

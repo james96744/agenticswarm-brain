@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "anatomy_modules"],
+  "properties": {
+    "version": { "type": "string" },
+    "last_updated": { "type": "string" },
+    "description": { "type": "string" },
+    "anatomy_modules": {
+      "type": "object",
+      "required": ["cerebrum", "cerebellum", "limbic_system", "neurons", "dendrites", "brainstem"],
+      "properties": {
+        "cerebrum": { "$ref": "#/$defs/anatomyModule" },
+        "cerebellum": { "$ref": "#/$defs/anatomyModule" },
+        "limbic_system": { "$ref": "#/$defs/anatomyModule" },
+        "neurons": { "$ref": "#/$defs/anatomyModule" },
+        "dendrites": { "$ref": "#/$defs/anatomyModule" },
+        "brainstem": { "$ref": "#/$defs/anatomyModule" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "pathRef": {
+      "type": "object",
+      "required": ["path", "role"],
+      "properties": {
+        "path": { "type": "string" },
+        "role": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "actionRef": {
+      "type": "object",
+      "required": ["target"],
+      "properties": {
+        "target": { "type": "string" },
+        "description": { "type": "string" },
+        "default_args": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "anatomyModule": {
+      "type": "object",
+      "required": ["label", "description", "wrapper_entrypoint", "module_refs", "actions"],
+      "properties": {
+        "label": { "type": "string" },
+        "description": { "type": "string" },
+        "wrapper_entrypoint": { "type": "string" },
+        "module_refs": { "type": "array", "items": { "$ref": "#/$defs/pathRef" } },
+        "actions": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/actionRef" }
+        }
+      },
+      "additionalProperties": true
+    }
+  }
+}

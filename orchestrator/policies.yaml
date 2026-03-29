@@ -2,6 +2,70 @@ version: "1.0"
 last_updated: "2026-03-28"
 description: Portable orchestration policies for routing, safety, memory, verification, and escalation.
 
+anatomy_policy:
+  cerebrum:
+    system_of_record: orchestrator/
+    functions:
+      - planning
+      - routing
+      - policy_application
+      - final_authority
+  cerebellum:
+    system_of_record:
+      - verification_policy
+      - structural_plasticity_policy
+      - meta_critic_fine_tuning_policy
+    functions:
+      - secondary_decision_making
+      - critique
+      - refinement
+      - adaptive_correction
+  limbic_system:
+    system_of_record:
+      - memory/
+      - truth_maintenance_policy
+      - memory_policy
+    functions:
+      - fact_retention
+      - contradiction_tracking
+      - route_replay
+      - approval_context
+  neurons:
+    system_of_record:
+      - capabilities/agents.yaml
+      - scripts/execution_engine.py
+    functions:
+      - bounded_execution
+      - specialist_reasoning
+      - artifact_production
+  dendrites:
+    system_of_record:
+      - capabilities/skills.yaml
+      - capabilities/plugins.yaml
+      - capabilities/mcp.yaml
+      - capabilities/cli.yaml
+      - capabilities/runtime.yaml
+    functions:
+      - connector_binding
+      - capability_activation
+      - signal_routing_to_neurons
+  brainstem:
+    system_of_record:
+      - scripts/control_plane.py
+      - telemetry/blackboard.yaml
+      - telemetry/control_plane.yaml
+    functions:
+      - whole_system_signal_transport
+      - approval_and_lease_transport
+      - runtime_state_continuity
+  optimization_rules:
+    - The cerebrum remains the sole global authority for task decomposition and side-effect approval.
+    - The cerebellum must review complex, unstable, or high-risk plans before commitment.
+    - The limbic system must inform routing with memory, contradictions, and approval context.
+    - Neurons execute within bounded scope and may not bypass dendrite gating or cerebrum policy.
+    - Dendrites expose only the minimum skill/plugin/MCP/CLI surface needed for the active task.
+    - The brainstem must keep control-plane state coherent and return execution signals back to the cerebrum.
+
 global_policy:
   inspect_before_act: true
   prefer_discovery_over_assumption: true
@@ -169,6 +233,7 @@ blackboard_policy:
     critic.failed: schemas/blackboard/critic.failed.schema.json
     critic.passed: schemas/blackboard/critic.passed.schema.json
     human.approval.required: schemas/blackboard/human.approval.required.schema.json
+    task.completed: schemas/blackboard/task.completed.schema.json
 
 simulation_policy:
   benchmark_harness_enabled: true

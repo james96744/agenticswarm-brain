@@ -77,6 +77,17 @@ state:
   last_install_error: null
   last_maintenance_run_at: null
   last_maintenance_summary: []
+  last_git_check_at: null
+  last_git_branch: null
+  last_git_head_sha: null
+  last_git_upstream_ref: null
+  last_git_upstream_head_sha: null
+  last_git_ahead_count: 0
+  last_git_behind_count: 0
+  last_git_dirty: false
+  last_featureset_update_at: null
+  last_featureset_update_status: never_checked
+  last_featureset_update_reason: null
 
 notes:
   - This file records whether the brain successfully installed a background startup recheck adapter.
@@ -93,6 +104,30 @@ training_triplets: []
 notes:
   - Append route records here or partition by date in larger repositories.
   - Use `plasticity_recommendations` for merge and prune proposals before applying topology changes.
+"""
+
+BLACKBOARD_TEMPLATE = """version: "1.0"
+last_updated: "{date}"
+description: Shared event log for task coordination, routing, approvals, and critic outcomes.
+
+events: []
+
+notes:
+  - Events in this file are append-only coordination facts emitted by the execution engine.
+"""
+
+CONTROL_PLANE_TEMPLATE = """version: "1.0"
+last_updated: "{date}"
+description: File-first control plane for tasks, runs, approvals, artifacts, and leases.
+
+tasks: []
+runs: []
+approvals: []
+artifacts: []
+leases: []
+
+notes:
+  - This file is the durable control-plane state for guarded-autonomy execution.
 """
 
 
@@ -177,6 +212,9 @@ def reset_stateful_files(target_root: Path) -> None:
     reset_section_list(target_root / "capabilities/mcp.yaml", "mcp_entries", "notes")
     reset_section_list(target_root / "capabilities/cli.yaml", "cli_entries", "notes")
     reset_section_list(target_root / "capabilities/models.yaml", "models", "notes")
+    reset_section_list(target_root / "capabilities/runtime.yaml", "agent_executors", "model_routers")
+    reset_section_list(target_root / "capabilities/runtime.yaml", "model_routers", "tool_backends")
+    reset_section_list(target_root / "capabilities/runtime.yaml", "tool_backends", "notes")
 
     (target_root / "telemetry/audit_report.yaml").write_text(
         AUDIT_REPORT_TEMPLATE.format(date=now_date()),
@@ -192,6 +230,14 @@ def reset_stateful_files(target_root: Path) -> None:
     )
     (target_root / "telemetry/routes.yaml").write_text(
         ROUTES_TEMPLATE.format(date=now_date()),
+        encoding="utf-8",
+    )
+    (target_root / "telemetry/blackboard.yaml").write_text(
+        BLACKBOARD_TEMPLATE.format(date=now_date()),
+        encoding="utf-8",
+    )
+    (target_root / "telemetry/control_plane.yaml").write_text(
+        CONTROL_PLANE_TEMPLATE.format(date=now_date()),
         encoding="utf-8",
     )
 

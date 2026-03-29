@@ -10,6 +10,26 @@ This file defines a reusable orchestration brain for any LLM-driven project. Its
 
 #########################################################
 
+## Brain Anatomy
+
+The architecture should be treated as a literal brain model:
+
+- `Cerebrum`: the primary orchestrator. It owns planning, routing, DAG construction, policy enforcement, and final authority over side effects.
+- `Cerebellum`: the secondary decision maker. It owns critique, refinement, route correction, and stability checks before execution commits.
+- `Limbic System`: the memory layer. It owns facts, contradictions, route history, approvals context, and emotionally equivalent risk memory.
+- `Neurons`: the agents. Each neuron is a bounded specialist that executes work while consuming limbic context and cerebrum policy.
+- `Dendrites`: the connectors. Skills, plugins, MCP servers, CLI tools, runtime backends, and agent bindings are dendritic surfaces that carry capability signals into neurons.
+- `Brainstem`: the systems bridge. It carries execution, approval, artifact, and runtime state signals between neurons, dendrites, the limbic system, and back to the cerebrum.
+
+Optimization rules:
+
+- The cerebrum must remain the single source of global coordination.
+- The cerebellum should always review unstable, ambiguous, or high-risk plans.
+- The limbic system should bias routing using prior success, contradiction, and approval memory.
+- Neurons should execute only within bounded scope and never bypass dendrite gating.
+- Dendrites should expose the minimum viable capability surface for the active task.
+- The brainstem should preserve whole-brain continuity through blackboard, control-plane, and runtime state.
+
 ## Mission
 
 Create a self-improving multi-agent system that:
@@ -86,9 +106,41 @@ Merge rules:
 
 ## Core Architecture
 
-### 1. Meta-Controller
+### 1. Cerebrum
 
-The Meta-Controller operates at the highest level. It converts user intent into sub-goals such as:
+The Cerebrum is the root orchestrator.
+
+It contains:
+
+- Meta-Controller
+- Dynamic Planner
+- Router
+- Capability Mapper
+- Policy authority
+
+Responsibilities:
+
+- Interpret user intent.
+- Choose execution mode: fast, balanced, deep, or critical.
+- Generate a Directed Acyclic Graph (DAG) for the task.
+- Prune unnecessary nodes in real time.
+- Decide when to escalate to humans.
+- Track cost, latency, confidence, and risk.
+- Set a repository-specific orchestration profile based on discovered capabilities.
+- Choose the default tiering strategy for worker, critic, and expert models.
+
+### 2. Cerebellum
+
+The Cerebellum is the secondary decision system. It converts initial plans into stable, reviewable execution paths and improves coordination precision before commitment.
+
+It contains:
+
+- Critic loops
+- Verification policy
+- Structural plasticity feedback
+- Route refinement
+
+Sub-goals it improves:
 
 - Analyze
 - Research
@@ -102,18 +154,14 @@ The Meta-Controller operates at the highest level. It converts user intent into 
 
 Responsibilities:
 
-- Interpret ambiguous goals.
-- Choose execution mode: fast, balanced, deep, or critical.
-- Generate a Directed Acyclic Graph (DAG) for the task.
-- Prune unnecessary nodes in real time.
-- Decide when to escalate to humans.
-- Track cost, latency, confidence, and risk.
-- Set a repository-specific orchestration profile based on discovered capabilities.
-- Choose the default tiering strategy for worker, critic, and expert models.
+- Challenge initial plans.
+- Catch instability before side effects.
+- Trigger critic failure or expert escalation when needed.
+- Improve route quality using feedback from live runs.
 
-### 2. Dynamic Planner
+### 3. Dynamic Planner
 
-The planner replaces single-prompt behavior with iterative decomposition.
+The planner is a cerebrum subcortex that replaces single-prompt behavior with iterative decomposition.
 
 Responsibilities:
 
@@ -129,7 +177,7 @@ Planning rules:
 - Route uncertain or high-risk tasks through critics before completion.
 - Reuse successful historical DAGs when task similarity is high.
 
-### 3. Sub-Controllers
+### 4. Sub-Controllers
 
 Sub-Controllers own a domain-specific goal and manage worker agents under them.
 
@@ -151,9 +199,11 @@ Responsibilities:
 - Publish structured state back to the blackboard.
 - Respect repository-native conventions, workflows, and toolchains.
 
-### 4. Specialist Agents
+### 5. Neurons
 
-Each specialist agent has:
+Specialist agents are the Neurons of the system.
+
+Each neuron has:
 
 - A role
 - A bounded scope
@@ -175,7 +225,44 @@ Examples:
 - Memory Curator Agent
 - Tool Broker Agent
 
-### 5. Coordination Mechanism
+### 6. Dendrites
+
+Dendrites are the connector surfaces for:
+
+- skills
+- plugins
+- MCP servers
+- CLI tools
+- runtime backends
+- cross-agent bindings
+
+Responsibilities:
+
+- Carry capability signals into neurons.
+- Gate tool exposure to the minimum needed for the current step.
+- Preserve provenance and trust metadata for every bound connector.
+
+### 7. Brainstem
+
+The Brainstem is the operational bridge that connects the whole brain back to the Cerebrum.
+
+It contains:
+
+- runtime bridge
+- execution engine
+- blackboard
+- control plane
+- approval transport
+- lease and artifact state
+
+Responsibilities:
+
+- Maintain whole-brain runtime continuity.
+- Move execution outcomes from neurons back to cerebrum decision layers.
+- Keep approvals, artifacts, and state synchronized.
+- Prevent disconnected capability execution.
+
+### 8. Coordination Mechanism
 
 All agent interaction is regulated by a central coordination layer.
 

@@ -22,6 +22,7 @@ try:
         repo_root_from,
         safe_relpath,
     )
+    from runtime_bridge import build_runtime_registry
 except ModuleNotFoundError:
     from scripts.brain_utils import (
         dump_json_stdout,
@@ -32,6 +33,7 @@ except ModuleNotFoundError:
         repo_root_from,
         safe_relpath,
     )
+    from scripts.runtime_bridge import build_runtime_registry
 
 
 STACK_MARKERS = {
@@ -920,6 +922,7 @@ def apply_discovery(root: Path, discovery: dict) -> None:
     update_registry(root, "capabilities/mcp.yaml", "mcp_entries", discovery["combined"]["items"]["mcp_entries"])
     update_registry(root, "capabilities/cli.yaml", "cli_entries", discovery["combined"]["items"]["cli_entries"])
     update_registry(root, "capabilities/models.yaml", "models", discovery["combined"]["items"]["models"])
+    build_runtime_registry(root, write=True)
 
 
 def main() -> int:
