@@ -4,7 +4,13 @@ This project is a portable orchestration scaffold. It is designed to be copied i
 
 ## 1. Create A Local Environment
 
-From the repository root:
+If you are installing the brain into another repo, the quickest path is:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/james96744/agenticswarm-brain/main/bootstrap.sh | bash -s -- /path/to/your/repo
+```
+
+Then move into the target repo and create a local environment:
 
 ```bash
 python3 -m venv .venv

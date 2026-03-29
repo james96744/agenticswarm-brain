@@ -6,7 +6,25 @@ It is designed to be dropped into any repository, inspect that repository plus t
 
 ## Install Into Another Repo
 
-From this scaffold repo:
+One-liner bootstrap:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/james96744/agenticswarm-brain/main/bootstrap.sh | bash
+```
+
+Install into the current directory:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/james96744/agenticswarm-brain/main/bootstrap.sh | bash -s -- .
+```
+
+Install into a specific repo path:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/james96744/agenticswarm-brain/main/bootstrap.sh | bash -s -- /path/to/your/repo
+```
+
+Manual install from a local clone:
 
 ```bash
 python3 install_brain.py --target /path/to/your/repo
