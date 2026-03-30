@@ -2,7 +2,7 @@
 
 This project is a portable orchestration scaffold. It is designed to be copied into a repository, pointed at that repository, and then used to discover capabilities, validate contracts, simulate routing, reconcile memory, and prepare optimization workflows.
 
-## 1. Create A Local Environment
+## 1. Install And Dry-Run
 
 If you are installing the brain into another repo, the quickest path is:
 
@@ -10,36 +10,29 @@ If you are installing the brain into another repo, the quickest path is:
 curl -fsSL https://raw.githubusercontent.com/james96744/agenticswarm-brain/main/bootstrap.sh | bash -s -- /path/to/your/repo
 ```
 
-Then move into the target repo and create a local environment:
+Then move into the target repo and run:
 
 ```bash
-python3 -m venv .venv
-./.venv/bin/pip install pyyaml jsonschema
+./run_brain.sh --dry-run --no-autostart
 ```
 
-These packages are required for YAML loading and schema validation.
+This single launcher creates `.venv` if needed, installs the minimum local Python dependencies, and runs the audit without changing files when `--dry-run` is set.
 
-## 2. Run The Auditor Once
+## 2. Populate And Activate The Local Brain
 
-Use this first:
+When the dry run looks correct, run:
 
 ```bash
-./.venv/bin/python scripts/run_audit.py --repo-root . --dry-run
+./run_brain.sh
 ```
 
-This performs one full audit pass without changing files:
+This uses the same launcher, but performs the full audit pass and writes the populated local state:
 
 - discovers repository-local agents, skills, plugins, MCPs, and CLIs
 - discovers globally installed agents, skills, plugins, MCP configs, MCP executables, models, and CLIs
 - compiles every Python script under `scripts/`
 - validates all YAML registries and semantic cross-file rules
-- dry-runs the runtime sanity checks for git-aware featureset updates, simulation, reconciliation, pruning, and distillation prep
-
-When the report looks correct, populate the registries and write an audit report:
-
-```bash
-./.venv/bin/python scripts/run_audit.py --repo-root .
-```
+- runs the runtime sanity checks for git-aware featureset updates, simulation, reconciliation, pruning, and distillation prep
 
 This updates:
 
@@ -64,6 +57,8 @@ After that first non-dry run, the brain takes over:
 - it runs maintenance phases automatically without separate commands
 
 Use `--skip-runtime-checks` only for a lighter first pass. Use `--no-autostart` only for CI or testing.
+
+[`scripts/run_audit.py`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/scripts/run_audit.py) still works directly, but [`run_brain.sh`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/run_brain.sh) is the intended everyday entrypoint.
 
 ## 3. Startup Behavior
 
@@ -361,8 +356,8 @@ Use this when enough verified Tier 3 corrections exist to justify LoRA or adapte
 Use this sequence when adopting the system in a new repository:
 
 ```bash
-./.venv/bin/python scripts/run_audit.py --repo-root . --dry-run
-./.venv/bin/python scripts/run_audit.py --repo-root .
+./run_brain.sh --dry-run --no-autostart
+./run_brain.sh
 ```
 
 Everything after that is automated by the brain.

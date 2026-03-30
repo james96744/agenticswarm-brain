@@ -2,19 +2,32 @@ version: '1.0'
 last_updated: '2026-03-30'
 description: Detected memory conflicts awaiting reconciliation or archived with resolution.
 conflicts:
-- conflict_id: conflict-5efe3be0dd
+- conflict_id: task_family:boilerplate_code:last_successful_executor
   subject: task_family:boilerplate_code
   predicate: last_successful_executor
-  previous_object: python-workflow-runner
-  new_object: codex-cli
-  detected_at: '2026-03-29T23:47:11.098730+00:00'
-  source_run_id: run-c8447e78686a
-- conflict_id: conflict-9a4a887f2a
-  subject: task_family:boilerplate_code
-  predicate: last_successful_executor
-  previous_object: python-workflow-runner
-  new_object: codex-cli
-  detected_at: '2026-03-30T00:19:20.958898+00:00'
-  source_run_id: run-f567e44f2b51
+  candidate_values:
+  - codex-cli
+  - python-workflow-runner
+  sources:
+  - run-e82c7349f7f9
+  - run-8d2d49374c4d
+  - run-12d11bf577f6
+  - run-c455fbb9f7f0
+  - run-c8447e78686a
+  - run-0ec484666c37
+  - run-abb62699ee94
+  - run-72d5743c3ec5
+  - run-ba443615325d
+  - run-f567e44f2b51
+  - run-26ea06db8fc0
+  - run-ec36ffaab86f
+  - run-a90eceb9c205
+  - run-08596b4e9ec9
+  - run-e09699de142d
+  - run-7d31331e4fe3
+  - run-4838556a0c6e
+  - run-808872e5a90c
+  status: needs_reconciliation
+  detected_at: '2026-03-30T01:41:54.695953+00:00'
 notes:
 - Populate from truth-maintenance scans and reconciliation sub-swarms.

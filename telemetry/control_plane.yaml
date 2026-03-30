@@ -742,13 +742,14 @@ queue_items:
   dispatched_at: '2026-03-30T00:19:15.280891+00:00'
 workers:
 - worker_id: local-scheduler-worker
-  queue_name: remote-workers
+  queue_name: deferred
   dispatch_modes:
+  - deferred
   - remote_worker
   status: ready
   worker_type: scheduler
-  transport_mode: shared_filesystem_fabric
-  last_heartbeat_at: '2026-03-30T01:26:08.075341+00:00'
+  transport_mode: local
+  last_heartbeat_at: '2026-03-30T01:42:44.851926+00:00'
 - worker_id: remote-fabric-worker
   queue_name: remote-workers
   dispatch_modes:
@@ -756,6 +757,6 @@ workers:
   status: ready
   worker_type: remote_worker
   transport_mode: shared_filesystem_fabric
-  last_heartbeat_at: '2026-03-30T01:26:08.079673+00:00'
+  last_heartbeat_at: '2026-03-30T01:42:44.648987+00:00'
 notes:
 - This file is the durable control-plane state for guarded-autonomy execution.

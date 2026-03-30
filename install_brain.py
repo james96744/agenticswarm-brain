@@ -16,6 +16,7 @@ ROOT_FILES = (
     "USAGE.md",
     "agent.md",
     "brain.schema.yaml",
+    "run_brain.sh",
 )
 
 ROOT_DIRS = (
@@ -283,9 +284,8 @@ def main() -> int:
 
     print(f"Installed AgenticSwarm scaffold into {target_root}")
     print("Next steps:")
-    print("  1. python3 -m venv .venv")
-    print("  2. ./.venv/bin/pip install pyyaml jsonschema")
-    print("  3. ./.venv/bin/python scripts/run_audit.py --repo-root .")
+    print("  1. ./run_brain.sh --dry-run")
+    print("  2. ./run_brain.sh")
     return 0
 
 

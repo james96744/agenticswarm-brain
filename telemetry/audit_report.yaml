@@ -1,5 +1,5 @@
 version: '1.0'
-last_updated: '2026-03-29'
+last_updated: '2026-03-30'
 description: Audit reports emitted by the single-entry audit runner.
 reports:
 - audit_id: audit-2026-03-29T02:26:06.777580+00:00
@@ -1778,6 +1778,900 @@ reports:
   startup_recheck:
     changed: false
     change_summary: []
+- audit_id: audit-2026-03-30T01:41:04.774140+00:00
+  timestamp: '2026-03-30T01:41:04.774140+00:00'
+  repo_root: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation
+  dry_run: false
+  startup_mode: false
+  phases:
+  - phase: discovery
+    status: passed
+    reason: manual_audit
+    counts: &id005
+      agents: 142
+      skills: 96
+      plugins: 1
+      mcp_entries: 84
+      cli_entries: 49
+      models: 13
+  - phase: populate
+    status: passed
+  - phase: compile
+    target: scripts/anatomy_wrapper.py
+    status: passed
+  - phase: compile
+    target: scripts/bootstrap_brain.py
+    status: passed
+  - phase: compile
+    target: scripts/brain_utils.py
+    status: passed
+  - phase: compile
+    target: scripts/brainstem.py
+    status: passed
+  - phase: compile
+    target: scripts/cerebellum.py
+    status: passed
+  - phase: compile
+    target: scripts/cerebrum.py
+    status: passed
+  - phase: compile
+    target: scripts/control_plane.py
+    status: passed
+  - phase: compile
+    target: scripts/dendrites.py
+    status: passed
+  - phase: compile
+    target: scripts/execute_task.py
+    status: passed
+  - phase: compile
+    target: scripts/execution_engine.py
+    status: passed
+  - phase: compile
+    target: scripts/limbic_system.py
+    status: passed
+  - phase: compile
+    target: scripts/maintain_approvals.py
+    status: passed
+  - phase: compile
+    target: scripts/neurons.py
+    status: passed
+  - phase: compile
+    target: scripts/operator_status.py
+    status: passed
+  - phase: compile
+    target: scripts/prepare_distillation.py
+    status: passed
+  - phase: compile
+    target: scripts/prune_topology.py
+    status: passed
+  - phase: compile
+    target: scripts/rebuild_learning.py
+    status: passed
+  - phase: compile
+    target: scripts/reconcile_memory.py
+    status: passed
+  - phase: compile
+    target: scripts/remote_transport.py
+    status: passed
+  - phase: compile
+    target: scripts/run_audit.py
+    status: passed
+  - phase: compile
+    target: scripts/run_remote_worker.py
+    status: passed
+  - phase: compile
+    target: scripts/run_scheduler.py
+    status: passed
+  - phase: compile
+    target: scripts/runtime_bridge.py
+    status: passed
+  - phase: compile
+    target: scripts/simulate_swarm.py
+    status: passed
+  - phase: compile
+    target: scripts/update_featureset.py
+    status: passed
+  - phase: compile
+    target: scripts/validate_brain.py
+    status: passed
+  - phase: compile
+    target: scripts/verify_anatomy_wrappers.py
+    status: passed
+  - phase: validation
+    status: passed
+    error_count: 0
+  - phase: runtime_check
+    target: scripts/update_featureset.py
+    status: passed
+    detail: "{\n  \"git_repo\": true,\n  \"status\": \"featureset_refreshed\",\n \
+      \ \"fetch\": {\n    \"attempted\": true,\n    \"ok\": true,\n    \"detail\"\
+      : \"\"\n  },\n  \"pull\": {\n    \"attempted\": false,\n    \"status\": \"not_behind\"\
+      \n  },\n  \"changed\": true,\n  \"reasons\": [\n    \"branch_changed\",\n  \
+      \  \"head_sha_changed\",\n    \"upstream_head_sha_changed\",\n    \"dirty_state_changed\"\
+      \n  ],\n  \"before\": {\n    \"branch\": \"main\",\n    \"head_sha\": \"3386cc12d5bd8d260b9046581348d87710beada4\"\
+      ,\n    \"upstream_ref\": \"origin/main\",\n    \"upstream_head_sha\": \"3386cc12d5bd8d260b9046581348d87710beada4\"\
+      ,\n    \"ahead_count\": 0,\n    \"behind_count\": 0,\n    \"dirty\": true,\n\
+      \    \"blocking_dirty_paths\": [\n      \"README.md\",\n      \"USAGE.md\",\n\
+      \      \"bootstrap.sh\",\n      \"brain.schema.yaml\",\n      \"capabilities/agents.yaml\"\
+      ,\n      \"capabilities/cli.yaml\",\n      \"capabilities/mcp.yaml\",\n    \
+      \  \"capabilities/models.yaml\",\n      \"capabilities/plugins.yaml\",\n   \
+      \   \"capabilities/skills.yaml\",\n      \"install_brain.py\",\n      \"run_brain.sh\"\
+      \n    ],\n    \"ignored_dirty_paths\": [\n      \"capabilities/runtime.yaml\"\
+      ,\n      \"telemetry/control_plane.yaml\",\n      \"telemetry/remote_fabric/workers/remote-fabric-worker.json\"\
+      \n    ]\n  },\n  \"after\": {\n    \"branch\": \"main\",\n    \"head_sha\":\
+      \ \"3386cc12d5bd8d260b9046581348d87710beada4\",\n    \"upstream_ref\": \"origin/main\"\
+      ,\n    \"upstream_head_sha\": \"3386cc12d5bd8d260b9046581348d87710beada4\",\n\
+      \    \"ahead_count\": 0,\n    \"behind_count\": 0,\n    \"dirty\": true,\n \
+      \   \"blocking_dirty_paths\": [\n      \"README.md\",\n      \"USAGE.md\",\n\
+      \      \"bootstrap.sh\",\n      \"brain.schema.yaml\",\n      \"capabilities/agents.yaml\"\
+      ,\n      \"capabilities/cli.yaml\",\n      \"capabilities/mcp.yaml\",\n    \
+      \  \"capabilities/models.yaml\",\n      \"capabilities/plugins.yaml\",\n   \
+      \   \"capabilities/skills.yaml\",\n      \"install_brain.py\",\n      \"run_brain.sh\"\
+      \n    ],\n    \"ignored_dirty_paths\": [\n      \"capabilities/runtime.yaml\"\
+      ,\n      \"telemetry/control_plane.yaml\",\n      \"telemetry/remote_fabric/workers/remote-fabric-worker.json\"\
+      \n    ]\n  },\n  \"blocking_dirty_paths\": [\n    \"README.md\",\n    \"USAGE.md\"\
+      ,\n    \"bootstrap.sh\",\n    \"brain.schema.yaml\",\n    \"capabilities/agents.yaml\"\
+      ,\n    \"capabilities/cli.yaml\",\n    \"capabilities/mcp.yaml\",\n    \"capabilities/models.yaml\"\
+      ,\n    \"capabilities/plugins.yaml\",\n    \"capabilities/skills.yaml\",\n \
+      \   \"install_brain.py\",\n    \"run_brain.sh\"\n  ],\n  \"ignored_dirty_paths\"\
+      : [\n    \"capabilities/runtime.yaml\",\n    \"telemetry/control_plane.yaml\"\
+      ,\n    \"telemetry/remote_fabric/workers/remote-fabric-worker.json\"\n  ],\n\
+      \  \"featureset\": {\n    \"refreshed\": true,\n    \"reason\": \"git_state_changed\"\
+      ,\n    \"counts\": null,\n    \"dry_run\": true\n  }\n}"
+  - phase: runtime_check
+    target: scripts/runtime_bridge.py
+    status: passed
+    detail: "{\n  \"runtime_summary\": {\n    \"executors\": 4,\n    \"routers\":\
+      \ 2,\n    \"backends\": 91\n  },\n  \"plans\": [\n    {\n      \"task_family\"\
+      : \"boilerplate_code\",\n      \"quality_target\": \"fast\",\n      \"risk_level\"\
+      : \"low\",\n      \"dispatch_mode\": \"immediate\",\n      \"requires_code\"\
+      : true,\n      \"requires_tools\": false,\n      \"model_tier_path\": [\n  \
+      \      \"tier_0_router\",\n        \"tier_1_worker\",\n        \"tier_2_critic\"\
+      \n      ],\n      \"selected_executor\": {\n        \"executor_id\": \"codex-cli\"\
+      ,\n        \"enabled\": true,\n        \"kind\": \"agent_cli\",\n        \"\
+      command\": \"codex\",\n        \"path\": \"/Applications/Codex.app/Contents/Resources/codex\"\
+      ,\n        \"runtime\": \"unknown\",\n        \"scope\": \"global\",\n     \
+      \   \"source\": \"cli:path_lookup\",\n        \"supports_code\": true,\n   \
+      \     \"supports_tools\": true,\n        \"supports_streaming\": true,\n   \
+      \     \"supports_direct_invocation\": true,\n        \"invocation_mode\": \"\
+      raw_command\",\n        \"supported_task_families\": [\n          \"coding\"\
+      ,\n          \"refactor\",\n          \"integration\",\n          \"debugging\"\
+      ,\n          \"review\",\n          \"boilerplate_code\",\n          \"data_migration\"\
+      \n        ],\n        \"strengths\": [\n          \"repo_aware_execution\",\n\
+      \          \"tool_use\",\n          \"code_changes\"\n        ],\n        \"\
+      auth_required\": false,\n        \"secret_requirements\": [],\n        \"health_status\"\
+      : \"ready\"\n      },\n      \"selected_router\": {\n        \"router_id\":\
+      \ \"anthropic-router\",\n        \"enabled\": true,\n        \"kind\": \"provider_api\"\
+      ,\n        \"provider\": \"anthropic\",\n        \"scope\": \"global\",\n  \
+      \      \"source\": \"runtime_registry\",\n        \"available_model_ids\": [\n\
+      \          \"anthropic-auto\"\n        ],\n        \"tier_coverage\": [\n  \
+      \        \"tier_0_router\",\n          \"tier_1_worker\",\n          \"tier_2_critic\"\
+      ,\n          \"tier_3_expert\"\n        ],\n        \"supports_dynamic_tiering\"\
+      : true,\n        \"selection_strategy\": \"tier_then_task_family\",\n      \
+      \  \"auth_required\": true,\n        \"secret_requirements\": [\n          \"\
+      ANTHROPIC_API_KEY\"\n        ],\n        \"health_status\": \"ready\"\n    \
+      \  },\n      \"model_assignments\": {\n        \"tier_0_router\": {\n      \
+      \    \"model_id\": \"anthropic:auto:tier_0_router\",\n          \"provider\"\
+      : \"anthropic\",\n          \"source\": \"provider_dynamic\",\n          \"\
+      status\": \"inferred\"\n        },\n        \"tier_1_worker\": {\n         \
+      \ \"model_id\": \"anthropic-auto\",\n          \"provider\": \"anthropic\",\n\
+      \          \"source\": \"environment\",\n          \"status\": \"available\"\
+      \n        },\n        \"tier_2_critic\": {\n          \"model_id\": \"anthropic:auto:tier_2_critic\"\
+      ,\n          \"provider\": \"anthropic\",\n          \"source\": \"provider_dynamic\"\
+      ,\n          \"status\": \"inferred\"\n        }\n      },\n      \"backend_bundle\"\
+      : [\n        {\n          \"backend_id\": \"cli-rg\",\n          \"enabled\"\
+      : true,\n          \"kind\": \"cli\",\n          \"category\": \"search\",\n\
+      \          \"scope\": \"global\",\n          \"source\": \"cli:path_lookup\"\
+      ,\n          \"path\": \"/Applications/Codex.app/Contents/Resources/rg\",\n\
+      \          \"command\": \"rg\",\n          \"capabilities\": [\n           \
+      \ \"search\"\n          ],\n          \"destructive\": false,\n          \"\
+      supports_json_output\": false,\n          \"auth_required\": false,\n      \
+      \    \"secret_requirements\": [],\n          \"destructive_capabilities\": [],\n\
+      \          \"supports_direct_invocation\": true,\n          \"health_status\"\
+      : \"ready\"\n        },\n        {\n          \"backend_id\": \"cli-pytest\"\
+      ,\n          \"enabled\": true,\n          \"kind\": \"cli\",\n          \"\
+      category\": \"test\",\n          \"scope\": \"global\",\n          \"source\"\
+      : \"cli:path_lookup\",\n          \"path\": \"/Library/Frameworks/Python.framework/Versions/3.10/bin/pytest\"\
+      ,\n          \"command\": \"pytest\",\n          \"capabilities\": [\n     \
+      \       \"test\"\n          ],\n          \"destructive\": false,\n        \
+      \  \"supports_json_output\": false,\n          \"auth_required\": false,\n \
+      \         \"secret_requirements\": [],\n          \"destructive_capabilities\"\
+      : [],\n          \"supports_direct_invocation\": true,\n          \"health_status\"\
+      : \"ready\"\n        },\n        {\n          \"backend_id\": \"cli-gh\",\n\
+      \          \"enabled\": true,\n          \"kind\": \"cli\",\n          \"category\"\
+      : \"vcs\",\n          \"scope\": \"global\",\n          \"source\": \"cli:path_lookup\"\
+      ,\n          \"path\": \"/opt/homebrew/bin/gh\",\n          \"command\": \"\
+      gh\",\n          \"capabilities\": [\n            \"vcs\"\n          ],\n  \
+      \        \"destructive\": false,\n          \"supports_json_output\": true,\n\
+      \          \"auth_required\": false,\n          \"secret_requirements\": [],\n\
+      \          \"destructive_capabilities\": [],\n          \"supports_direct_invocation\"\
+      : true,\n          \"health_status\": \"ready\"\n        }\n      ],\n     \
+      \ \"confidence\": 1.0,\n      \"reasons\": [\n        \"executor:codex-cli\"\
+      ,\n        \"router:anthropic-router\",\n        \"backends:cli-rg,cli-pytest,cli-gh\"\
+      ,\n        \"replay_candidate:run-abb62699ee94\"\n      ],\n      \"replay_candidate\"\
+      : {\n        \"task_family\": \"boilerplate_code\",\n        \"run_id\": \"\
+      run-abb62699ee94\",\n        \"executor_id\": \"python-workflow-runner\",\n\
+      \        \"router_id\": \"anthropic-router\",\n        \"backend_ids\": [\n\
+      \          \"cli-rg\"\n        ],\n        \"replay_score\": 0.9633\n      },\n\
+      \      \"unresolved\": [],\n      \"planned_at\": \"2026-03-30T01:41:29.525841+00:00\"\
+      \n    },\n    {\n      \"task_family\": \"data_migration\",\n      \"quality_target\"\
+      : \"balanced\",\n      \"risk_level\": \"medium\",\n      \"dispatch_mode\"\
+      : \"immediate\",\n      \"requires_code\": true,\n      \"requires_tools\":\
+      \ true,\n      \"model_tier_path\": [\n        \"tier_0_router\",\n        \"\
+      tier_1_worker\",\n        \"tier_2_critic\"\n      ],\n      \"selected_executor\"\
+      : {\n        \"executor_id\": \"codex-cli\",\n        \"enabled\": true,\n \
+      \       \"kind\": \"agent_cli\",\n        \"command\": \"codex\",\n        \"\
+      path\": \"/Applications/Codex.app/Contents/Resources/codex\",\n        \"runtime\"\
+      : \"unknown\",\n        \"scope\": \"global\",\n        \"source\": \"cli:path_lookup\"\
+      ,\n        \"supports_code\": true,\n        \"supports_tools\": true,\n   \
+      \     \"supports_streaming\": true,\n        \"supports_direct_invocation\"\
+      : true,\n        \"invocation_mode\": \"raw_command\",\n        \"supported_task_families\"\
+      : [\n          \"coding\",\n          \"refactor\",\n          \"integration\"\
+      ,\n          \"debugging\",\n          \"review\",\n          \"boilerplate_code\"\
+      ,\n          \"data_migration\"\n        ],\n        \"strengths\": [\n    \
+      \      \"repo_aware_execution\",\n          \"tool_use\",\n          \"code_changes\"\
+      \n        ],\n        \"auth_required\": false,\n        \"secret_requirements\"\
+      : [],\n        \"health_status\": \"ready\"\n      },\n      \"selected_router\"\
+      : {\n        \"router_id\": \"anthropic-router\",\n        \"enabled\": true,\n\
+      \        \"kind\": \"provider_api\",\n        \"provider\": \"anthropic\",\n\
+      \        \"scope\": \"global\",\n        \"source\": \"runtime_registry\",\n\
+      \        \"available_model_ids\": [\n          \"anthropic-auto\"\n        ],\n\
+      \        \"tier_coverage\": [\n          \"tier_0_router\",\n          \"tier_1_worker\"\
+      ,\n          \"tier_2_critic\",\n          \"tier_3_expert\"\n        ],\n \
+      \       \"supports_dynamic_tiering\": true,\n        \"selection_strategy\"\
+      : \"tier_then_task_family\",\n        \"auth_required\": true,\n        \"secret_requirements\"\
+      : [\n          \"ANTHROPIC_API_KEY\"\n        ],\n        \"health_status\"\
+      : \"ready\"\n      },\n      \"model_assignments\": {\n        \"tier_0_router\"\
+      : {\n          \"model_id\": \"anthropic:auto:tier_0_router\",\n          \"\
+      provider\": \"anthropic\",\n          \"source\": \"provider_dynamic\",\n  \
+      \        \"status\": \"inferred\"\n        },\n        \"tier_1_worker\": {\n\
+      \          \"model_id\": \"anthropic-auto\",\n          \"provider\": \"anthropic\"\
+      ,\n          \"source\": \"environment\",\n          \"status\": \"available\"\
+      \n        },\n        \"tier_2_critic\": {\n          \"model_id\": \"anthropic:auto:tier_2_critic\"\
+      ,\n          \"provider\": \"anthropic\",\n          \"source\": \"provider_dynamic\"\
+      ,\n          \"status\": \"inferred\"\n        }\n      },\n      \"backend_bundle\"\
+      : [\n        {\n          \"backend_id\": \"cli-jq\",\n          \"enabled\"\
+      : true,\n          \"kind\": \"cli\",\n          \"category\": \"data\",\n \
+      \         \"scope\": \"global\",\n          \"source\": \"cli:path_lookup\"\
+      ,\n          \"path\": \"/usr/bin/jq\",\n          \"command\": \"jq\",\n  \
+      \        \"capabilities\": [\n            \"data\"\n          ],\n         \
+      \ \"destructive\": false,\n          \"supports_json_output\": true,\n     \
+      \     \"auth_required\": false,\n          \"secret_requirements\": [],\n  \
+      \        \"destructive_capabilities\": [],\n          \"supports_direct_invocation\"\
+      : true,\n          \"health_status\": \"ready\"\n        },\n        {\n   \
+      \       \"backend_id\": \"cli-rg\",\n          \"enabled\": true,\n        \
+      \  \"kind\": \"cli\",\n          \"category\": \"search\",\n          \"scope\"\
+      : \"global\",\n          \"source\": \"cli:path_lookup\",\n          \"path\"\
+      : \"/Applications/Codex.app/Contents/Resources/rg\",\n          \"command\"\
+      : \"rg\",\n          \"capabilities\": [\n            \"search\"\n         \
+      \ ],\n          \"destructive\": false,\n          \"supports_json_output\"\
+      : false,\n          \"auth_required\": false,\n          \"secret_requirements\"\
+      : [],\n          \"destructive_capabilities\": [],\n          \"supports_direct_invocation\"\
+      : true,\n          \"health_status\": \"ready\"\n        },\n        {\n   \
+      \       \"backend_id\": \"cli-pytest\",\n          \"enabled\": true,\n    \
+      \      \"kind\": \"cli\",\n          \"category\": \"test\",\n          \"scope\"\
+      : \"global\",\n          \"source\": \"cli:path_lookup\",\n          \"path\"\
+      : \"/Library/Frameworks/Python.framework/Versions/3.10/bin/pytest\",\n     \
+      \     \"command\": \"pytest\",\n          \"capabilities\": [\n            \"\
+      test\"\n          ],\n          \"destructive\": false,\n          \"supports_json_output\"\
+      : false,\n          \"auth_required\": false,\n          \"secret_requirements\"\
+      : [],\n          \"destructive_capabilities\": [],\n          \"supports_direct_invocation\"\
+      : true,\n          \"health_status\": \"ready\"\n        },\n        {\n   \
+      \       \"backend_id\": \"cli-gh\",\n          \"enabled\": true,\n        \
+      \  \"kind\": \"cli\",\n          \"category\": \"vcs\",\n          \"scope\"\
+      : \"global\",\n          \"source\": \"cli:path_lookup\",\n          \"path\"\
+      : \"/opt/homebrew/bin/gh\",\n          \"command\": \"gh\",\n          \"capabilities\"\
+      : [\n            \"vcs\"\n          ],\n          \"destructive\": false,\n\
+      \          \"supports_json_output\": true,\n          \"auth_required\": false,\n\
+      \          \"secret_requirements\": [],\n          \"destructive_capabilities\"\
+      : [],\n          \"supports_direct_invocation\": true,\n          \"health_status\"\
+      : \"ready\"\n        }\n      ],\n      \"confidence\": 1.0,\n      \"reasons\"\
+      : [\n        \"executor:codex-cli\",\n        \"router:anthropic-router\",\n\
+      \        \"backends:cli-jq,cli-rg,cli-pytest,cli-gh\",\n        \"replay_candidate:run-06883ac249d1\"\
+      \n      ],\n      \"replay_candidate\": {\n        \"task_id\": \"http-backend-demo\"\
+      ,\n        \"run_id\": \"run-06883ac249d1\",\n        \"task_family\": \"data_migration\"\
+      ,\n        \"simulated\": false,\n        \"status\": \"success\",\n       \
+      \ \"model_tier_path\": [\n          \"tier_0_router\",\n          \"tier_1_worker\"\
+      ,\n          \"tier_2_critic\"\n        ],\n        \"executor_id\": \"python-workflow-runner\"\
+      ,\n        \"router_id\": \"anthropic-router\",\n        \"backend_ids\": [\n\
+      \          \"mcp-vercel\"\n        ],\n        \"dispatch_mode\": \"immediate\"\
+      ,\n        \"queue_name\": null,\n        \"quality_target\": \"balanced\",\n\
+      \        \"risk_level\": \"low\",\n        \"confidence\": 1.0,\n        \"\
+      critic_status\": \"passed\",\n        \"verified_execution\": true,\n      \
+      \  \"replay_eligible\": true,\n        \"replay_score\": 1.0,\n        \"latency_ms\"\
+      : 119,\n        \"backend_success_count\": 1,\n        \"backend_failure_count\"\
+      : 0,\n        \"timestamp\": \"2026-03-29T23:47:10.885926+00:00\"\n      },\n\
+      \      \"unresolved\": [],\n      \"planned_at\": \"2026-03-30T01:41:29.553262+00:00\"\
+      \n    },\n    {\n      \"task_family\": \"security_sensitive\",\n      \"quality_target\"\
+      : \"critical\",\n      \"risk_level\": \"high\",\n      \"dispatch_mode\": \"\
+      immediate\",\n      \"requires_code\": false,\n      \"requires_tools\": true,\n\
+      \      \"model_tier_path\": [\n        \"tier_0_router\",\n        \"tier_1_worker\"\
+      ,\n        \"tier_2_critic\",\n        \"tier_3_expert\"\n      ],\n      \"\
+      selected_executor\": {\n        \"executor_id\": \"claude-cli\",\n        \"\
+      enabled\": true,\n        \"kind\": \"agent_cli\",\n        \"command\": \"\
+      claude\",\n        \"path\": \"/Users/j/.local/bin/claude\",\n        \"runtime\"\
+      : \"unknown\",\n        \"scope\": \"global\",\n        \"source\": \"cli:path_lookup\"\
+      ,\n        \"supports_code\": true,\n        \"supports_tools\": true,\n   \
+      \     \"supports_streaming\": true,\n        \"supports_direct_invocation\"\
+      : true,\n        \"invocation_mode\": \"raw_command\",\n        \"supported_task_families\"\
+      : [\n          \"research\",\n          \"review\",\n          \"architecture\"\
+      ,\n          \"architecture_decision\",\n          \"security_sensitive\"\n\
+      \        ],\n        \"strengths\": [\n          \"analysis\",\n          \"\
+      architecture\",\n          \"high_context\"\n        ],\n        \"auth_required\"\
+      : false,\n        \"secret_requirements\": [],\n        \"health_status\": \"\
+      ready\"\n      },\n      \"selected_router\": {\n        \"router_id\": \"anthropic-router\"\
+      ,\n        \"enabled\": true,\n        \"kind\": \"provider_api\",\n       \
+      \ \"provider\": \"anthropic\",\n        \"scope\": \"global\",\n        \"source\"\
+      : \"runtime_registry\",\n        \"available_model_ids\": [\n          \"anthropic-auto\"\
+      \n        ],\n        \"tier_coverage\": [\n          \"tier_0_router\",\n \
+      \         \"tier_1_worker\",\n          \"tier_2_critic\",\n          \"tier_3_expert\"\
+      \n        ],\n        \"supports_dynamic_tiering\": true,\n        \"selection_strategy\"\
+      : \"tier_then_task_family\",\n        \"auth_required\": true,\n        \"secret_requirements\"\
+      : [\n          \"ANTHROPIC_API_KEY\"\n        ],\n        \"health_status\"\
+      : \"ready\"\n      },\n      \"model_assignments\": {\n        \"tier_0_router\"\
+      : {\n          \"model_id\": \"anthropic:auto:tier_0_router\",\n          \"\
+      provider\": \"anthropic\",\n          \"source\": \"provider_dynamic\",\n  \
+      \        \"status\": \"inferred\"\n        },\n        \"tier_1_worker\": {\n\
+      \          \"model_id\": \"anthropic-auto\",\n          \"provider\": \"anthropic\"\
+      ,\n          \"source\": \"environment\",\n          \"status\": \"available\"\
+      \n        },\n        \"tier_2_critic\": {\n          \"model_id\": \"anthropic:auto:tier_2_critic\"\
+      ,\n          \"provider\": \"anthropic\",\n          \"source\": \"provider_dynamic\"\
+      ,\n          \"status\": \"inferred\"\n        },\n        \"tier_3_expert\"\
+      : {\n          \"model_id\": \"anthropic:auto:tier_3_expert\",\n          \"\
+      provider\": \"anthropic\",\n          \"source\": \"provider_dynamic\",\n  \
+      \        \"status\": \"inferred\"\n        }\n      },\n      \"backend_bundle\"\
+      : [\n        {\n          \"backend_id\": \"mcp-semgrep\",\n          \"enabled\"\
+      : true,\n          \"kind\": \"mcp_server\",\n          \"category\": \"security\"\
+      ,\n          \"scope\": \"global\",\n          \"source\": \"mcp:global_mcp_config\"\
+      ,\n          \"path\": \"/Users/j/.claude/plugins/cache/claude-plugins-official/semgrep/6f3962351041/plugin/.mcp.json\"\
+      ,\n          \"transport\": \"stdio\",\n          \"command\": \"semgrep\",\n\
+      \          \"url\": null,\n          \"capabilities\": [],\n          \"destructive\"\
+      : false,\n          \"auth_required\": false,\n          \"secret_requirements\"\
+      : [],\n          \"destructive_capabilities\": [],\n          \"supports_direct_invocation\"\
+      : true,\n          \"health_status\": \"ready\"\n        },\n        {\n   \
+      \       \"backend_id\": \"mcp-graphiti\",\n          \"enabled\": true,\n  \
+      \        \"kind\": \"mcp_server\",\n          \"category\": \"mcp\",\n     \
+      \     \"scope\": \"global\",\n          \"source\": \"mcp:global_mcp_config\"\
+      ,\n          \"path\": \"/Users/j/.claude/plugins/graphiti-main/mcp_server/config/mcp_config_stdio_example.json\"\
+      ,\n          \"transport\": \"stdio\",\n          \"command\": \"uv\",\n   \
+      \       \"url\": null,\n          \"capabilities\": [],\n          \"destructive\"\
+      : false,\n          \"auth_required\": false,\n          \"secret_requirements\"\
+      : [],\n          \"destructive_capabilities\": [],\n          \"supports_direct_invocation\"\
+      : true,\n          \"health_status\": \"ready\"\n        },\n        {\n   \
+      \       \"backend_id\": \"cli-rg\",\n          \"enabled\": true,\n        \
+      \  \"kind\": \"cli\",\n          \"category\": \"search\",\n          \"scope\"\
+      : \"global\",\n          \"source\": \"cli:path_lookup\",\n          \"path\"\
+      : \"/Applications/Codex.app/Contents/Resources/rg\",\n          \"command\"\
+      : \"rg\",\n          \"capabilities\": [\n            \"search\"\n         \
+      \ ],\n          \"destructive\": false,\n          \"supports_json_output\"\
+      : false,\n          \"auth_required\": false,\n          \"secret_requirements\"\
+      : [],\n          \"destructive_capabilities\": [],\n          \"supports_direct_invocation\"\
+      : true,\n          \"health_status\": \"ready\"\n        },\n        {\n   \
+      \       \"backend_id\": \"cli-jq\",\n          \"enabled\": true,\n        \
+      \  \"kind\": \"cli\",\n          \"category\": \"data\",\n          \"scope\"\
+      : \"global\",\n          \"source\": \"cli:path_lookup\",\n          \"path\"\
+      : \"/usr/bin/jq\",\n          \"command\": \"jq\",\n          \"capabilities\"\
+      : [\n            \"data\"\n          ],\n          \"destructive\": false,\n\
+      \          \"supports_json_output\": true,\n          \"auth_required\": false,\n\
+      \          \"secret_requirements\": [],\n          \"destructive_capabilities\"\
+      : [],\n          \"supports_direct_invocation\": true,\n          \"health_status\"\
+      : \"ready\"\n        }\n      ],\n      \"confidence\": 1.0,\n      \"reasons\"\
+      : [\n        \"executor:claude-cli\",\n        \"router:anthropic-router\",\n\
+      \        \"backends:mcp-semgrep,mcp-graphiti,cli-rg,cli-jq\"\n      ],\n   \
+      \   \"replay_candidate\": null,\n      \"unresolved\": [],\n      \"planned_at\"\
+      : \"2026-03-30T01:41:29.584569+00:00\"\n    },\n    {\n      \"task_family\"\
+      : \"architecture_decision\",\n      \"quality_target\": \"deep\",\n      \"\
+      risk_level\": \"high\",\n      \"dispatch_mode\": \"immediate\",\n      \"requires_code\"\
+      : false,\n      \"requires_tools\": false,\n      \"model_tier_path\": [\n \
+      \       \"tier_0_router\",\n        \"tier_1_worker\",\n        \"tier_2_critic\"\
+      ,\n        \"tier_3_expert\"\n      ],\n      \"selected_executor\": {\n   \
+      \     \"executor_id\": \"claude-cli\",\n        \"enabled\": true,\n       \
+      \ \"kind\": \"agent_cli\",\n        \"command\": \"claude\",\n        \"path\"\
+      : \"/Users/j/.local/bin/claude\",\n        \"runtime\": \"unknown\",\n     \
+      \   \"scope\": \"global\",\n        \"source\": \"cli:path_lookup\",\n     \
+      \   \"supports_code\": true,\n        \"supports_tools\": true,\n        \"\
+      supports_streaming\": true,\n        \"supports_direct_invocation\": true,\n\
+      \        \"invocation_mode\": \"raw_command\",\n        \"supported_task_families\"\
+      : [\n          \"research\",\n          \"review\",\n          \"architecture\"\
+      ,\n          \"architecture_decision\",\n          \"security_sensitive\"\n\
+      \        ],\n        \"strengths\": [\n          \"analysis\",\n          \"\
+      architecture\",\n          \"high_context\"\n        ],\n        \"auth_required\"\
+      : false,\n        \"secret_requirements\": [],\n        \"health_status\": \"\
+      ready\"\n      },\n      \"selected_router\": {\n        \"router_id\": \"anthropic-router\"\
+      ,\n        \"enabled\": true,\n        \"kind\": \"provider_api\",\n       \
+      \ \"provider\": \"anthropic\",\n        \"scope\": \"global\",\n        \"source\"\
+      : \"runtime_registry\",\n        \"available_model_ids\": [\n          \"anthropic-auto\"\
+      \n        ],\n        \"tier_coverage\": [\n          \"tier_0_router\",\n \
+      \         \"tier_1_worker\",\n          \"tier_2_critic\",\n          \"tier_3_expert\"\
+      \n        ],\n        \"supports_dynamic_tiering\": true,\n        \"selection_strategy\"\
+      : \"tier_then_task_family\",\n        \"auth_required\": true,\n        \"secret_requirements\"\
+      : [\n          \"ANTHROPIC_API_KEY\"\n        ],\n        \"health_status\"\
+      : \"ready\"\n      },\n      \"model_assignments\": {\n        \"tier_0_router\"\
+      : {\n          \"model_id\": \"anthropic:auto:tier_0_router\",\n          \"\
+      provider\": \"anthropic\",\n          \"source\": \"provider_dynamic\",\n  \
+      \        \"status\": \"inferred\"\n        },\n        \"tier_1_worker\": {\n\
+      \          \"model_id\": \"anthropic-auto\",\n          \"provider\": \"anthropic\"\
+      ,\n          \"source\": \"environment\",\n          \"status\": \"available\"\
+      \n        },\n        \"tier_2_critic\": {\n          \"model_id\": \"anthropic:auto:tier_2_critic\"\
+      ,\n          \"provider\": \"anthropic\",\n          \"source\": \"provider_dynamic\"\
+      ,\n          \"status\": \"inferred\"\n        },\n        \"tier_3_expert\"\
+      : {\n          \"model_id\": \"anthropic:auto:tier_3_expert\",\n          \"\
+      provider\": \"anthropic\",\n          \"source\": \"provider_dynamic\",\n  \
+      \        \"status\": \"inferred\"\n        }\n      },\n      \"backend_bundle\"\
+      : [],\n      \"confidence\": 0.84,\n      \"reasons\": [\n        \"executor:claude-cli\"\
+      ,\n        \"router:anthropic-router\"\n      ],\n      \"replay_candidate\"\
+      : null,\n      \"unresolved\": [],\n      \"planned_at\": \"2026-03-30T01:41:29.626101+00:00\"\
+      \n    }\n  ]\n}"
+  - phase: runtime_check
+    target: scripts/operator_status.py
+    status: passed
+    detail: "{\n  \"runtime\": {\n    \"executors_ready\": 4,\n    \"routers_ready\"\
+      : 1,\n    \"backends_ready\": 70\n  },\n  \"packaging\": {\n    \"active_tier\"\
+      : \"community\",\n    \"allows_external_services\": false,\n    \"byo_infrastructure\"\
+      : false,\n    \"allowed_remote_transport_modes\": [\n      \"shared_filesystem_fabric\"\
+      \n    ]\n  },\n  \"approvals\": {\n    \"pending\": 0,\n    \"approved\": 0,\n\
+      \    \"rejected\": 0,\n    \"expired\": 1\n  },\n  \"runs\": {\n    \"total\"\
+      : 22,\n    \"recent\": [\n      {\n        \"run_id\": \"run-808872e5a90c\"\
+      ,\n        \"task_id\": \"anatomy-wrapper-safe-demo\",\n        \"status\":\
+      \ \"completed\",\n        \"selected_executor_id\": \"python-workflow-runner\"\
+      ,\n        \"selected_router_id\": \"anthropic-router\",\n        \"selected_backend_ids\"\
+      : [\n          \"cli-rg\"\n        ],\n        \"dispatch_mode\": \"immediate\"\
+      ,\n        \"queue_name\": null,\n        \"retry_count\": 0,\n        \"approval_status\"\
+      : \"not_required\",\n        \"current_step\": \"complete\",\n        \"started_at\"\
+      : \"2026-03-30T01:03:58.841875+00:00\",\n        \"updated_at\": \"2026-03-30T01:03:59.299028+00:00\"\
+      ,\n        \"completed_at\": \"2026-03-30T01:03:59.299024+00:00\",\n       \
+      \ \"failure_reason\": null,\n        \"confidence\": 0.89\n      },\n      {\n\
+      \        \"run_id\": \"run-4838556a0c6e\",\n        \"task_id\": \"anatomy-wrapper-safe-demo\"\
+      ,\n        \"status\": \"completed\",\n        \"selected_executor_id\": \"\
+      python-workflow-runner\",\n        \"selected_router_id\": \"anthropic-router\"\
+      ,\n        \"selected_backend_ids\": [\n          \"cli-rg\"\n        ],\n \
+      \       \"dispatch_mode\": \"immediate\",\n        \"queue_name\": null,\n \
+      \       \"retry_count\": 0,\n        \"approval_status\": \"not_required\",\n\
+      \        \"current_step\": \"complete\",\n        \"started_at\": \"2026-03-30T01:03:56.240782+00:00\"\
+      ,\n        \"updated_at\": \"2026-03-30T01:03:56.689541+00:00\",\n        \"\
+      completed_at\": \"2026-03-30T01:03:56.689538+00:00\",\n        \"failure_reason\"\
+      : null,\n        \"confidence\": 0.89\n      },\n      {\n        \"run_id\"\
+      : \"run-7d31331e4fe3\",\n        \"task_id\": \"anatomy-wrapper-safe-demo\"\
+      ,\n        \"status\": \"completed\",\n        \"selected_executor_id\": \"\
+      python-workflow-runner\",\n        \"selected_router_id\": \"anthropic-router\"\
+      ,\n        \"selected_backend_ids\": [\n          \"cli-rg\"\n        ],\n \
+      \       \"dispatch_mode\": \"immediate\",\n        \"queue_name\": null,\n \
+      \       \"retry_count\": 0,\n        \"approval_status\": \"not_required\",\n\
+      \        \"current_step\": \"complete\",\n        \"started_at\": \"2026-03-30T01:02:51.968135+00:00\"\
+      ,\n        \"updated_at\": \"2026-03-30T01:02:52.382195+00:00\",\n        \"\
+      completed_at\": \"2026-03-30T01:02:52.382192+00:00\",\n        \"failure_reason\"\
+      : null,\n        \"confidence\": 0.89\n      },\n      {\n        \"run_id\"\
+      : \"run-e09699de142d\",\n        \"task_id\": \"anatomy-wrapper-safe-demo\"\
+      ,\n        \"status\": \"completed\",\n        \"selected_executor_id\": \"\
+      python-workflow-runner\",\n        \"selected_router_id\": \"anthropic-router\"\
+      ,\n        \"selected_backend_ids\": [\n          \"cli-rg\"\n        ],\n \
+      \       \"dispatch_mode\": \"immediate\",\n        \"queue_name\": null,\n \
+      \       \"retry_count\": 0,\n        \"approval_status\": \"not_required\",\n\
+      \        \"current_step\": \"complete\",\n        \"started_at\": \"2026-03-30T01:02:49.464472+00:00\"\
+      ,\n        \"updated_at\": \"2026-03-30T01:02:49.948172+00:00\",\n        \"\
+      completed_at\": \"2026-03-30T01:02:49.948169+00:00\",\n        \"failure_reason\"\
+      : null,\n        \"confidence\": 0.89\n      },\n      {\n        \"run_id\"\
+      : \"run-08596b4e9ec9\",\n        \"task_id\": \"anatomy-wrapper-safe-demo\"\
+      ,\n        \"status\": \"completed\",\n        \"selected_executor_id\": \"\
+      python-workflow-runner\",\n        \"selected_router_id\": \"anthropic-router\"\
+      ,\n        \"selected_backend_ids\": [\n          \"cli-rg\"\n        ],\n \
+      \       \"dispatch_mode\": \"immediate\",\n        \"queue_name\": null,\n \
+      \       \"retry_count\": 0,\n        \"approval_status\": \"not_required\",\n\
+      \        \"current_step\": \"complete\",\n        \"started_at\": \"2026-03-30T00:22:39.652124+00:00\"\
+      ,\n        \"updated_at\": \"2026-03-30T00:22:40.038936+00:00\",\n        \"\
+      completed_at\": \"2026-03-30T00:22:40.038934+00:00\",\n        \"failure_reason\"\
+      : null,\n        \"confidence\": 0.89\n      }\n    ]\n  },\n  \"scheduler\"\
+      : {\n    \"pending\": 0,\n    \"claimed\": 0,\n    \"dispatched\": 0,\n    \"\
+      awaiting_approval\": 0,\n    \"completed\": 2,\n    \"failed\": 0,\n    \"workers\"\
+      : [\n      {\n        \"worker_id\": \"local-scheduler-worker\",\n        \"\
+      queue_name\": \"deferred\",\n        \"dispatch_modes\": [\n          \"deferred\"\
+      ,\n          \"remote_worker\"\n        ],\n        \"status\": \"ready\",\n\
+      \        \"worker_type\": \"scheduler\",\n        \"transport_mode\": \"local\"\
+      ,\n        \"last_heartbeat_at\": \"2026-03-30T01:40:54.021881+00:00\"\n   \
+      \   },\n      {\n        \"worker_id\": \"remote-fabric-worker\",\n        \"\
+      queue_name\": \"remote-workers\",\n        \"dispatch_modes\": [\n         \
+      \ \"remote_worker\"\n        ],\n        \"status\": \"ready\",\n        \"\
+      worker_type\": \"remote_worker\",\n        \"transport_mode\": \"shared_filesystem_fabric\"\
+      ,\n        \"last_heartbeat_at\": \"2026-03-30T01:40:53.827326+00:00\"\n   \
+      \   }\n    ]\n  },\n  \"transport\": {\n    \"mode\": \"shared_filesystem_fabric\"\
+      ,\n    \"backend\": \"filesystem\",\n    \"available\": true,\n    \"fabric_root\"\
+      : \"/Users/j/Desktop/Lahaolesolutions/agenticswarm creation/telemetry/remote_fabric\"\
+      ,\n    \"inbox\": 0,\n    \"claims\": 0,\n    \"results\": 0,\n    \"workers\"\
+      : 1,\n    \"packaging_tier\": \"community\",\n    \"requested_mode\": \"shared_filesystem_fabric\"\
+      ,\n    \"active_mode\": \"shared_filesystem_fabric\",\n    \"allowed_modes\"\
+      : [\n      \"shared_filesystem_fabric\"\n    ]\n  },\n  \"learning\": {\n  \
+      \  \"route_records\": 24,\n    \"route_preferences\": 3,\n    \"replay_candidates\"\
+      : 20,\n    \"verified_executions\": 16,\n    \"avg_replay_score\": 0.8988,\n\
+      \    \"task_family_benchmarks\": 2,\n    \"adapter_benchmarks\": 2,\n    \"\
+      training_triplets\": 0\n  }\n}"
+  - phase: runtime_check
+    target: scripts/maintain_approvals.py
+    status: passed
+    detail: "{\n  \"stale_after_minutes\": 30,\n  \"pending\": 0,\n  \"expired\":\
+      \ 1\n}"
+  - phase: runtime_check
+    target: scripts/run_remote_worker.py
+    status: passed
+    detail: "{\n  \"transport_worker\": {\n    \"worker_id\": \"remote-fabric-worker\"\
+      ,\n    \"queue_name\": \"remote-workers\",\n    \"status\": \"ready\",\n   \
+      \ \"worker_type\": \"remote_worker\",\n    \"transport_mode\": \"shared_filesystem_fabric\"\
+      ,\n    \"last_heartbeat_at\": \"2026-03-30T01:41:30.025871+00:00\"\n  },\n \
+      \ \"control_plane_worker\": {\n    \"worker_id\": \"remote-fabric-worker\",\n\
+      \    \"queue_name\": \"remote-workers\",\n    \"dispatch_modes\": [\n      \"\
+      remote_worker\"\n    ],\n    \"status\": \"ready\",\n    \"worker_type\": \"\
+      remote_worker\",\n    \"transport_mode\": \"shared_filesystem_fabric\",\n  \
+      \  \"last_heartbeat_at\": \"2026-03-30T01:41:30.026467+00:00\"\n  },\n  \"transport\"\
+      : {\n    \"mode\": \"shared_filesystem_fabric\",\n    \"backend\": \"filesystem\"\
+      ,\n    \"available\": true,\n    \"fabric_root\": \"/Users/j/Desktop/Lahaolesolutions/agenticswarm\
+      \ creation/telemetry/remote_fabric\",\n    \"inbox\": 0,\n    \"claims\": 0,\n\
+      \    \"results\": 0,\n    \"workers\": 1,\n    \"packaging_tier\": \"community\"\
+      ,\n    \"requested_mode\": \"shared_filesystem_fabric\",\n    \"active_mode\"\
+      : \"shared_filesystem_fabric\",\n    \"allowed_modes\": [\n      \"shared_filesystem_fabric\"\
+      \n    ]\n  }\n}"
+  - phase: runtime_check
+    target: scripts/rebuild_learning.py
+    status: passed
+    detail: "{\n  \"dry_run\": true,\n  \"real_routes\": 20,\n  \"verified_routes\"\
+      : 20,\n  \"task_family_benchmarks\": 2,\n  \"model_benchmarks\": 2,\n  \"agent_value_metrics\"\
+      : 3,\n  \"adapter_benchmarks\": 2,\n  \"route_preferences\": 3\n}"
+  - phase: runtime_check
+    target: scripts/run_scheduler.py
+    status: passed
+    detail: "{\n  \"worker\": {\n    \"worker_id\": \"local-scheduler-worker\",\n\
+      \    \"queue_name\": \"deferred\",\n    \"dispatch_modes\": [\n      \"deferred\"\
+      ,\n      \"remote_worker\"\n    ],\n    \"status\": \"ready\",\n    \"worker_type\"\
+      : \"scheduler\",\n    \"transport_mode\": \"local\",\n    \"last_heartbeat_at\"\
+      : \"2026-03-30T01:41:30.220211+00:00\"\n  },\n  \"eligible_queue_items\": 0,\n\
+      \  \"queue_name\": null,\n  \"dispatch_mode\": null,\n  \"transport\": {\n \
+      \   \"mode\": \"shared_filesystem_fabric\",\n    \"backend\": \"filesystem\"\
+      ,\n    \"available\": true,\n    \"fabric_root\": \"/Users/j/Desktop/Lahaolesolutions/agenticswarm\
+      \ creation/telemetry/remote_fabric\",\n    \"inbox\": 0,\n    \"claims\": 0,\n\
+      \    \"results\": 0,\n    \"workers\": 1,\n    \"packaging_tier\": \"community\"\
+      ,\n    \"requested_mode\": \"shared_filesystem_fabric\",\n    \"active_mode\"\
+      : \"shared_filesystem_fabric\",\n    \"allowed_modes\": [\n      \"shared_filesystem_fabric\"\
+      \n    ]\n  },\n  \"pending_remote_results\": []\n}"
+  - phase: runtime_check
+    target: scripts/simulate_swarm.py
+    status: passed
+    detail: '{''task_id'': ''boilerplate-api'', ''task_family'': ''boilerplate_code'',
+      ''simulated'': True, ''model_tier_path'': [''tier_0_router'', ''tier_1_worker'',
+      ''tier_2_critic''], ''executor_id'': ''codex-cli'', ''router_id'': ''anthropic-router'',
+      ''backend_ids'': [''cli-rg'', ''cli-pytest'', ''cli-gh''], ''plan_confidence'':
+      1.0, ''unresolved'': [], ''quality_target'': ''fast'', ''timestamp'': ''2026-03-30T01:41:30.570524+00:00''}
+
+      {''task_id'': ''schema-migration'', ''task_family'': ''data_migration'', ''simulated'':
+      True, ''model_tier_path'': [''tier_0_router'', ''tier_1_worker'', ''tier_2_critic''],
+      ''executor_id'': ''codex-cli'', ''router_id'': ''anthropic-router'', ''backend_ids'':
+      [''cli-jq'', ''cli-rg'', ''cli-pytest'', ''cli-gh''], ''plan_confidence'': 1.0,
+      ''unresolved'': [], ''quality_target'': ''balanced'', ''timestamp'': ''2026-03-30T01:41:30.597958+00:00''}
+
+      {''task_id'': ''security-review'', ''task_family'': ''security_sensitive'',
+      ''simulated'': True, ''model_tier_path'': [''tier_0_router'', ''tier_1_worker'',
+      ''tier_2_critic'', ''tier_3_expert''], ''executor_id'': ''claude-cli'', ''router_id'':
+      ''anthropic-router'', ''backend_ids'': [''mcp-semgrep'', ''mcp-graphiti'', ''cli-rg'',
+      ''cli-jq''], ''plan_confidence'': 1.0, ''unresolved'': [], ''quality_target'':
+      ''critical'', ''timestamp'': ''2026-03-30T01:41:30.625270+00:00''}
+
+      {''task_id'': ''architecture-arbitration'', ''task_family'': ''architecture_decision'',
+      ''simulated'': True, ''model_tier_path'': [''tier_0_router'', ''tier_1_worker'',
+      ''tier_2_critic'', ''tier_3_expert''], ''executor_id'': ''claude-cli'', ''router_id'':
+      ''anthropic-router'', ''backend_ids'': [], ''plan_confidence'': 0.84, ''unresolved'':
+      [], ''quality_target'': ''deep'', ''timestamp'': ''2026-03-30T01:41:30.652408+00:00''}'
+  - phase: runtime_check
+    target: scripts/reconcile_memory.py
+    status: passed
+    detail: '{''conflict_id'': ''task_family:boilerplate_code:last_successful_executor'',
+      ''subject'': ''task_family:boilerplate_code'', ''predicate'': ''last_successful_executor'',
+      ''candidate_values'': [''codex-cli'', ''python-workflow-runner''], ''sources'':
+      [''run-e82c7349f7f9'', ''run-8d2d49374c4d'', ''run-12d11bf577f6'', ''run-c455fbb9f7f0'',
+      ''run-c8447e78686a'', ''run-0ec484666c37'', ''run-abb62699ee94'', ''run-72d5743c3ec5'',
+      ''run-ba443615325d'', ''run-f567e44f2b51'', ''run-26ea06db8fc0'', ''run-ec36ffaab86f'',
+      ''run-a90eceb9c205'', ''run-08596b4e9ec9'', ''run-e09699de142d'', ''run-7d31331e4fe3'',
+      ''run-4838556a0c6e'', ''run-808872e5a90c''], ''status'': ''needs_reconciliation'',
+      ''detected_at'': ''2026-03-30T01:41:30.717602+00:00''}'
+  - phase: runtime_check
+    target: scripts/prune_topology.py
+    status: passed
+    detail: ''
+  - phase: runtime_check
+    target: scripts/prepare_distillation.py
+    status: passed
+    detail: ''
+  - phase: maintenance
+    target: scripts/update_featureset.py
+    status: passed
+    detail: "{\n  \"git_repo\": true,\n  \"status\": \"featureset_refreshed\",\n \
+      \ \"fetch\": {\n    \"attempted\": true,\n    \"ok\": true,\n    \"detail\"\
+      : \"\"\n  },\n  \"pull\": {\n    \"attempted\": false,\n    \"status\": \"not_behind\"\
+      \n  },\n  \"changed\": true,\n  \"reasons\": [\n    \"branch_changed\",\n  \
+      \  \"head_sha_changed\",\n    \"upstream_head_sha_changed\",\n    \"dirty_state_changed\"\
+      \n  ],\n  \"before\": {\n    \"branch\": \"main\",\n    \"head_sha\": \"3386cc12d5bd8d260b9046581348d87710beada4\"\
+      ,\n    \"upstream_ref\": \"origin/main\",\n    \"upstream_head_sha\": \"3386cc12d5bd8d260b9046581348d87710beada4\"\
+      ,\n    \"ahead_count\": 0,\n    \"behind_count\": 0,\n    \"dirty\": true,\n\
+      \    \"blocking_dirty_paths\": [\n      \"README.md\",\n      \"USAGE.md\",\n\
+      \      \"bootstrap.sh\",\n      \"brain.schema.yaml\",\n      \"capabilities/agents.yaml\"\
+      ,\n      \"capabilities/cli.yaml\",\n      \"capabilities/mcp.yaml\",\n    \
+      \  \"capabilities/models.yaml\",\n      \"capabilities/plugins.yaml\",\n   \
+      \   \"capabilities/skills.yaml\",\n      \"install_brain.py\",\n      \"run_brain.sh\"\
+      \n    ],\n    \"ignored_dirty_paths\": [\n      \"capabilities/runtime.yaml\"\
+      ,\n      \"telemetry/control_plane.yaml\",\n      \"telemetry/remote_fabric/workers/remote-fabric-worker.json\"\
+      \n    ]\n  },\n  \"after\": {\n    \"branch\": \"main\",\n    \"head_sha\":\
+      \ \"3386cc12d5bd8d260b9046581348d87710beada4\",\n    \"upstream_ref\": \"origin/main\"\
+      ,\n    \"upstream_head_sha\": \"3386cc12d5bd8d260b9046581348d87710beada4\",\n\
+      \    \"ahead_count\": 0,\n    \"behind_count\": 0,\n    \"dirty\": true,\n \
+      \   \"blocking_dirty_paths\": [\n      \"README.md\",\n      \"USAGE.md\",\n\
+      \      \"bootstrap.sh\",\n      \"brain.schema.yaml\",\n      \"capabilities/agents.yaml\"\
+      ,\n      \"capabilities/cli.yaml\",\n      \"capabilities/mcp.yaml\",\n    \
+      \  \"capabilities/models.yaml\",\n      \"capabilities/plugins.yaml\",\n   \
+      \   \"capabilities/skills.yaml\",\n      \"install_brain.py\",\n      \"run_brain.sh\"\
+      \n    ],\n    \"ignored_dirty_paths\": [\n      \"capabilities/runtime.yaml\"\
+      ,\n      \"telemetry/control_plane.yaml\",\n      \"telemetry/remote_fabric/workers/remote-fabric-worker.json\"\
+      \n    ]\n  },\n  \"blocking_dirty_paths\": [\n    \"README.md\",\n    \"USAGE.md\"\
+      ,\n    \"bootstrap.sh\",\n    \"brain.schema.yaml\",\n    \"capabilities/agents.yaml\"\
+      ,\n    \"capabilities/cli.yaml\",\n    \"capabilities/mcp.yaml\",\n    \"capabilities/models.yaml\"\
+      ,\n    \"capabilities/plugins.yaml\",\n    \"capabilities/skills.yaml\",\n \
+      \   \"install_brain.py\",\n    \"run_brain.sh\"\n  ],\n  \"ignored_dirty_paths\"\
+      : [\n    \"capabilities/runtime.yaml\",\n    \"telemetry/control_plane.yaml\"\
+      ,\n    \"telemetry/remote_fabric/workers/remote-fabric-worker.json\"\n  ],\n\
+      \  \"featureset\": {\n    \"refreshed\": true,\n    \"reason\": \"git_state_changed\"\
+      ,\n    \"counts\": {\n      \"agents\": 142,\n      \"skills\": 96,\n      \"\
+      plugins\": 1,\n      \"mcp_entries\": 84,\n      \"cli_entries\": 49,\n    \
+      \  \"models\": 13\n    }\n  }\n}"
+  - phase: maintenance
+    target: scripts/maintain_approvals.py
+    status: passed
+    detail: "{\n  \"stale_after_minutes\": 30,\n  \"expired_count\": 0,\n  \"expired_approval_ids\"\
+      : [],\n  \"pending\": 0,\n  \"expired\": 1\n}"
+  - phase: maintenance
+    target: scripts/reconcile_memory.py
+    status: passed
+    detail: Wrote 1 memory conflicts.
+  - phase: maintenance
+    target: scripts/prune_topology.py
+    status: passed
+    detail: Wrote 0 plasticity recommendations.
+  - phase: maintenance
+    target: scripts/prepare_distillation.py
+    status: passed
+    detail: Prepared 0 distillation jobs.
+  - phase: autostart
+    status: skipped
+    detail: disabled_by_flag
+  validation:
+    passed: true
+    errors: []
+  discovery_counts: *id005
+  watch_roots:
+  - /Applications/Codex.app/Contents/Resources
+  - /Library/Apple/usr/bin
+  - /Library/Frameworks/Python.framework/Versions/3.10/bin
+  - /Library/Frameworks/Python.framework/Versions/3.11/bin
+  - /Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home/bin
+  - /System/Volumes/Preboot/Cryptexes/App/usr/bin
+  - /Users/j/.agents
+  - /Users/j/.agents/skills
+  - /Users/j/.agents/skills/appinsights-instrumentation
+  - /Users/j/.agents/skills/azure-ai
+  - /Users/j/.agents/skills/azure-aigateway
+  - /Users/j/.agents/skills/azure-cloud-migrate
+  - /Users/j/.agents/skills/azure-compliance
+  - /Users/j/.agents/skills/azure-compute
+  - /Users/j/.agents/skills/azure-cost-optimization
+  - /Users/j/.agents/skills/azure-deploy
+  - /Users/j/.agents/skills/azure-diagnostics
+  - /Users/j/.agents/skills/azure-hosted-copilot-sdk
+  - /Users/j/.agents/skills/azure-kusto
+  - /Users/j/.agents/skills/azure-messaging
+  - /Users/j/.agents/skills/azure-prepare
+  - /Users/j/.agents/skills/azure-quotas
+  - /Users/j/.agents/skills/azure-rbac
+  - /Users/j/.agents/skills/azure-resource-lookup
+  - /Users/j/.agents/skills/azure-resource-visualizer
+  - /Users/j/.agents/skills/azure-storage
+  - /Users/j/.agents/skills/azure-upgrade
+  - /Users/j/.agents/skills/azure-validate
+  - /Users/j/.agents/skills/claude_telemetry-main/.claude/agents
+  - /Users/j/.agents/skills/entra-app-registration
+  - /Users/j/.agents/skills/frontend-design
+  - /Users/j/.agents/skills/microsoft-foundry
+  - /Users/j/.agents/skills/microsoft-foundry/foundry-agent/create/references
+  - /Users/j/.agents/skills/microsoft-foundry/models/deploy-model
+  - /Users/j/.agents/skills/microsoft-foundry/models/deploy-model/capacity
+  - /Users/j/.agents/skills/microsoft-foundry/models/deploy-model/customize
+  - /Users/j/.agents/skills/microsoft-foundry/models/deploy-model/preset
+  - /Users/j/.agents/skills/microsoft-foundry/references
+  - /Users/j/.agents/skills/nano-banana-2-skill-main/plugins/nano-banana/skills/nano-banana
+  - /Users/j/.agents/skills/stitch-mcp-main/.gemini/skills/typed-service-contract
+  - /Users/j/.agents/skills/stitch-mcp-main/docs
+  - /Users/j/.agents/skills/threejs-master
+  - /Users/j/.agents/skills/top-tier-ui
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/examples/with-nextjs-resumable-stream
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/examples/with-workspace/workspace/skills/data-analysis
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/examples/with-workspace/workspace/skills/playwright-cli
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/agents
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/agents/a2a
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/agents/mcp
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/agents/memory
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/api/endpoints
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/rag
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/docs/workflows/steps
+  - /Users/j/.agents/skills/voltagent--voltagent-core-2.6.4/website/recipes
+  - /Users/j/.bun/bin
+  - /Users/j/.claude
+  - /Users/j/.claude/plugins/cache/claude-plugins-official/adspirer-ads-agent/1.1.0
+  - /Users/j/.claude/plugins/cache/claude-plugins-official/huggingface-skills/1.0.1
+  - /Users/j/.claude/plugins/cache/claude-plugins-official/playwright/d5c15b861cd2
+  - /Users/j/.claude/plugins/cache/claude-plugins-official/semgrep/6f3962351041/plugin
+  - /Users/j/.claude/plugins/cache/claude-plugins-official/stripe/0.1.0
+  - /Users/j/.claude/plugins/goose-main/crates/goose/tests/mcp_replays
+  - /Users/j/.claude/plugins/goose-main/documentation/src/pages/recipes/data/recipes
+  - /Users/j/.claude/plugins/graphiti-main/.github/workflows
+  - /Users/j/.claude/plugins/graphiti-main/mcp_server/config
+  - /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/discord
+  - /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/fakechat
+  - /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/telegram
+  - /Users/j/.claude/plugins/marketplaces/local-desktop-app-uploads/ui-ux-pro-max/cli/assets/templates/platforms
+  - /Users/j/.claude/skills/voltagent--voltagent-core-2.6.4/examples/with-cerbos/policies
+  - /Users/j/.codex
+  - /Users/j/.codex/.tmp/plugins/plugins/build-web-apps
+  - /Users/j/.codex/.tmp/plugins/plugins/cloudflare
+  - /Users/j/.codex/.tmp/plugins/plugins/hugging-face
+  - /Users/j/.codex/plugins
+  - /Users/j/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/.codex-plugin
+  - /Users/j/.codex/skills
+  - /Users/j/.codex/skills/.system/imagegen
+  - /Users/j/.codex/skills/.system/openai-docs
+  - /Users/j/.codex/skills/.system/plugin-creator
+  - /Users/j/.codex/skills/.system/skill-creator
+  - /Users/j/.codex/skills/.system/skill-installer
+  - /Users/j/.codex/skills/AReaL-main
+  - /Users/j/.codex/skills/AReaL-main/.claude/agents
+  - /Users/j/.codex/skills/AReaL-main/.opencode/agents
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-archon-model
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-dataset
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-reward
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-unit-tests
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/add-workflow
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/commit-conventions
+  - /Users/j/.codex/skills/AReaL-main/.opencode/skills/debug-distributed
+  - /Users/j/.codex/skills/AReaL-main/docs/zh/customization
+  - /Users/j/.codex/skills/AReaL-main/docs/zh/reference
+  - /Users/j/.codex/skills/AReaL-main/docs/zh/tutorial
+  - /Users/j/.codex/skills/EvoAgentX-main/docs/modules
+  - /Users/j/.codex/skills/EvoAgentX-main/docs/tutorial
+  - /Users/j/.codex/skills/EvoAgentX-main/docs/zh/modules
+  - /Users/j/.codex/skills/EvoAgentX-main/docs/zh/tutorial
+  - /Users/j/.codex/skills/agno-main
+  - /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/dash/knowledge/business
+  - /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/dash/knowledge/tables
+  - /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/scout/knowledge/patterns
+  - /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/scout/knowledge/routing
+  - /Users/j/.codex/skills/agno-main/cookbook/01_demo/agents/scout/knowledge/sources
+  - /Users/j/.codex/skills/agno-main/cookbook/02_agents/16_skills/sample_skills/code-review
+  - /Users/j/.codex/skills/agno-main/cookbook/02_agents/16_skills/sample_skills/git-workflow
+  - /Users/j/.codex/skills/agno-main/cookbook/05_agent_os/skills/sample_skills/system-info
+  - /Users/j/.codex/skills/agno-main/cookbook/10_reasoning/agents
+  - /Users/j/.codex/skills/aspnet-core
+  - /Users/j/.codex/skills/auditing-terraform-infrastructure-for-security
+  - /Users/j/.codex/skills/browser-use-main
+  - /Users/j/.codex/skills/browser-use-main/skills/browser-use
+  - /Users/j/.codex/skills/browser-use-main/skills/remote-browser
+  - /Users/j/.codex/skills/chatgpt-apps
+  - /Users/j/.codex/skills/dify-main
+  - /Users/j/.codex/skills/dify-main/.agents/skills/backend-code-review
+  - /Users/j/.codex/skills/dify-main/.agents/skills/component-refactoring
+  - /Users/j/.codex/skills/dify-main/.agents/skills/frontend-code-review
+  - /Users/j/.codex/skills/dify-main/.agents/skills/frontend-testing
+  - /Users/j/.codex/skills/dify-main/.agents/skills/orpc-contract-first
+  - /Users/j/.codex/skills/dify-main/.github/workflows
+  - /Users/j/.codex/skills/dify-main/api
+  - /Users/j/.codex/skills/dify-main/web
+  - /Users/j/.codex/skills/dify-main/web/app/components/base/icons/src/vender/workflow
+  - /Users/j/.codex/skills/figma
+  - /Users/j/.codex/skills/figma-implement-design
+  - /Users/j/.codex/skills/gh-address-comments
+  - /Users/j/.codex/skills/gh-fix-ci
+  - /Users/j/.codex/skills/goose-main
+  - /Users/j/.codex/skills/goose-main/crates/goose/src/agents/builtin_skills/skills
+  - /Users/j/.codex/skills/goose-main/crates/goose/src/prompts
+  - /Users/j/.codex/skills/goose-main/documentation
+  - /Users/j/.codex/skills/goose-main/documentation/docs/mcp
+  - /Users/j/.codex/skills/goose-main/documentation/docs/tutorials
+  - /Users/j/.codex/skills/graphiti-main
+  - /Users/j/.codex/skills/implementing-secrets-scanning-in-ci-cd
+  - /Users/j/.codex/skills/instructor-main
+  - /Users/j/.codex/skills/instructor-main/docs
+  - /Users/j/.codex/skills/jupyter-notebook
+  - /Users/j/.codex/skills/linear
+  - /Users/j/.codex/skills/meeting-notes-and-actions
+  - /Users/j/.codex/skills/notion-knowledge-capture
+  - /Users/j/.codex/skills/notion-meeting-intelligence
+  - /Users/j/.codex/skills/notion-research-documentation
+  - /Users/j/.codex/skills/notion-spec-to-implementation
+  - /Users/j/.codex/skills/openai-agents-python-main
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/code-change-verification
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/docs-sync
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/examples-auto-run
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/final-release-review
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/implementation-strategy
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/openai-knowledge
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/pr-draft-summary
+  - /Users/j/.codex/skills/openai-agents-python-main/.agents/skills/test-coverage-improver
+  - /Users/j/.codex/skills/openai-agents-python-main/docs
+  - /Users/j/.codex/skills/openai-agents-python-main/docs/ja
+  - /Users/j/.codex/skills/openai-agents-python-main/docs/ko
+  - /Users/j/.codex/skills/openai-agents-python-main/docs/ref
+  - /Users/j/.codex/skills/openai-agents-python-main/docs/ref/realtime
+  - /Users/j/.codex/skills/openai-agents-python-main/docs/ref/run_internal
+  - /Users/j/.codex/skills/openai-agents-python-main/docs/zh
+  - /Users/j/.codex/skills/openai-agents-python-main/examples/tools/skills/csv-workbench
+  - /Users/j/.codex/skills/openai-agents-python-main/src/agents/realtime
+  - /Users/j/.codex/skills/pdf
+  - /Users/j/.codex/skills/performing-vulnerability-scanning-with-nessus
+  - /Users/j/.codex/skills/performing-web-application-vulnerability-triage
+  - /Users/j/.codex/skills/ragas-main/docs/concepts/metrics/available_metrics
+  - /Users/j/.codex/skills/ragas-main/docs/concepts/test_data_generation
+  - /Users/j/.codex/skills/ragas-main/docs/howtos/cli
+  - /Users/j/.codex/skills/ragas-main/docs/howtos/integrations
+  - /Users/j/.codex/skills/ragas-main/docs/tutorials
+  - /Users/j/.codex/skills/ray-master/python/ray/autoscaler/aws/cloudwatch
+  - /Users/j/.codex/skills/ray-master/release/dashboard
+  - /Users/j/.codex/skills/scanning-docker-images-with-trivy
+  - /Users/j/.codex/skills/scanning-kubernetes-manifests-with-kubesec
+  - /Users/j/.codex/skills/security-best-practices
+  - /Users/j/.codex/skills/security-ownership-map
+  - /Users/j/.codex/skills/security-threat-model
+  - /Users/j/.codex/skills/security-threat-model/agents
+  - /Users/j/.codex/skills/sora
+  - /Users/j/.codex/skills/speech
+  - /Users/j/.codex/skills/speech-to-text
+  - /Users/j/.codex/skills/spreadsheet
+  - /Users/j/.codex/skills/testing-api-security-with-owasp-top-10
+  - /Users/j/.codex/skills/transcribe
+  - /Users/j/.codex/skills/triaging-security-incident
+  - /Users/j/.codex/skills/vercel-deploy
+  - /Users/j/.codex/tmp/arg0/codex-arg0VLEIhj
+  - /Users/j/.config
+  - /Users/j/.cursor
+  - /Users/j/.cursor/projects/var-folders-4k-n41g-qzd39vdsqh0-phybjm0000gn-T-6b53a819-54ac-4f82-963a-9cae47cd31a9/mcps/plugin-adspirer-ads-agent-adspirer/tools
+  - /Users/j/.foundry/bin
+  - /Users/j/.local/bin
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.venv/bin
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/scripts
+  - /Users/j/Library/Application Support/Claude
+  - /Users/j/Library/Application Support/Claude/Claude Extensions Settings
+  - /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/dist
+  - /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/schemas
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/brand-voice/1.0.0
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/cowork-plugin-management/0.2.2/skills/cowork-plugin-customizer/examples
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/design/1.1.0
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/cache/knowledge-work-plugins/operations/1.1.0
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/bio-research
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/data
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/engineering
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/enterprise-search
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/legal
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/marketing
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/partner-built/apollo
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/partner-built/common-room
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/product-management
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/productivity
+  - /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/sales
+  - /Users/j/Library/Application Support/Codex
+  - /Users/j/Library/Application Support/Cursor
+  - /Users/j/Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings
+  - /bin
+  - /opt/homebrew/bin
+  - /opt/homebrew/sbin
+  - /opt/metasploit-framework/bin
+  - /sbin
+  - /usr/bin
+  - /usr/local/MacGPG2/bin
+  - /usr/local/bin
+  - /usr/local/share/dotnet
+  - /usr/sbin
 notes:
 - Each report captures discovery counts, validation status, and the phases executed
   by `scripts/run_audit.py`.

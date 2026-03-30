@@ -1,5 +1,5 @@
 version: '1.0'
-last_updated: '2026-03-29'
+last_updated: '2026-03-30'
 description: Portable registry for globally installed and repository-local CLI tools
   available to the orchestrator.
 registry_defaults:
@@ -52,35 +52,35 @@ cli_entries:
   command: python3
   enabled: true
   category: runtime
-  kind: global_binary
+  kind: local_binary
   runtime: unknown
   destructive: false
   supports_json_output: false
-  path: /opt/homebrew/bin/python3
-  scope: global
-  source: path_lookup
+  path: .venv/bin/python3
+  scope: local
+  source: repository_binary
 - cli_id: pip
   command: pip
   enabled: true
   category: package_manager
-  kind: global_binary
+  kind: local_binary
   runtime: unknown
   destructive: false
   supports_json_output: false
-  path: /Library/Frameworks/Python.framework/Versions/3.10/bin/pip
-  scope: global
-  source: path_lookup
+  path: .venv/bin/pip
+  scope: local
+  source: repository_binary
 - cli_id: pip3
   command: pip3
   enabled: true
   category: package_manager
-  kind: global_binary
+  kind: local_binary
   runtime: unknown
   destructive: false
   supports_json_output: false
-  path: /opt/homebrew/bin/pip3
-  scope: global
-  source: path_lookup
+  path: .venv/bin/pip3
+  scope: local
+  source: repository_binary
 - cli_id: uv
   command: uv
   enabled: true
@@ -235,6 +235,105 @@ cli_entries:
   path: /Library/Frameworks/Python.framework/Versions/3.11/bin/playwright
   scope: global
   source: path_lookup
+- cli_id: thon
+  command: "\U0001D70Bthon"
+  enabled: true
+  category: general
+  kind: local_binary
+  runtime: unknown
+  destructive: false
+  supports_json_output: false
+  path: ".venv/bin/\U0001D70Bthon"
+  scope: local
+  source: repository_binary
+- cli_id: pip3-14
+  command: pip3.14
+  enabled: true
+  category: general
+  kind: local_binary
+  runtime: unknown
+  destructive: false
+  supports_json_output: false
+  path: .venv/bin/pip3.14
+  scope: local
+  source: repository_binary
+- cli_id: python
+  command: python
+  enabled: true
+  category: runtime
+  kind: local_binary
+  runtime: unknown
+  destructive: false
+  supports_json_output: false
+  path: .venv/bin/python
+  scope: local
+  source: repository_binary
+- cli_id: jsonschema
+  command: jsonschema
+  enabled: true
+  category: general
+  kind: local_binary
+  runtime: unknown
+  destructive: false
+  supports_json_output: false
+  path: .venv/bin/jsonschema
+  scope: local
+  source: repository_binary
+- cli_id: python3-14
+  command: python3.14
+  enabled: true
+  category: general
+  kind: local_binary
+  runtime: unknown
+  destructive: false
+  supports_json_output: false
+  path: .venv/bin/python3.14
+  scope: local
+  source: repository_binary
+- cli_id: run-remote-worker
+  command: run_remote_worker
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/run_remote_worker.py
+  scope: local
+  source: repository_script
+- cli_id: execution-engine
+  command: execution_engine
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/execution_engine.py
+  scope: local
+  source: repository_script
+- cli_id: anatomy-wrapper
+  command: anatomy_wrapper
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/anatomy_wrapper.py
+  scope: local
+  source: repository_script
+- cli_id: rebuild-learning
+  command: rebuild_learning
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/rebuild_learning.py
+  scope: local
+  source: repository_script
 - cli_id: simulate-swarm
   command: simulate_swarm
   enabled: true
@@ -246,6 +345,72 @@ cli_entries:
   path: scripts/simulate_swarm.py
   scope: local
   source: repository_script
+- cli_id: operator-status
+  command: operator_status
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/operator_status.py
+  scope: local
+  source: repository_script
+- cli_id: runtime-bridge
+  command: runtime_bridge
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/runtime_bridge.py
+  scope: local
+  source: repository_script
+- cli_id: dendrites
+  command: dendrites
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/dendrites.py
+  scope: local
+  source: repository_script
+- cli_id: control-plane
+  command: control_plane
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/control_plane.py
+  scope: local
+  source: repository_script
+- cli_id: remote-transport
+  command: remote_transport
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/remote_transport.py
+  scope: local
+  source: repository_script
+- cli_id: cerebellum
+  command: cerebellum
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/cerebellum.py
+  scope: local
+  source: repository_script
 - cli_id: brain-utils
   command: brain_utils
   enabled: true
@@ -255,6 +420,39 @@ cli_entries:
   destructive: false
   supports_json_output: false
   path: scripts/brain_utils.py
+  scope: local
+  source: repository_script
+- cli_id: limbic-system
+  command: limbic_system
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/limbic_system.py
+  scope: local
+  source: repository_script
+- cli_id: execute-task
+  command: execute_task
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/execute_task.py
+  scope: local
+  source: repository_script
+- cli_id: neurons
+  command: neurons
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/neurons.py
   scope: local
   source: repository_script
 - cli_id: bootstrap-brain
@@ -290,6 +488,17 @@ cli_entries:
   path: scripts/validate_brain.py
   scope: local
   source: repository_script
+- cli_id: verify-anatomy-wrappers
+  command: verify_anatomy_wrappers
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/verify_anatomy_wrappers.py
+  scope: local
+  source: repository_script
 - cli_id: prepare-distillation
   command: prepare_distillation
   enabled: true
@@ -299,6 +508,17 @@ cli_entries:
   destructive: false
   supports_json_output: false
   path: scripts/prepare_distillation.py
+  scope: local
+  source: repository_script
+- cli_id: cerebrum
+  command: cerebrum
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/cerebrum.py
   scope: local
   source: repository_script
 - cli_id: run-audit
@@ -312,6 +532,17 @@ cli_entries:
   path: scripts/run_audit.py
   scope: local
   source: repository_script
+- cli_id: brainstem
+  command: brainstem
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/brainstem.py
+  scope: local
+  source: repository_script
 - cli_id: reconcile-memory
   command: reconcile_memory
   enabled: true
@@ -321,6 +552,39 @@ cli_entries:
   destructive: false
   supports_json_output: false
   path: scripts/reconcile_memory.py
+  scope: local
+  source: repository_script
+- cli_id: update-featureset
+  command: update_featureset
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/update_featureset.py
+  scope: local
+  source: repository_script
+- cli_id: run-scheduler
+  command: run_scheduler
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/run_scheduler.py
+  scope: local
+  source: repository_script
+- cli_id: maintain-approvals
+  command: maintain_approvals
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/maintain_approvals.py
   scope: local
   source: repository_script
 notes:

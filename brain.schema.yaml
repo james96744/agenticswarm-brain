@@ -195,20 +195,20 @@ brain_manifest:
       skills: 0
       plugins: 0
       mcp_entries: 0
-      cli_entries: 8
+      cli_entries: 35
       models: 0
     global_counts:
       agents: 140
       skills: 96
-      plugins: 0
+      plugins: 1
       mcp_entries: 84
       cli_entries: 17
       models: 13
     combined_counts:
       agents: 142
       skills: 96
-      plugins: 0
+      plugins: 1
       mcp_entries: 84
-      cli_entries: 25
+      cli_entries: 49
       models: 13
-    generated_at: '2026-03-29T02:56:14.681835+00:00'
+    generated_at: '2026-03-30T01:41:53.767549+00:00'

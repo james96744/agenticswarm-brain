@@ -1,11 +1,11 @@
 version: '1.0'
-last_updated: '2026-03-29'
+last_updated: '2026-03-30'
 description: Persistent discovery watch state used for startup rechecks and new-install
   detection.
 state:
   repo_root: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation
-  last_full_audit_at: '2026-03-29T02:55:51.905678+00:00'
-  last_startup_check_at: '2026-03-29T02:56:31.005016+00:00'
+  last_full_audit_at: '2026-03-30T01:41:04.774140+00:00'
+  last_startup_check_at: '2026-03-30T01:41:04.774140+00:00'
   watch_roots:
   - /Applications/Codex.app/Contents/Resources
   - /Library/Apple/usr/bin
@@ -82,6 +82,8 @@ state:
   - /Users/j/.codex/.tmp/plugins/plugins/build-web-apps
   - /Users/j/.codex/.tmp/plugins/plugins/cloudflare
   - /Users/j/.codex/.tmp/plugins/plugins/hugging-face
+  - /Users/j/.codex/plugins
+  - /Users/j/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/.codex-plugin
   - /Users/j/.codex/skills
   - /Users/j/.codex/skills/.system/imagegen
   - /Users/j/.codex/skills/.system/openai-docs
@@ -194,13 +196,14 @@ state:
   - /Users/j/.codex/skills/transcribe
   - /Users/j/.codex/skills/triaging-security-incident
   - /Users/j/.codex/skills/vercel-deploy
-  - /Users/j/.codex/tmp/arg0/codex-arg0xxwt1u
+  - /Users/j/.codex/tmp/arg0/codex-arg0VLEIhj
   - /Users/j/.config
   - /Users/j/.cursor
   - /Users/j/.cursor/projects/var-folders-4k-n41g-qzd39vdsqh0-phybjm0000gn-T-6b53a819-54ac-4f82-963a-9cae47cd31a9/mcps/plugin-adspirer-ads-agent-adspirer/tools
   - /Users/j/.foundry/bin
   - /Users/j/.local/bin
   - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.venv/bin
   - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/scripts
   - /Users/j/Library/Application Support/Claude
   - /Users/j/Library/Application Support/Claude/Claude Extensions Settings
@@ -306,10 +309,12 @@ state:
     /Users/j/.claude/plugins/marketplaces/claude-plugins-official/external_plugins/telegram: 1774034749628105386
     /Users/j/.claude/plugins/marketplaces/local-desktop-app-uploads/ui-ux-pro-max/cli/assets/templates/platforms: 1772652643276188765
     /Users/j/.claude/skills/voltagent--voltagent-core-2.6.4/examples/with-cerbos/policies: 1772662942000000000
-    /Users/j/.codex: 1774752205480722447
+    /Users/j/.codex: 1774833808432414600
     /Users/j/.codex/.tmp/plugins/plugins/build-web-apps: 1774667707906047638
     /Users/j/.codex/.tmp/plugins/plugins/cloudflare: 1774667707986467821
     /Users/j/.codex/.tmp/plugins/plugins/hugging-face: 1774667708271198231
+    /Users/j/.codex/plugins: 1774753589261803178
+    /Users/j/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/.codex-plugin: 1774753589315000056
     /Users/j/.codex/skills: 1774744580603320474
     /Users/j/.codex/skills/.system/imagegen: 1774744580604748680
     /Users/j/.codex/skills/.system/openai-docs: 1774744580605441930
@@ -422,16 +427,17 @@ state:
     /Users/j/.codex/skills/transcribe: 1772830140373494647
     /Users/j/.codex/skills/triaging-security-incident: 1773783053717359296
     /Users/j/.codex/skills/vercel-deploy: 1773782706289949413
-    /Users/j/.codex/tmp/arg0/codex-arg0xxwt1u: 1774744580562340804
-    /Users/j/.config: 1772827417756953612
+    /Users/j/.codex/tmp/arg0/codex-arg0VLEIhj: 1774822661594037652
+    /Users/j/.config: 1774754320761750292
     /Users/j/.cursor: 1773862185257099817
     ? /Users/j/.cursor/projects/var-folders-4k-n41g-qzd39vdsqh0-phybjm0000gn-T-6b53a819-54ac-4f82-963a-9cae47cd31a9/mcps/plugin-adspirer-ads-agent-adspirer/tools
     : 1774743584369847084
     /Users/j/.foundry/bin: 1770768342515155786
     /Users/j/.local/bin: 1770238910853332441
-    /Users/j/Desktop/Lahaolesolutions/agenticswarm creation: 1774752915926774761
-    /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/scripts: 1774752839935975000
-    /Users/j/Library/Application Support/Claude: 1774752478137643263
+    /Users/j/Desktop/Lahaolesolutions/agenticswarm creation: 1774834913792407344
+    /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.venv/bin: 1774823119860357992
+    /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/scripts: 1774832489336422153
+    /Users/j/Library/Application Support/Claude: 1774827121199556898
     /Users/j/Library/Application Support/Claude/Claude Extensions Settings: 1773965237601757073
     ? /Users/j/Library/Application Support/Claude/Claude Extensions/ant.dir.gh.vendr.vendr-mcp/node_modules/@anthropic-ai/mcpb/dist
     : 1773643504632767846
@@ -467,11 +473,11 @@ state:
     : 1772765157010237255
     ? /Users/j/Library/Application Support/Claude/local-agent-mode-sessions/884b651d-9dc0-48ea-aef0-801df344937f/186cc641-996f-4dbe-9f4d-9d0fa89aabe1/cowork_plugins/marketplaces/knowledge-work-plugins/sales
     : 1772765157025525520
-    /Users/j/Library/Application Support/Codex: 1774752941244160305
-    /Users/j/Library/Application Support/Cursor: 1774752550178791303
+    /Users/j/Library/Application Support/Codex: 1774834872354920152
+    /Users/j/Library/Application Support/Cursor: 1774834441717202700
     /Users/j/Library/Application Support/Cursor/User/globalStorage/saoudrizwan.claude-dev/settings: 1773862569423298761
     /bin: 1771990892000000000
-    /opt/homebrew/bin: 1774437958758724001
+    /opt/homebrew/bin: 1774754351834254004
     /opt/homebrew/sbin: 1774437958759374750
     /opt/metasploit-framework/bin: 1772307792192396972
     /sbin: 1771990892000000000
@@ -483,12 +489,13 @@ state:
   discovery_counts:
     agents: 142
     skills: 96
-    plugins: 0
+    plugins: 1
     mcp_entries: 84
-    cli_entries: 25
+    cli_entries: 49
     models: 13
-  last_change_detected: false
-  last_change_summary: []
+  last_change_detected: true
+  last_change_summary:
+  - manual_audit
 notes:
 - run_audit.py --startup-check compares current watch-root fingerprints with this
   state.

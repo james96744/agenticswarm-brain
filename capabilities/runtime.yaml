@@ -1674,6 +1674,20 @@ tool_backends:
   destructive_capabilities: []
   supports_direct_invocation: false
   health_status: configured
+- backend_id: plugin-codex-plugin
+  enabled: true
+  kind: plugin
+  category: global_installed
+  scope: global
+  source: plugin:global_plugin
+  path: /Users/j/.codex/plugins/cache/openai-curated/github/d88301d4694edc6282ca554e97fb8425cbd5a250/.codex-plugin/plugin.json
+  capabilities: []
+  destructive: false
+  auth_required: true
+  secret_requirements: []
+  destructive_capabilities: []
+  supports_direct_invocation: true
+  health_status: ready
 - backend_id: cli-git
   enabled: true
   kind: cli

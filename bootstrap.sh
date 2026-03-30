@@ -41,7 +41,6 @@ python3 "$source_root/install_brain.py" --target "$TARGET"
 cat <<'EOF'
 
 Next steps in the target repo:
-  1. python3 -m venv .venv
-  2. ./.venv/bin/pip install pyyaml jsonschema
-  3. ./.venv/bin/python scripts/run_audit.py --repo-root .
+  1. ./run_brain.sh --dry-run
+  2. ./run_brain.sh
 EOF

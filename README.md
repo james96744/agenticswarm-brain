@@ -23,6 +23,16 @@ It provides:
 
 The result is a reusable brain scaffold that can be installed into many repos and then adapt itself to each one.
 
+## At A Glance
+
+- one-command local bring-up with [`run_brain.sh`](./run_brain.sh)
+- repo discovery across agents, skills, plugins, MCP, CLI tools, and models
+- real execution through executor, router, and backend selection
+- durable blackboard and control-plane state for tasks, runs, approvals, artifacts, leases, and queues
+- tiered transport packaging: free local/community by default, optional Redis-backed network mode in `advanced`
+- verified telemetry rebuild for replay-aware routing and benchmark rollups
+- anatomy-based wrapper entrypoints so orchestration can reason in brain terms without renaming implementation modules
+
 ## Distribution Tiers
 
 The architecture is now packaged explicitly in three tiers:
@@ -32,6 +42,16 @@ The architecture is now packaged explicitly in three tiers:
 - `Enterprise`: reserved pluggable-broker tier for future NATS/SQS-style transports
 
 The active tier is declared in [`orchestrator/policies.yaml`](./orchestrator/policies.yaml) under `packaging_profile.active_tier` and mirrored in [`brain.schema.yaml`](./brain.schema.yaml) as `repository_profile.distribution_tier`.
+
+## Local, Shared, And Networked Modes
+
+There are three practical ways to run the brain today:
+
+- `Local workspace`: one repo clone, one machine, one `.venv`, default `community` mode
+- `Shared workspace`: multiple workers using the same filesystem fabric, still `community`, useful for a shared volume or LAN-style setup
+- `Networked workspace`: multiple independent repo clones connected through a broker, use `advanced` plus BYO Redis
+
+If you want zero ongoing hosting cost, stay on `community`. If you want independent cloud workspaces, remote laptops, or multiple machines without a shared disk, move to `advanced` and bring your own Redis.
 
 ## Core Idea
 
@@ -71,11 +91,12 @@ The runtime layer can:
 
 - resolve discovered inventory into executor, router, and backend candidates
 - plan task-family-specific execution bundles
-- invoke selected executors and backends directly
+- invoke selected executors and backends directly instead of only simulating routes
 - queue deferred and remote-worker dispatch through a file-first scheduler
 - dispatch remote-worker tasks into a shared transport fabric and import remote results back into the queue ledger
 - switch the remote-worker transport backend between shared filesystem and Redis without changing scheduler or worker entrypoints
 - gate risky or high-impact execution behind approvals
+- expire stale approvals and close stranded approval-gated runs cleanly
 - record runs, artifacts, backend calls, critic outcomes, latency, replay score, and verified execution telemetry
 - rebuild benchmark rollups and preferred route bundles from accumulated verified telemetry
 
@@ -100,6 +121,13 @@ The system includes a durable file-first coordination layer:
 - [`scripts/operator_status.py`](./scripts/operator_status.py): compact operator view
 
 This gives the brain stable coordination even before Redis/Postgres adapters exist.
+
+Operator-facing control-plane maintenance now includes:
+
+- pending and expired approval tracking
+- queue and worker heartbeat visibility
+- linked run and artifact provenance
+- remote dispatch reconciliation back into the control plane
 
 ### Git-Aware Self-Maintenance
 
@@ -127,6 +155,8 @@ The current scaffold records enough information to support:
 - contradiction-aware memory updates
 - training triplet accumulation
 
+Those learning surfaces are now fed by real execution telemetry, not only simulated routes.
+
 Relevant files:
 
 - [`telemetry/routes.yaml`](./telemetry/routes.yaml)
@@ -153,6 +183,7 @@ training/       adapter and distillation job planning
 
 - [`bootstrap.sh`](./bootstrap.sh): installer bootstrap
 - [`install_brain.py`](./install_brain.py): copies the scaffold into a target repo
+- [`run_brain.sh`](./run_brain.sh): one-command local bootstrap, dependency install, audit, populate, and activation launcher
 - [`scripts/run_audit.py`](./scripts/run_audit.py): top-level audit, validation, maintenance, and autostart flow
 - [`scripts/bootstrap_brain.py`](./scripts/bootstrap_brain.py): discovery and registry population engine
 - [`scripts/validate_brain.py`](./scripts/validate_brain.py): schema and semantic validation
@@ -203,32 +234,146 @@ Or from a local clone:
 python3 install_brain.py --target /path/to/repo
 ```
 
-### 2. Create A Local Environment
+### 2. Run The Brain
 
 Inside the target repository:
 
 ```bash
-python3 -m venv .venv
-./.venv/bin/pip install pyyaml jsonschema
+./run_brain.sh --dry-run --no-autostart
 ```
 
-### 3. Run The First Audit
+That single command:
 
-Dry-run first:
+- creates `.venv` if it does not exist
+- installs the minimum local Python dependencies automatically
+- runs the audit against the current repo
+- keeps autostart disabled when you pass `--no-autostart`
+
+For most users, this is the only command needed to bootstrap the local brain.
+
+### 3. Populate And Activate
 
 ```bash
-./.venv/bin/python scripts/run_audit.py --repo-root . --dry-run --no-autostart
+./run_brain.sh
 ```
 
-Then populate:
+That first non-dry run handles discovery, population, validation, runtime checks, maintenance, telemetry initialization, and supported autostart installation.
+
+[`scripts/run_audit.py`](./scripts/run_audit.py) is still available directly, but [`run_brain.sh`](./run_brain.sh) is the normal entrypoint.
+
+## Upgrade To Cloud Or Networked Workspaces
+
+Use this when you want the same brain to coordinate work across separate machines, remote devboxes, or cloud workspaces without relying on a shared filesystem.
+
+### 1. Move From `community` To `advanced`
+
+Update the active distribution tier in both files so validation stays aligned:
+
+- [`orchestrator/policies.yaml`](./orchestrator/policies.yaml)
+  - set `packaging_profile.active_tier: advanced`
+- [`brain.schema.yaml`](./brain.schema.yaml)
+  - set `repository_profile.distribution_tier: advanced`
+
+Then switch the remote-worker transport policy:
+
+- [`orchestrator/policies.yaml`](./orchestrator/policies.yaml)
+  - set `remote_worker_policy.transport_mode: redis_broker`
+
+### 2. Point The Brain At Your Broker
+
+The current networked backend is Redis. You can configure it in either of two ways:
+
+- preferred: export `REDIS_URL` in each workspace
+- fallback: set `remote_worker_policy.redis.url` in [`orchestrator/policies.yaml`](./orchestrator/policies.yaml)
+
+Example `REDIS_URL`:
 
 ```bash
-./.venv/bin/python scripts/run_audit.py --repo-root .
+export REDIS_URL=redis://127.0.0.1:6379/0
 ```
 
-That first audit handles discovery, validation, runtime checks, maintenance, telemetry initialization, and supported autostart installation.
+If you want to keep this free, self-host Redis yourself. Typical paths are:
+
+- local Docker on your own machine
+- a VM you already control
+- a home-lab or LAN server
+
+You do not need to pay for a managed cloud broker unless you specifically want that.
+
+### 3. Install The Optional Redis Client In Each Workspace
+
+The base launcher only installs the minimum local dependencies. Redis support needs the Python Redis client:
+
+```bash
+./.venv/bin/pip install redis
+```
+
+### 4. Bootstrap Each Workspace
+
+Each cloud or remote workspace should have its own repo clone and local environment:
+
+```bash
+./run_brain.sh --dry-run --no-autostart
+./run_brain.sh --no-autostart
+```
+
+That keeps each workspace capable of discovery, validation, execution, and local tool access while sharing remote dispatch through Redis.
+
+### 5. Run The Coordinator
+
+On the machine acting as the cerebrum-side queue dispatcher:
+
+```bash
+./.venv/bin/python scripts/run_scheduler.py --repo-root . --dispatch-mode remote_worker --transport-mode redis
+```
+
+This takes queued `remote_worker` jobs from the control plane and dispatches them into the broker.
+
+### 6. Run Remote Workers
+
+On each remote machine or cloud workspace:
+
+```bash
+./.venv/bin/python scripts/run_remote_worker.py --repo-root . --transport-mode redis --worker-id worker-1
+```
+
+Use a distinct `--worker-id` per workspace.
+
+### 7. Verify The Upgrade
+
+Check the live transport and packaging state:
+
+```bash
+./.venv/bin/python scripts/operator_status.py --repo-root .
+./.venv/bin/python scripts/run_remote_worker.py --repo-root . --dry-run --transport-mode redis
+```
+
+You should see:
+
+- `active_tier: advanced`
+- `allowed_remote_transport_modes` including `redis_broker`
+- transport status with `active_mode: redis_broker`
+
+If Redis is requested but not reachable, the system will report a fallback or restriction reason instead of failing silently.
+
+### Operational Notes
+
+- `community` is still the right default for free local distribution.
+- `advanced` is the current path for real networked workspaces.
+- `enterprise` is reserved for future broker backends like NATS or SQS; that tier is not the normal path today.
+- Workers should each have the repo and any required local tools installed; the broker transports jobs, not full execution environments.
+- If multiple machines are meant to execute code, keep repository state synchronized with Git rather than trying to share one `.venv` or one working tree across hosts.
 
 ## Typical Workflows
+
+### One-Command Local Bring-Up
+
+```bash
+./run_brain.sh --dry-run --no-autostart
+./run_brain.sh
+```
+
+Use this sequence when installing the brain into a repo for the first time.
 
 ### Plan Runtime Paths
 
@@ -247,6 +392,8 @@ That first audit handles discovery, validation, runtime checks, maintenance, tel
 ```bash
 ./.venv/bin/python scripts/operator_status.py --repo-root .
 ```
+
+This is the fastest way to inspect the current packaging tier, transport mode, run counts, approval state, and learning summary.
 
 ### Refresh The Featureset Safely
 
@@ -327,6 +474,7 @@ The project validates:
 - semantic alignment between manifest, policy, and anatomy layers
 - runtime wrapper registration and module existence
 - blackboard event schema references and script path integrity
+- packaging-tier and remote-transport alignment
 
 Use:
 
@@ -338,7 +486,7 @@ The repository also includes CI validation via [`.github/workflows/brain-validat
 
 ## Why The Design Is File-First
 
-The current implementation uses files as the system of record because it is:
+The current implementation keeps the control plane and most registries file-first because it is:
 
 - portable across repos
 - easy to inspect and diff
@@ -346,20 +494,23 @@ The current implementation uses files as the system of record because it is:
 - low-friction for local development
 - a clean foundation for later storage adapters
 
-Redis/Postgres-style backends can be added later behind the same interfaces without changing the top-level contracts.
+Remote transport is already allowed to move beyond the filesystem through the broker abstraction. The file-first rule mainly applies to the core system-of-record state, not to every signal path.
 
 ## Current Status
 
 The repository currently provides:
 
 - a portable orchestration scaffold
-- a capability inventory system
-- a live runtime planning and execution layer
-- a durable blackboard and control plane
-- an anatomy-based orchestration model with wrapper entrypoints
-- git-aware self-maintenance, queued remote work, and replay-aware learning surfaces
+- a capability inventory system across agents, skills, plugins, MCP, CLI tools, and models
+- a live runtime planning and execution layer with direct invocation
+- a durable blackboard and control plane with approvals, leases, queues, artifacts, and workers
+- anatomy-based orchestration with registry-backed wrapper entrypoints
+- a one-command local bootstrap path through [`run_brain.sh`](./run_brain.sh)
+- git-aware self-maintenance and generated-state-aware dirty handling
+- remote-worker dispatch through shared filesystem fabric and optional Redis broker transport
+- replay-aware learning surfaces rebuilt from verified execution telemetry
 
-The main expansion areas from here are even broader backend adapters, richer remote-worker transport beyond the local file-first scheduler, and larger-scale verified telemetry ingestion for future route adaptation.
+The main expansion areas from here are wider broker coverage beyond Redis, alternative durable state backends beyond the file-first control plane, and larger verified telemetry volumes for stronger route adaptation.
 
 ## Repository
 
