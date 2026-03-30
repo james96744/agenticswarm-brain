@@ -53,6 +53,12 @@ DISCOVERED_PATH_CHECKS = (
 MODEL_TIERS = {"tier_0_router", "tier_1_worker", "tier_2_critic", "tier_3_expert"}
 ANATOMY_KEYS = {"cerebrum", "cerebellum", "limbic_system", "neurons", "dendrites", "brainstem"}
 PACKAGING_TIERS = {"community", "advanced", "enterprise"}
+OPTIONAL_LOCAL_PATH_PREFIXES = (".venv/", ".brain_integrations/")
+
+
+def is_optional_local_path(path_value: str) -> bool:
+    normalized = path_value.replace("\\", "/")
+    return normalized.startswith(OPTIONAL_LOCAL_PATH_PREFIXES)
 
 
 def require_jsonschema():
@@ -101,7 +107,7 @@ def add_missing_local_path_errors(root: Path, errors: list[str], label: str, ite
         if not path_value:
             errors.append(f"{label}: local entry `{item.get(key, 'unknown')}` is missing `path`")
             continue
-        if not (root / path_value).exists():
+        if not (root / path_value).exists() and not is_optional_local_path(path_value):
             errors.append(f"{label}: local entry `{item.get(key, 'unknown')}` points to missing path `{path_value}`")
 
 
