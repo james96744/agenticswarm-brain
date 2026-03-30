@@ -4,18 +4,22 @@ description: Benchmark and telemetry rollup store for task-family routing, pruni
   and adapter activation.
 task_family_benchmarks:
 - task_family: boilerplate_code
-  run_count: 18
-  success_count: 18
-  critic_pass_count: 18
-  verified_execution_count: 18
-  replay_candidate_count: 18
-  avg_confidence: 0.8939
-  avg_latency_ms: 35.16
+  run_count: 26
+  success_count: 26
+  critic_pass_count: 26
+  verified_execution_count: 26
+  replay_candidate_count: 26
+  avg_confidence: 0.8927
+  avg_latency_ms: 37.33
+  avg_total_tokens: 95.38
+  avg_prompt_tokens: 16.92
+  avg_completion_tokens: 5.22
+  avg_tool_context_tokens: 73.23
   queued_run_count: 0
   remote_dispatch_count: 0
   last_executor_id: python-workflow-runner
   last_router_id: anthropic-router
-  updated_at: '2026-03-30T01:03:59.484909+00:00'
+  updated_at: '2026-03-30T05:13:10.353437+00:00'
 - task_family: data_migration
   run_count: 2
   success_count: 2
@@ -24,6 +28,10 @@ task_family_benchmarks:
   replay_candidate_count: 2
   avg_confidence: 0.985
   avg_latency_ms: 246.5
+  avg_total_tokens: 0.0
+  avg_prompt_tokens: 0.0
+  avg_completion_tokens: 0.0
+  avg_tool_context_tokens: 0.0
   queued_run_count: 0
   remote_dispatch_count: 0
   last_executor_id: python-workflow-runner
@@ -32,17 +40,19 @@ task_family_benchmarks:
 model_benchmarks:
 - model_id: anthropic-router
   task_family: boilerplate_code
-  run_count: 18
-  success_count: 18
-  critic_pass_count: 18
-  avg_latency_ms: 35.16
-  last_used_at: '2026-03-30T01:03:59.484913+00:00'
+  run_count: 26
+  success_count: 26
+  critic_pass_count: 26
+  avg_latency_ms: 37.33
+  avg_total_tokens: 95.38
+  last_used_at: '2026-03-30T05:13:10.353442+00:00'
 - model_id: anthropic-router
   task_family: data_migration
   run_count: 2
   success_count: 2
   critic_pass_count: 2
   avg_latency_ms: 246.5
+  avg_total_tokens: 0.0
   last_used_at: '2026-03-29T23:47:10.885926+00:00'
 agent_pair_metrics: []
 agent_value_metrics:
@@ -53,23 +63,25 @@ agent_value_metrics:
   critic_failure_count: 0
   avg_confidence: 0.865
   avg_latency_ms: 58.5
+  avg_total_tokens: 0.0
   prune_protected: false
-  value_add_per_token: 0.89
+  value_add_per_token: 1730.0
   critic_rejection_rate: 0.0
   ignored_edit_rate: 0.0
-  updated_at: '2026-03-30T00:19:20.948973+00:00'
+  updated_at: '2026-03-30T00:19:20.938950+00:00'
 - agent_id: python-workflow-runner
   task_family: boilerplate_code
-  run_count: 16
-  success_count: 16
+  run_count: 24
+  success_count: 24
   critic_failure_count: 0
-  avg_confidence: 0.8974
-  avg_latency_ms: 32.25
+  avg_confidence: 0.895
+  avg_latency_ms: 35.53
+  avg_total_tokens: 103.33
   prune_protected: false
-  value_add_per_token: 0.89
+  value_add_per_token: 2.8617
   critic_rejection_rate: 0.0
   ignored_edit_rate: 0.0
-  updated_at: '2026-03-30T01:03:59.484919+00:00'
+  updated_at: '2026-03-30T05:13:10.353449+00:00'
 - agent_id: python-workflow-runner
   task_family: data_migration
   run_count: 2
@@ -77,25 +89,28 @@ agent_value_metrics:
   critic_failure_count: 0
   avg_confidence: 0.985
   avg_latency_ms: 246.5
+  avg_total_tokens: 0.0
   prune_protected: false
-  value_add_per_token: 0.985
+  value_add_per_token: 1970.0
   critic_rejection_rate: 0.0
   ignored_edit_rate: 0.0
   updated_at: '2026-03-29T23:47:10.885926+00:00'
 adapter_benchmarks:
 - adapter_id: backend:cli-rg:boilerplate_code
   task_family: boilerplate_code
-  run_count: 18
-  success_count: 18
-  avg_latency_ms: 19.22
+  run_count: 26
+  success_count: 26
+  avg_latency_ms: 29.38
+  avg_total_tokens: 95.38
   dispatch_mode: immediate
   last_status: success
-  updated_at: '2026-03-30T01:03:59.484922+00:00'
+  updated_at: '2026-03-30T05:13:10.353454+00:00'
 - adapter_id: backend:mcp-vercel:data_migration
   task_family: data_migration
   run_count: 2
   success_count: 2
   avg_latency_ms: 246.5
+  avg_total_tokens: 0.0
   dispatch_mode: immediate
   last_status: success
   updated_at: '2026-03-29T23:47:10.885926+00:00'

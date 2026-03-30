@@ -26,10 +26,10 @@ tasks:
   description: Safe anatomy wrapper verification run
   state: completed
   approval_status: not_required
-  current_run_id: run-808872e5a90c
+  current_run_id: run-300fff306434
   dependencies: []
-  updated_at: '2026-03-30T01:03:59.347203+00:00'
-  created_at: '2026-03-30T01:03:58.759705+00:00'
+  updated_at: '2026-03-30T05:13:10.171589+00:00'
+  created_at: '2026-03-30T05:13:09.425572+00:00'
 - task_id: remote-queue-demo
   task_family: boilerplate_code
   description: Queue remote worker demo
@@ -424,6 +424,142 @@ runs:
   completed_at: '2026-03-30T01:03:59.299024+00:00'
   failure_reason: null
   confidence: 0.89
+- run_id: run-ac040a15c60c
+  task_id: anatomy-wrapper-safe-demo
+  status: completed
+  selected_executor_id: python-workflow-runner
+  selected_router_id: anthropic-router
+  selected_backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  retry_count: 0
+  approval_status: not_required
+  current_step: complete
+  started_at: '2026-03-30T05:07:14.241415+00:00'
+  updated_at: '2026-03-30T05:07:14.739728+00:00'
+  completed_at: '2026-03-30T05:07:14.739724+00:00'
+  failure_reason: null
+  confidence: 0.89
+- run_id: run-2ca1bee786ed
+  task_id: anatomy-wrapper-safe-demo
+  status: completed
+  selected_executor_id: python-workflow-runner
+  selected_router_id: anthropic-router
+  selected_backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  retry_count: 0
+  approval_status: not_required
+  current_step: complete
+  started_at: '2026-03-30T05:07:17.350788+00:00'
+  updated_at: '2026-03-30T05:07:17.833603+00:00'
+  completed_at: '2026-03-30T05:07:17.833600+00:00'
+  failure_reason: null
+  confidence: 0.89
+- run_id: run-78be95484775
+  task_id: anatomy-wrapper-safe-demo
+  status: completed
+  selected_executor_id: python-workflow-runner
+  selected_router_id: anthropic-router
+  selected_backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  retry_count: 0
+  approval_status: not_required
+  current_step: complete
+  started_at: '2026-03-30T05:09:49.190330+00:00'
+  updated_at: '2026-03-30T05:09:49.742377+00:00'
+  completed_at: '2026-03-30T05:09:49.742368+00:00'
+  failure_reason: null
+  confidence: 0.89
+- run_id: run-4b279583d112
+  task_id: anatomy-wrapper-safe-demo
+  status: completed
+  selected_executor_id: python-workflow-runner
+  selected_router_id: anthropic-router
+  selected_backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  retry_count: 0
+  approval_status: not_required
+  current_step: complete
+  started_at: '2026-03-30T05:09:52.396275+00:00'
+  updated_at: '2026-03-30T05:09:52.909625+00:00'
+  completed_at: '2026-03-30T05:09:52.909621+00:00'
+  failure_reason: null
+  confidence: 0.89
+- run_id: run-79b1872bfe1a
+  task_id: anatomy-wrapper-safe-demo
+  status: completed
+  selected_executor_id: python-workflow-runner
+  selected_router_id: anthropic-router
+  selected_backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  retry_count: 0
+  approval_status: not_required
+  current_step: complete
+  started_at: '2026-03-30T05:10:43.700644+00:00'
+  updated_at: '2026-03-30T05:10:44.243521+00:00'
+  completed_at: '2026-03-30T05:10:44.243518+00:00'
+  failure_reason: null
+  confidence: 0.89
+- run_id: run-2b41168fd391
+  task_id: anatomy-wrapper-safe-demo
+  status: completed
+  selected_executor_id: python-workflow-runner
+  selected_router_id: anthropic-router
+  selected_backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  retry_count: 0
+  approval_status: not_required
+  current_step: complete
+  started_at: '2026-03-30T05:10:46.919081+00:00'
+  updated_at: '2026-03-30T05:10:47.471582+00:00'
+  completed_at: '2026-03-30T05:10:47.471580+00:00'
+  failure_reason: null
+  confidence: 0.89
+- run_id: run-6d4bb891f732
+  task_id: anatomy-wrapper-safe-demo
+  status: completed
+  selected_executor_id: python-workflow-runner
+  selected_router_id: anthropic-router
+  selected_backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  retry_count: 0
+  approval_status: not_required
+  current_step: complete
+  started_at: '2026-03-30T05:13:05.977478+00:00'
+  updated_at: '2026-03-30T05:13:06.586789+00:00'
+  completed_at: '2026-03-30T05:13:06.586779+00:00'
+  failure_reason: null
+  confidence: 0.89
+- run_id: run-300fff306434
+  task_id: anatomy-wrapper-safe-demo
+  status: completed
+  selected_executor_id: python-workflow-runner
+  selected_router_id: anthropic-router
+  selected_backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  retry_count: 0
+  approval_status: not_required
+  current_step: complete
+  started_at: '2026-03-30T05:13:09.533251+00:00'
+  updated_at: '2026-03-30T05:13:10.112224+00:00'
+  completed_at: '2026-03-30T05:13:10.112221+00:00'
+  failure_reason: null
+  confidence: 0.89
 approvals:
 - approval_id: approval-8675872c0c7b
   task_id: risky-exec-demo
@@ -665,6 +801,102 @@ artifacts:
     - cli-rg
   critic_status: passed
   created_at: '2026-03-30T01:03:59.125123+00:00'
+- artifact_id: artifact-19bf8128893c
+  task_id: anatomy-wrapper-safe-demo
+  run_id: run-ac040a15c60c
+  kind: execution_result
+  summary: Executor `python-workflow-runner` returned 0.
+  provenance:
+    executor_id: python-workflow-runner
+    router_id: anthropic-router
+    backend_ids:
+    - cli-rg
+  critic_status: passed
+  created_at: '2026-03-30T05:07:14.560574+00:00'
+- artifact_id: artifact-ba158786aef3
+  task_id: anatomy-wrapper-safe-demo
+  run_id: run-2ca1bee786ed
+  kind: execution_result
+  summary: Executor `python-workflow-runner` returned 0.
+  provenance:
+    executor_id: python-workflow-runner
+    router_id: anthropic-router
+    backend_ids:
+    - cli-rg
+  critic_status: passed
+  created_at: '2026-03-30T05:07:17.645755+00:00'
+- artifact_id: artifact-a8813321cfec
+  task_id: anatomy-wrapper-safe-demo
+  run_id: run-78be95484775
+  kind: execution_result
+  summary: Executor `python-workflow-runner` returned 0.
+  provenance:
+    executor_id: python-workflow-runner
+    router_id: anthropic-router
+    backend_ids:
+    - cli-rg
+  critic_status: passed
+  created_at: '2026-03-30T05:09:49.523241+00:00'
+- artifact_id: artifact-e808b90e3c0a
+  task_id: anatomy-wrapper-safe-demo
+  run_id: run-4b279583d112
+  kind: execution_result
+  summary: Executor `python-workflow-runner` returned 0.
+  provenance:
+    executor_id: python-workflow-runner
+    router_id: anthropic-router
+    backend_ids:
+    - cli-rg
+  critic_status: passed
+  created_at: '2026-03-30T05:09:52.717696+00:00'
+- artifact_id: artifact-d6fc2c2762b8
+  task_id: anatomy-wrapper-safe-demo
+  run_id: run-79b1872bfe1a
+  kind: execution_result
+  summary: Executor `python-workflow-runner` returned 0.
+  provenance:
+    executor_id: python-workflow-runner
+    router_id: anthropic-router
+    backend_ids:
+    - cli-rg
+  critic_status: passed
+  created_at: '2026-03-30T05:10:44.045087+00:00'
+- artifact_id: artifact-67601ccfac44
+  task_id: anatomy-wrapper-safe-demo
+  run_id: run-2b41168fd391
+  kind: execution_result
+  summary: Executor `python-workflow-runner` returned 0.
+  provenance:
+    executor_id: python-workflow-runner
+    router_id: anthropic-router
+    backend_ids:
+    - cli-rg
+  critic_status: passed
+  created_at: '2026-03-30T05:10:47.257046+00:00'
+- artifact_id: artifact-ebf00de1d7d0
+  task_id: anatomy-wrapper-safe-demo
+  run_id: run-6d4bb891f732
+  kind: execution_result
+  summary: Executor `python-workflow-runner` returned 0.
+  provenance:
+    executor_id: python-workflow-runner
+    router_id: anthropic-router
+    backend_ids:
+    - cli-rg
+  critic_status: passed
+  created_at: '2026-03-30T05:13:06.360750+00:00'
+- artifact_id: artifact-10f4158007e1
+  task_id: anatomy-wrapper-safe-demo
+  run_id: run-300fff306434
+  kind: execution_result
+  summary: Executor `python-workflow-runner` returned 0.
+  provenance:
+    executor_id: python-workflow-runner
+    router_id: anthropic-router
+    backend_ids:
+    - cli-rg
+  critic_status: passed
+  created_at: '2026-03-30T05:13:09.892419+00:00'
 leases: []
 queue_items:
 - queue_item_id: queue-1dc5b2b0a7b1
@@ -749,7 +981,7 @@ workers:
   status: ready
   worker_type: scheduler
   transport_mode: local
-  last_heartbeat_at: '2026-03-30T01:42:44.851926+00:00'
+  last_heartbeat_at: '2026-03-30T05:45:28.362225+00:00'
 - worker_id: remote-fabric-worker
   queue_name: remote-workers
   dispatch_modes:
@@ -757,6 +989,6 @@ workers:
   status: ready
   worker_type: remote_worker
   transport_mode: shared_filesystem_fabric
-  last_heartbeat_at: '2026-03-30T01:42:44.648987+00:00'
+  last_heartbeat_at: '2026-03-30T05:45:28.099703+00:00'
 notes:
 - This file is the durable control-plane state for guarded-autonomy execution.

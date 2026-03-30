@@ -14,6 +14,8 @@ anatomy_modules:
         role: discovery_engine
       - path: scripts/runtime_bridge.py
         role: route_planner
+      - path: scripts/transplant_brain.py
+        role: sovereign_transplant
     actions:
       audit:
         target: scripts/run_audit.py
@@ -24,6 +26,9 @@ anatomy_modules:
       plan:
         target: scripts/runtime_bridge.py
         description: Build executable plans from the runtime registry.
+      transplant:
+        target: scripts/transplant_brain.py
+        description: Implant the sovereign brain into another repo while carrying portable intelligence only.
 
   cerebellum:
     label: Cerebellum

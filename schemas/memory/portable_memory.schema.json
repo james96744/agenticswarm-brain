@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "memory_classification_policy", "portable_memory", "derived_portable_lessons", "portable_route_preferences", "capability_preferences"],
+  "properties": {
+    "version": { "type": "string" },
+    "memory_classification_policy": { "type": "object", "additionalProperties": true },
+    "portable_memory": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "derived_portable_lessons": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "portable_route_preferences": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "capability_preferences": { "type": "array", "items": { "type": "object", "additionalProperties": true } }
+  },
+  "additionalProperties": true
+}

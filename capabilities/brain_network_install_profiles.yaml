@@ -1,0 +1,272 @@
+version: "1.0"
+last_updated: "2026-03-30"
+description: Upstream-derived install and activation profiles for curated brain-network integrations.
+
+profiles:
+  - integration_id: codebase-memory-mcp
+    install_tier: local_ready
+    activation_strategy: local_stdio_mcp
+    benchmark_weight: 1.0
+    token_efficiency_weight: 1.0
+    install_methods:
+      - method_id: release_script
+        type: repo_install_script
+        source: https://github.com/DeusData/codebase-memory-mcp
+        runtime: bash
+    requirements:
+      commands: ["bash", "curl"]
+      services: []
+      env: []
+    activation_notes:
+      - Single static binary installation with optional local MCP config.
+      - Supports local CLI and stdio MCP usage without external services.
+
+  - integration_id: nocturne-memory
+    install_tier: local_ready
+    activation_strategy: local_stdio_mcp
+    benchmark_weight: 0.8
+    token_efficiency_weight: 0.35
+    install_methods:
+      - method_id: repo_clone_python_requirements
+        type: git_clone_plus_requirements
+        source: https://github.com/Dataojitori/nocturne_memory
+        runtime: python
+    requirements:
+      commands: ["git", "python3", "uv"]
+      services: []
+      env: []
+    activation_notes:
+      - Local Python MCP server can run against SQLite without external infrastructure.
+      - Optional Docker/Postgres deployment exists but is not required for local adoption.
+
+  - integration_id: context-portal
+    install_tier: local_ready
+    activation_strategy: local_stdio_mcp
+    benchmark_weight: 0.75
+    token_efficiency_weight: 0.3
+    install_methods:
+      - method_id: pypi_or_editable_uv
+        type: uv_python_install
+        source: https://github.com/GreatScottyMac/context-portal
+        runtime: python
+    requirements:
+      commands: ["git", "python3", "uv"]
+      services: []
+      env: []
+    activation_notes:
+      - Recommended upstream path is uvx; local editable install works for repo-bounded activation.
+      - Uses SQLite per workspace and supports stdio MCP mode.
+
+  - integration_id: mcp-graphiti
+    install_tier: service_backed
+    activation_strategy: remote_http_mcp
+    benchmark_weight: 0.55
+    token_efficiency_weight: 0.2
+    install_methods:
+      - method_id: pipx_or_editable_clone
+        type: python_cli_plus_docker
+        source: https://github.com/rawr-ai/mcp-graphiti
+        runtime: python
+    requirements:
+      commands: ["git", "python3", "docker"]
+      services: ["neo4j"]
+      env: ["OPENAI_API_KEY", "NEO4J_PASSWORD"]
+    activation_notes:
+      - Upstream quick start expects Docker-managed project servers plus Neo4j.
+      - Not activated locally by default without Docker and graph credentials.
+
+  - integration_id: claude-historian-mcp
+    install_tier: installable
+    activation_strategy: local_stdio_mcp
+    benchmark_weight: 0.5
+    token_efficiency_weight: 0.9
+    install_methods:
+      - method_id: manual_upstream_review
+        type: manual
+        source: https://github.com/Vvkmnn/claude-historian-mcp
+        runtime: unknown
+    requirements:
+      commands: []
+      services: []
+      env: []
+    activation_notes:
+      - Tracked as a token-optimization candidate pending local install profiling.
+
+  - integration_id: token-optimizer-mcp
+    install_tier: installable
+    activation_strategy: local_stdio_mcp
+    benchmark_weight: 0.45
+    token_efficiency_weight: 1.0
+    install_methods:
+      - method_id: manual_upstream_review
+        type: manual
+        source: https://github.com/ooples/token-optimizer-mcp
+        runtime: unknown
+    requirements:
+      commands: []
+      services: []
+      env: []
+    activation_notes:
+      - Purpose-built token optimization layer tracked for later staged adoption.
+
+  - integration_id: memorix
+    install_tier: local_ready
+    activation_strategy: local_stdio_mcp
+    benchmark_weight: 0.85
+    token_efficiency_weight: 0.25
+    install_methods:
+      - method_id: repo_clone_npm_build
+        type: git_clone_plus_npm_build
+        source: https://github.com/AVIDS2/memorix
+        runtime: node
+    requirements:
+      commands: ["git", "node", "npm"]
+      services: []
+      env: []
+    activation_notes:
+      - Local stdio MCP path is available with `memorix serve`.
+      - Optional background HTTP control plane exists but is not required for initial local use.
+
+  - integration_id: anemoi
+    install_tier: service_backed
+    activation_strategy: local_or_remote_service
+    benchmark_weight: 0.6
+    token_efficiency_weight: 0.0
+    install_methods:
+      - method_id: repo_clone_python_project
+        type: git_clone_project
+        source: https://github.com/Coral-Protocol/Anemoi
+        runtime: python
+    requirements:
+      commands: ["git", "git-lfs", "python3"]
+      services: []
+      env: []
+    activation_notes:
+      - A2A coordination layer with heavier experiment-style setup than the local-first first wave.
+      - Community packaging should keep this as a recommendation until an advanced or enterprise tier is enabled.
+
+  - integration_id: marm-systems
+    install_tier: installable
+    activation_strategy: local_or_remote_service
+    benchmark_weight: 0.55
+    token_efficiency_weight: 0.0
+    install_methods:
+      - method_id: manual_upstream_review
+        type: manual
+        source: https://github.com/Lyellr88/MARM-Systems
+        runtime: unknown
+    requirements:
+      commands: []
+      services: []
+      env: []
+    activation_notes:
+      - Multi-transport coordination candidate tracked for later inter-brain rollout.
+
+  - integration_id: continuous-claude-v3
+    install_tier: local_ready
+    activation_strategy: local_skill_overlay
+    benchmark_weight: 0.6
+    token_efficiency_weight: 0.4
+    install_methods:
+      - method_id: repo_clone_overlay
+        type: git_clone_project
+        source: https://github.com/parcadei/Continuous-Claude-v3
+        runtime: python
+    requirements:
+      commands: ["git"]
+      services: []
+      env: []
+    activation_notes:
+      - Installed as a local continuity overlay and skill/reference layer, not as a full daemonized replacement runtime.
+      - Keeps the brain lightweight while still exposing long-session continuity patterns.
+
+  - integration_id: atlas-mcp-server
+    install_tier: service_backed
+    activation_strategy: local_stdio_or_http_mcp
+    benchmark_weight: 0.7
+    token_efficiency_weight: 0.15
+    install_methods:
+      - method_id: repo_clone_npm_build
+        type: git_clone_plus_npm_build
+        source: https://github.com/cyanheads/atlas-mcp-server
+        runtime: node
+    requirements:
+      commands: ["git", "node", "npm", "docker"]
+      services: ["neo4j"]
+      env: ["NEO4J_URI", "NEO4J_USER", "NEO4J_PASSWORD"]
+    activation_notes:
+      - Current upstream versions require Neo4j. Local activation is deferred without that service.
+
+  - integration_id: claude-code-skills
+    install_tier: local_ready
+    activation_strategy: local_mcp_bundle
+    benchmark_weight: 0.5
+    token_efficiency_weight: 0.1
+    install_methods:
+      - method_id: repo_clone_npm_bundle
+        type: git_clone_plus_npm_build
+        source: https://github.com/levnikolaevich/claude-code-skills
+        runtime: node
+    requirements:
+      commands: ["git", "node", "npm"]
+      services: []
+      env: []
+    activation_notes:
+      - First-wave local adoption focuses on hex-line and hex-graph MCP servers.
+      - Full marketplace/plugin installation remains optional and out of the default path.
+
+  - integration_id: mcp-context-forge
+    install_tier: service_backed
+    activation_strategy: local_gateway_service
+    benchmark_weight: 0.8
+    token_efficiency_weight: 0.2
+    install_methods:
+      - method_id: pypi_or_editable_uv
+        type: uv_python_install
+        source: https://github.com/IBM/mcp-context-forge
+        runtime: python
+    requirements:
+      commands: ["git", "python3", "uv"]
+      services: []
+      env: []
+    activation_notes:
+      - Local install is feasible, but useful activation expects a long-lived gateway process.
+      - Redis-backed federation is optional, not required for initial local testing.
+
+  - integration_id: agentset
+    install_tier: installable
+    activation_strategy: ingestion_pipeline
+    benchmark_weight: 0.65
+    token_efficiency_weight: 0.15
+    install_methods:
+      - method_id: manual_upstream_review
+        type: manual
+        source: https://github.com/agentset-ai/agentset
+        runtime: mixed
+    requirements:
+      commands: []
+      services: []
+      env: []
+    activation_notes:
+      - Knowledge ingestion platform reserved for later breadth expansion.
+
+  - integration_id: memory-bank-mcp
+    install_tier: installable
+    activation_strategy: local_memory_overlay
+    benchmark_weight: 0.55
+    token_efficiency_weight: 0.1
+    install_methods:
+      - method_id: manual_upstream_review
+        type: manual
+        source: https://github.com/alioshr/memory-bank-mcp
+        runtime: unknown
+    requirements:
+      commands: []
+      services: []
+      env: []
+    activation_notes:
+      - Structured memory overlay tracked for later staged adoption.
+
+notes:
+  - local_ready means the integration can be installed and activated in a repo-local footprint without paid infrastructure.
+  - service_backed means the code can be installed locally, but useful activation still depends on a gateway, database, or containerized service.

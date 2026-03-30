@@ -517,6 +517,262 @@ routes:
   backend_success_count: 1
   backend_failure_count: 0
   timestamp: '2026-03-30T01:03:59.471139+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-ac040a15c60c
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 56
+  backend_success_count: 1
+  backend_failure_count: 0
+  prompt_tokens: 55
+  completion_tokens: 17
+  tool_context_tokens: 238
+  cache_read_tokens: 0
+  cache_write_tokens: 0
+  total_tokens: 310
+  token_estimation_method: estimated
+  timestamp: '2026-03-30T05:07:14.916850+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-2ca1bee786ed
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 31
+  backend_success_count: 1
+  backend_failure_count: 0
+  prompt_tokens: 55
+  completion_tokens: 17
+  tool_context_tokens: 238
+  cache_read_tokens: 0
+  cache_write_tokens: 0
+  total_tokens: 310
+  token_estimation_method: estimated
+  timestamp: '2026-03-30T05:07:18.018344+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-78be95484775
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 53
+  backend_success_count: 1
+  backend_failure_count: 0
+  prompt_tokens: 55
+  completion_tokens: 17
+  tool_context_tokens: 237
+  cache_read_tokens: 0
+  cache_write_tokens: 0
+  total_tokens: 309
+  token_estimation_method: estimated
+  timestamp: '2026-03-30T05:09:49.949369+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-4b279583d112
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 37
+  backend_success_count: 1
+  backend_failure_count: 0
+  prompt_tokens: 55
+  completion_tokens: 17
+  tool_context_tokens: 238
+  cache_read_tokens: 0
+  cache_write_tokens: 0
+  total_tokens: 310
+  token_estimation_method: estimated
+  timestamp: '2026-03-30T05:09:53.114350+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-79b1872bfe1a
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 45
+  backend_success_count: 1
+  backend_failure_count: 0
+  prompt_tokens: 55
+  completion_tokens: 17
+  tool_context_tokens: 238
+  cache_read_tokens: 0
+  cache_write_tokens: 0
+  total_tokens: 310
+  token_estimation_method: estimated
+  timestamp: '2026-03-30T05:10:44.446021+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-2b41168fd391
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 33
+  backend_success_count: 1
+  backend_failure_count: 0
+  prompt_tokens: 55
+  completion_tokens: 17
+  tool_context_tokens: 238
+  cache_read_tokens: 0
+  cache_write_tokens: 0
+  total_tokens: 310
+  token_estimation_method: estimated
+  timestamp: '2026-03-30T05:10:47.680040+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-6d4bb891f732
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 48
+  backend_success_count: 1
+  backend_failure_count: 0
+  prompt_tokens: 55
+  completion_tokens: 17
+  tool_context_tokens: 238
+  cache_read_tokens: 0
+  cache_write_tokens: 0
+  total_tokens: 310
+  token_estimation_method: estimated
+  timestamp: '2026-03-30T05:13:06.811954+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-300fff306434
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 34
+  backend_success_count: 1
+  backend_failure_count: 0
+  prompt_tokens: 55
+  completion_tokens: 17
+  tool_context_tokens: 239
+  cache_read_tokens: 0
+  cache_write_tokens: 0
+  total_tokens: 311
+  token_estimation_method: estimated
+  timestamp: '2026-03-30T05:13:10.334315+00:00'
 plasticity_recommendations: []
 training_triplets: []
 route_preferences:
@@ -526,14 +782,15 @@ route_preferences:
   backend_ids:
   - cli-rg
   dispatch_mode: immediate
-  run_count: 6
-  verified_execution_count: 6
-  replay_candidate_count: 6
+  run_count: 16
+  verified_execution_count: 16
+  replay_candidate_count: 16
   success_rate: 1.0
-  avg_replay_score: 0.9633
-  avg_latency_ms: 18.67
-  last_run_id: run-abb62699ee94
-  updated_at: '2026-03-29T23:49:24.437936+00:00'
+  avg_replay_score: 0.9175
+  avg_latency_ms: 32.25
+  avg_total_tokens: 0.0
+  last_run_id: run-808872e5a90c
+  updated_at: '2026-03-30T01:03:59.471139+00:00'
   rank: 1
 - task_family: boilerplate_code
   executor_id: codex-cli
@@ -541,14 +798,15 @@ route_preferences:
   backend_ids:
   - cli-rg
   dispatch_mode: immediate
-  run_count: 1
-  verified_execution_count: 1
-  replay_candidate_count: 1
+  run_count: 2
+  verified_execution_count: 2
+  replay_candidate_count: 2
   success_rate: 1.0
-  avg_replay_score: 0.84
-  avg_latency_ms: 77.0
-  last_run_id: run-c8447e78686a
-  updated_at: '2026-03-29T23:47:11.074328+00:00'
+  avg_replay_score: 0.865
+  avg_latency_ms: 58.5
+  avg_total_tokens: 0.0
+  last_run_id: run-f567e44f2b51
+  updated_at: '2026-03-30T00:19:20.938950+00:00'
   rank: 2
 - task_family: data_migration
   executor_id: python-workflow-runner
@@ -562,6 +820,7 @@ route_preferences:
   success_rate: 1.0
   avg_replay_score: 0.985
   avg_latency_ms: 246.5
+  avg_total_tokens: 0.0
   last_run_id: run-06883ac249d1
   updated_at: '2026-03-29T23:47:10.885926+00:00'
   rank: 1

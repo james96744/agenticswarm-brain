@@ -59,11 +59,13 @@ def main() -> int:
 
     root = repo_root_from(args.repo_root)
     request_file = args.request_file or build_safe_request_file()
+    transplant_target = tempfile.mkdtemp(prefix="brain-transplant-target-")
 
     matrix = [
         ("cerebrum", "audit", ["--repo-root", str(root), "--dry-run", "--no-autostart"]),
         ("cerebrum", "discover", ["--repo-root", str(root), "--dry-run"]),
         ("cerebrum", "plan", ["--repo-root", str(root), "--dry-run"]),
+        ("cerebrum", "transplant", ["--repo-root", str(root), "--target", transplant_target, "--dry-run"]),
         ("cerebellum", "validate", ["--repo-root", str(root)]),
         ("cerebellum", "simulate", ["--repo-root", str(root), "--dry-run"]),
         ("cerebellum", "prune", ["--repo-root", str(root), "--dry-run"]),

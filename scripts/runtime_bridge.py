@@ -125,6 +125,7 @@ def load_runtime_inputs(root: Path) -> dict:
         "agents": load_yaml_file(root / "capabilities/agents.yaml"),
         "models": load_yaml_file(root / "capabilities/models.yaml"),
         "plugins": load_yaml_file(root / "capabilities/plugins.yaml"),
+        "brain_network": load_yaml_file(root / "capabilities/brain_network.yaml"),
         "mcp": load_yaml_file(root / "capabilities/mcp.yaml"),
         "cli": load_yaml_file(root / "capabilities/cli.yaml"),
         "benchmarks": load_yaml_file(root / "capabilities/benchmarks.yaml"),
@@ -363,10 +364,13 @@ def discover_tool_backends(mcp_entries: list[dict], plugins: list[dict], cli_ent
     return dedupe(results, "backend_id")
 
 
-def observed_success_maps(benchmarks_payload: dict, routes_payload: dict) -> dict:
+def observed_success_maps(benchmarks_payload: dict, routes_payload: dict, portable_memory_payload: dict | None = None) -> dict:
+    portable_memory_payload = portable_memory_payload or {}
     executor_rates: dict[tuple[str, str], float] = {}
     router_rates: dict[tuple[str, str], float] = {}
     backend_rates: dict[tuple[str, str], float] = {}
+    backend_metrics: dict[tuple[str, str], dict] = {}
+    task_metrics: dict[str, dict] = {}
     executor_counts = defaultdict(lambda: {"success": 0, "total": 0})
     router_counts = defaultdict(lambda: {"success": 0, "total": 0})
     backend_counts = defaultdict(lambda: {"success": 0, "total": 0})
@@ -437,6 +441,57 @@ def observed_success_maps(benchmarks_payload: dict, routes_payload: dict) -> dic
                 pref_score,
             )
 
+    for preference in portable_memory_payload.get("portable_route_preferences", []):
+        task_family = preference.get("task_family")
+        pref_score = float(preference.get("confidence", 0.0))
+        executor_id = preference.get("preferred_executor_id")
+        router_id = preference.get("preferred_router_id")
+        if task_family and executor_id:
+            executor_rates[(task_family, executor_id)] = max(
+                executor_rates.get((task_family, executor_id), 0.0),
+                pref_score,
+            )
+        if task_family and router_id:
+            router_rates[(task_family, router_id)] = max(
+                router_rates.get((task_family, router_id), 0.0),
+                pref_score,
+            )
+        for backend_id in preference.get("preferred_backend_ids", []):
+            backend_rates[(task_family, backend_id)] = max(
+                backend_rates.get((task_family, backend_id), 0.0),
+                pref_score,
+            )
+
+    for item in benchmarks_payload.get("task_family_benchmarks", []):
+        task_family = item.get("task_family")
+        if not task_family:
+            continue
+        task_metrics[task_family] = {
+            "run_count": int(item.get("run_count", 0) or 0),
+            "avg_latency_ms": float(item.get("avg_latency_ms", 0.0) or 0.0),
+            "avg_total_tokens": float(item.get("avg_total_tokens", 0.0) or 0.0),
+        }
+
+    for item in benchmarks_payload.get("adapter_benchmarks", []):
+        adapter_id = str(item.get("adapter_id", ""))
+        task_family = item.get("task_family")
+        if not task_family or not adapter_id.startswith("backend:"):
+            continue
+        parts = adapter_id.split(":")
+        if len(parts) < 3:
+            continue
+        backend_id = parts[1]
+        key = (task_family, backend_id)
+        run_count = int(item.get("run_count", 0) or 0)
+        success_rate = float(item.get("success_count", 0) or 0.0) / max(1, run_count)
+        backend_metrics[key] = {
+            "run_count": run_count,
+            "success_rate": success_rate,
+            "avg_latency_ms": float(item.get("avg_latency_ms", 0.0) or 0.0),
+            "avg_total_tokens": float(item.get("avg_total_tokens", 0.0) or 0.0),
+        }
+        backend_rates[key] = max(backend_rates.get(key, 0.0), success_rate)
+
     replay_ready = sorted(
         [
             route for route in routes_payload.get("routes", [])
@@ -453,6 +508,18 @@ def observed_success_maps(benchmarks_payload: dict, routes_payload: dict) -> dic
             }
             for item in routes_payload.get("route_preferences", [])
             if float(item.get("avg_replay_score", 0.0)) >= 0.7 and float(item.get("success_rate", 0.0)) >= 0.75
+        ]
+        + [
+            {
+                "task_family": item.get("task_family"),
+                "run_id": None,
+                "executor_id": item.get("preferred_executor_id"),
+                "router_id": item.get("preferred_router_id"),
+                "backend_ids": item.get("preferred_backend_ids", []),
+                "replay_score": item.get("confidence", 0.0),
+            }
+            for item in portable_memory_payload.get("portable_route_preferences", [])
+            if float(item.get("confidence", 0.0)) >= 0.75 and int(item.get("evidence_count", 0)) >= 1
         ],
         key=lambda item: float(item.get("replay_score", 0.0)),
         reverse=True,
@@ -462,8 +529,115 @@ def observed_success_maps(benchmarks_payload: dict, routes_payload: dict) -> dic
         "executor_rates": executor_rates,
         "router_rates": router_rates,
         "backend_rates": backend_rates,
+        "backend_metrics": backend_metrics,
+        "task_metrics": task_metrics,
         "replay_ready": replay_ready,
     }
+
+
+def curated_backend_adjustment(backend: dict, task: dict, curated: list[dict], curated_policy: dict) -> float:
+    match = match_curated_backend(backend, curated)
+    if not match:
+        return 0.0
+
+    score = 0.0
+    priority = match.get("install_priority", "p2")
+    score += float(curated_policy.get("install_priority_score_boost", {}).get(priority, 0.0))
+    category = match.get("category")
+    score += float(curated_policy.get("category_score_boost", {}).get(category, 0.0))
+    if category == "architecture_optimization" and task.get("task_family") == "architecture_decision":
+        score += 0.08
+    if category == "persistent_learning" and task.get("task_family") in {"architecture_decision", "research"}:
+        score += 0.08
+    if category == "inter_brain_communication" and task.get("dispatch_mode") == "remote_worker":
+        score += 0.08
+    if category == "workflow_optimization" and task.get("requires_code", False):
+        score += 0.05
+
+    hints = match.get("routing_hints", {})
+    preferred_task_families = set(hints.get("preferred_task_families", []))
+    discouraged_task_families = set(hints.get("discouraged_task_families", []))
+    preferred_dispatch_modes = set(hints.get("preferred_dispatch_modes", []))
+    discouraged_dispatch_modes = set(hints.get("discouraged_dispatch_modes", []))
+    task_family = task.get("task_family")
+    dispatch_mode = task.get("dispatch_mode")
+    if task_family in preferred_task_families:
+        score += 0.12
+    if task_family in discouraged_task_families:
+        score -= 0.14
+    if dispatch_mode in preferred_dispatch_modes:
+        score += 0.08
+    if dispatch_mode in discouraged_dispatch_modes:
+        score -= 0.1
+    if hints.get("prefer_when_requires_code", False) and task.get("requires_code", False):
+        score += 0.08
+    if hints.get("avoid_when_requires_code", False) and task.get("requires_code", False):
+        score -= 0.1
+    if hints.get("prefer_when_quality_target_high", False) and task.get("quality_target") in {"high", "deep", "critical"}:
+        score += 0.06
+    if hints.get("discourage_as_default_bundle", False):
+        score -= 0.05
+    return score
+
+
+def backend_efficiency_adjustment(backend: dict, task: dict, observed: dict, curated: list[dict], curated_policy: dict) -> float:
+    selection_policy = curated_policy.get("adaptive_backend_pressure", {})
+    if not selection_policy.get("enabled", True):
+        return 0.0
+
+    task_family = task.get("task_family")
+    backend_id = backend.get("backend_id")
+    metric = observed.get("backend_metrics", {}).get((task_family, backend_id))
+    if not metric:
+        return 0.0
+
+    task_metric = observed.get("task_metrics", {}).get(task_family, {})
+    run_count = int(metric.get("run_count", 0) or 0)
+    min_run_count = int(selection_policy.get("min_run_count_for_penalty", 3))
+    score = 0.0
+
+    if run_count < min_run_count:
+        score -= float(selection_policy.get("low_data_penalty", 0.04))
+        return score
+
+    backend_tokens = float(metric.get("avg_total_tokens", 0.0) or 0.0)
+    task_tokens = float(task_metric.get("avg_total_tokens", 0.0) or 0.0)
+    if backend_tokens > 0 and task_tokens > 0:
+        token_ratio = backend_tokens / max(1.0, task_tokens)
+        token_weight = float(selection_policy.get("token_penalty_weight", 0.18))
+        if token_ratio > 1.0:
+            score -= min(0.24, (token_ratio - 1.0) * token_weight)
+        elif token_ratio < 0.9:
+            score += min(0.08, (1.0 - token_ratio) * 0.15)
+
+    backend_latency = float(metric.get("avg_latency_ms", 0.0) or 0.0)
+    task_latency = float(task_metric.get("avg_latency_ms", 0.0) or 0.0)
+    if backend_latency > 0 and task_latency > 0:
+        latency_ratio = backend_latency / max(1.0, task_latency)
+        latency_weight = float(selection_policy.get("latency_penalty_weight", 0.08))
+        if latency_ratio > 1.15:
+            score -= min(0.12, (latency_ratio - 1.0) * latency_weight)
+        elif latency_ratio < 0.9:
+            score += min(0.04, (1.0 - latency_ratio) * 0.08)
+
+    success_rate = float(metric.get("success_rate", 0.0) or 0.0)
+    score += (success_rate - 0.9) * float(selection_policy.get("success_rate_weight", 0.1))
+    return score
+
+
+def should_add_extra_mcp(selected: list[dict], ranked_mcp: list[tuple[float, dict]], task: dict) -> bool:
+    if any(item.get("kind", "").startswith("mcp") for item in selected):
+        return False
+    if not ranked_mcp:
+        return False
+    best_score, _ = ranked_mcp[0]
+    if task.get("task_family") in {"architecture_decision", "research"}:
+        return best_score >= 0.55
+    if task.get("high_stakes", False) or task.get("quality_target") in {"high", "deep", "critical"}:
+        return best_score >= 0.6
+    if task.get("requires_code", False) and task.get("complexity") == "high":
+        return best_score >= 0.65
+    return False
 
 
 def build_runtime_registry(root: Path, *, write: bool) -> dict:
@@ -484,6 +658,48 @@ def build_runtime_registry(root: Path, *, write: bool) -> dict:
 
 def task_profile(task_family: str) -> dict:
     return TASK_PROFILES.get(task_family, TASK_PROFILES["default"])
+
+
+def curated_integrations(brain_network_payload: dict) -> list[dict]:
+    return brain_network_payload.get("integrations", [])
+
+
+def match_curated_capability(capability: dict, curated: list[dict]) -> dict | None:
+    haystacks = {
+        str(capability.get(key, "")).lower()
+        for key in (
+            "backend_id",
+            "mcp_id",
+            "skill_id",
+            "plugin_id",
+            "cli_id",
+            "command",
+            "path",
+            "url",
+            "name",
+            "server_name",
+        )
+        if capability.get(key)
+    }
+
+    for integration in curated:
+        hints = integration.get("detection_hints", {})
+        explicit_ids = {
+            str(item).lower()
+            for key in ("backend_ids", "mcp_ids", "skill_ids", "plugin_ids", "cli_ids")
+            for item in hints.get(key, [])
+        }
+        if explicit_ids and haystacks.intersection(explicit_ids):
+            return integration
+        for fragment in hints.get("id_contains", []):
+            needle = str(fragment).lower()
+            if needle and any(needle in value for value in haystacks):
+                return integration
+    return None
+
+
+def match_curated_backend(backend: dict, curated: list[dict]) -> dict | None:
+    return match_curated_capability(backend, curated)
 
 
 def build_tier_path(task: dict, policies: dict) -> list[str]:
@@ -604,7 +820,7 @@ def select_models_for_route(models_payload: dict, router: dict | None, tier_path
     return assignments
 
 
-def backend_score(backend: dict, desired_category: str, task: dict, observed: dict) -> float:
+def backend_score(backend: dict, desired_category: str, task: dict, observed: dict, curated: list[dict], curated_policy: dict) -> float:
     score = 0.25
     if backend.get("health_status") == "ready":
         score += 0.15
@@ -629,10 +845,12 @@ def backend_score(backend: dict, desired_category: str, task: dict, observed: di
     if task.get("requires_code", False) and backend.get("category") in {"search", "test", "vcs"}:
         score += 0.05
     score += 0.15 * observed["backend_rates"].get((task.get("task_family"), backend.get("backend_id")), 0.0)
+    score += curated_backend_adjustment(backend, task, curated, curated_policy)
+    score += backend_efficiency_adjustment(backend, task, observed, curated, curated_policy)
     return score
 
 
-def select_backends(backends: list[dict], task: dict, limit: int, observed: dict) -> list[dict]:
+def select_backends(backends: list[dict], task: dict, limit: int, observed: dict, curated: list[dict], curated_policy: dict) -> list[dict]:
     if not task.get("requires_tools", False) and not task.get("requires_code", False):
         return []
 
@@ -641,13 +859,17 @@ def select_backends(backends: list[dict], task: dict, limit: int, observed: dict
     used_ids: set[str] = set()
 
     for desired_category in profile["backend_categories"]:
-        ranked = sorted(backends, key=lambda item: backend_score(item, desired_category, task, observed), reverse=True)
+        ranked = sorted(
+            backends,
+            key=lambda item: backend_score(item, desired_category, task, observed, curated, curated_policy),
+            reverse=True,
+        )
         for candidate in ranked:
             if not candidate.get("enabled", True):
                 continue
             if candidate.get("backend_id") in used_ids:
                 continue
-            if backend_score(candidate, desired_category, task, observed) < 0.45:
+            if backend_score(candidate, desired_category, task, observed, curated, curated_policy) < 0.45:
                 continue
             selected.append(candidate)
             used_ids.add(candidate["backend_id"])
@@ -656,11 +878,16 @@ def select_backends(backends: list[dict], task: dict, limit: int, observed: dict
             break
 
     if task.get("requires_tools", False) and not any(item.get("kind", "").startswith("mcp") for item in selected):
-        ranked_mcp = sorted(backends, key=lambda item: backend_score(item, "mcp", task, observed), reverse=True)
-        for candidate in ranked_mcp:
-            if candidate.get("backend_id") in used_ids or not candidate.get("enabled", True):
-                continue
-            if candidate.get("kind", "").startswith("mcp"):
+        ranked_mcp = [
+            (backend_score(item, "mcp", task, observed, curated, curated_policy), item)
+            for item in backends
+            if item.get("enabled", True) and item.get("kind", "").startswith("mcp")
+        ]
+        ranked_mcp.sort(key=lambda item: item[0], reverse=True)
+        if should_add_extra_mcp(selected, ranked_mcp, task):
+            for _, candidate in ranked_mcp:
+                if candidate.get("backend_id") in used_ids or not candidate.get("enabled", True):
+                    continue
                 selected.append(candidate)
                 used_ids.add(candidate["backend_id"])
                 break
@@ -674,7 +901,11 @@ def plan_execution(root: Path, task: dict, *, runtime_registry: dict | None = No
     models_payload = load_yaml_file(root / "capabilities/models.yaml")
     benchmarks_payload = load_yaml_file(root / "capabilities/benchmarks.yaml")
     routes_payload = load_yaml_file(root / "telemetry/routes.yaml")
-    observed = observed_success_maps(benchmarks_payload, routes_payload)
+    portable_memory_payload = load_yaml_file(root / "memory/portable_memory.yaml")
+    brain_network_payload = load_yaml_file(root / "capabilities/brain_network.yaml")
+    curated = curated_integrations(brain_network_payload)
+    curated_policy = brain_network_payload.get("selection_policy", {})
+    observed = observed_success_maps(benchmarks_payload, routes_payload, portable_memory_payload)
 
     tier_path = build_tier_path(task, policies)
     executor, executor_score = select_executor(runtime_registry.get("agent_executors", []), task, observed)
@@ -684,7 +915,21 @@ def plan_execution(root: Path, task: dict, *, runtime_registry: dict | None = No
         task,
         runtime_registry.get("selection_policy", {}).get("limit_default_backend_bundle", 4),
         observed,
+        curated,
+        curated_policy,
     )
+    enriched_backends = []
+    curated_matches = []
+    for backend in backends:
+        backend_copy = dict(backend)
+        match = match_curated_backend(backend_copy, curated)
+        if match:
+            backend_copy["curated_integration_id"] = match.get("integration_id")
+            backend_copy["curated_category"] = match.get("category")
+            backend_copy["curated_install_priority"] = match.get("install_priority")
+            curated_matches.append(match.get("integration_id"))
+        enriched_backends.append(backend_copy)
+    backends = enriched_backends
     assignments = select_models_for_route(models_payload, router, tier_path)
 
     reasons = []
@@ -698,6 +943,8 @@ def plan_execution(root: Path, task: dict, *, runtime_registry: dict | None = No
         reasons.append("router:missing")
     if backends:
         reasons.append(f"backends:{','.join(item['backend_id'] for item in backends)}")
+    if curated_matches:
+        reasons.append(f"curated:{','.join(curated_matches)}")
     replay = next((route for route in observed["replay_ready"] if route.get("task_family") == task.get("task_family")), None)
     if replay:
         reasons.append(f"replay_candidate:{replay.get('run_id')}")

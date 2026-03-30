@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "user_taste_profile", "product_judgment_profile", "autonomy_profile", "acceptance_signals"],
+  "properties": {
+    "version": { "type": "string" },
+    "user_taste_profile": { "type": "object", "additionalProperties": true },
+    "product_judgment_profile": { "type": "object", "additionalProperties": true },
+    "autonomy_profile": { "type": "object", "additionalProperties": true },
+    "acceptance_signals": { "type": "array", "items": { "type": "object", "additionalProperties": true } }
+  },
+  "additionalProperties": true
+}

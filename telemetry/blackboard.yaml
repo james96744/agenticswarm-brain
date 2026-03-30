@@ -963,6 +963,358 @@ events:
   run_id: run-808872e5a90c
   status: completed
   timestamp: '2026-03-30T01:03:59.393095+00:00'
+- event_type: task.created
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Safe anatomy wrapper verification run
+  confidence: 0.89
+  user_goal: Safe anatomy wrapper verification run
+  timestamp: '2026-03-30T05:07:14.336005+00:00'
+- event_type: model.selected
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Selected router `anthropic-router`.
+  confidence: 0.89
+  model_id: anthropic-router
+  model_tier: tier_0_router,tier_1_worker
+  timestamp: '2026-03-30T05:07:14.390570+00:00'
+- event_type: artifact.ready
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  artifact_id: artifact-19bf8128893c
+  model_tier: tier_0_router,tier_1_worker
+  critic_required: true
+  next_step: complete
+  dependencies_satisfied: true
+  run_id: run-ac040a15c60c
+  timestamp: '2026-03-30T05:07:14.607587+00:00'
+- event_type: critic.passed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: critic
+  summary: Critic passed for `anatomy-wrapper-safe-demo`.
+  confidence: 0.89
+  artifact_id: artifact-19bf8128893c
+  run_id: run-ac040a15c60c
+  failure_reasons: []
+  timestamp: '2026-03-30T05:07:14.673189+00:00'
+- event_type: task.completed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  run_id: run-ac040a15c60c
+  status: completed
+  timestamp: '2026-03-30T05:07:14.837370+00:00'
+- event_type: task.created
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Safe anatomy wrapper verification run
+  confidence: 0.89
+  user_goal: Safe anatomy wrapper verification run
+  timestamp: '2026-03-30T05:07:17.441490+00:00'
+- event_type: model.selected
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Selected router `anthropic-router`.
+  confidence: 0.89
+  model_id: anthropic-router
+  model_tier: tier_0_router,tier_1_worker
+  timestamp: '2026-03-30T05:07:17.497047+00:00'
+- event_type: artifact.ready
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  artifact_id: artifact-ba158786aef3
+  model_tier: tier_0_router,tier_1_worker
+  critic_required: true
+  next_step: complete
+  dependencies_satisfied: true
+  run_id: run-2ca1bee786ed
+  timestamp: '2026-03-30T05:07:17.697950+00:00'
+- event_type: critic.passed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: critic
+  summary: Critic passed for `anatomy-wrapper-safe-demo`.
+  confidence: 0.89
+  artifact_id: artifact-ba158786aef3
+  run_id: run-2ca1bee786ed
+  failure_reasons: []
+  timestamp: '2026-03-30T05:07:17.766380+00:00'
+- event_type: task.completed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  run_id: run-2ca1bee786ed
+  status: completed
+  timestamp: '2026-03-30T05:07:17.933966+00:00'
+- event_type: task.created
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Safe anatomy wrapper verification run
+  confidence: 0.89
+  user_goal: Safe anatomy wrapper verification run
+  timestamp: '2026-03-30T05:09:49.293849+00:00'
+- event_type: model.selected
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Selected router `anthropic-router`.
+  confidence: 0.89
+  model_id: anthropic-router
+  model_tier: tier_0_router,tier_1_worker
+  timestamp: '2026-03-30T05:09:49.356585+00:00'
+- event_type: artifact.ready
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  artifact_id: artifact-a8813321cfec
+  model_tier: tier_0_router,tier_1_worker
+  critic_required: true
+  next_step: complete
+  dependencies_satisfied: true
+  run_id: run-78be95484775
+  timestamp: '2026-03-30T05:09:49.573707+00:00'
+- event_type: critic.passed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: critic
+  summary: Critic passed for `anatomy-wrapper-safe-demo`.
+  confidence: 0.89
+  artifact_id: artifact-a8813321cfec
+  run_id: run-78be95484775
+  failure_reasons: []
+  timestamp: '2026-03-30T05:09:49.661230+00:00'
+- event_type: task.completed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  run_id: run-78be95484775
+  status: completed
+  timestamp: '2026-03-30T05:09:49.860833+00:00'
+- event_type: task.created
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Safe anatomy wrapper verification run
+  confidence: 0.89
+  user_goal: Safe anatomy wrapper verification run
+  timestamp: '2026-03-30T05:09:52.495014+00:00'
+- event_type: model.selected
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Selected router `anthropic-router`.
+  confidence: 0.89
+  model_id: anthropic-router
+  model_tier: tier_0_router,tier_1_worker
+  timestamp: '2026-03-30T05:09:52.559001+00:00'
+- event_type: artifact.ready
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  artifact_id: artifact-e808b90e3c0a
+  model_tier: tier_0_router,tier_1_worker
+  critic_required: true
+  next_step: complete
+  dependencies_satisfied: true
+  run_id: run-4b279583d112
+  timestamp: '2026-03-30T05:09:52.772872+00:00'
+- event_type: critic.passed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: critic
+  summary: Critic passed for `anatomy-wrapper-safe-demo`.
+  confidence: 0.89
+  artifact_id: artifact-e808b90e3c0a
+  run_id: run-4b279583d112
+  failure_reasons: []
+  timestamp: '2026-03-30T05:09:52.844629+00:00'
+- event_type: task.completed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  run_id: run-4b279583d112
+  status: completed
+  timestamp: '2026-03-30T05:09:53.016236+00:00'
+- event_type: task.created
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Safe anatomy wrapper verification run
+  confidence: 0.89
+  user_goal: Safe anatomy wrapper verification run
+  timestamp: '2026-03-30T05:10:43.803410+00:00'
+- event_type: model.selected
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Selected router `anthropic-router`.
+  confidence: 0.89
+  model_id: anthropic-router
+  model_tier: tier_0_router,tier_1_worker
+  timestamp: '2026-03-30T05:10:43.867369+00:00'
+- event_type: artifact.ready
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  artifact_id: artifact-d6fc2c2762b8
+  model_tier: tier_0_router,tier_1_worker
+  critic_required: true
+  next_step: complete
+  dependencies_satisfied: true
+  run_id: run-79b1872bfe1a
+  timestamp: '2026-03-30T05:10:44.102892+00:00'
+- event_type: critic.passed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: critic
+  summary: Critic passed for `anatomy-wrapper-safe-demo`.
+  confidence: 0.89
+  artifact_id: artifact-d6fc2c2762b8
+  run_id: run-79b1872bfe1a
+  failure_reasons: []
+  timestamp: '2026-03-30T05:10:44.167493+00:00'
+- event_type: task.completed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  run_id: run-79b1872bfe1a
+  status: completed
+  timestamp: '2026-03-30T05:10:44.348174+00:00'
+- event_type: task.created
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Safe anatomy wrapper verification run
+  confidence: 0.89
+  user_goal: Safe anatomy wrapper verification run
+  timestamp: '2026-03-30T05:10:47.023052+00:00'
+- event_type: model.selected
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Selected router `anthropic-router`.
+  confidence: 0.89
+  model_id: anthropic-router
+  model_tier: tier_0_router,tier_1_worker
+  timestamp: '2026-03-30T05:10:47.088376+00:00'
+- event_type: artifact.ready
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  artifact_id: artifact-67601ccfac44
+  model_tier: tier_0_router,tier_1_worker
+  critic_required: true
+  next_step: complete
+  dependencies_satisfied: true
+  run_id: run-2b41168fd391
+  timestamp: '2026-03-30T05:10:47.316018+00:00'
+- event_type: critic.passed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: critic
+  summary: Critic passed for `anatomy-wrapper-safe-demo`.
+  confidence: 0.89
+  artifact_id: artifact-67601ccfac44
+  run_id: run-2b41168fd391
+  failure_reasons: []
+  timestamp: '2026-03-30T05:10:47.393062+00:00'
+- event_type: task.completed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  run_id: run-2b41168fd391
+  status: completed
+  timestamp: '2026-03-30T05:10:47.582446+00:00'
+- event_type: task.created
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Safe anatomy wrapper verification run
+  confidence: 0.89
+  user_goal: Safe anatomy wrapper verification run
+  timestamp: '2026-03-30T05:13:06.097073+00:00'
+- event_type: model.selected
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Selected router `anthropic-router`.
+  confidence: 0.89
+  model_id: anthropic-router
+  model_tier: tier_0_router,tier_1_worker
+  timestamp: '2026-03-30T05:13:06.168928+00:00'
+- event_type: artifact.ready
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  artifact_id: artifact-ebf00de1d7d0
+  model_tier: tier_0_router,tier_1_worker
+  critic_required: true
+  next_step: complete
+  dependencies_satisfied: true
+  run_id: run-6d4bb891f732
+  timestamp: '2026-03-30T05:13:06.423525+00:00'
+- event_type: critic.passed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: critic
+  summary: Critic passed for `anatomy-wrapper-safe-demo`.
+  confidence: 0.89
+  artifact_id: artifact-ebf00de1d7d0
+  run_id: run-6d4bb891f732
+  failure_reasons: []
+  timestamp: '2026-03-30T05:13:06.505293+00:00'
+- event_type: task.completed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  run_id: run-6d4bb891f732
+  status: completed
+  timestamp: '2026-03-30T05:13:06.707921+00:00'
+- event_type: task.created
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Safe anatomy wrapper verification run
+  confidence: 0.89
+  user_goal: Safe anatomy wrapper verification run
+  timestamp: '2026-03-30T05:13:09.643032+00:00'
+- event_type: model.selected
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Selected router `anthropic-router`.
+  confidence: 0.89
+  model_id: anthropic-router
+  model_tier: tier_0_router,tier_1_worker
+  timestamp: '2026-03-30T05:13:09.718251+00:00'
+- event_type: artifact.ready
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  artifact_id: artifact-10f4158007e1
+  model_tier: tier_0_router,tier_1_worker
+  critic_required: true
+  next_step: complete
+  dependencies_satisfied: true
+  run_id: run-300fff306434
+  timestamp: '2026-03-30T05:13:09.949648+00:00'
+- event_type: critic.passed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: critic
+  summary: Critic passed for `anatomy-wrapper-safe-demo`.
+  confidence: 0.89
+  artifact_id: artifact-10f4158007e1
+  run_id: run-300fff306434
+  failure_reasons: []
+  timestamp: '2026-03-30T05:13:10.029144+00:00'
+- event_type: task.completed
+  task_id: anatomy-wrapper-safe-demo
+  agent_id: brain
+  summary: Executor `python-workflow-runner` returned 0.
+  confidence: 0.89
+  run_id: run-300fff306434
+  status: completed
+  timestamp: '2026-03-30T05:13:10.228901+00:00'
 notes:
 - Events in this file are append-only coordination facts emitted by the execution
   engine.

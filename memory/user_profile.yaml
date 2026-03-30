@@ -1,0 +1,351 @@
+version: '1.0'
+last_updated: '2026-03-30'
+description: Portable sovereign-brain profile for personal taste, judgment, autonomy,
+  and acceptance signals.
+user_taste_profile:
+  design_preferences: []
+  technical_standards: []
+  product_ambition: balanced_excellence
+  risk_tolerance: guarded_high_autonomy
+  refinement_style: meticulous
+  quality_target_preferences:
+    balanced: 28
+  task_family_preferences:
+    boilerplate_code: 26
+    data_migration: 2
+product_judgment_profile:
+  architecture_priority: 0.8
+  ux_priority: 0.8
+  reliability_priority: 0.85
+  clarity_priority: 0.8
+  polish_priority: 0.75
+  distinctiveness_priority: 0.7
+  accepted_work_count: 28
+  rejected_work_count: 0
+  edited_work_count: 0
+  reverted_work_count: 0
+  reused_work_count: 0
+autonomy_profile:
+  mode: guarded_high_autonomy
+  auto_execute_task_classes:
+  - documentation_refinement
+  - quality_hardening
+  - consistency_fix
+  - benchmark_refresh
+  approval_required_for:
+  - destructive_actions
+  - production_deployment
+  - security_sensitive_operations
+  - major_product_direction_change
+  meticulous_task_bias: high
+acceptance_signals:
+- signal_id: rebuild-run-e82c7349f7f9
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 1.0
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-29T22:57:21.050928+00:00'
+- signal_id: rebuild-run-8d2d49374c4d
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 1.0
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-29T23:08:42.090462+00:00'
+- signal_id: rebuild-run-12d11bf577f6
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.84
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-29T23:26:37.044283+00:00'
+- signal_id: rebuild-run-c455fbb9f7f0
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.84
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-29T23:26:39.705145+00:00'
+- signal_id: rebuild-run-c092f7348289
+  task_family: data_migration
+  quality_target: balanced
+  state: accepted
+  confidence: 0.97
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - mcp-vercel
+  timestamp: '2026-03-29T23:46:35.347161+00:00'
+- signal_id: rebuild-run-06883ac249d1
+  task_family: data_migration
+  quality_target: balanced
+  state: accepted
+  confidence: 1.0
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - mcp-vercel
+  timestamp: '2026-03-29T23:47:10.885926+00:00'
+- signal_id: rebuild-run-c8447e78686a
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.84
+  critic_status: passed
+  executor_id: codex-cli
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-29T23:47:11.074328+00:00'
+- signal_id: rebuild-run-0ec484666c37
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-29T23:49:21.442181+00:00'
+- signal_id: rebuild-run-abb62699ee94
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-29T23:49:24.437936+00:00'
+- signal_id: rebuild-run-72d5743c3ec5
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-29T23:59:52.813111+00:00'
+- signal_id: rebuild-run-ba443615325d
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-29T23:59:55.960273+00:00'
+- signal_id: rebuild-run-f567e44f2b51
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: codex-cli
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T00:19:20.938950+00:00'
+- signal_id: rebuild-run-26ea06db8fc0
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T00:21:12.944829+00:00'
+- signal_id: rebuild-run-ec36ffaab86f
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T00:21:15.282475+00:00'
+- signal_id: rebuild-run-a90eceb9c205
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T00:22:37.577157+00:00'
+- signal_id: rebuild-run-08596b4e9ec9
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T00:22:40.177971+00:00'
+- signal_id: rebuild-run-e09699de142d
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T01:02:50.104863+00:00'
+- signal_id: rebuild-run-7d31331e4fe3
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T01:02:52.532780+00:00'
+- signal_id: rebuild-run-4838556a0c6e
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T01:03:56.857468+00:00'
+- signal_id: rebuild-run-808872e5a90c
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T01:03:59.471139+00:00'
+- signal_id: acceptance-run-ac040a15c60c
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T05:07:15.019577+00:00'
+- signal_id: acceptance-run-2ca1bee786ed
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T05:07:18.130188+00:00'
+- signal_id: acceptance-run-78be95484775
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T05:09:50.066304+00:00'
+- signal_id: acceptance-run-4b279583d112
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T05:09:53.244634+00:00'
+- signal_id: acceptance-run-79b1872bfe1a
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T05:10:44.562397+00:00'
+- signal_id: acceptance-run-2b41168fd391
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T05:10:47.798989+00:00'
+- signal_id: acceptance-run-6d4bb891f732
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T05:13:06.928944+00:00'
+- signal_id: acceptance-run-300fff306434
+  task_family: boilerplate_code
+  quality_target: balanced
+  state: accepted
+  confidence: 0.89
+  critic_status: passed
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  timestamp: '2026-03-30T05:13:10.457417+00:00'
+notes:
+- This file stores portable user-owned intelligence that may survive repo transplants.

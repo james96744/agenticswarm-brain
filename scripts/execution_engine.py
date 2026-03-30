@@ -16,10 +16,12 @@ try:
     from brain_utils import dump_yaml_file, load_yaml_file, repo_root_from
     from control_plane import BlackboardStore, ControlPlaneStore, utc_now
     from runtime_bridge import build_runtime_registry, plan_execution
+    from sovereign_memory import ensure_state_files, record_execution_acceptance
 except ModuleNotFoundError:
     from scripts.brain_utils import dump_yaml_file, load_yaml_file, repo_root_from
     from scripts.control_plane import BlackboardStore, ControlPlaneStore, utc_now
     from scripts.runtime_bridge import build_runtime_registry, plan_execution
+    from scripts.sovereign_memory import ensure_state_files, record_execution_acceptance
 
 
 @dataclass
@@ -86,6 +88,7 @@ class ExecutionResult:
     outputs: dict = field(default_factory=dict)
     critic_status: str = "pending"
     latency_ms: int = 0
+    token_usage: dict = field(default_factory=dict)
 
 
 class RouterAdapter:
@@ -99,6 +102,69 @@ class RouterAdapter:
             "kind": router.get("kind"),
             "model_assignments": route.get("model_assignments", {}),
         }
+
+
+def _safe_int(value, default: int = 0) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _estimate_text_tokens(value) -> int:
+    if value is None:
+        return 0
+    if isinstance(value, (dict, list, tuple)):
+        text = json.dumps(value, sort_keys=True, default=str)
+    else:
+        text = str(value)
+    text = text.strip()
+    if not text:
+        return 0
+    return max(1, (len(text) + 3) // 4)
+
+
+def _collect_token_usage(request: ExecutionRequest, executor_result: dict, backend_calls: list[dict], summary: str) -> dict:
+    explicit = request.inputs.get("token_usage", {}) or request.inputs.get("provider_usage", {}) or {}
+    prompt_tokens = _safe_int(explicit.get("prompt_tokens"))
+    completion_tokens = _safe_int(explicit.get("completion_tokens"))
+    tool_context_tokens = _safe_int(explicit.get("tool_context_tokens"))
+    cache_read_tokens = _safe_int(explicit.get("cache_read_tokens"))
+    cache_write_tokens = _safe_int(explicit.get("cache_write_tokens"))
+    estimation_method = "provider_reported" if explicit else "estimated"
+
+    if not explicit:
+        prompt_tokens = _estimate_text_tokens(request.description)
+        prompt_tokens += _estimate_text_tokens(request.quality_target)
+        prompt_tokens += _estimate_text_tokens(request.risk_level)
+        prompt_tokens += _estimate_text_tokens(request.inputs)
+        prompt_tokens += _estimate_text_tokens(request.selected_backend_ids)
+        completion_tokens = _estimate_text_tokens(summary)
+        completion_tokens += _estimate_text_tokens(executor_result.get("stdout", ""))
+        completion_tokens += _estimate_text_tokens(executor_result.get("stderr", ""))
+        tool_context_tokens = _estimate_text_tokens(
+            [
+                {
+                    "backend_id": call.get("backend_id"),
+                    "status": call.get("status"),
+                    "summary": call.get("summary"),
+                    "stdout": call.get("stdout", "")[:800],
+                    "stderr": call.get("stderr", "")[:400],
+                }
+                for call in backend_calls
+            ]
+        )
+
+    total_tokens = prompt_tokens + completion_tokens + tool_context_tokens
+    return {
+        "prompt_tokens": prompt_tokens,
+        "completion_tokens": completion_tokens,
+        "tool_context_tokens": tool_context_tokens,
+        "cache_read_tokens": cache_read_tokens,
+        "cache_write_tokens": cache_write_tokens,
+        "total_tokens": total_tokens,
+        "estimation_method": estimation_method,
+    }
 
 
 def _http_invoke(url: str, method: str, timeout_seconds: int, headers: dict | None = None, body: str | bytes | None = None) -> dict:
@@ -472,6 +538,10 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
             "replay_candidate_count": 0,
             "avg_confidence": 0.0,
             "avg_latency_ms": 0.0,
+            "avg_total_tokens": 0.0,
+            "avg_prompt_tokens": 0.0,
+            "avg_completion_tokens": 0.0,
+            "avg_tool_context_tokens": 0.0,
             "queued_run_count": 0,
             "remote_dispatch_count": 0,
             "last_executor_id": run.selected_executor_id,
@@ -483,6 +553,10 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
     task_metric.setdefault("verified_execution_count", 0)
     task_metric.setdefault("replay_candidate_count", 0)
     task_metric.setdefault("avg_latency_ms", 0.0)
+    task_metric.setdefault("avg_total_tokens", 0.0)
+    task_metric.setdefault("avg_prompt_tokens", 0.0)
+    task_metric.setdefault("avg_completion_tokens", 0.0)
+    task_metric.setdefault("avg_tool_context_tokens", 0.0)
     task_metric.setdefault("queued_run_count", 0)
     task_metric.setdefault("remote_dispatch_count", 0)
     task_metric["success_count"] += 1 if result.status == "success" else 0
@@ -491,9 +565,29 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
     task_metric["replay_candidate_count"] += 1 if result.outputs.get("replay_eligible", False) else 0
     prior_conf = float(task_metric.get("avg_confidence", 0.0))
     prior_latency = float(task_metric.get("avg_latency_ms", 0.0))
+    prior_total_tokens = float(task_metric.get("avg_total_tokens", 0.0))
+    prior_prompt_tokens = float(task_metric.get("avg_prompt_tokens", 0.0))
+    prior_completion_tokens = float(task_metric.get("avg_completion_tokens", 0.0))
+    prior_tool_context_tokens = float(task_metric.get("avg_tool_context_tokens", 0.0))
     count = max(1, int(task_metric["run_count"]))
     task_metric["avg_confidence"] = round(((prior_conf * (count - 1)) + result.confidence) / count, 4)
     task_metric["avg_latency_ms"] = round(((prior_latency * (count - 1)) + int(result.latency_ms)) / count, 2)
+    task_metric["avg_total_tokens"] = round(
+        ((prior_total_tokens * (count - 1)) + float(result.token_usage.get("total_tokens", 0))) / count,
+        2,
+    )
+    task_metric["avg_prompt_tokens"] = round(
+        ((prior_prompt_tokens * (count - 1)) + float(result.token_usage.get("prompt_tokens", 0))) / count,
+        2,
+    )
+    task_metric["avg_completion_tokens"] = round(
+        ((prior_completion_tokens * (count - 1)) + float(result.token_usage.get("completion_tokens", 0))) / count,
+        2,
+    )
+    task_metric["avg_tool_context_tokens"] = round(
+        ((prior_tool_context_tokens * (count - 1)) + float(result.token_usage.get("tool_context_tokens", 0))) / count,
+        2,
+    )
     task_metric["queued_run_count"] += 1 if request.dispatch_mode == "deferred" else 0
     task_metric["remote_dispatch_count"] += 1 if request.dispatch_mode == "remote_worker" else 0
     task_metric["last_executor_id"] = run.selected_executor_id
@@ -512,16 +606,26 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
                 "success_count": 0,
                 "critic_pass_count": 0,
                 "avg_latency_ms": 0.0,
+                "avg_total_tokens": 0.0,
                 "last_used_at": None,
             },
         )
         model_metric.setdefault("critic_pass_count", 0)
         model_metric.setdefault("avg_latency_ms", 0.0)
+        model_metric.setdefault("avg_total_tokens", 0.0)
         model_metric["run_count"] += 1
         model_metric["success_count"] += 1 if result.status == "success" else 0
         model_metric["critic_pass_count"] += 1 if result.critic_status == "passed" else 0
         model_metric["avg_latency_ms"] = round(
             ((float(model_metric.get("avg_latency_ms", 0.0)) * (model_metric["run_count"] - 1)) + int(result.latency_ms))
+            / max(1, int(model_metric["run_count"])),
+            2,
+        )
+        model_metric["avg_total_tokens"] = round(
+            (
+                (float(model_metric.get("avg_total_tokens", 0.0)) * (model_metric["run_count"] - 1))
+                + float(result.token_usage.get("total_tokens", 0))
+            )
             / max(1, int(model_metric["run_count"])),
             2,
         )
@@ -539,6 +643,7 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
                 "success_count": 0,
                 "critic_failure_count": 0,
                 "avg_confidence": 0.0,
+                "avg_total_tokens": 0.0,
                 "prune_protected": False,
             },
         )
@@ -546,6 +651,7 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
         agent_metric.setdefault("critic_failure_count", 0)
         agent_metric.setdefault("avg_confidence", 0.0)
         agent_metric.setdefault("avg_latency_ms", 0.0)
+        agent_metric.setdefault("avg_total_tokens", 0.0)
         agent_metric["success_count"] += 1 if result.status == "success" else 0
         agent_metric["critic_failure_count"] += 1 if result.critic_status == "failed" else 0
         agent_metric["avg_confidence"] = round(
@@ -557,10 +663,16 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
         run_count = max(1, int(agent_metric["run_count"]))
         critic_failure_count = max(0, int(agent_metric["critic_failure_count"]))
         agent_metric["value_add_per_token"] = round(result.confidence, 4)
+        total_tokens = max(1.0, float(result.token_usage.get("total_tokens", 0)))
+        agent_metric["value_add_per_token"] = round((result.confidence * 1000.0) / total_tokens, 4)
         agent_metric["critic_rejection_rate"] = round(critic_failure_count / run_count, 4)
         agent_metric["ignored_edit_rate"] = 0.0
         agent_metric["avg_latency_ms"] = round(
             ((float(agent_metric.get("avg_latency_ms", 0.0)) * (run_count - 1)) + int(result.latency_ms)) / run_count,
+            2,
+        )
+        agent_metric["avg_total_tokens"] = round(
+            ((float(agent_metric.get("avg_total_tokens", 0.0)) * (run_count - 1)) + total_tokens) / run_count,
             2,
         )
         agent_metric["updated_at"] = utc_now()
@@ -579,11 +691,13 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
                 "run_count": 0,
                 "success_count": 0,
                 "avg_latency_ms": 0.0,
+                "avg_total_tokens": 0.0,
                 "dispatch_mode": request.dispatch_mode,
                 "last_status": None,
             },
         )
         adapter_metric.setdefault("avg_latency_ms", 0.0)
+        adapter_metric.setdefault("avg_total_tokens", 0.0)
         adapter_metric["run_count"] += 1
         adapter_metric["success_count"] += 1 if backend_call.get("status") == "success" else 0
         adapter_metric["avg_latency_ms"] = round(
@@ -593,6 +707,14 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
         )
         adapter_metric["dispatch_mode"] = request.dispatch_mode
         adapter_metric["last_status"] = backend_call.get("status")
+        adapter_metric["avg_total_tokens"] = round(
+            (
+                (float(adapter_metric.get("avg_total_tokens", 0.0)) * (adapter_metric["run_count"] - 1))
+                + float(result.token_usage.get("total_tokens", 0))
+            )
+            / max(1, int(adapter_metric["run_count"])),
+            2,
+        )
         adapter_metric["updated_at"] = utc_now()
 
     payload["last_updated"] = datetime.now(timezone.utc).date().isoformat()
@@ -698,6 +820,13 @@ def _update_routes_and_triplets(root: Path, request: ExecutionRequest, run: Exec
         "latency_ms": int(result.latency_ms),
         "backend_success_count": len([call for call in result.backend_calls if call.get("status") == "success"]),
         "backend_failure_count": len([call for call in result.backend_calls if call.get("status") == "failed"]),
+        "prompt_tokens": int(result.token_usage.get("prompt_tokens", 0)),
+        "completion_tokens": int(result.token_usage.get("completion_tokens", 0)),
+        "tool_context_tokens": int(result.token_usage.get("tool_context_tokens", 0)),
+        "cache_read_tokens": int(result.token_usage.get("cache_read_tokens", 0)),
+        "cache_write_tokens": int(result.token_usage.get("cache_write_tokens", 0)),
+        "total_tokens": int(result.token_usage.get("total_tokens", 0)),
+        "token_estimation_method": result.token_usage.get("estimation_method", "unknown"),
         "timestamp": utc_now(),
     }
     routes.append(route_record)
@@ -721,13 +850,16 @@ def _update_routes_and_triplets(root: Path, request: ExecutionRequest, run: Exec
 
 
 def record_learning(root: Path, request: ExecutionRequest, run: ExecutionRun, result: ExecutionResult) -> None:
+    ensure_state_files(root)
     _update_routes_and_triplets(root, request, run, result)
     _update_benchmarks(root, request, run, result)
     _update_memory(root, request, run, result)
+    record_execution_acceptance(root, request, run, result)
 
 
 def execute_request(repo_root: str | None, payload: dict, *, force_immediate: bool = False) -> dict:
     root = repo_root_from(repo_root)
+    ensure_state_files(root)
     request = request_from_payload(payload)
     if force_immediate:
         request.dispatch_mode = "immediate"
@@ -1014,6 +1146,7 @@ def execute_request(repo_root: str | None, payload: dict, *, force_immediate: bo
         },
         critic_status=critic_status,
         latency_ms=latency_ms,
+        token_usage=_collect_token_usage(request, executor_result, backend_calls, summary),
     )
     record_learning(root, request, run, result)
     control_plane.release_lease(request.task_id, request.owner_id)

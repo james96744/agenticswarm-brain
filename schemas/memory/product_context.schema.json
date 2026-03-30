@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "product_intent_graph", "product_quality_model", "repo_ontology", "opportunity_map"],
+  "properties": {
+    "version": { "type": "string" },
+    "product_intent_graph": { "type": "object", "additionalProperties": true },
+    "product_quality_model": { "type": "object", "additionalProperties": true },
+    "repo_ontology": { "type": "object", "additionalProperties": true },
+    "opportunity_map": { "type": "array", "items": { "type": "object", "additionalProperties": true } }
+  },
+  "additionalProperties": true
+}

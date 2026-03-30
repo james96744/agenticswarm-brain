@@ -13,6 +13,8 @@ FILE_SCHEMA_MAP = {
     "brain.schema.yaml": "schemas/brain_manifest.schema.json",
     "capabilities/agents.yaml": "schemas/capabilities/agents.schema.json",
     "capabilities/benchmarks.yaml": "schemas/capabilities/benchmarks.schema.json",
+    "capabilities/brain_network.yaml": "schemas/capabilities/brain_network.schema.json",
+    "capabilities/brain_network_install_profiles.yaml": "schemas/capabilities/brain_network_install_profiles.schema.json",
     "capabilities/cli.yaml": "schemas/capabilities/cli.schema.json",
     "capabilities/mcp.yaml": "schemas/capabilities/mcp.schema.json",
     "capabilities/models.yaml": "schemas/capabilities/models.schema.json",
@@ -21,6 +23,9 @@ FILE_SCHEMA_MAP = {
     "capabilities/skills.yaml": "schemas/capabilities/skills.schema.json",
     "memory/conflicts.yaml": "schemas/memory/conflicts.schema.json",
     "memory/facts.yaml": "schemas/memory/facts.schema.json",
+    "memory/portable_memory.yaml": "schemas/memory/portable_memory.schema.json",
+    "memory/product_context.yaml": "schemas/memory/product_context.schema.json",
+    "memory/user_profile.yaml": "schemas/memory/user_profile.schema.json",
     "orchestrator/autopilot.yaml": "schemas/orchestrator/autopilot.schema.json",
     "orchestrator/anatomy_registry.yaml": "schemas/orchestrator/anatomy_registry.schema.json",
     "orchestrator/policies.yaml": "schemas/orchestrator/policies.schema.json",
@@ -28,9 +33,11 @@ FILE_SCHEMA_MAP = {
     "telemetry/audit_report.yaml": "schemas/telemetry/audit_report.schema.json",
     "telemetry/autopilot_state.yaml": "schemas/telemetry/autopilot_state.schema.json",
     "telemetry/blackboard.yaml": "schemas/telemetry/blackboard.schema.json",
+    "telemetry/brain_network_installs.yaml": "schemas/telemetry/brain_network_installs.schema.json",
     "telemetry/control_plane.yaml": "schemas/telemetry/control_plane.schema.json",
     "telemetry/discovery_state.yaml": "schemas/telemetry/discovery_state.schema.json",
     "telemetry/routes.yaml": "schemas/telemetry/routes.schema.json",
+    "telemetry/transplant_history.yaml": "schemas/telemetry/transplant_history.schema.json",
     "training/adapters.yaml": "schemas/training/adapters.schema.json",
     "training/jobs.yaml": "schemas/training/jobs.schema.json",
 }
@@ -104,6 +111,17 @@ def semantic_checks(root: Path) -> list[str]:
     brain = brain_data.get("brain_manifest", {})
     anatomy_registry_ref = brain.get("anatomy_registry", {}).get("path", "orchestrator/anatomy_registry.yaml")
     anatomy_registry = load_yaml_file(root / anatomy_registry_ref)
+    brain_network_ref = brain.get("brain_network_registry", {}).get("path", "capabilities/brain_network.yaml")
+    brain_network = load_yaml_file(root / brain_network_ref)
+    install_profiles_ref = brain.get("brain_network_install_profiles", {}).get("path", "capabilities/brain_network_install_profiles.yaml")
+    install_profiles_payload = load_yaml_file(root / install_profiles_ref)
+    install_state_ref = brain.get("brain_network_install_state", {}).get("path", "telemetry/brain_network_installs.yaml")
+    sovereign_memory = brain.get("sovereign_memory", {})
+    user_profile_ref = sovereign_memory.get("user_profile_path", "memory/user_profile.yaml")
+    product_context_ref = sovereign_memory.get("product_context_path", "memory/product_context.yaml")
+    portable_memory_ref = sovereign_memory.get("portable_memory_path", "memory/portable_memory.yaml")
+    transplant_history_ref = sovereign_memory.get("transplant_history_path", "telemetry/transplant_history.yaml")
+    transplant_script_ref = sovereign_memory.get("transplant_script", "scripts/transplant_brain.py")
     policies = load_yaml_file(root / "orchestrator/policies.yaml")
 
     brain_anatomy = set(brain.get("anatomy_map", {}).keys())
@@ -159,8 +177,50 @@ def semantic_checks(root: Path) -> list[str]:
             "brain.schema.yaml:policies.require_human_approval_for must match orchestrator/policies.yaml human_in_the_loop.required_for"
         )
 
+    if brain_network_ref and not (root / brain_network_ref).exists():
+        errors.append(f"brain.schema.yaml:brain_network_registry.path points to missing file `{brain_network_ref}`")
+    if install_profiles_ref and not (root / install_profiles_ref).exists():
+        errors.append(f"brain.schema.yaml:brain_network_install_profiles.path points to missing file `{install_profiles_ref}`")
+    if install_state_ref and not (root / install_state_ref).exists():
+        errors.append(f"brain.schema.yaml:brain_network_install_state.path points to missing file `{install_state_ref}`")
+    for label, ref in (
+        ("user_profile_path", user_profile_ref),
+        ("product_context_path", product_context_ref),
+        ("portable_memory_path", portable_memory_ref),
+        ("transplant_history_path", transplant_history_ref),
+        ("transplant_script", transplant_script_ref),
+    ):
+        if ref and not (root / ref).exists():
+            errors.append(f"brain.schema.yaml:sovereign_memory.{label} points to missing path `{ref}`")
+
+    integrations = brain_network.get("integrations", [])
+    bundles = brain_network.get("bundles", [])
+    install_profiles = install_profiles_payload.get("profiles", [])
+    add_duplicate_errors(errors, "capabilities/brain_network.yaml", integrations, "integration_id")
+    add_duplicate_errors(errors, "capabilities/brain_network_install_profiles.yaml", install_profiles, "integration_id")
+    known_integration_ids = {item.get("integration_id") for item in integrations if item.get("integration_id")}
+    known_profile_ids = {item.get("integration_id") for item in install_profiles if item.get("integration_id")}
+    for bundle in bundles:
+        bundle_id = bundle.get("bundle_id", "unknown-bundle")
+        for integration_id in bundle.get("integration_ids", []):
+            if integration_id not in known_integration_ids:
+                errors.append(
+                    f"capabilities/brain_network.yaml: bundle `{bundle_id}` references unknown integration `{integration_id}`"
+                )
+    for integration_id in sorted(known_integration_ids - known_profile_ids):
+        errors.append(f"capabilities/brain_network_install_profiles.yaml: missing install profile for integration `{integration_id}`")
+    for integration_id in sorted(known_profile_ids - known_integration_ids):
+        errors.append(f"capabilities/brain_network_install_profiles.yaml: profile exists for unknown integration `{integration_id}`")
+
+    curated_registry_path = policies.get("brain_network_policy", {}).get("curated_registry_path")
+    if curated_registry_path and curated_registry_path != brain_network_ref:
+        errors.append("orchestrator/policies.yaml:brain_network_policy.curated_registry_path must match brain.schema.yaml brain_network_registry.path")
+
     brain_tier = brain.get("repository_profile", {}).get("distribution_tier")
     packaging_profile = policies.get("packaging_profile", {})
+    transplant_policy = policies.get("transplant_policy", {})
+    sovereign_policy = policies.get("sovereign_product_brain_policy", {})
+    memory_classification_policy = policies.get("memory_classification_policy", {})
     policy_tier = packaging_profile.get("active_tier")
     tier_defs = packaging_profile.get("tiers", {})
     if brain_tier and brain_tier not in PACKAGING_TIERS:
@@ -178,6 +238,14 @@ def semantic_checks(root: Path) -> list[str]:
         errors.append("orchestrator/policies.yaml:community tier must use shared_filesystem_fabric as the configured remote transport")
     if remote_mode and allowed_modes and remote_mode not in allowed_modes:
         errors.append("orchestrator/policies.yaml:remote_worker_policy.transport_mode must be allowed by the active packaging tier")
+    if not sovereign_policy.get("always_on", False):
+        errors.append("orchestrator/policies.yaml:sovereign_product_brain_policy.always_on must be true")
+    if not memory_classification_policy.get("explicit_classification_required", False):
+        errors.append("orchestrator/policies.yaml:memory_classification_policy.explicit_classification_required must be true")
+    if not transplant_policy.get("enabled", False):
+        errors.append("orchestrator/policies.yaml:transplant_policy.enabled must be true")
+    if not transplant_policy.get("local_target_only", False):
+        errors.append("orchestrator/policies.yaml:transplant_policy.local_target_only must be true for the current implementation")
 
     schema_refs = policies.get("blackboard_policy", {}).get("event_schema_refs", {})
     event_types = set(policies.get("blackboard_policy", {}).get("event_types", []))

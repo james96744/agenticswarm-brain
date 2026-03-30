@@ -1,0 +1,133 @@
+version: '1.0'
+last_updated: '2026-03-30'
+description: Portable and derived-portable sovereign-brain memory, route preferences,
+  and capability preferences.
+memory_classification_policy:
+  portable_classes:
+  - user_profile
+  - general_quality_pattern
+  - general_capability_preference
+  - portable_route_preference
+  repo_bound_classes:
+  - repo_fact
+  - repo_conflict
+  - control_plane_state
+  - blackboard_event
+  - repo_route_record
+  - repo_runtime_registry
+  - repo_install_snapshot
+  derived_portable_classes:
+  - derived_portable_lesson
+  - scrubbed_route_pattern
+portable_memory:
+- record_id: portable-memory-quality-bias
+  classification: portable
+  type: general_quality_pattern
+  summary: Balanced excellence with guarded high autonomy and meticulous refinement.
+  confidence: 0.9
+  updated_at: '2026-03-30T05:02:41.648848+00:00'
+derived_portable_lessons:
+- lesson_id: portable-lesson-1
+  task_family: boilerplate_code
+  summary: For `boilerplate_code`, prefer `codex-cli` with `anthropic-router` and
+    1 supporting backends when the quality target is `balanced`.
+  confidence: 0.865
+  evidence_count: 2
+  source_type: verified_routes
+  updated_at: '2026-03-30T05:02:41.648771+00:00'
+- lesson_id: portable-lesson-2
+  task_family: boilerplate_code
+  summary: For `boilerplate_code`, prefer `python-workflow-runner` with `anthropic-router`
+    and 1 supporting backends when the quality target is `balanced`.
+  confidence: 0.8975
+  evidence_count: 16
+  source_type: verified_routes
+  updated_at: '2026-03-30T05:02:41.648778+00:00'
+- lesson_id: portable-lesson-3
+  task_family: data_migration
+  summary: For `data_migration`, prefer `python-workflow-runner` with `anthropic-router`
+    and 1 supporting backends when the quality target is `balanced`.
+  confidence: 0.985
+  evidence_count: 2
+  source_type: verified_routes
+  updated_at: '2026-03-30T05:02:41.648783+00:00'
+portable_route_preferences:
+- preference_id: portable-route-1
+  task_family: boilerplate_code
+  repo_archetype: generalized
+  quality_target: balanced
+  preferred_executor_id: codex-cli
+  preferred_router_id: anthropic-router
+  preferred_backend_ids:
+  - cli-rg
+  confidence: 0.865
+  evidence_count: 2
+  updated_at: '2026-03-30T05:02:41.648766+00:00'
+- preference_id: portable-route-2
+  task_family: boilerplate_code
+  repo_archetype: generalized
+  quality_target: balanced
+  preferred_executor_id: python-workflow-runner
+  preferred_router_id: anthropic-router
+  preferred_backend_ids:
+  - cli-rg
+  confidence: 0.8975
+  evidence_count: 16
+  updated_at: '2026-03-30T05:02:41.648776+00:00'
+- preference_id: portable-route-3
+  task_family: data_migration
+  repo_archetype: generalized
+  quality_target: balanced
+  preferred_executor_id: python-workflow-runner
+  preferred_router_id: anthropic-router
+  preferred_backend_ids:
+  - mcp-vercel
+  confidence: 0.985
+  evidence_count: 2
+  updated_at: '2026-03-30T05:02:41.648781+00:00'
+capability_preferences:
+- capability_id: codex-cli
+  preference_kind: executor
+  accepted_count: 0
+  rejected_count: 0
+  task_families: {}
+  confidence_sum: 0.0
+  updated_at: '2026-03-30T05:02:41.648788+00:00'
+  generalized_success_rate: 1.0
+- capability_id: python-workflow-runner
+  preference_kind: executor
+  accepted_count: 8
+  rejected_count: 0
+  task_families:
+    boilerplate_code: 8
+  confidence_sum: 7.12
+  updated_at: '2026-03-30T05:13:10.464531+00:00'
+  generalized_success_rate: 1.0
+- capability_id: cli-rg
+  preference_kind: backend
+  accepted_count: 8
+  rejected_count: 0
+  task_families:
+    boilerplate_code: 8
+  confidence_sum: 7.12
+  updated_at: '2026-03-30T05:13:10.464538+00:00'
+  generalized_success_rate: 1.0
+- capability_id: mcp-vercel
+  preference_kind: backend
+  accepted_count: 0
+  rejected_count: 0
+  task_families: {}
+  confidence_sum: 0.0
+  updated_at: '2026-03-30T05:02:41.648846+00:00'
+  generalized_success_rate: 1.0
+- capability_id: anthropic-router
+  preference_kind: router
+  accepted_count: 8
+  rejected_count: 0
+  task_families:
+    boilerplate_code: 8
+  confidence_sum: 7.12
+  updated_at: '2026-03-30T05:13:10.464535+00:00'
+notes:
+- Portable intelligence must not include repo names, file paths, task IDs, or artifact
+  bodies.

@@ -47,6 +47,10 @@ This updates:
 - [`telemetry/audit_report.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/audit_report.yaml)
 - [`telemetry/discovery_state.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/discovery_state.yaml)
 - [`telemetry/autopilot_state.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/autopilot_state.yaml)
+- [`memory/user_profile.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/memory/user_profile.yaml)
+- [`memory/product_context.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/memory/product_context.yaml)
+- [`memory/portable_memory.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/memory/portable_memory.yaml)
+- [`telemetry/transplant_history.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/transplant_history.yaml)
 
 After that first non-dry run, the brain takes over:
 
@@ -121,6 +125,7 @@ Examples:
 
 ```bash
 ./.venv/bin/python scripts/cerebrum.py plan --repo-root . --dry-run
+.venv/bin/python scripts/cerebrum.py transplant --repo-root . --target /path/to/next-repo --dry-run
 ./.venv/bin/python scripts/cerebellum.py validate --repo-root .
 ./.venv/bin/python scripts/brainstem.py status --repo-root .
 ./.venv/bin/python scripts/neurons.py execute --repo-root . --request-file request.yaml
@@ -135,6 +140,15 @@ To verify the full anatomy wrapper surface end to end, run:
 ```
 
 This exercises every registered wrapper action, including safe execution paths for `neurons` and `brainstem`.
+
+## 5B. Transplant The Sovereign Brain Into Another Repo
+
+```bash
+./.venv/bin/python scripts/transplant_brain.py --repo-root . --target /path/to/next-repo --dry-run
+./.venv/bin/python scripts/transplant_brain.py --repo-root . --target /path/to/next-repo
+```
+
+This installs the scaffold into the target repo, carries only portable intelligence, resets repo-bound target state, and then rebuilds target-specific discovery and runtime state.
 
 ## 6. Populate The Capability Registries
 

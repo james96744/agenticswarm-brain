@@ -135,6 +135,146 @@ notes:
   - This file is the durable control-plane state for guarded-autonomy execution.
 """
 
+BRAIN_NETWORK_INSTALLS_TEMPLATE = """version: "1.0"
+last_updated: "{date}"
+description: Durable install and activation state for curated brain-network integrations.
+
+installs: []
+benchmarks: []
+
+notes:
+  - Each install record tracks local install feasibility, activation status, and benchmark snapshots.
+"""
+
+USER_PROFILE_TEMPLATE = """version: "1.0"
+last_updated: "{date}"
+description: Portable sovereign-brain profile for personal taste, judgment, autonomy, and acceptance signals.
+
+user_taste_profile:
+  design_preferences: []
+  technical_standards: []
+  product_ambition: balanced_excellence
+  risk_tolerance: guarded_high_autonomy
+  refinement_style: meticulous
+  quality_target_preferences: {{}}
+  task_family_preferences: {{}}
+
+product_judgment_profile:
+  architecture_priority: 0.8
+  ux_priority: 0.8
+  reliability_priority: 0.85
+  clarity_priority: 0.8
+  polish_priority: 0.75
+  distinctiveness_priority: 0.7
+  accepted_work_count: 0
+  rejected_work_count: 0
+  edited_work_count: 0
+  reverted_work_count: 0
+  reused_work_count: 0
+
+autonomy_profile:
+  mode: guarded_high_autonomy
+  auto_execute_task_classes:
+    - documentation_refinement
+    - quality_hardening
+    - consistency_fix
+    - benchmark_refresh
+  approval_required_for:
+    - destructive_actions
+    - production_deployment
+    - security_sensitive_operations
+    - major_product_direction_change
+  meticulous_task_bias: high
+
+acceptance_signals: []
+
+notes:
+  - This file stores portable user-owned intelligence that may survive repo transplants.
+"""
+
+PRODUCT_CONTEXT_TEMPLATE = """version: "1.0"
+last_updated: "{date}"
+description: Repo-local product context for ontology, product intent, quality model, and ranked opportunities.
+
+product_intent_graph:
+  repo_name: ""
+  goal_summary: ""
+  target_users: []
+  feature_priorities: []
+  differentiators: []
+  constraints: []
+  last_refreshed_at: null
+
+product_quality_model:
+  architecture_quality: 0.5
+  ux_quality: 0.5
+  reliability: 0.5
+  maintainability: 0.5
+  clarity: 0.5
+  polish: 0.5
+  distinctiveness: 0.5
+  last_refreshed_at: null
+
+repo_ontology:
+  repo_fingerprint: ""
+  repo_name: ""
+  stack: []
+  risk_level: medium
+  file_count: 0
+  modules: []
+  domains: []
+  workflows: []
+  user_facing_surfaces: []
+  architecture_relationships: []
+  last_refreshed_at: null
+
+opportunity_map: []
+
+notes:
+  - This file is repo-bound and should be rebuilt after transplant into a new repository.
+"""
+
+PORTABLE_MEMORY_TEMPLATE = """version: "1.0"
+last_updated: "{date}"
+description: Portable and derived-portable sovereign-brain memory, route preferences, and capability preferences.
+
+memory_classification_policy:
+  portable_classes:
+    - user_profile
+    - general_quality_pattern
+    - general_capability_preference
+    - portable_route_preference
+  repo_bound_classes:
+    - repo_fact
+    - repo_conflict
+    - control_plane_state
+    - blackboard_event
+    - repo_route_record
+    - repo_runtime_registry
+    - repo_install_snapshot
+  derived_portable_classes:
+    - derived_portable_lesson
+    - scrubbed_route_pattern
+
+portable_memory: []
+derived_portable_lessons: []
+portable_route_preferences: []
+capability_preferences: []
+
+notes:
+  - Portable intelligence must not include repo names, file paths, task IDs, or artifact bodies.
+"""
+
+TRANSPLANT_HISTORY_TEMPLATE = """version: "1.0"
+last_updated: "{date}"
+description: Transplant history for sovereign-brain carryover across repositories.
+
+transplants: []
+
+notes:
+  - Each entry records the portable payload transferred into a target repo and the sections stripped as repo-bound.
+"""
+
 
 def now_date() -> str:
     return datetime.now(timezone.utc).date().isoformat()
@@ -196,7 +336,7 @@ def merge_gitignore(source_root: Path, target_root: Path) -> None:
 def reset_brain_manifest(path: Path) -> None:
     text = path.read_text(encoding="utf-8")
     text = re.sub(r"(?m)^    name:.*$", "    name: ''", text)
-    text = re.sub(r"(?m)^    stack:.*$", "    stack: []", text)
+    text = re.sub(r"(?ms)^    stack:.*?(?=^    [A-Za-z_])", "    stack: []\n", text)
     text = re.sub(r"(?ms)\n  discovery_summary:.*$", "", text)
     path.write_text(text.rstrip() + "\n", encoding="utf-8")
 
@@ -245,6 +385,26 @@ def reset_stateful_files(target_root: Path) -> None:
         CONTROL_PLANE_TEMPLATE.format(date=now_date()),
         encoding="utf-8",
     )
+    (target_root / "telemetry/brain_network_installs.yaml").write_text(
+        BRAIN_NETWORK_INSTALLS_TEMPLATE.format(date=now_date()),
+        encoding="utf-8",
+    )
+    (target_root / "memory/user_profile.yaml").write_text(
+        USER_PROFILE_TEMPLATE.format(date=now_date()),
+        encoding="utf-8",
+    )
+    (target_root / "memory/product_context.yaml").write_text(
+        PRODUCT_CONTEXT_TEMPLATE.format(date=now_date()),
+        encoding="utf-8",
+    )
+    (target_root / "memory/portable_memory.yaml").write_text(
+        PORTABLE_MEMORY_TEMPLATE.format(date=now_date()),
+        encoding="utf-8",
+    )
+    (target_root / "telemetry/transplant_history.yaml").write_text(
+        TRANSPLANT_HISTORY_TEMPLATE.format(date=now_date()),
+        encoding="utf-8",
+    )
 
 
 def write_manifest(source_root: Path, target_root: Path) -> None:
@@ -255,6 +415,15 @@ def write_manifest(source_root: Path, target_root: Path) -> None:
         "installed_paths": list(ROOT_FILES) + list(ROOT_DIRS),
     }
     (target_root / MANIFEST_PATH).write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+
+
+def install_scaffold(source_root: Path, target_root: Path) -> None:
+    for relative in ROOT_FILES + ROOT_DIRS:
+        install_path(source_root, target_root, relative)
+
+    merge_gitignore(source_root, target_root)
+    reset_stateful_files(target_root)
+    write_manifest(source_root, target_root)
 
 
 def main() -> int:
@@ -275,12 +444,7 @@ def main() -> int:
         print(f"Target path is not a directory: {target_root}", file=sys.stderr)
         return 1
 
-    for relative in ROOT_FILES + ROOT_DIRS:
-        install_path(source_root, target_root, relative)
-
-    merge_gitignore(source_root, target_root)
-    reset_stateful_files(target_root)
-    write_manifest(source_root, target_root)
+    install_scaffold(source_root, target_root)
 
     print(f"Installed AgenticSwarm scaffold into {target_root}")
     print("Next steps:")

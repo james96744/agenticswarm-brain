@@ -193,6 +193,42 @@ memory_policy:
   confidence_decay_half_life_days: 30
   expire_low_confidence_facts: true
 
+sovereign_product_brain_policy:
+  always_on: true
+  deep_personalization: true
+  balanced_excellence_default: true
+  guarded_high_autonomy_default: true
+  optimize_full_product_stack: true
+
+memory_classification_policy:
+  explicit_classification_required: true
+  portable_classes:
+    - user_profile
+    - general_quality_pattern
+    - general_capability_preference
+    - portable_route_preference
+  repo_bound_classes:
+    - repo_fact
+    - repo_conflict
+    - control_plane_state
+    - blackboard_event
+    - repo_route_record
+    - repo_runtime_registry
+    - repo_install_snapshot
+  derived_portable_classes:
+    - derived_portable_lesson
+    - scrubbed_route_pattern
+  scrub_repo_identifiers_from_portable_memory: true
+
+transplant_policy:
+  enabled: true
+  local_target_only: true
+  source_repo_non_destructive: true
+  preserve_portable_intelligence_only: true
+  run_bootstrap_after_transplant: true
+  run_audit_after_transplant: true
+  write_transplant_history: true
+
 truth_maintenance_policy:
   enabled: true
   contradiction_detection_enabled: true
@@ -207,6 +243,40 @@ plugin_trust_policy:
   require_destructive_capability_flags: true
   require_data_classification: true
   human_approval_for_destructive_plugins: true
+
+brain_network_policy:
+  curated_registry_path: capabilities/brain_network.yaml
+  use_curated_registry_for_install_planning: true
+  prefer_curated_integrations_when_discovered: true
+  treat_uninstalled_curated_integrations_as_recommendation_only: true
+  allow_auto_install: false
+  install_waves:
+    wave_1:
+      - persistent_learning
+      - architecture_optimization
+    wave_2:
+      - inter_brain_communication
+      - workflow_optimization
+    wave_3:
+      - token_optimization
+  anatomy_alignment:
+    persistent_learning:
+      - limbic_system
+      - cerebrum
+    token_optimization:
+      - cerebellum
+      - brainstem
+    inter_brain_communication:
+      - brainstem
+      - neurons
+    workflow_optimization:
+      - cerebellum
+      - cerebrum
+      - brainstem
+    architecture_optimization:
+      - cerebrum
+      - dendrites
+      - limbic_system
 
 packaging_profile:
   active_tier: community

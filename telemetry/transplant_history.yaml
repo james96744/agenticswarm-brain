@@ -1,0 +1,6 @@
+version: '1.0'
+last_updated: '2026-03-30'
+description: Transplant history for sovereign-brain carryover across repositories.
+transplants: []
+notes:
+- Each entry records the portable payload transferred into a target repo and the sections stripped as repo-bound.

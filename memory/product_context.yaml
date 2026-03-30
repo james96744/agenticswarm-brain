@@ -1,0 +1,63 @@
+version: '1.0'
+last_updated: '2026-03-30'
+description: Repo-local product context for ontology, product intent, quality model,
+  and ranked opportunities.
+product_intent_graph:
+  repo_name: agenticswarm creation
+  goal_summary: Continuously elevate `agenticswarm creation` into a high-quality product.
+  target_users: []
+  feature_priorities: []
+  differentiators: []
+  constraints:
+  - risk:medium
+  last_refreshed_at: '2026-03-30T05:03:04.892628+00:00'
+product_quality_model:
+  architecture_quality: 0.55
+  ux_quality: 0.45
+  reliability: 0.5
+  maintainability: 0.65
+  clarity: 0.55
+  polish: 0.45
+  distinctiveness: 0.5
+  last_refreshed_at: '2026-03-30T05:03:04.892623+00:00'
+repo_ontology:
+  repo_fingerprint: a15ce9029be6bd23
+  repo_name: agenticswarm creation
+  stack: &id001
+  - node
+  risk_level: medium
+  file_count: 135
+  modules:
+  - AGENTS.md
+  - README.md
+  - USAGE.md
+  - agent.md
+  - bootstrap.sh
+  - brain.schema.yaml
+  - install_brain.py
+  - run_brain.sh
+  domains: *id001
+  workflows:
+  - ci
+  user_facing_surfaces:
+  - schemas
+  - telemetry
+  architecture_relationships:
+  - module:AGENTS.md
+  - module:README.md
+  - module:USAGE.md
+  - module:agent.md
+  - module:bootstrap.sh
+  - module:brain.schema.yaml
+  - module:install_brain.py
+  - module:run_brain.sh
+  last_refreshed_at: '2026-03-30T05:03:04.892680+00:00'
+opportunity_map:
+- opportunity_id: opportunity-1
+  category: reliability
+  summary: Add or expand automated tests and verification coverage.
+  priority: 1
+  confidence: 0.92
+  source: bootstrap_discovery
+notes:
+- This file is repo-bound and should be rebuilt after transplant into a new repository.

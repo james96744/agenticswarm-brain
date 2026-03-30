@@ -102,11 +102,13 @@ def safe_relpath(path: Path, root: Path) -> str:
 
 def iter_repo_files(root: Path):
     for current_root, dirnames, filenames in __import__("os").walk(root):
+        current_path = Path(current_root)
         dirnames[:] = [
             name
             for name in dirnames
             if name not in IGNORED_DIRS and not any(name.startswith(prefix) for prefix in IGNORED_PREFIXES)
         ]
-        current_path = Path(current_root)
+        if current_path == root / ".brain_integrations":
+            dirnames[:] = [name for name in dirnames if name not in {"repos", "venvs"}]
         for filename in filenames:
             yield current_path / filename

@@ -6,8 +6,10 @@ from datetime import datetime, timezone
 
 try:
     from brain_utils import dump_json_stdout, dump_yaml_file, load_yaml_file, repo_root_from
+    from sovereign_memory import ensure_state_files, rebuild_portable_intelligence
 except ModuleNotFoundError:
     from scripts.brain_utils import dump_json_stdout, dump_yaml_file, load_yaml_file, repo_root_from
+    from scripts.sovereign_memory import ensure_state_files, rebuild_portable_intelligence
 
 
 def _utc_now() -> str:
@@ -41,6 +43,7 @@ def _safe_int(value, default: int = 0) -> int:
 
 
 def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
+    ensure_state_files(root)
     routes_path = root / "telemetry" / "routes.yaml"
     benchmarks_path = root / "capabilities" / "benchmarks.yaml"
     routes_payload = load_yaml_file(routes_path)
@@ -59,6 +62,7 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
             "success_count": 0,
             "avg_replay_score_total": 0.0,
             "avg_latency_total": 0.0,
+            "avg_total_tokens_total": 0.0,
             "last_run_id": None,
             "updated_at": None,
         }
@@ -77,6 +81,10 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
                 "replay_candidate_count": 0,
                 "avg_confidence_total": 0.0,
                 "avg_latency_total": 0.0,
+                "avg_total_tokens_total": 0.0,
+                "avg_prompt_tokens_total": 0.0,
+                "avg_completion_tokens_total": 0.0,
+                "avg_tool_context_tokens_total": 0.0,
                 "queued_run_count": 0,
                 "remote_dispatch_count": 0,
                 "last_executor_id": None,
@@ -97,6 +105,7 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
                 "success_count": 0,
                 "critic_pass_count": 0,
                 "avg_latency_total": 0.0,
+                "avg_total_tokens_total": 0.0,
                 "last_used_at": None,
             }
             model_rows[key] = row
@@ -114,6 +123,7 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
                 "critic_failure_count": 0,
                 "avg_confidence_total": 0.0,
                 "avg_latency_total": 0.0,
+                "avg_total_tokens_total": 0.0,
                 "prune_protected": False,
                 "updated_at": None,
             }
@@ -130,6 +140,7 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
                 "run_count": 0,
                 "success_count": 0,
                 "avg_latency_total": 0.0,
+                "avg_total_tokens_total": 0.0,
                 "dispatch_mode": dispatch_mode,
                 "last_status": None,
                 "updated_at": None,
@@ -145,6 +156,10 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
         verified = _verified_route(route)
         confidence = _safe_float(route.get("confidence"))
         latency_ms = _safe_int(route.get("latency_ms"))
+        total_tokens = _safe_int(route.get("total_tokens"))
+        prompt_tokens = _safe_int(route.get("prompt_tokens"))
+        completion_tokens = _safe_int(route.get("completion_tokens"))
+        tool_context_tokens = _safe_int(route.get("tool_context_tokens"))
         replay_score = _safe_float(route.get("replay_score", 1.0 if verified else 0.0))
         timestamp = route.get("timestamp", _utc_now())
 
@@ -156,6 +171,10 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
         task["replay_candidate_count"] += 1 if route.get("replay_eligible") else 0
         task["avg_confidence_total"] += confidence
         task["avg_latency_total"] += latency_ms
+        task["avg_total_tokens_total"] += total_tokens
+        task["avg_prompt_tokens_total"] += prompt_tokens
+        task["avg_completion_tokens_total"] += completion_tokens
+        task["avg_tool_context_tokens_total"] += tool_context_tokens
         task["queued_run_count"] += 1 if route.get("dispatch_mode") == "deferred" else 0
         task["remote_dispatch_count"] += 1 if route.get("dispatch_mode") == "remote_worker" else 0
         if timestamp >= str(task.get("updated_at") or ""):
@@ -170,6 +189,7 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
             model["success_count"] += 1 if success else 0
             model["critic_pass_count"] += 1 if route.get("critic_status") == "passed" else 0
             model["avg_latency_total"] += latency_ms
+            model["avg_total_tokens_total"] += total_tokens
             if timestamp >= str(model.get("last_used_at") or ""):
                 model["last_used_at"] = timestamp
 
@@ -181,6 +201,7 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
             agent["critic_failure_count"] += 1 if route.get("critic_status") == "failed" else 0
             agent["avg_confidence_total"] += confidence
             agent["avg_latency_total"] += latency_ms
+            agent["avg_total_tokens_total"] += total_tokens
             if timestamp >= str(agent.get("updated_at") or ""):
                 agent["updated_at"] = timestamp
 
@@ -189,6 +210,7 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
             adapter["run_count"] += 1
             adapter["success_count"] += 1 if success else 0
             adapter["avg_latency_total"] += latency_ms
+            adapter["avg_total_tokens_total"] += total_tokens
             adapter["dispatch_mode"] = route.get("dispatch_mode", "immediate")
             adapter["last_status"] = route.get("status")
             if timestamp >= str(adapter.get("updated_at") or ""):
@@ -209,6 +231,7 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
             cluster["success_count"] += 1 if success else 0
             cluster["avg_replay_score_total"] += replay_score
             cluster["avg_latency_total"] += latency_ms
+            cluster["avg_total_tokens_total"] += total_tokens
             if timestamp >= str(cluster.get("updated_at") or ""):
                 cluster["last_run_id"] = route.get("run_id")
                 cluster["updated_at"] = timestamp
@@ -226,6 +249,10 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
                 "replay_candidate_count": row["replay_candidate_count"],
                 "avg_confidence": round(row["avg_confidence_total"] / run_count, 4),
                 "avg_latency_ms": round(row["avg_latency_total"] / run_count, 2),
+                "avg_total_tokens": round(row["avg_total_tokens_total"] / run_count, 2),
+                "avg_prompt_tokens": round(row["avg_prompt_tokens_total"] / run_count, 2),
+                "avg_completion_tokens": round(row["avg_completion_tokens_total"] / run_count, 2),
+                "avg_tool_context_tokens": round(row["avg_tool_context_tokens_total"] / run_count, 2),
                 "queued_run_count": row["queued_run_count"],
                 "remote_dispatch_count": row["remote_dispatch_count"],
                 "last_executor_id": row["last_executor_id"],
@@ -245,6 +272,7 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
                 "success_count": row["success_count"],
                 "critic_pass_count": row["critic_pass_count"],
                 "avg_latency_ms": round(row["avg_latency_total"] / run_count, 2),
+                "avg_total_tokens": round(row["avg_total_tokens_total"] / run_count, 2),
                 "last_used_at": row["last_used_at"] or _utc_now(),
             }
         )
@@ -262,8 +290,9 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
                 "critic_failure_count": critic_failure_count,
                 "avg_confidence": round(row["avg_confidence_total"] / run_count, 4),
                 "avg_latency_ms": round(row["avg_latency_total"] / run_count, 2),
+                "avg_total_tokens": round(row["avg_total_tokens_total"] / run_count, 2),
                 "prune_protected": row["prune_protected"],
-                "value_add_per_token": round(row["avg_confidence_total"] / run_count, 4),
+                "value_add_per_token": round((row["avg_confidence_total"] * 1000.0) / max(1.0, row["avg_total_tokens_total"]), 4),
                 "critic_rejection_rate": round(critic_failure_count / run_count, 4),
                 "ignored_edit_rate": 0.0,
                 "updated_at": row["updated_at"] or _utc_now(),
@@ -280,6 +309,7 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
                 "run_count": row["run_count"],
                 "success_count": row["success_count"],
                 "avg_latency_ms": round(row["avg_latency_total"] / run_count, 2),
+                "avg_total_tokens": round(row["avg_total_tokens_total"] / run_count, 2),
                 "dispatch_mode": row["dispatch_mode"],
                 "last_status": row["last_status"],
                 "updated_at": row["updated_at"] or _utc_now(),
@@ -301,6 +331,7 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
                 "success_rate": round(row["success_count"] / run_count, 4),
                 "avg_replay_score": round(row["avg_replay_score_total"] / run_count, 4),
                 "avg_latency_ms": round(row["avg_latency_total"] / run_count, 2),
+                "avg_total_tokens": round(row["avg_total_tokens_total"] / run_count, 2),
                 "last_run_id": row["last_run_id"],
                 "updated_at": row["updated_at"] or _utc_now(),
             }
@@ -314,6 +345,7 @@ def rebuild_learning_state(root, *, top_per_family: int = 3) -> dict:
                 float(item.get("avg_replay_score", 0.0)),
                 float(item.get("success_rate", 0.0)),
                 int(item.get("verified_execution_count", 0)),
+                -float(item.get("avg_total_tokens", 0.0)),
                 -float(item.get("avg_latency_ms", 0.0)),
             ),
             reverse=True,
@@ -359,10 +391,11 @@ def main() -> int:
 
     root = repo_root_from(args.repo_root)
     rebuilt = rebuild_learning_state(root, top_per_family=max(1, args.top_per_family))
+    portable_result = rebuild_portable_intelligence(root, write=not args.dry_run)
     if not args.dry_run:
         dump_yaml_file(root / "capabilities/benchmarks.yaml", rebuilt["benchmarks"])
         dump_yaml_file(root / "telemetry/routes.yaml", rebuilt["routes"])
-    dump_json_stdout({"dry_run": args.dry_run, **rebuilt["summary"]})
+    dump_json_stdout({"dry_run": args.dry_run, **rebuilt["summary"], **portable_result["summary"]})
     return 0
 
 

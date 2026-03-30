@@ -1,0 +1,1639 @@
+version: '1.0'
+last_updated: '2026-03-30'
+description: Durable install and activation state for curated brain-network integrations.
+installs:
+- integration_id: codebase-memory-mcp
+  status: activated
+  install_tier: local_ready
+  installed_at: '2026-03-30T03:11:54.838500+00:00'
+  activated_at: '2026-03-30T03:11:54.838671+00:00'
+  blocked_reason: null
+  repo_path: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/codebase-memory-mcp
+  wrapper_paths:
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/mcp/codebase-memory-mcp.mcp.json
+  steps:
+  - status: success
+    command:
+    - git
+    - clone
+    - --depth
+    - '1'
+    - https://github.com/DeusData/codebase-memory-mcp
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/codebase-memory-mcp
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: 'Cloning into ''/Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/codebase-memory-mcp''...
+
+      Updating files:  55% (446/800)
+
+      Updating files:  56% (448/800)
+
+      Updating files:  57% (456/800)
+
+      Updating files:  58% (464/800)
+
+      Updating files:  59% (472/800)
+
+      Updating files:  60% (480/800)
+
+      Updating files:  61% (488/800)
+
+      Updating files:  62% (496/800)
+
+      Updating files:  63% (504/800)
+
+      Updating files:  64% (512/800)
+
+      Updating files:  65% (520/800)
+
+      Updating files:  66% (528/800)
+
+      Updating files:  67% (536/800)
+
+      Updating files:  68% (544/800)
+
+      Updating files:  69% (552/800)
+
+      Updating files:  70% (560/800)
+
+      Updating files:  71% (568/800)
+
+      Updating files:  72% (576/800)
+
+      Updating files:  73% (584/800)
+
+      Updating files:  74% (592/800)
+
+      Updating files:  75% (600/800)
+
+      Updating files:  76% (608/800)
+
+      Updating files:  77% (616/800)
+
+      Updating files:  78% (624/800)
+
+      Updating files:  79% (632/800)
+
+      Updating files:  80% (640/800)
+
+      Updating files:  81% (648/800)
+
+      Updating files:  82% (656/800)
+
+      Updating files:  83% (664/800)
+
+      Updating files:  84% (672/800)
+
+      Updating files:  85% (680/800)
+
+      Updating files:  86% (688/800)
+
+      Updating files:  87% (696/800)
+
+      Updating files:  88% (704/800)
+
+      Updating files:  89% (712/800)
+
+      Updating files:  90% (720/800)
+
+      Updating files:  91% (728/800)
+
+      Updating files:  92% (736/800)
+
+      Updating files:  93% (744/800)
+
+      Updating files:  94% (752/800)
+
+      Updating files:  95% (760/800)
+
+      Updating files:  96% (768/800)
+
+      Updating files:  97% (776/800)
+
+      Updating files:  98% (784/800)
+
+      Updating files:  99% (792/800)
+
+      Updating files: 100% (800/800)
+
+      Updating files: 100% (800/800), done.'
+  - status: success
+    command:
+    - bash
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/codebase-memory-mcp/install.sh
+    - --dir
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/bin
+    - --skip-config
+    cwd: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/codebase-memory-mcp
+    exit_code: 0
+    stdout: "codebase-memory-mcp installer\n  os:      darwin\n  arch:    arm64\n\
+      \  variant: standard\n  target:  /Users/j/Desktop/Lahaolesolutions/agenticswarm\
+      \ creation/.brain_integrations/bin/codebase-memory-mcp\n\nDownloading codebase-memory-mcp-darwin-arm64.tar.gz...\n\
+      Checksum verified.\nExtracting...\nFixing macOS code signing...\nInstalled:\
+      \ codebase-memory-mcp 0.5.7\n\nSkipping agent configuration (--skip-config)\n\
+      \nNOTE: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/bin\
+      \ is not in your PATH.\nAdd it to your shell config:\n\n  echo 'export PATH=\"\
+      /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/bin:$PATH\"\
+      ' >> ~/.zshrc\n\nDone! Restart your coding agent to start using codebase-memory-mcp."
+    stderr: "#=#=#                                                               \
+      \           \n##O#-#                                                       \
+      \                  \n##O=#  #                                              \
+      \                         \n#=#=-#  #                                      \
+      \                                \n-#O#- #   #                             \
+      \                                       \n\n                               \
+      \                                            0.2%\n####                    \
+      \                                                   5.7%\n#######          \
+      \                                                         10.4%\n##############\
+      \                                                            19.5%\n####################\
+      \                                                      28.0%\n###########################\
+      \                                               37.8%\n################################\
+      \                                          45.2%\n#################################\
+      \                                         47.2%\n#######################################\
+      \                                   55.4%\n###############################################\
+      \                           66.0%\n######################################################\
+      \                    75.4%\n###########################################################\
+      \               82.8%\n###################################################################\
+      \       93.2%\n########################################################################\
+      \ 100.0%"
+  activation_note: null
+- integration_id: nocturne-memory
+  status: activated
+  install_tier: local_ready
+  installed_at: '2026-03-30T03:12:09.998098+00:00'
+  activated_at: '2026-03-30T03:12:09.998116+00:00'
+  blocked_reason: null
+  repo_path: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/nocturne_memory
+  wrapper_paths:
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/bin/nocturne-memory-mcp
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/mcp/nocturne-memory.mcp.json
+  steps:
+  - status: success
+    command:
+    - git
+    - clone
+    - --depth
+    - '1'
+    - https://github.com/Dataojitori/nocturne_memory
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/nocturne_memory
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: Cloning into '/Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/nocturne_memory'...
+  - status: success
+    command:
+    - uv
+    - venv
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/venvs/nocturne-memory
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: 'Using CPython 3.14.2 interpreter at: /opt/homebrew/opt/python@3.14/bin/python3.14
+
+      Creating virtual environment at: .brain_integrations/venvs/nocturne-memory
+
+      Activate with: source .brain_integrations/venvs/nocturne-memory/bin/activate'
+  - status: success
+    command:
+    - uv
+    - pip
+    - install
+    - --python
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/venvs/nocturne-memory/bin/python
+    - -r
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/nocturne_memory/backend/requirements.txt
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: "Using Python 3.14.2 environment at: .brain_integrations/venvs/nocturne-memory\n\
+      WARN Skipping file for requests: requests-2.23.0-py2.7.egg\nWARN Skipping file\
+      \ for sqlalchemy: SQLAlchemy-0.1.1-py2.4.egg\nWARN Skipping file for sqlalchemy:\
+      \ SQLAlchemy-0.1.2-py2.4.egg\nWARN Skipping file for sqlalchemy: SQLAlchemy-0.1.3-py2.4.egg\n\
+      WARN Skipping file for sqlalchemy: SQLAlchemy-0.1.4-py2.4.egg\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6b1-py2.3.egg\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6b1-py2.4.egg\nWARN Skipping file for setuptools: setuptools-0.6b2-py2.3.egg\n\
+      WARN Skipping file for setuptools: setuptools-0.6b2-py2.4.egg\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6b3-py2.3.egg\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6b3-py2.4.egg\nWARN Skipping file for setuptools: setuptools-0.6b4-py2.3.egg\n\
+      WARN Skipping file for setuptools: setuptools-0.6b4-py2.4.egg\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c1-py2.3.egg\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c1-py2.4.egg\nWARN Skipping file for setuptools: setuptools-0.6c10-1.src.rpm\n\
+      WARN Skipping file for setuptools: setuptools-0.6c10-py2.3.egg\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c10-py2.4.egg\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c10-py2.5.egg\nWARN Skipping file for setuptools: setuptools-0.6c10-py2.6.egg\n\
+      WARN Skipping file for setuptools: setuptools-0.6c10.win32-py2.3.exe\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c10.win32-py2.4.exe\nWARN Skipping file\
+      \ for setuptools: setuptools-0.6c10.win32-py2.5.exe\nWARN Skipping file for\
+      \ setuptools: setuptools-0.6c10.win32-py2.6.exe\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c11-1.src.rpm\nWARN Skipping file for setuptools: setuptools-0.6c11-py2.3.egg\n\
+      WARN Skipping file for setuptools: setuptools-0.6c11-py2.4.egg\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c11-py2.5.egg\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c11-py2.6.egg\nWARN Skipping file for setuptools: setuptools-0.6c11-py2.7.egg\n\
+      WARN Skipping file for setuptools: setuptools-0.6c11.win32-py2.3.exe\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c11.win32-py2.4.exe\nWARN Skipping file\
+      \ for setuptools: setuptools-0.6c11.win32-py2.5.exe\nWARN Skipping file for\
+      \ setuptools: setuptools-0.6c11.win32-py2.6.exe\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c11.win32-py2.7.exe\nWARN Skipping file for setuptools: setuptools-0.6c2-py2.3.egg\n\
+      WARN Skipping file for setuptools: setuptools-0.6c2-py2.4.egg\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c3-py2.3.egg\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c3-py2.4.egg\nWARN Skipping file for setuptools: setuptools-0.6c3-py2.5.egg\n\
+      WARN Skipping file for setuptools: setuptools-0.6c4-1.src.rpm\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c4-py2.3.egg\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c4-py2.4.egg\nWARN Skipping file for setuptools: setuptools-0.6c4-py2.5.egg\n\
+      WARN Skipping file for setuptools: setuptools-0.6c4.win32-py2.3.exe\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c4.win32-py2.4.exe\nWARN Skipping file\
+      \ for setuptools: setuptools-0.6c4.win32-py2.5.exe\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c5-1.src.rpm\nWARN Skipping file for setuptools: setuptools-0.6c5-py2.3.egg\n\
+      WARN Skipping file for setuptools: setuptools-0.6c5-py2.4.egg\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c5-py2.5.egg\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c5.win32-py2.3.exe\nWARN Skipping file for setuptools: setuptools-0.6c5.win32-py2.4.exe\n\
+      WARN Skipping file for setuptools: setuptools-0.6c5.win32-py2.5.exe\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c6-1.src.rpm\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c6-py2.3.egg\nWARN Skipping file for setuptools: setuptools-0.6c6-py2.4.egg\n\
+      WARN Skipping file for setuptools: setuptools-0.6c6-py2.5.egg\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c6.win32-py2.3.exe\nWARN Skipping file\
+      \ for setuptools: setuptools-0.6c6.win32-py2.4.exe\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c6.win32-py2.5.exe\nWARN Skipping file for setuptools: setuptools-0.6c7-1.src.rpm\n\
+      WARN Skipping file for setuptools: setuptools-0.6c7-py2.3.egg\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c7-py2.4.egg\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c7-py2.5.egg\nWARN Skipping file for setuptools: setuptools-0.6c7.win32-py2.3.exe\n\
+      WARN Skipping file for setuptools: setuptools-0.6c7.win32-py2.4.exe\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c7.win32-py2.5.exe\nWARN Skipping file\
+      \ for setuptools: setuptools-0.6c8-1.src.rpm\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c8-py2.3.egg\nWARN Skipping file for setuptools: setuptools-0.6c8-py2.4.egg\n\
+      WARN Skipping file for setuptools: setuptools-0.6c8-py2.5.egg\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c8.win32-py2.3.exe\nWARN Skipping file\
+      \ for setuptools: setuptools-0.6c8.win32-py2.4.exe\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c8.win32-py2.5.exe\nWARN Skipping file for setuptools: setuptools-0.6c9-1.src.rpm\n\
+      WARN Skipping file for setuptools: setuptools-0.6c9-py2.3.egg\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c9-py2.4.egg\nWARN Skipping file for setuptools:\
+      \ setuptools-0.6c9-py2.5.egg\nWARN Skipping file for setuptools: setuptools-0.6c9-py2.6.egg\n\
+      WARN Skipping file for setuptools: setuptools-0.6c9.win32-py2.3.exe\nWARN Skipping\
+      \ file for setuptools: setuptools-0.6c9.win32-py2.4.exe\nWARN Skipping file\
+      \ for setuptools: setuptools-0.6c9.win32-py2.5.exe\nWARN Skipping file for setuptools:\
+      \ setuptools-18.3.1-py3.4.egg\nResolved 40 packages in 10.17s\n   Building jieba==0.42.1\n\
+      Downloading sqlalchemy (2.1MiB)\nDownloading cryptography (6.8MiB)\n Downloaded\
+      \ sqlalchemy\n      Built jieba==0.42.1\n Downloaded cryptography\nPrepared\
+      \ 15 packages in 1.82s\nInstalled 40 packages in 118ms\n + aiosqlite==0.22.1\n\
+      \ + annotated-doc==0.0.4\n + annotated-types==0.7.0\n + anyio==4.13.0\n + asyncpg==0.31.0\n\
+      \ + attrs==26.1.0\n + certifi==2026.2.25\n + cffi==2.0.0\n + charset-normalizer==3.4.6\n\
+      \ + click==8.3.1\n + cryptography==46.0.6\n + diff-match-patch==20241021\n +\
+      \ fastapi==0.135.2\n + h11==0.16.0\n + httpcore==1.0.9\n + httpx==0.28.1\n +\
+      \ httpx-sse==0.4.3\n + idna==3.11\n + jieba==0.42.1\n + jsonschema==4.26.0\n\
+      \ + jsonschema-specifications==2025.9.1\n + mcp==1.26.0\n + pyahocorasick==2.3.0\n\
+      \ + pycparser==3.0\n + pydantic==2.12.5\n + pydantic-core==2.41.5\n + pydantic-settings==2.13.1\n\
+      \ + pyjwt==2.12.1\n + python-dotenv==1.2.2\n + python-multipart==0.0.22\n +\
+      \ referencing==0.37.0\n + requests==2.33.0\n + rpds-py==0.30.0\n + sqlalchemy==2.0.48\n\
+      \ + sse-starlette==3.3.4\n + starlette==1.0.0\n + typing-extensions==4.15.0\n\
+      \ + typing-inspection==0.4.2\n + urllib3==2.6.3\n + uvicorn==0.42.0"
+  activation_note: null
+- integration_id: context-portal
+  status: activated
+  install_tier: local_ready
+  installed_at: '2026-03-30T03:12:41.252055+00:00'
+  activated_at: '2026-03-30T03:12:41.252082+00:00'
+  blocked_reason: null
+  repo_path: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/context-portal
+  wrapper_paths:
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/bin/context-portal-mcp
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/mcp/context-portal.mcp.json
+  steps:
+  - status: success
+    command:
+    - git
+    - clone
+    - --depth
+    - '1'
+    - https://github.com/GreatScottyMac/context-portal
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/context-portal
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: Cloning into '/Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/context-portal'...
+  - status: success
+    command:
+    - uv
+    - venv
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/venvs/context-portal
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: 'Using CPython 3.14.2 interpreter at: /opt/homebrew/opt/python@3.14/bin/python3.14
+
+      Creating virtual environment at: .brain_integrations/venvs/context-portal
+
+      Activate with: source .brain_integrations/venvs/context-portal/bin/activate'
+  - status: success
+    command:
+    - uv
+    - pip
+    - install
+    - --python
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/venvs/context-portal/bin/python
+    - -e
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/context-portal
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: "Using Python 3.14.2 environment at: .brain_integrations/venvs/context-portal\n\
+      WARN `pyproject.toml` does not contain a `project` table: `/Users/j/pyproject.toml`\n\
+      WARN Skipping file for scikit-learn: scikit-learn-0.10.win32-py2.6.exe\nWARN\
+      \ Skipping file for scikit-learn: scikit-learn-0.10.win32-py2.7.exe\nWARN Skipping\
+      \ file for scikit-learn: scikit-learn-0.11.win32-py2.6.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.11.win32-py2.7.exe\nWARN Skipping file for\
+      \ scikit-learn: scikit-learn-0.12.1.win32-py2.6.exe\nWARN Skipping file for\
+      \ scikit-learn: scikit-learn-0.12.1.win32-py2.7.exe\nWARN Skipping file for\
+      \ scikit-learn: scikit-learn-0.12.win32-py2.6.exe\nWARN Skipping file for scikit-learn:\
+      \ scikit-learn-0.12.win32-py2.7.exe\nWARN Skipping file for scikit-learn: scikit-learn-0.13.1.win32-py2.6.exe\n\
+      WARN Skipping file for scikit-learn: scikit-learn-0.13.1.win32-py2.7.exe\nWARN\
+      \ Skipping file for scikit-learn: scikit-learn-0.13.win32-py2.6.exe\nWARN Skipping\
+      \ file for scikit-learn: scikit-learn-0.13.win32-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.14.1.win32-py2.6.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.14.1.win32-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.14.1.win32-py3.3.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.15.0.win-amd64-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.15.0.win-amd64-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.15.0.win32-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.15.0.win32-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.15.1.win-amd64-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.15.1.win-amd64-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.15.1.win32-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.15.1.win32-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.15.2.win-amd64-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.15.2.win-amd64-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.15.2.win32-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.15.2.win32-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.16.0.win-amd64-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.16.0.win-amd64-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.16.0.win32-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.16.0.win32-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.16.1.win-amd64-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.16.1.win-amd64-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.16.1.win32-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.16.1.win32-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.17.1.win-amd64-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.17.1.win-amd64-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.17.1.win-amd64-py3.5.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.17.1.win32-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.17.1.win32-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.17.1.win32-py3.5.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.17.win-amd64-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.17.win-amd64-py3.4.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.17.win-amd64-py3.5.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.17.win32-py2.7.exe\nWARN Skipping file for\
+      \ scikit-learn: scikit-learn-0.17.win32-py3.4.exe\nWARN Skipping file for scikit-learn:\
+      \ scikit-learn-0.17.win32-py3.5.exe\nWARN Skipping file for scikit-learn: scikit-learn-0.18.1.win-amd64-py2.7.exe\n\
+      WARN Skipping file for scikit-learn: scikit-learn-0.18.1.win-amd64-py3.5.exe\n\
+      WARN Skipping file for scikit-learn: scikit-learn-0.18.1.win32-py2.7.exe\nWARN\
+      \ Skipping file for scikit-learn: scikit-learn-0.18.1.win32-py3.5.exe\nWARN\
+      \ Skipping file for scikit-learn: scikit-learn-0.18.2.win-amd64-py2.7.exe\n\
+      WARN Skipping file for scikit-learn: scikit-learn-0.18.2.win-amd64-py3.5.exe\n\
+      WARN Skipping file for scikit-learn: scikit-learn-0.18.2.win32-py2.7.exe\nWARN\
+      \ Skipping file for scikit-learn: scikit-learn-0.18.2.win32-py3.5.exe\nWARN\
+      \ Skipping file for scikit-learn: scikit-learn-0.18.win-amd64-py2.7.exe\nWARN\
+      \ Skipping file for scikit-learn: scikit-learn-0.18.win-amd64-py3.5.exe\nWARN\
+      \ Skipping file for scikit-learn: scikit-learn-0.18.win32-py2.7.exe\nWARN Skipping\
+      \ file for scikit-learn: scikit-learn-0.18.win32-py3.5.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.19.1.win-amd64-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.19.1.win-amd64-py3.5.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.19.1.win32-py2.7.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.19.1.win32-py3.5.exe\nWARN Skipping file\
+      \ for scikit-learn: scikit-learn-0.9.win32-py2.6.exe\nWARN Skipping file for\
+      \ scikit-learn: scikit-learn-0.9.win32-py2.7.exe\nWARN Skipping file for numpy:\
+      \ numpy-1.0.1.dev3460.win32-py2.4.exe\nWARN Skipping file for numpy: numpy-1.3.0.win32-py2.5.exe\n\
+      WARN Skipping file for numpy: numpy-1.5.0.win32-py2.6.exe\nWARN Skipping file\
+      \ for numpy: numpy-1.5.1.win32-py2.5-nosse.exe\nWARN Skipping file for numpy:\
+      \ numpy-1.5.1.win32-py2.6-nosse.exe\nWARN Skipping file for numpy: numpy-1.5.1.win32-py2.7-nosse.exe\n\
+      WARN Skipping file for numpy: numpy-1.5.1.win32-py3.1-nosse.exe\nWARN Skipping\
+      \ file for numpy: numpy-1.6.0.win32-py2.5.exe\nWARN Skipping file for numpy:\
+      \ numpy-1.6.0.win32-py2.6.exe\nWARN Skipping file for numpy: numpy-1.6.0.win32-py2.7.exe\n\
+      WARN Skipping file for numpy: numpy-1.6.0.win32-py3.1.exe\nWARN Skipping file\
+      \ for numpy: numpy-1.6.0.win32-py3.2.exe\nWARN Skipping file for numpy: numpy-1.6.1.win32-py2.5.exe\n\
+      WARN Skipping file for numpy: numpy-1.6.1.win32-py2.6.exe\nWARN Skipping file\
+      \ for numpy: numpy-1.6.1.win32-py2.7.exe\nWARN Skipping file for numpy: numpy-1.6.1.win32-py3.1.exe\n\
+      WARN Skipping file for numpy: numpy-1.6.1.win32-py3.2.exe\nWARN Skipping file\
+      \ for numpy: numpy-1.6.2.win32-py2.5.exe\nWARN Skipping file for numpy: numpy-1.6.2.win32-py2.6.exe\n\
+      WARN Skipping file for numpy: numpy-1.6.2.win32-py2.7.exe\nWARN Skipping file\
+      \ for numpy: numpy-1.6.2.win32-py3.1.exe\nWARN Skipping file for numpy: numpy-1.6.2.win32-py3.2.exe\n\
+      WARN Skipping file for numpy: numpy-1.7.0.win32-py2.5.exe\nWARN Skipping file\
+      \ for numpy: numpy-1.7.0.win32-py2.6.exe\nWARN Skipping file for numpy: numpy-1.7.0.win32-py2.7.exe\n\
+      WARN Skipping file for numpy: numpy-1.7.0.win32-py3.1.exe\nWARN Skipping file\
+      \ for numpy: numpy-1.7.0.win32-py3.2.exe\nWARN Skipping file for numpy: numpy-1.7.0.win32-py3.3.exe\n\
+      WARN Skipping file for numpy: numpy-1.7.1.win32-py2.5.exe\nWARN Skipping file\
+      \ for numpy: numpy-1.7.1.win32-py2.6.exe\nWARN Skipping file for numpy: numpy-1.7.1.win32-py2.7.exe\n\
+      WARN Skipping file for numpy: numpy-1.7.1.win32-py3.1.exe\nWARN Skipping file\
+      \ for numpy: numpy-1.7.1.win32-py3.2.exe\nWARN Skipping file for numpy: numpy-1.7.1.win32-py3.3.exe\n\
+      WARN Skipping file for keyring: keyring-0.1.win32-py2.6.exe\nWARN Skipping file\
+      \ for keyring: keyring-0.2.win32-py2.6.exe\nWARN Skipping file for sympy: sympy-0.7.0.win32.exe\n\
+      WARN Skipping file for sympy: sympy-0.7.1.win32.exe\nWARN Skipping file for\
+      \ sympy: sympy-0.7.2-py3.2.tar.gz\nWARN Skipping file for sympy: sympy-0.7.2-py3.3.tar.gz\n\
+      WARN Skipping file for sympy: sympy-0.7.2.win32.exe\nWARN Skipping file for\
+      \ sympy: sympy-0.7.3-py2.5.tar.gz\nWARN Skipping file for sympy: sympy-0.7.3-py2.6.tar.gz\n\
+      WARN Skipping file for sympy: sympy-0.7.3-py2.7.tar.gz\nWARN Skipping file for\
+      \ sympy: sympy-0.7.3-py3.2.tar.gz\nWARN Skipping file for sympy: sympy-0.7.3-py3.3.tar.gz\n\
+      WARN Skipping file for sympy: sympy-0.7.3.win32.exe\nWARN Skipping file for\
+      \ sympy: sympy-1.0.win32.exe\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Fixing invalid version specifier by removing\
+      \ star after comparison operator other than equal and not equal (before: `>3.4.*,\
+      \ <4`; after: `>3.4, <4`)\nWARN Skipping file for pygments: Pygments-0.10-py2.3.egg\n\
+      WARN Skipping file for pygments: Pygments-0.10-py2.4.egg\nWARN Skipping file\
+      \ for pygments: Pygments-0.10-py2.5.egg\nWARN Skipping file for pygments: Pygments-0.11-py2.3.egg\n\
+      WARN Skipping file for pygments: Pygments-0.11-py2.4.egg\nWARN Skipping file\
+      \ for pygments: Pygments-0.11-py2.5.egg\nWARN Skipping file for pygments: Pygments-0.11.1-py2.3.egg\n\
+      WARN Skipping file for pygments: Pygments-0.11.1-py2.4.egg\nWARN Skipping file\
+      \ for pygments: Pygments-0.11.1-py2.5.egg\nWARN Skipping file for pygments:\
+      \ Pygments-0.5-py2.3.egg\nWARN Skipping file for pygments: Pygments-0.5-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-0.5-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-0.5.1-py2.3.egg\nWARN Skipping file for pygments: Pygments-0.5.1-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-0.5.1-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-0.6-py2.3.egg\nWARN Skipping file for pygments: Pygments-0.6-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-0.6-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-0.7-py2.3.egg\nWARN Skipping file for pygments: Pygments-0.7-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-0.7-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-0.7.1-py2.3.egg\nWARN Skipping file for pygments: Pygments-0.7.1-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-0.7.1-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-0.8-py2.3.egg\nWARN Skipping file for pygments: Pygments-0.8-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-0.8-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-0.8.1-py2.3.egg\nWARN Skipping file for pygments: Pygments-0.8.1-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-0.8.1-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-0.9-py2.3.egg\nWARN Skipping file for pygments: Pygments-0.9-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-0.9-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-1.0-py2.3.egg\nWARN Skipping file for pygments: Pygments-1.0-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-1.0-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-1.0-py2.6.egg\nWARN Skipping file for pygments: Pygments-1.1-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-1.1-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-1.1-py2.6.egg\nWARN Skipping file for pygments: Pygments-1.1.1-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-1.1.1-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-1.1.1-py2.6.egg\nWARN Skipping file for pygments: Pygments-1.2-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-1.2-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-1.2-py2.6.egg\nWARN Skipping file for pygments: Pygments-1.2.1-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-1.2.1-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-1.2.1-py2.6.egg\nWARN Skipping file for pygments: Pygments-1.2.2-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-1.2.2-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-1.2.2-py2.6.egg\nWARN Skipping file for pygments: Pygments-1.3-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-1.3-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-1.3-py2.6.egg\nWARN Skipping file for pygments: Pygments-1.3.1-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-1.3.1-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-1.3.1-py2.6.egg\nWARN Skipping file for pygments: Pygments-1.4-py2.4.egg\n\
+      WARN Skipping file for pygments: Pygments-1.4-py2.5.egg\nWARN Skipping file\
+      \ for pygments: Pygments-1.4-py2.6.egg\nWARN Skipping file for pygments: Pygments-1.4-py2.7.egg\n\
+      WARN Skipping file for pygments: Pygments-1.5-py2.6.egg\nWARN Skipping file\
+      \ for pygments: Pygments-1.5-py2.7.egg\nWARN Skipping file for pygments: Pygments-1.6-py2.6.egg\n\
+      WARN Skipping file for pygments: Pygments-1.6-py2.7.egg\nWARN Skipping file\
+      \ for pygments: Pygments-1.6rc1-py2.6.egg\nWARN Skipping file for pygments:\
+      \ Pygments-1.6rc1-py2.7.egg\nWARN Skipping file for regex: regex-2013-02-16.tar.gz\n\
+      WARN Skipping file for regex: regex-2013-02-23.tar.gz\nWARN Skipping file for\
+      \ regex: regex-2013-03-11.tar.gz\nWARN Skipping file for regex: regex-2013-05-21.tar.gz\n\
+      WARN Skipping file for regex: regex-2013-06-05.tar.gz\nWARN Skipping file for\
+      \ regex: regex-2013-06-26.tar.gz\nWARN Skipping file for regex: regex-2013-08-04.tar.gz\n\
+      WARN Skipping file for regex: regex-2013-10-04.tar.gz\nWARN Skipping file for\
+      \ regex: regex-2013-10-12.tar.gz\nWARN Skipping file for regex: regex-2013-10-21.tar.gz\n\
+      WARN Skipping file for regex: regex-2013-10-22.tar.gz\nWARN Skipping file for\
+      \ regex: regex-2013-10-23.tar.gz\nWARN Skipping file for regex: regex-2013-10-24.tar.gz\n\
+      WARN Skipping file for regex: regex-2013-10-25.tar.gz\nWARN Skipping file for\
+      \ regex: regex-2013-10-26.tar.gz\nWARN Skipping file for regex: regex-2013-11-29.tar.gz\n\
+      WARN Skipping file for regex: regex-2013-12-31.tar.gz\nWARN Skipping file for\
+      \ protobuf: protobuf-2.0.0beta-py2.4.egg\nWARN Skipping file for protobuf: protobuf-2.0.3-py2.4.egg\n\
+      WARN Skipping file for protobuf: protobuf-2.3.0-py2.5.egg\nWARN Skipping file\
+      \ for protobuf: protobuf-2.4.1-py2.6.egg\nWARN Skipping file for protobuf: protobuf-2.5.0-py2.7.egg\n\
+      WARN Skipping file for protobuf: protobuf-2.6.0-py2.7.egg\nWARN Skipping file\
+      \ for protobuf: protobuf-2.6.1-py2.6.egg\nWARN Skipping file for protobuf: protobuf-2.6.1-py2.7.egg\n\
+      WARN Skipping file for protobuf: protobuf-3.0.0-py2.7.egg\nWARN Skipping file\
+      \ for protobuf: protobuf-3.0.0a2-py2.7.egg\nWARN Skipping file for protobuf:\
+      \ protobuf-3.0.0a3-py2.7.egg\nWARN Skipping file for protobuf: protobuf-3.0.0b1-py2.7.egg\n\
+      WARN Skipping file for protobuf: protobuf-3.0.0b1.post2-py2.7.egg\nWARN Skipping\
+      \ file for protobuf: protobuf-3.0.0b3-py2.7.egg\nWARN Skipping file for protobuf:\
+      \ protobuf-3.0.0b4-py2.7.egg\nWARN Skipping file for protobuf: protobuf-3.1.0-py2.7.egg\n\
+      WARN Skipping file for protobuf: protobuf-3.1.0.post1-py2.7.egg\nWARN Skipping\
+      \ file for protobuf: protobuf-3.10.0-py2.7.egg\nWARN Skipping file for protobuf:\
+      \ protobuf-3.10.0rc1-py2.7.egg\nWARN Skipping file for protobuf: protobuf-3.11.0-py2.7.egg\n\
+      WARN Skipping file for protobuf: protobuf-3.11.0rc1-py2.7.egg\nWARN Skipping\
+      \ file for protobuf: protobuf-3.11.0rc2-py2.7.egg\nWARN Skipping file for protobuf:\
+      \ protobuf-3.11.1-py2.7.egg\nWARN Skipping file for protobuf: protobuf-3.11.2-py2.7.egg\n\
+      WARN Skipping file for protobuf: protobuf-3.11.3-py2.7.egg\nWARN Skipping file\
+      \ for protobuf: protobuf-3.2.0-py2.7.egg\nWARN Skipping file for protobuf: protobuf-3.2.0rc1-py2.7.egg\n\
+      WARN Skipping file for protobuf: protobuf-3.2.0rc1.post1-py2.7.egg\nWARN Skipping\
+      \ file for protobuf: protobuf-3.2.0rc2-py2.7.egg\nWARN Skipping file for protobuf:\
+      \ protobuf-3.4.0-py2.7.egg\nWARN Skipping file for protobuf: protobuf-3.5.0.post1-py2.7.egg\n\
+      WARN Skipping file for protobuf: protobuf-3.5.1-py2.7.egg\nWARN Skipping file\
+      \ for protobuf: protobuf-3.5.2-py2.7.egg\nWARN Skipping file for protobuf: protobuf-3.5.2.post1-py2.7.egg\n\
+      WARN Skipping file for protobuf: protobuf-3.6.0-py2.7.egg\nWARN Skipping file\
+      \ for protobuf: protobuf-3.6.1-py2.7.egg\nWARN Skipping file for protobuf: protobuf-3.7.0-py2.7.egg\n\
+      WARN Skipping file for protobuf: protobuf-3.7.0rc2-py2.7.egg\nWARN Skipping\
+      \ file for protobuf: protobuf-3.7.0rc3-py2.7.egg\nWARN Skipping file for protobuf:\
+      \ protobuf-3.7.1-py2.7.egg\nWARN Skipping file for protobuf: protobuf-3.8.0-py2.7.egg\n\
+      WARN Skipping file for protobuf: protobuf-3.8.0rc1-py2.7.egg\nWARN Skipping\
+      \ file for protobuf: protobuf-3.9.0-py2.7.egg\nWARN Skipping file for protobuf:\
+      \ protobuf-3.9.0rc1-py2.7.egg\nWARN Skipping file for protobuf: protobuf-3.9.1-py2.7.egg\n\
+      WARN Skipping file for protobuf: protobuf-3.9.2-py2.7.egg\nWARN Skipping file\
+      \ for networkx: networkx-0.34-py2.4.egg\nWARN Skipping file for networkx: networkx-0.34-py2.5.egg\n\
+      WARN Skipping file for networkx: networkx-0.34.win32.exe\nWARN Skipping file\
+      \ for networkx: networkx-0.35-py2.4.egg\nWARN Skipping file for networkx: networkx-0.35-py2.5.egg\n\
+      WARN Skipping file for networkx: networkx-0.35.1-py2.4.egg\nWARN Skipping file\
+      \ for networkx: networkx-0.35.1-py2.5.egg\nWARN Skipping file for networkx:\
+      \ networkx-0.35.1.win32.exe\nWARN Skipping file for networkx: networkx-0.35.win32.exe\n\
+      WARN Skipping file for networkx: networkx-0.36-py2.4.egg\nWARN Skipping file\
+      \ for networkx: networkx-0.36-py2.5.egg\nWARN Skipping file for networkx: networkx-0.36.win32.exe\n\
+      WARN Skipping file for networkx: networkx-0.37-py2.4.egg\nWARN Skipping file\
+      \ for networkx: networkx-0.37-py2.5.egg\nWARN Skipping file for networkx: networkx-0.37.win32.exe\n\
+      WARN Skipping file for networkx: networkx-0.99-py2.4.egg\nWARN Skipping file\
+      \ for networkx: networkx-0.99-py2.5.egg\nWARN Skipping file for networkx: networkx-0.99.win32.exe\n\
+      WARN Skipping file for networkx: networkx-1.0-py2.6.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.0.1-py2.6.egg\nWARN Skipping file for networkx: networkx-1.0rc1-py2.4.egg\n\
+      WARN Skipping file for networkx: networkx-1.0rc1-py2.5.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.0rc1-py2.6.egg\nWARN Skipping file for networkx:\
+      \ networkx-1.1-py2.5.egg\nWARN Skipping file for networkx: networkx-1.1-py2.6.egg\n\
+      WARN Skipping file for networkx: networkx-1.10-py2.7.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.10-py3.4.egg\nWARN Skipping file for networkx: networkx-1.11-py2.7.egg\n\
+      WARN Skipping file for networkx: networkx-1.11-py3.4.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.11rc1-py2.7.egg\nWARN Skipping file for networkx:\
+      \ networkx-1.11rc1-py3.4.egg\nWARN Skipping file for networkx: networkx-1.11rc2-py2.7.egg\n\
+      WARN Skipping file for networkx: networkx-1.11rc2-py3.4.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.2-py2.6.egg\nWARN Skipping file for networkx: networkx-1.2rc1-py2.6.egg\n\
+      WARN Skipping file for networkx: networkx-1.3-py2.6.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.3-py2.7.egg\nWARN Skipping file for networkx: networkx-1.3-py3.1.egg\n\
+      WARN Skipping file for networkx: networkx-1.3-py3.2.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.3rc1-py2.6.egg\nWARN Skipping file for networkx:\
+      \ networkx-1.3rc1-py2.7.egg\nWARN Skipping file for networkx: networkx-1.3rc1-py3.1.egg\n\
+      WARN Skipping file for networkx: networkx-1.4-py2.6.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.4-py2.7.egg\nWARN Skipping file for networkx: networkx-1.4-py3.1.egg\n\
+      WARN Skipping file for networkx: networkx-1.4-py3.2.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.4rc1-py2.6.egg\nWARN Skipping file for networkx:\
+      \ networkx-1.4rc1-py2.7.egg\nWARN Skipping file for networkx: networkx-1.4rc1-py3.1.egg\n\
+      WARN Skipping file for networkx: networkx-1.4rc1-py3.2.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.5-py2.6.egg\nWARN Skipping file for networkx: networkx-1.5-py2.7.egg\n\
+      WARN Skipping file for networkx: networkx-1.5-py3.1.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.5-py3.2.egg\nWARN Skipping file for networkx: networkx-1.5rc1-py2.6.egg\n\
+      WARN Skipping file for networkx: networkx-1.5rc1-py2.7.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.5rc1-py3.1.egg\nWARN Skipping file for networkx:\
+      \ networkx-1.5rc1-py3.2.egg\nWARN Skipping file for networkx: networkx-1.6-py2.6.egg\n\
+      WARN Skipping file for networkx: networkx-1.6-py2.7.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.6-py3.1.egg\nWARN Skipping file for networkx: networkx-1.6-py3.2.egg\n\
+      WARN Skipping file for networkx: networkx-1.6rc1-py2.6.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.6rc1-py2.7.egg\nWARN Skipping file for networkx:\
+      \ networkx-1.6rc1-py3.1.egg\nWARN Skipping file for networkx: networkx-1.6rc1-py3.2.egg\n\
+      WARN Skipping file for networkx: networkx-1.7-py2.6.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.7-py2.7.egg\nWARN Skipping file for networkx: networkx-1.7-py3.2.egg\n\
+      WARN Skipping file for networkx: networkx-1.7rc1-py2.6.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.7rc1-py2.7.egg\nWARN Skipping file for networkx:\
+      \ networkx-1.7rc1-py3.2.egg\nWARN Skipping file for networkx: networkx-1.8-py2.6.egg\n\
+      WARN Skipping file for networkx: networkx-1.8-py2.7.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.8-py3.2.egg\nWARN Skipping file for networkx: networkx-1.8-py3.3.egg\n\
+      WARN Skipping file for networkx: networkx-1.8.1-py2.6.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.8.1-py2.7.egg\nWARN Skipping file for networkx: networkx-1.8.1-py3.2.egg\n\
+      WARN Skipping file for networkx: networkx-1.8.1-py3.3.egg\nWARN Skipping file\
+      \ for networkx: networkx-1.8rc1-py2.6.egg\nWARN Skipping file for networkx:\
+      \ networkx-1.8rc1-py2.7.egg\nWARN Skipping file for networkx: networkx-1.8rc1-py3.2.egg\n\
+      WARN Skipping file for networkx: networkx-1.8rc1-py3.3.egg\nWARN Skipping file\
+      \ for mpmath: mpmath-0.10.win32.exe\nWARN Skipping file for mpmath: mpmath-0.11.win32.exe\n\
+      WARN Skipping file for mpmath: mpmath-0.12.win32.exe\nWARN Skipping file for\
+      \ mpmath: mpmath-0.13.win32.exe\nWARN Skipping file for mpmath: mpmath-0.14.win32.exe\n\
+      WARN Skipping file for mpmath: mpmath-0.15.win32.exe\nWARN Skipping file for\
+      \ mpmath: mpmath-0.16.win32-py2.6.msi\nWARN Skipping file for mpmath: mpmath-0.17.win32.exe\n\
+      WARN Skipping file for mpmath: mpmath-0.2.win32.exe\nWARN Skipping file for\
+      \ mpmath: mpmath-0.3.win32.exe\nWARN Skipping file for mpmath: mpmath-0.4.src.zip\n\
+      WARN Skipping file for mpmath: mpmath-0.4.win32.exe\nWARN Skipping file for\
+      \ mpmath: mpmath-0.5.win32.exe\nWARN Skipping file for mpmath: mpmath-0.6.win32.exe\n\
+      WARN Skipping file for mpmath: mpmath-0.7.win32.exe\nWARN Skipping file for\
+      \ mpmath: mpmath-0.8.win32.exe\nWARN Skipping file for mpmath: mpmath-0.9.win32.exe\n\
+      WARN Skipping file for mpmath: mpmath-all-0.17.tar.gz\nWARN Skipping file for\
+      \ mpmath: mpmath-all-0.18.tar.gz\nWARN Skipping file for mpmath: mpmath-all-0.19.tar.gz\n\
+      WARN Skipping file for mpmath: mpmath-docsrc-0.16.tar.gz\nWARN Skipping file\
+      \ for requests-oauthlib: requests_oauthlib-1.0.0-py3.6.egg\nWARN Skipping file\
+      \ for requests-oauthlib: requests_oauthlib-1.1.0-py3.7.egg\nWARN Skipping file\
+      \ for requests-oauthlib: requests_oauthlib-1.2.0-py3.7.egg\nWARN Skipping file\
+      \ for requests-oauthlib: requests_oauthlib-1.3.0-py3.7.egg\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nWARN Fixing invalid\
+      \ version specifier by removing star after comparison operator other than equal\
+      \ and not equal (before: `>=3.5.*, <4`; after: `>=3.5, <4`)\nResolved 129 packages\
+      \ in 1.34s\n   Building context-portal-mcp @ file:///Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/.brain_integrations/repos/context-portal\n\
+      WARN `pyproject.toml` does not contain a `project` table: `/Users/j/pyproject.toml`\n\
+      Downloading beartype (1.3MiB)\nDownloading torch (76.8MiB)\nDownloading pygments\
+      \ (1.2MiB)\nDownloading tokenizers (2.8MiB)\nDownloading networkx (2.0MiB)\n\
+      Downloading hf-xet (3.4MiB)\nDownloading kubernetes (1.9MiB)\nDownloading scikit-learn\
+      \ (7.7MiB)\nDownloading setuptools (1.0MiB)\nDownloading scipy (19.4MiB)\nDownloading\
+      \ numpy (5.0MiB)\nDownloading chromadb (19.2MiB)\nDownloading sympy (6.0MiB)\n\
+      Downloading transformers (9.6MiB)\nDownloading grpcio (11.3MiB)\nDownloading\
+      \ uvloop (1.3MiB)\nDownloading onnxruntime (16.5MiB)\nWARN `pyproject.toml`\
+      \ does not contain a `project` table: `/Users/j/pyproject.toml`\n      Built\
+      \ context-portal-mcp @ file:///Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/.brain_integrations/repos/context-portal\n\
+      \ Downloaded setuptools\n Downloaded pygments\n Downloaded beartype\n Downloaded\
+      \ uvloop\n Downloaded kubernetes\n Downloaded networkx\n Downloaded tokenizers\n\
+      \ Downloaded hf-xet\n Downloaded numpy\n Downloaded sympy\n Downloaded scikit-learn\n\
+      \ Downloaded transformers\n Downloaded grpcio\n Downloaded onnxruntime\n Downloaded\
+      \ chromadb\n Downloaded scipy\n Downloaded torch\nPrepared 83 packages in 27.69s\n\
+      Installed 129 packages in 551ms\n + aiofile==3.9.0\n + alembic==1.18.4\n + annotated-doc==0.0.4\n\
+      \ + annotated-types==0.7.0\n + anyio==4.13.0\n + attrs==26.1.0\n + authlib==1.6.9\n\
+      \ + bcrypt==5.0.0\n + beartype==0.22.9\n + build==1.4.2\n + cachetools==7.0.5\n\
+      \ + caio==0.9.25\n + certifi==2026.2.25\n + cffi==2.0.0\n + charset-normalizer==3.4.6\n\
+      \ + chromadb==1.5.5\n + click==8.3.1\n + context-portal-mcp==0.3.13 (from file:///Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/.brain_integrations/repos/context-portal)\n\
+      \ + cryptography==46.0.6\n + cyclopts==4.10.1\n + dnspython==2.8.0\n + docstring-parser==0.17.0\n\
+      \ + docutils==0.22.4\n + durationpy==0.10\n + email-validator==2.3.0\n + exceptiongroup==1.3.1\n\
+      \ + fastapi==0.135.2\n + fastmcp==3.1.1\n + filelock==3.25.2\n + flatbuffers==25.12.19\n\
+      \ + fsspec==2026.3.0\n + googleapis-common-protos==1.73.1\n + grpcio==1.78.0\n\
+      \ + h11==0.16.0\n + hf-xet==1.4.2\n + httpcore==1.0.9\n + httptools==0.7.1\n\
+      \ + httpx==0.28.1\n + httpx-sse==0.4.3\n + huggingface-hub==1.8.0\n + idna==3.11\n\
+      \ + importlib-metadata==8.7.1\n + importlib-resources==6.5.2\n + jaraco-classes==3.4.0\n\
+      \ + jaraco-context==6.1.2\n + jaraco-functools==4.4.0\n + jinja2==3.1.6\n +\
+      \ joblib==1.5.3\n + jsonref==1.1.0\n + jsonschema==4.26.0\n + jsonschema-path==0.4.5\n\
+      \ + jsonschema-specifications==2025.9.1\n + keyring==25.7.0\n + kubernetes==35.0.0\n\
+      \ + mako==1.3.10\n + markdown-it-py==4.0.0\n + markupsafe==3.0.3\n + mcp==1.26.0\n\
+      \ + mdurl==0.1.2\n + mmh3==5.2.1\n + more-itertools==10.8.0\n + mpmath==1.3.0\n\
+      \ + networkx==3.6.1\n + numpy==2.4.4\n + oauthlib==3.3.1\n + onnxruntime==1.24.4\n\
+      \ + openapi-pydantic==0.5.1\n + opentelemetry-api==1.40.0\n + opentelemetry-exporter-otlp-proto-common==1.40.0\n\
+      \ + opentelemetry-exporter-otlp-proto-grpc==1.40.0\n + opentelemetry-proto==1.40.0\n\
+      \ + opentelemetry-sdk==1.40.0\n + opentelemetry-semantic-conventions==0.61b0\n\
+      \ + orjson==3.11.7\n + overrides==7.7.0\n + packaging==26.0\n + pathable==0.5.0\n\
+      \ + platformdirs==4.9.4\n + protobuf==6.33.6\n + py-key-value-aio==0.4.4\n +\
+      \ pybase64==1.4.3\n + pycparser==3.0\n + pydantic==2.12.5\n + pydantic-core==2.41.5\n\
+      \ + pydantic-settings==2.13.1\n + pygments==2.20.0\n + pyjwt==2.12.1\n + pyperclip==1.11.0\n\
+      \ + pypika==0.51.1\n + pyproject-hooks==1.2.0\n + python-dateutil==2.9.0.post0\n\
+      \ + python-dotenv==1.2.2\n + python-multipart==0.0.22\n + pyyaml==6.0.3\n +\
+      \ referencing==0.37.0\n + regex==2026.3.32\n + requests==2.33.0\n + requests-oauthlib==2.0.0\n\
+      \ + rich==14.3.3\n + rich-rst==1.3.2\n + rpds-py==0.30.0\n + safetensors==0.7.0\n\
+      \ + scikit-learn==1.8.0\n + scipy==1.17.1\n + sentence-transformers==5.3.0\n\
+      \ + setuptools==81.0.0\n + shellingham==1.5.4\n + six==1.17.0\n + sqlalchemy==2.0.48\n\
+      \ + sse-starlette==3.3.4\n + starlette==1.0.0\n + sympy==1.14.0\n + tenacity==9.1.4\n\
+      \ + threadpoolctl==3.6.0\n + tokenizers==0.22.2\n + torch==2.11.0\n + tqdm==4.67.3\n\
+      \ + transformers==5.4.0\n + typer==0.24.1\n + typing-extensions==4.15.0\n +\
+      \ typing-inspection==0.4.2\n + uncalled-for==0.2.0\n + urllib3==2.6.3\n + uvicorn==0.42.0\n\
+      \ + uvloop==0.22.1\n + watchfiles==1.1.1\n + websocket-client==1.9.0\n + websockets==16.0\n\
+      \ + zipp==3.23.0"
+  activation_note: null
+- integration_id: mcp-graphiti
+  status: blocked
+  install_tier: service_backed
+  installed_at: '2026-03-30T03:12:41.309970+00:00'
+  activated_at: null
+  blocked_reason: missing_required_command:docker
+  wrapper_paths: []
+  steps: []
+- integration_id: mcp-context-forge
+  status: installed_assets_only
+  install_tier: service_backed
+  installed_at: '2026-03-30T03:12:53.995898+00:00'
+  activated_at: null
+  blocked_reason: null
+  repo_path: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/mcp-context-forge
+  wrapper_paths:
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/bin/mcp-context-forge-service
+  steps:
+  - status: success
+    command:
+    - git
+    - clone
+    - --depth
+    - '1'
+    - https://github.com/IBM/mcp-context-forge
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/mcp-context-forge
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: Cloning into '/Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/mcp-context-forge'...
+  - status: success
+    command:
+    - uv
+    - venv
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/venvs/mcp-context-forge
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: 'Using CPython 3.14.2 interpreter at: /opt/homebrew/opt/python@3.14/bin/python3.14
+
+      Creating virtual environment at: .brain_integrations/venvs/mcp-context-forge
+
+      Activate with: source .brain_integrations/venvs/mcp-context-forge/bin/activate'
+  - status: success
+    command:
+    - uv
+    - pip
+    - install
+    - --python
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/venvs/mcp-context-forge/bin/python
+    - -e
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/mcp-context-forge
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: "Using Python 3.14.2 environment at: .brain_integrations/venvs/mcp-context-forge\n\
+      WARN `pyproject.toml` does not contain a `project` table: `/Users/j/pyproject.toml`\n\
+      Resolved 73 packages in 672ms\n   Building mcp-contextforge-gateway @ file:///Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/.brain_integrations/repos/mcp-context-forge\n\
+      WARN `pyproject.toml` does not contain a `project` table: `/Users/j/pyproject.toml`\n\
+      WARN `pyproject.toml` does not contain a `project` table: `/Users/j/pyproject.toml`\n\
+      \      Built mcp-contextforge-gateway @ file:///Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/.brain_integrations/repos/mcp-context-forge\n\
+      Prepared 15 packages in 1.91s\nInstalled 73 packages in 119ms\n + alembic==1.18.4\n\
+      \ + annotated-doc==0.0.4\n + annotated-types==0.7.0\n + anyio==4.13.0\n + argon2-cffi==25.1.0\n\
+      \ + argon2-cffi-bindings==25.1.0\n + attrs==26.1.0\n + brotli==1.2.0\n + certifi==2026.2.25\n\
+      \ + cffi==2.0.0\n + charset-normalizer==3.4.6\n + click==8.3.1\n + cryptography==46.0.6\n\
+      \ + dnspython==2.8.0\n + email-validator==2.3.0\n + fastapi==0.135.2\n + filelock==3.25.2\n\
+      \ + gunicorn==25.3.0\n + h11==0.16.0\n + h2==4.3.0\n + hpack==4.1.0\n + httpcore==1.0.9\n\
+      \ + httptools==0.7.1\n + httpx==0.28.1\n + httpx-sse==0.4.3\n + hyperframe==6.1.0\n\
+      \ + idna==3.11\n + jinja2==3.1.6\n + jq==1.11.0\n + jsonpath-ng==1.8.0\n + jsonschema==4.26.0\n\
+      \ + jsonschema-specifications==2025.9.1\n + mako==1.3.10\n + markdown-it-py==4.0.0\n\
+      \ + markupsafe==3.0.3\n + mcp==1.26.0\n + mcp-contextforge-gateway==1.0.0rc2\
+      \ (from file:///Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/.brain_integrations/repos/mcp-context-forge)\n\
+      \ + mdurl==0.1.2\n + oauthlib==3.3.1\n + orjson==3.11.7\n + packaging==26.0\n\
+      \ + parse==1.21.1\n + prometheus-client==0.24.1\n + prometheus-fastapi-instrumentator==7.1.0\n\
+      \ + psutil==7.2.2\n + pycparser==3.0\n + pydantic==2.12.5\n + pydantic-core==2.41.5\n\
+      \ + pydantic-settings==2.13.1\n + pygments==2.20.0\n + pyjwt==2.12.1\n + python-dotenv==1.2.2\n\
+      \ + python-json-logger==4.1.0\n + python-multipart==0.0.22\n + pyyaml==6.0.3\n\
+      \ + referencing==0.37.0\n + requests==2.33.0\n + requests-oauthlib==2.0.0\n\
+      \ + rich==14.3.3\n + rpds-py==0.30.0\n + shellingham==1.5.4\n + sqlalchemy==2.0.48\n\
+      \ + sse-starlette==3.3.4\n + starlette==0.52.1\n + starlette-compress==1.7.0\n\
+      \ + typer==0.24.1\n + typing-extensions==4.15.0\n + typing-inspection==0.4.2\n\
+      \ + urllib3==2.6.3\n + uvicorn==0.42.0\n + uvloop==0.22.1\n + watchfiles==1.1.1\n\
+      \ + websockets==16.0"
+  activation_note: Gateway service installed locally but not auto-activated as an
+    MCP endpoint.
+- integration_id: agentset
+  status: blocked
+  install_tier: installable
+  installed_at: '2026-03-30T03:12:54.097819+00:00'
+  activated_at: null
+  blocked_reason: no_local_installer_implemented
+  wrapper_paths: []
+  steps: []
+- integration_id: memory-bank-mcp
+  status: blocked
+  install_tier: installable
+  installed_at: '2026-03-30T03:12:54.202759+00:00'
+  activated_at: null
+  blocked_reason: no_local_installer_implemented
+  wrapper_paths: []
+  steps: []
+- integration_id: memorix
+  status: activated
+  install_tier: local_ready
+  installed_at: '2026-03-30T03:47:04.422771+00:00'
+  activated_at: '2026-03-30T03:47:04.423404+00:00'
+  blocked_reason: null
+  repo_path: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/memorix
+  wrapper_paths:
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/bin/memorix-mcp
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/mcp/memorix.mcp.json
+  steps:
+  - status: success
+    command:
+    - git
+    - clone
+    - --depth
+    - '1'
+    - https://github.com/AVIDS2/memorix
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/memorix
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: Cloning into '/Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/memorix'...
+  - status: success
+    command:
+    - npm
+    - install
+    cwd: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/memorix
+    exit_code: 0
+    stdout: "added 359 packages, and audited 360 packages in 20s\n\n125 packages are\
+      \ looking for funding\n  run `npm fund` for details\n\n10 vulnerabilities (1\
+      \ low, 1 moderate, 8 high)\n\nTo address issues that do not require attention,\
+      \ run:\n  npm audit fix\n\nTo address all issues (including breaking changes),\
+      \ run:\n  npm audit fix --force\n\nRun `npm audit` for details."
+    stderr: 'npm warn deprecated boolean@3.2.0: Package no longer supported. Contact
+      Support at https://www.npmjs.com/support for more info.
+
+      npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain
+      widely publicized security vulnerabilities, which have been fixed in the current
+      version. Please update. Support for old versions may be purchased (at exorbitant
+      rates) by contacting i@izs.me'
+  - status: success
+    command:
+    - npm
+    - run
+    - build
+    cwd: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/memorix
+    exit_code: 0
+    stdout: "> memorix@1.0.5 build\n> tsup\n\nCLI Building entry: {\"index\":\"src/index.ts\"\
+      }\nCLI Using tsconfig: tsconfig.json\nCLI Building entry: {\"cli/index\":\"\
+      src/cli/index.ts\"}\nCLI Using tsconfig: tsconfig.json\nCLI tsup v8.5.1\nCLI\
+      \ Using tsup config: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/memorix/tsup.config.ts\n\
+      CLI tsup v8.5.1\nCLI Using tsup config: /Users/j/Desktop/Lahaolesolutions/agenticswarm\
+      \ creation/.brain_integrations/repos/memorix/tsup.config.ts\nCLI Target: node20\n\
+      CLI Target: node20\nESM Build start\nCLI Cleaning output folder\nESM Build start\n\
+      ESM dist/index.js     499.23 KB\nESM dist/index.js.map 1009.67 KB\nESM \u26A1\
+      \uFE0F Build success in 126ms\nESM dist/cli/index.js     3.20 MB\nESM dist/cli/index.js.map\
+      \ 5.11 MB\nESM \u26A1\uFE0F Build success in 300ms\nDTS Build start\nDTS Build\
+      \ start\n\u2713 Copied dashboard static files\nDTS \u26A1\uFE0F Build success\
+      \ in 1547ms\nDTS dist/index.d.ts 20.00 B\nDTS \u26A1\uFE0F Build success in\
+      \ 2148ms\nDTS dist/cli/index.d.ts 13.00 B"
+    stderr: ''
+  activation_note: null
+- integration_id: anemoi
+  status: blocked
+  install_tier: service_backed
+  installed_at: '2026-03-30T03:47:04.567281+00:00'
+  activated_at: null
+  blocked_reason: packaging_tier_not_allowed:community
+  wrapper_paths: []
+  steps: []
+- integration_id: marm-systems
+  status: blocked
+  install_tier: installable
+  installed_at: '2026-03-30T03:47:04.712385+00:00'
+  activated_at: null
+  blocked_reason: packaging_tier_not_allowed:community
+  wrapper_paths: []
+  steps: []
+- integration_id: continuous-claude-v3
+  status: installed_assets_only
+  install_tier: local_ready
+  installed_at: '2026-03-30T03:47:06.849122+00:00'
+  activated_at: null
+  blocked_reason: null
+  repo_path: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/continuous-claude-v3
+  wrapper_paths:
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/skills/continuous-claude-v3/SKILL.md
+  steps:
+  - status: success
+    command:
+    - git
+    - clone
+    - --depth
+    - '1'
+    - https://github.com/parcadei/Continuous-Claude-v3
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/continuous-claude-v3
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: Cloning into '/Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/continuous-claude-v3'...
+  activation_note: Continuity overlay installed locally as a skill/reference layer
+    without enabling its full daemon stack.
+- integration_id: atlas-mcp-server
+  status: blocked
+  install_tier: service_backed
+  installed_at: '2026-03-30T03:47:06.981880+00:00'
+  activated_at: null
+  blocked_reason: missing_required_command:docker
+  wrapper_paths: []
+  steps: []
+- integration_id: claude-code-skills
+  status: activated
+  install_tier: local_ready
+  installed_at: '2026-03-30T03:47:21.761732+00:00'
+  activated_at: '2026-03-30T03:47:21.761744+00:00'
+  blocked_reason: null
+  repo_path: /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/claude-code-skills
+  wrapper_paths:
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/bin/hex-line-mcp
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/bin/hex-graph-mcp
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/mcp/hex-line.mcp.json
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/mcp/hex-graph.mcp.json
+  - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/skills/claude-code-skills/SKILL.md
+  steps:
+  - status: success
+    command:
+    - git
+    - clone
+    - --depth
+    - '1'
+    - https://github.com/levnikolaevich/claude-code-skills
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/claude-code-skills
+    cwd: null
+    exit_code: 0
+    stdout: ''
+    stderr: Cloning into '/Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/repos/claude-code-skills'...
+  - status: success
+    command:
+    - npm
+    - install
+    - --prefix
+    - /Users/j/Desktop/Lahaolesolutions/agenticswarm creation/.brain_integrations/npm/claude-code-skills
+    - '@levnikolaevich/hex-line-mcp'
+    - '@levnikolaevich/hex-graph-mcp'
+    cwd: null
+    exit_code: 0
+    stdout: "added 143 packages in 13s\n\n40 packages are looking for funding\n  run\
+      \ `npm fund` for details"
+    stderr: 'npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please
+      contact the author of the relevant native addon; alternatives are available.'
+  activation_note: null
+benchmarks:
+- label: post-simulator-cleanup
+  captured_at: '2026-03-30T04:05:50.292050+00:00'
+  adopted_integrations:
+  - atlas-mcp-server
+  - claude-code-skills
+  - codebase-memory-mcp
+  - context-portal
+  - continuous-claude-v3
+  - mcp-context-forge
+  - mcp-graphiti
+  - memorix
+  - nocturne-memory
+  installed_integrations:
+  - claude-code-skills
+  - codebase-memory-mcp
+  - context-portal
+  - continuous-claude-v3
+  - mcp-context-forge
+  - memorix
+  - nocturne-memory
+  active_integrations:
+  - atlas-mcp-server
+  - claude-code-skills
+  - codebase-memory-mcp
+  - context-portal
+  - continuous-claude-v3
+  - mcp-context-forge
+  - mcp-graphiti
+  - memorix
+  - nocturne-memory
+  measured_token_routes: 0
+  token_efficiency_score: 1000.0
+  avg_total_tokens_verified: 0.0
+  avg_prompt_tokens_verified: 0.0
+  avg_completion_tokens_verified: 0.0
+  avg_tool_context_tokens_verified: 0.0
+  avg_planning_latency_ms: 129.0
+  avg_replay_score: 0.8988
+  route_records: 24
+  verified_executions: 16
+  adapter_benchmarks: 2
+  scenario_plans:
+  - scenario_id: architecture
+    planning_latency_ms: 125
+    selected_executor_id: claude-cli
+    selected_router_id: anthropic-router
+    selected_backend_ids:
+    - mcp-memorix
+    - mcp-nocturne-memory
+    curated_selected:
+    - memorix
+    - nocturne-memory
+    reasons:
+    - executor:claude-cli
+    - router:anthropic-router
+    - backends:mcp-memorix,mcp-nocturne-memory
+    - curated:memorix,nocturne-memory
+  - scenario_id: coding
+    planning_latency_ms: 129
+    selected_executor_id: codex-cli
+    selected_router_id: anthropic-router
+    selected_backend_ids:
+    - cli-rg
+    - mcp-hex-line
+    - mcp-hex-graph
+    curated_selected:
+    - claude-code-skills
+    reasons:
+    - executor:codex-cli
+    - router:anthropic-router
+    - backends:cli-rg,mcp-hex-line,mcp-hex-graph
+    - curated:claude-code-skills,claude-code-skills
+    - replay_candidate:run-808872e5a90c
+  - scenario_id: remote_coordination
+    planning_latency_ms: 133
+    selected_executor_id: remote-worker
+    selected_router_id: anthropic-router
+    selected_backend_ids:
+    - mcp-memorix
+    - mcp-nocturne-memory
+    curated_selected:
+    - memorix
+    - nocturne-memory
+    reasons:
+    - executor:remote-worker
+    - router:anthropic-router
+    - backends:mcp-memorix,mcp-nocturne-memory
+    - curated:memorix,nocturne-memory
+notes:
+- Each install record tracks local install feasibility, activation status, and benchmark
+  snapshots.

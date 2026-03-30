@@ -644,6 +644,18 @@ skills:
   path: /Users/j/.agents/skills/microsoft-foundry/models/deploy-model/customize/SKILL.md
   scope: global
   source: global_skill
+- skill_id: claude-code-skills
+  enabled: true
+  category: repository_discovered
+  path: .brain_integrations/skills/claude-code-skills/SKILL.md
+  scope: local
+  source: repository_local
+- skill_id: continuous-claude-v3
+  enabled: true
+  category: repository_discovered
+  path: .brain_integrations/skills/continuous-claude-v3/SKILL.md
+  scope: local
+  source: repository_local
 notes:
 - Populate `skills` with discovered repository-local skills first, then augment with
   global skills.

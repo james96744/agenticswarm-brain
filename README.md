@@ -12,14 +12,17 @@ It provides:
 
 - repository and environment discovery
 - capability registries for agents, skills, plugins, MCP, CLI tools, and models
+- sovereign per-user memory for taste, product judgment, autonomy, and portable intelligence
 - runtime planning and direct execution adapters
 - direct invocation for CLI, HTTP-backed MCP, plugin, and queued remote-worker paths
 - a blackboard and control plane for events, runs, approvals, artifacts, and leases
 - a scheduler abstraction for deferred and remote-worker queue processing
 - a transport abstraction for remote workers, with shared-fabric and Redis-broker backends
 - git-aware self-maintenance and featureset refresh
+- cross-repo transplant into another local repo while preserving portable intelligence only
 - learning surfaces for route replay, benchmark scoring, verified route preferences, and training triplets
 - anatomy-based wrapper entrypoints so the system can think in brain terms without renaming the real implementation
+- audit-verified runtime health, including transplant and anatomy-wrapper coverage
 
 The result is a reusable brain scaffold that can be installed into many repos and then adapt itself to each one.
 
@@ -144,6 +147,33 @@ Relevant files:
 - [`orchestrator/autopilot.yaml`](./orchestrator/autopilot.yaml)
 - [`telemetry/autopilot_state.yaml`](./telemetry/autopilot_state.yaml)
 
+### Sovereign Memory And Cross-Repo Transplant
+
+The brain now separates user-owned intelligence from repo-owned state.
+
+Portable carryover includes:
+
+- taste and product-judgment profiles
+- autonomy preferences
+- generalized capability preferences
+- portable route preferences
+- derived portable lessons distilled from accepted history
+
+Repo-bound state stays behind:
+
+- facts tied to source-repo files, entities, and paths
+- control-plane tasks, runs, approvals, and artifacts
+- blackboard history
+- repo-specific route records and discovery registries
+
+Primary files:
+
+- [`memory/user_profile.yaml`](./memory/user_profile.yaml)
+- [`memory/product_context.yaml`](./memory/product_context.yaml)
+- [`memory/portable_memory.yaml`](./memory/portable_memory.yaml)
+- [`telemetry/transplant_history.yaml`](./telemetry/transplant_history.yaml)
+- [`scripts/transplant_brain.py`](./scripts/transplant_brain.py)
+
 ### Learning And Replay
 
 The current scaffold records enough information to support:
@@ -163,6 +193,10 @@ Relevant files:
 - [`capabilities/benchmarks.yaml`](./capabilities/benchmarks.yaml)
 - [`memory/facts.yaml`](./memory/facts.yaml)
 - [`memory/conflicts.yaml`](./memory/conflicts.yaml)
+- [`memory/user_profile.yaml`](./memory/user_profile.yaml)
+- [`memory/product_context.yaml`](./memory/product_context.yaml)
+- [`memory/portable_memory.yaml`](./memory/portable_memory.yaml)
+- [`telemetry/transplant_history.yaml`](./telemetry/transplant_history.yaml)
 
 ## Repository Layout
 
@@ -198,6 +232,7 @@ training/       adapter and distillation job planning
 - [`scripts/operator_status.py`](./scripts/operator_status.py): runtime and learning summary
 - [`scripts/rebuild_learning.py`](./scripts/rebuild_learning.py): rebuild benchmark rollups and replay preferences from route history
 - [`scripts/update_featureset.py`](./scripts/update_featureset.py): git-aware featureset refresh
+- [`scripts/transplant_brain.py`](./scripts/transplant_brain.py): transplant the sovereign brain into another local repo while preserving portable intelligence only
 
 ### Anatomy Wrappers
 
@@ -211,6 +246,8 @@ The project includes stable anatomy-named wrappers over the implementation modul
 - [`scripts/brainstem.py`](./scripts/brainstem.py)
 
 The wrapper-to-module mapping is declared in [`orchestrator/anatomy_registry.yaml`](./orchestrator/anatomy_registry.yaml), and all wrapper actions can be exercised end-to-end with [`scripts/verify_anatomy_wrappers.py`](./scripts/verify_anatomy_wrappers.py).
+
+The standard audit surface also exercises transplant safely in dry-run mode, so transplant support is covered by the same health path as the rest of the runtime.
 
 ## Quick Start
 
@@ -250,6 +287,21 @@ That single command:
 - keeps autostart disabled when you pass `--no-autostart`
 
 For most users, this is the only command needed to bootstrap the local brain.
+
+### 3. Transplant The Brain Into The Next Repo
+
+When a repo is finished, implant the brain into another existing local repo while carrying only portable intelligence:
+
+```bash
+./.venv/bin/python scripts/transplant_brain.py --repo-root . --target /path/to/next-repo --dry-run
+./.venv/bin/python scripts/transplant_brain.py --repo-root . --target /path/to/next-repo
+```
+
+Or through the anatomy wrapper:
+
+```bash
+./.venv/bin/python scripts/cerebrum.py transplant --repo-root . --target /path/to/next-repo --dry-run
+```
 
 ### 3. Populate And Activate
 
@@ -429,6 +481,29 @@ This converts stale pending approvals into explicit `expired` state and closes t
 
 This compacts accumulated real execution telemetry into refreshed benchmark rollups and ranked `route_preferences` inside [`telemetry/routes.yaml`](./telemetry/routes.yaml), which the planner can then reuse for replay-aware routing.
 
+### Transplant The Brain Into Another Repo
+
+```bash
+./.venv/bin/python scripts/transplant_brain.py --repo-root . --target /path/to/next-repo --dry-run
+./.venv/bin/python scripts/transplant_brain.py --repo-root . --target /path/to/next-repo
+```
+
+This carries over:
+
+- user taste and product-judgment profiles
+- autonomy profile
+- portable memory and derived portable lessons
+- portable route preferences
+- generalized capability preferences
+
+This does not carry over:
+
+- repo facts and conflicts
+- blackboard and control-plane history
+- source repo task and route history
+- source runtime discovery state
+- source install and benchmark snapshots
+
 ### Exercise Anatomy Wrappers
 
 ```bash
@@ -442,6 +517,7 @@ Use anatomy terms directly:
 ```bash
 ./.venv/bin/python scripts/cerebrum.py audit --repo-root . --dry-run --no-autostart
 ./.venv/bin/python scripts/cerebrum.py plan --repo-root . --dry-run
+.venv/bin/python scripts/cerebrum.py transplant --repo-root . --target /path/to/next-repo --dry-run
 ./.venv/bin/python scripts/cerebellum.py validate --repo-root .
 ./.venv/bin/python scripts/dendrites.py refresh --repo-root . --dry-run
 ./.venv/bin/python scripts/neurons.py execute --repo-root . --request-file request.yaml

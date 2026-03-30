@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["version", "registry_defaults", "selection_policy", "bundles", "integrations"],
+  "properties": {
+    "version": { "type": "string" },
+    "registry_defaults": { "type": "object", "additionalProperties": true },
+    "selection_policy": { "type": "object", "additionalProperties": true },
+    "bundles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["bundle_id", "integration_ids"],
+        "properties": {
+          "bundle_id": { "type": "string" },
+          "integration_ids": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "integrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["integration_id", "name", "repo", "category", "kind", "install_priority"],
+        "properties": {
+          "integration_id": { "type": "string" },
+          "name": { "type": "string" },
+          "repo": { "type": "string" },
+          "category": { "type": "string" },
+          "kind": { "type": "string" },
+          "install_priority": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

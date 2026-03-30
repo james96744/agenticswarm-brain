@@ -4,8 +4,10 @@ __pycache__/
 .venv*/
 venv/
 .agenticswarm-backups/
+.brain_integrations/
 telemetry/audit.lock
 telemetry/blackboard.lock
 telemetry/control_plane.lock
+telemetry/*.lock
 telemetry/autopilot.stdout.log
 telemetry/autopilot.stderr.log

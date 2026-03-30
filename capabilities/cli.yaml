@@ -235,6 +235,83 @@ cli_entries:
   path: /Library/Frameworks/Python.framework/Versions/3.11/bin/playwright
   scope: global
   source: path_lookup
+- cli_id: codebase-memory-mcp
+  command: codebase-memory-mcp
+  enabled: true
+  category: general
+  kind: local_binary
+  runtime: unknown
+  destructive: false
+  supports_json_output: false
+  path: .brain_integrations/bin/codebase-memory-mcp
+  scope: local
+  source: repository_binary
+- cli_id: nocturne-memory-mcp
+  command: nocturne-memory-mcp
+  enabled: true
+  category: general
+  kind: local_binary
+  runtime: unknown
+  destructive: false
+  supports_json_output: false
+  path: .brain_integrations/bin/nocturne-memory-mcp
+  scope: local
+  source: repository_binary
+- cli_id: hex-line-mcp
+  command: hex-line-mcp
+  enabled: true
+  category: general
+  kind: local_binary
+  runtime: unknown
+  destructive: false
+  supports_json_output: false
+  path: .brain_integrations/bin/hex-line-mcp
+  scope: local
+  source: repository_binary
+- cli_id: hex-graph-mcp
+  command: hex-graph-mcp
+  enabled: true
+  category: general
+  kind: local_binary
+  runtime: unknown
+  destructive: false
+  supports_json_output: false
+  path: .brain_integrations/bin/hex-graph-mcp
+  scope: local
+  source: repository_binary
+- cli_id: context-portal-mcp
+  command: context-portal-mcp
+  enabled: true
+  category: general
+  kind: local_binary
+  runtime: unknown
+  destructive: false
+  supports_json_output: false
+  path: .brain_integrations/bin/context-portal-mcp
+  scope: local
+  source: repository_binary
+- cli_id: mcp-context-forge-service
+  command: mcp-context-forge-service
+  enabled: true
+  category: general
+  kind: local_binary
+  runtime: unknown
+  destructive: false
+  supports_json_output: false
+  path: .brain_integrations/bin/mcp-context-forge-service
+  scope: local
+  source: repository_binary
+- cli_id: memorix-mcp
+  command: memorix-mcp
+  enabled: true
+  category: general
+  kind: local_binary
+  runtime: unknown
+  destructive: false
+  supports_json_output: false
+  path: .brain_integrations/bin/memorix-mcp
+  scope: local
+  source: repository_binary
 - cli_id: thon
   command: "\U0001D70Bthon"
   enabled: true
@@ -301,6 +378,28 @@ cli_entries:
   path: scripts/run_remote_worker.py
   scope: local
   source: repository_script
+- cli_id: benchmark-brain-network
+  command: benchmark_brain_network
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/benchmark_brain_network.py
+  scope: local
+  source: repository_script
+- cli_id: install-brain-network
+  command: install_brain_network
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/install_brain_network.py
+  scope: local
+  source: repository_script
 - cli_id: execution-engine
   command: execution_engine
   enabled: true
@@ -365,6 +464,17 @@ cli_entries:
   destructive: false
   supports_json_output: false
   path: scripts/runtime_bridge.py
+  scope: local
+  source: repository_script
+- cli_id: sovereign-memory
+  command: sovereign_memory
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/sovereign_memory.py
   scope: local
   source: repository_script
 - cli_id: dendrites
@@ -574,6 +684,17 @@ cli_entries:
   destructive: false
   supports_json_output: false
   path: scripts/run_scheduler.py
+  scope: local
+  source: repository_script
+- cli_id: transplant-brain
+  command: transplant_brain
+  enabled: true
+  category: project_script
+  kind: repository_script
+  runtime: python
+  destructive: false
+  supports_json_output: false
+  path: scripts/transplant_brain.py
   scope: local
   source: repository_script
 - cli_id: maintain-approvals

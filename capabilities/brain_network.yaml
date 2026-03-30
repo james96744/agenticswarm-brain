@@ -1,0 +1,464 @@
+version: "1.0"
+last_updated: "2026-03-30"
+description: Curated brain-network registry for high-value MCP, CLI, and coordination integrations not yet guaranteed to be locally installed.
+
+registry_defaults:
+  enabled: true
+  treat_uninstalled_integrations_as_intelligence_only: true
+  allow_recommendation_without_activation: true
+  require_explicit_install_before_execution: true
+  prefer_curated_integrations_when_discovered: true
+
+selection_policy:
+  prefer_curated_installed_integrations: true
+  adaptive_backend_pressure:
+    enabled: true
+    min_run_count_for_penalty: 3
+    low_data_penalty: 0.04
+    token_penalty_weight: 0.12
+    latency_penalty_weight: 0.06
+    success_rate_weight: 0.1
+  install_priority_score_boost:
+    p0: 0.18
+    p1: 0.12
+    p2: 0.08
+  category_score_boost:
+    persistent_learning: 0.1
+    token_optimization: 0.06
+    inter_brain_communication: 0.12
+    workflow_optimization: 0.08
+    architecture_optimization: 0.1
+
+bundles:
+  - bundle_id: persistent_learning
+    anatomy_focus:
+      - limbic_system
+      - cerebrum
+    description: Long-lived memory, rollback, temporal validity, and project-knowledge reinforcement.
+    integration_ids:
+      - codebase-memory-mcp
+      - nocturne-memory
+      - context-portal
+      - mcp-graphiti
+  - bundle_id: token_optimization
+    anatomy_focus:
+      - cerebellum
+      - brainstem
+    description: Context compression, retrieval, and historical recall to reduce token burn.
+    integration_ids:
+      - claude-historian-mcp
+      - token-optimizer-mcp
+  - bundle_id: inter_brain_communication
+    anatomy_focus:
+      - brainstem
+      - neurons
+    description: Cross-agent memory, formal discovery, and reasoning handoff across tools and hosts.
+    integration_ids:
+      - memorix
+      - anemoi
+      - marm-systems
+  - bundle_id: workflow_optimization
+    anatomy_focus:
+      - cerebellum
+      - brainstem
+      - cerebrum
+    description: Session continuity, task hierarchy, and verified editing/remote execution utilities.
+    integration_ids:
+      - continuous-claude-v3
+      - atlas-mcp-server
+      - claude-code-skills
+  - bundle_id: architecture_optimization
+    anatomy_focus:
+      - cerebrum
+      - dendrites
+      - limbic_system
+    description: Gateway, ingestion, and structured memory-bank layers for larger-scale orchestration.
+    integration_ids:
+      - mcp-context-forge
+      - agentset
+      - memory-bank-mcp
+
+integrations:
+  - integration_id: codebase-memory-mcp
+    name: codebase-memory-mcp
+    repo: DeusData/codebase-memory-mcp
+    repo_url: https://github.com/DeusData/codebase-memory-mcp
+    category: persistent_learning
+    kind: mcp_server
+    install_priority: p0
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - limbic_system
+      - dendrites
+    recommended_distribution_tiers:
+      - community
+      - advanced
+    value_claims:
+      - code_knowledge_graph
+      - token_savings
+      - precise_context_retrieval
+    rationale: Tree-sitter-backed code memory that can replace broad file reads with targeted graph retrieval.
+    detection_hints:
+      backend_ids:
+        - mcp-codebase-memory-mcp
+      id_contains:
+        - codebase-memory
+        - codebase-memory-mcp
+  - integration_id: nocturne-memory
+    name: nocturne_memory
+    repo: Dataojitori/nocturne_memory
+    repo_url: https://github.com/Dataojitori/nocturne_memory
+    category: persistent_learning
+    kind: memory_layer
+    install_priority: p0
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - limbic_system
+      - brainstem
+    recommended_distribution_tiers:
+      - community
+      - advanced
+    value_claims:
+      - rollbackable_graph_memory
+      - sqlite_postgres_support
+      - memory_recovery
+    rationale: Adds reversible external memory so mistaken learning can be rolled back cleanly.
+    detection_hints:
+      id_contains:
+        - nocturne
+        - nocturne-memory
+        - nocturne_memory
+  - integration_id: context-portal
+    name: context-portal
+    repo: GreatScottyMac/context-portal
+    repo_url: https://github.com/GreatScottyMac/context-portal
+    category: persistent_learning
+    kind: project_knowledge_graph
+    install_priority: p0
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - limbic_system
+      - cerebrum
+    recommended_distribution_tiers:
+      - community
+      - advanced
+    value_claims:
+      - architecture_memory
+      - decision_tracking
+      - component_relationships
+    rationale: Project-level knowledge graph that sits above raw fact triples and below strategic planning.
+    detection_hints:
+      id_contains:
+        - context-portal
+        - conport
+  - integration_id: mcp-graphiti
+    name: mcp-graphiti
+    repo: rawr-ai/mcp-graphiti
+    repo_url: https://github.com/rawr-ai/mcp-graphiti
+    category: persistent_learning
+    kind: mcp_server
+    install_priority: p0
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - limbic_system
+      - dendrites
+    recommended_distribution_tiers:
+      - community
+      - advanced
+    value_claims:
+      - temporal_memory
+      - validity_tracking
+      - knowledge_age_reasoning
+    rationale: Dedicated Graphiti MCP wrapper with temporal awareness to strengthen knowledge validity checks over time.
+    detection_hints:
+      backend_ids:
+        - mcp-graphiti
+      id_contains:
+        - graphiti
+        - mcp-graphiti
+  - integration_id: claude-historian-mcp
+    name: claude-historian-mcp
+    repo: Vvkmnn/claude-historian-mcp
+    repo_url: https://github.com/Vvkmnn/claude-historian-mcp
+    category: token_optimization
+    kind: mcp_server
+    install_priority: p1
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - limbic_system
+      - cerebrum
+    recommended_distribution_tiers:
+      - community
+      - advanced
+    value_claims:
+      - historical_context_indexing
+      - reduced_reexplanation
+      - repeated_session_recall
+    rationale: Retrieves relevant historical context instead of replaying full conversation history.
+    detection_hints:
+      id_contains:
+        - historian
+        - claude-historian
+  - integration_id: token-optimizer-mcp
+    name: token-optimizer-mcp
+    repo: ooples/token-optimizer-mcp
+    repo_url: https://github.com/ooples/token-optimizer-mcp
+    category: token_optimization
+    kind: mcp_server
+    install_priority: p1
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - cerebellum
+      - brainstem
+    recommended_distribution_tiers:
+      - community
+      - advanced
+    value_claims:
+      - context_compression
+      - caching
+      - tool_intelligence
+    rationale: Narrow but directly aligned with reducing token burn in coding-agent loops.
+    detection_hints:
+      id_contains:
+        - token-optimizer
+        - token-optimizer-mcp
+  - integration_id: memorix
+    name: memorix
+    repo: AVIDS2/memorix
+    repo_url: https://github.com/AVIDS2/memorix
+    category: inter_brain_communication
+    kind: cross_agent_memory
+    install_priority: p0
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - limbic_system
+      - brainstem
+      - neurons
+    recommended_distribution_tiers:
+      - community
+      - advanced
+    value_claims:
+      - cross_tool_memory
+      - local_first_sync
+      - git_aware_memory
+    rationale: Extends memory continuity across different agent toolchains rather than only within one host environment.
+    routing_hints:
+      preferred_task_families:
+        - architecture_decision
+        - research
+      preferred_dispatch_modes:
+        - remote_worker
+      discouraged_task_families:
+        - boilerplate_code
+        - validation
+      discourage_as_default_bundle: true
+    detection_hints:
+      id_contains:
+        - memorix
+  - integration_id: anemoi
+    name: Anemoi
+    repo: Coral-Protocol/Anemoi
+    repo_url: https://github.com/Coral-Protocol/Anemoi
+    category: inter_brain_communication
+    kind: agent_to_agent_protocol
+    install_priority: p0
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - brainstem
+      - neurons
+      - dendrites
+    recommended_distribution_tiers:
+      - advanced
+      - enterprise
+    value_claims:
+      - agent_discovery
+      - message_passing
+      - formal_inter_agent_protocol
+    rationale: Adds structured agent-to-agent discovery and communication above raw task dispatch.
+    detection_hints:
+      id_contains:
+        - anemoi
+        - coral-protocol
+  - integration_id: marm-systems
+    name: MARM-Systems
+    repo: Lyellr88/MARM-Systems
+    repo_url: https://github.com/Lyellr88/MARM-Systems
+    category: inter_brain_communication
+    kind: reasoning_handoff_layer
+    install_priority: p1
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - brainstem
+      - neurons
+      - cerebellum
+    recommended_distribution_tiers:
+      - advanced
+      - enterprise
+    value_claims:
+      - multi_transport_coordination
+      - reasoning_continuity
+      - structured_handoffs
+    rationale: Bridges execution handoffs with preserved reasoning state across transports.
+    detection_hints:
+      id_contains:
+        - marm
+        - marm-systems
+  - integration_id: continuous-claude-v3
+    name: Continuous-Claude-v3
+    repo: parcadei/Continuous-Claude-v3
+    repo_url: https://github.com/parcadei/Continuous-Claude-v3
+    category: workflow_optimization
+    kind: session_continuity_framework
+    install_priority: p1
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - cerebellum
+      - brainstem
+    recommended_distribution_tiers:
+      - community
+      - advanced
+    value_claims:
+      - hook_based_continuity
+      - ledgers
+      - long_session_resilience
+    rationale: Strengthens session continuity above the current blackboard and control-plane layers.
+    detection_hints:
+      id_contains:
+        - continuous-claude
+        - continuous-claude-v3
+  - integration_id: atlas-mcp-server
+    name: atlas-mcp-server
+    repo: cyanheads/atlas-mcp-server
+    repo_url: https://github.com/cyanheads/atlas-mcp-server
+    category: workflow_optimization
+    kind: mcp_server
+    install_priority: p1
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - cerebrum
+      - limbic_system
+      - brainstem
+    recommended_distribution_tiers:
+      - community
+      - advanced
+    value_claims:
+      - task_hierarchy
+      - dependency_awareness
+      - knowledge_linking
+    rationale: Adds project/task graphing and dependency-aware workflow structure on top of the control plane.
+    detection_hints:
+      id_contains:
+        - atlas
+        - atlas-mcp
+        - atlas-mcp-server
+  - integration_id: claude-code-skills
+    name: claude-code-skills
+    repo: levnikolaevich/claude-code-skills
+    repo_url: https://github.com/levnikolaevich/claude-code-skills
+    category: workflow_optimization
+    kind: bundled_mcp_servers
+    install_priority: p1
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - dendrites
+      - neurons
+      - brainstem
+    recommended_distribution_tiers:
+      - community
+      - advanced
+    value_claims:
+      - hash_verified_editing
+      - code_graph
+      - remote_ssh
+    rationale: Bundles high-signal utility MCPs, especially hash-verified editing to reduce stale-edit failures.
+    routing_hints:
+      preferred_task_families:
+        - boilerplate_code
+        - validation
+      discouraged_task_families:
+        - research
+      prefer_when_requires_code: true
+      prefer_when_quality_target_high: true
+      discourage_as_default_bundle: true
+    detection_hints:
+      id_contains:
+        - claude-code-skills
+        - hex-line
+        - hex-graph
+        - hex-ssh
+  - integration_id: mcp-context-forge
+    name: mcp-context-forge
+    repo: IBM/mcp-context-forge
+    repo_url: https://github.com/IBM/mcp-context-forge
+    category: architecture_optimization
+    kind: gateway_registry
+    install_priority: p0
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - cerebrum
+      - dendrites
+      - brainstem
+    recommended_distribution_tiers:
+      - advanced
+      - enterprise
+    value_claims:
+      - gateway
+      - centralized_discovery
+      - guardrails
+      - observability
+    rationale: Best fit for scaling MCP/A2A/REST surfaces without unmanaged sprawl.
+    detection_hints:
+      id_contains:
+        - context-forge
+        - mcp-context-forge
+  - integration_id: agentset
+    name: agentset
+    repo: agentset-ai/agentset
+    repo_url: https://github.com/agentset-ai/agentset
+    category: architecture_optimization
+    kind: ingestion_platform
+    install_priority: p0
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - limbic_system
+      - dendrites
+    recommended_distribution_tiers:
+      - advanced
+      - enterprise
+    value_claims:
+      - knowledge_ingestion
+      - rag_pipeline
+      - citations
+      - multi_format_support
+    rationale: Strong ingestion and research substrate that can feed memory and replay systems.
+    detection_hints:
+      id_contains:
+        - agentset
+  - integration_id: memory-bank-mcp
+    name: memory-bank-mcp
+    repo: alioshr/memory-bank-mcp
+    repo_url: https://github.com/alioshr/memory-bank-mcp
+    category: architecture_optimization
+    kind: structured_memory_layer
+    install_priority: p0
+    activation_state: recommend_only_until_installed
+    intended_anatomy:
+      - limbic_system
+      - cerebrum
+    recommended_distribution_tiers:
+      - community
+      - advanced
+    value_claims:
+      - active_context
+      - decisions
+      - progress_tracking
+    rationale: Adds higher-level structured state above raw memory facts and conflicts.
+    detection_hints:
+      id_contains:
+        - memory-bank
+        - memory-bank-mcp
+
+notes:
+  - This registry is a curated strategic layer, not proof that an integration is locally installed.
+  - Installed integrations should influence routing only after discovery surfaces them as executable capabilities.
+  - Use install_priority plus category to decide the next adoption wave without bloating the brain network.

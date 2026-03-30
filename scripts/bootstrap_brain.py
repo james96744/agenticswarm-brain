@@ -23,6 +23,7 @@ try:
         safe_relpath,
     )
     from runtime_bridge import build_runtime_registry
+    from sovereign_memory import ensure_state_files, update_product_context_from_discovery
 except ModuleNotFoundError:
     from scripts.brain_utils import (
         dump_json_stdout,
@@ -34,6 +35,7 @@ except ModuleNotFoundError:
         safe_relpath,
     )
     from scripts.runtime_bridge import build_runtime_registry
+    from scripts.sovereign_memory import ensure_state_files, update_product_context_from_discovery
 
 
 STACK_MARKERS = {
@@ -202,6 +204,7 @@ CLI_DESTRUCTIVE_HINTS = {
 }
 
 LOCAL_EXECUTABLE_DIRS = (
+    ".brain_integrations/bin",
     "node_modules/.bin",
     ".venv/bin",
     "venv/bin",
@@ -279,6 +282,10 @@ def detect_risk(files: list[Path]) -> str:
 
 
 def should_skip_local_path(path: Path) -> bool:
+    if ".brain_integrations" in path.parts:
+        index = path.parts.index(".brain_integrations")
+        if len(path.parts) > index + 1 and path.parts[index + 1] in {"repos", "venvs"}:
+            return True
     return any(part in DISCOVERY_EXCLUDED_PARTS for part in path.parts)
 
 
@@ -397,6 +404,8 @@ def discover_global_agents() -> list[dict]:
 def discover_local_skills(files: list[Path], root: Path) -> list[dict]:
     results = []
     for path in files:
+        if should_skip_local_path(path):
+            continue
         if path.name != "SKILL.md":
             continue
         results.append(
@@ -915,6 +924,7 @@ def update_registry(root: Path, relative_path: str, key: str, items: list[dict])
 
 
 def apply_discovery(root: Path, discovery: dict) -> None:
+    ensure_state_files(root)
     update_brain_manifest(root, discovery)
     update_registry(root, "capabilities/agents.yaml", "agents", discovery["combined"]["items"]["agents"])
     update_registry(root, "capabilities/skills.yaml", "skills", discovery["combined"]["items"]["skills"])
@@ -923,6 +933,7 @@ def apply_discovery(root: Path, discovery: dict) -> None:
     update_registry(root, "capabilities/cli.yaml", "cli_entries", discovery["combined"]["items"]["cli_entries"])
     update_registry(root, "capabilities/models.yaml", "models", discovery["combined"]["items"]["models"])
     build_runtime_registry(root, write=True)
+    update_product_context_from_discovery(root, discovery)
 
 
 def main() -> int:

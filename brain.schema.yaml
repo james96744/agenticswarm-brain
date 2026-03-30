@@ -2,7 +2,8 @@ brain_manifest:
   version: '1.0'
   repository_profile:
     name: agenticswarm creation
-    stack: []
+    stack:
+    - node
     risk_level: medium
     orchestration_profile: adaptive
     distribution_tier: community
@@ -15,6 +16,18 @@ brain_manifest:
       neurons: scripts/neurons.py
       dendrites: scripts/dendrites.py
       brainstem: scripts/brainstem.py
+  brain_network_registry:
+    path: capabilities/brain_network.yaml
+  brain_network_install_profiles:
+    path: capabilities/brain_network_install_profiles.yaml
+  brain_network_install_state:
+    path: telemetry/brain_network_installs.yaml
+  sovereign_memory:
+    user_profile_path: memory/user_profile.yaml
+    product_context_path: memory/product_context.yaml
+    portable_memory_path: memory/portable_memory.yaml
+    transplant_history_path: telemetry/transplant_history.yaml
+    transplant_script: scripts/transplant_brain.py
   anatomy_map:
     cerebrum:
       role: Primary orchestration cortex
@@ -84,6 +97,7 @@ brain_manifest:
       - Maintain whole-brain operational continuity
   discovery:
     enabled: true
+    inspect_curated_brain_network: true
     inspect_repo_docs: true
     inspect_local_agents: true
     inspect_global_agents: true
@@ -173,12 +187,20 @@ brain_manifest:
     reconciliation_subswarm_enabled: true
     garbage_collection_enabled: true
   memory:
+    user_profile_store: memory/user_profile.yaml
+    product_context_store: memory/product_context.yaml
+    portable_memory_store: memory/portable_memory.yaml
     episodic_store: ''
     semantic_store: ''
     route_store: ''
     blackboard_store: ''
     replay_minimum_quality_score: 0.75
     confidence_decay_half_life_days: 30
+  transplant:
+    enabled: true
+    local_target_only: true
+    source_repo_non_destructive: true
+    preserve_portable_intelligence_only: true
   capability_scoring:
     weights:
       task_relevance: 0.3
@@ -192,10 +214,10 @@ brain_manifest:
   discovery_summary:
     local_counts:
       agents: 2
-      skills: 0
+      skills: 2
       plugins: 0
-      mcp_entries: 0
-      cli_entries: 35
+      mcp_entries: 12
+      cli_entries: 46
       models: 0
     global_counts:
       agents: 140
@@ -206,9 +228,9 @@ brain_manifest:
       models: 13
     combined_counts:
       agents: 142
-      skills: 96
+      skills: 98
       plugins: 1
-      mcp_entries: 84
-      cli_entries: 49
+      mcp_entries: 96
+      cli_entries: 60
       models: 13
-    generated_at: '2026-03-30T01:41:53.767549+00:00'
+    generated_at: '2026-03-30T05:03:04.348738+00:00'

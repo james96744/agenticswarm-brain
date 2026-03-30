@@ -10,6 +10,7 @@ import plistlib
 import py_compile
 import subprocess
 import sys
+import tempfile
 
 try:
     import fcntl
@@ -35,10 +36,13 @@ RUNTIME_CHECKS = (
     "scripts/rebuild_learning.py",
     "scripts/run_scheduler.py",
     "scripts/simulate_swarm.py",
+    "scripts/transplant_brain.py",
     "scripts/reconcile_memory.py",
     "scripts/prune_topology.py",
     "scripts/prepare_distillation.py",
 )
+
+MAX_RUNTIME_DETAIL_CHARS = 12000
 
 MAINTENANCE_SCRIPTS = (
     ("scripts/update_featureset.py", "update_featureset"),
@@ -75,6 +79,13 @@ def audit_lock(root: Path):
 def load_autopilot_config(root: Path) -> dict:
     payload = load_yaml_file(root / "orchestrator/autopilot.yaml")
     return payload.get("autopilot", {})
+
+
+def runtime_python(root: Path) -> str:
+    preferred = root / ".venv" / "bin" / "python"
+    if preferred.exists():
+        return str(preferred)
+    return sys.executable
 
 
 def load_discovery_state(root: Path) -> dict:
@@ -117,21 +128,43 @@ def compile_scripts(root: Path) -> tuple[bool, list[dict]]:
     return success, results
 
 
+def runtime_check_command(root: Path, script: str) -> tuple[list[str], tempfile.TemporaryDirectory[str] | None]:
+    command = [runtime_python(root), str(root / script), "--repo-root", str(root), "--dry-run"]
+    temp_dir: tempfile.TemporaryDirectory[str] | None = None
+    if script == "scripts/transplant_brain.py":
+        temp_dir = tempfile.TemporaryDirectory(prefix="brain-audit-transplant-")
+        command.extend(["--target", temp_dir.name])
+    return command, temp_dir
+
+
+def truncate_runtime_detail(detail: str) -> str:
+    if len(detail) <= MAX_RUNTIME_DETAIL_CHARS:
+        return detail
+    omitted = len(detail) - MAX_RUNTIME_DETAIL_CHARS
+    head = detail[: MAX_RUNTIME_DETAIL_CHARS - 64]
+    return f"{head}\n... truncated {omitted} characters ..."
+
+
 def run_runtime_checks(root: Path) -> tuple[bool, list[dict]]:
     results = []
     success = True
     for script in RUNTIME_CHECKS:
-        completed = subprocess.run(
-            [sys.executable, str(root / script), "--repo-root", str(root), "--dry-run"],
-            cwd=root,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
+        command, temp_dir = runtime_check_command(root, script)
+        try:
+            completed = subprocess.run(
+                command,
+                cwd=root,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+        finally:
+            if temp_dir is not None:
+                temp_dir.cleanup()
         status = "passed" if completed.returncode == 0 else "failed"
         if completed.returncode != 0:
             success = False
-        detail = completed.stdout.strip() or completed.stderr.strip()
+        detail = truncate_runtime_detail(completed.stdout.strip() or completed.stderr.strip())
         results.append(
             {
                 "phase": "runtime_check",
@@ -144,7 +177,7 @@ def run_runtime_checks(root: Path) -> tuple[bool, list[dict]]:
 
 
 def run_script(root: Path, script: str, *, dry_run: bool) -> tuple[bool, dict]:
-    command = [sys.executable, str(root / script), "--repo-root", str(root)]
+    command = [runtime_python(root), str(root / script), "--repo-root", str(root)]
     if dry_run:
         command.append("--dry-run")
     completed = subprocess.run(
@@ -285,7 +318,7 @@ def install_launchd_autostart(root: Path, autopilot: dict, *, dry_run: bool) -> 
     plist = {
         "Label": label,
         "ProgramArguments": [
-            sys.executable,
+            runtime_python(root),
             str(root / "scripts/run_audit.py"),
             "--repo-root",
             str(root),
