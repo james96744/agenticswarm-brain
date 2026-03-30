@@ -2,9 +2,14 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
+from difflib import SequenceMatcher
+import json
 from pathlib import Path
 import shlex
 import subprocess
+import time
+from urllib import error as urllib_error
+from urllib import request as urllib_request
 import uuid
 
 try:
@@ -33,6 +38,10 @@ class ExecutionRequest:
     workdir: str | None = None
     owner_id: str = "brain"
     approve_risky: bool = False
+    dispatch_mode: str = "immediate"
+    queue_name: str | None = None
+    not_before_at: str | None = None
+    max_retries: int = 1
     selected_executor_id: str | None = None
     selected_router_id: str | None = None
     selected_backend_ids: list[str] = field(default_factory=list)
@@ -50,6 +59,8 @@ class ExecutionRun:
     selected_executor_id: str | None
     selected_router_id: str | None
     selected_backend_ids: list[str]
+    dispatch_mode: str = "immediate"
+    queue_name: str | None = None
     retry_count: int = 0
     approval_status: str = "not_required"
     current_step: str = "created"
@@ -74,6 +85,7 @@ class ExecutionResult:
     route: dict = field(default_factory=dict)
     outputs: dict = field(default_factory=dict)
     critic_status: str = "pending"
+    latency_ms: int = 0
 
 
 class RouterAdapter:
@@ -87,6 +99,50 @@ class RouterAdapter:
             "kind": router.get("kind"),
             "model_assignments": route.get("model_assignments", {}),
         }
+
+
+def _http_invoke(url: str, method: str, timeout_seconds: int, headers: dict | None = None, body: str | bytes | None = None) -> dict:
+    request = urllib_request.Request(url=url, method=method.upper())
+    for key, value in (headers or {}).items():
+        request.add_header(str(key), str(value))
+    data = None
+    if body is not None:
+        data = body.encode("utf-8") if isinstance(body, str) else body
+    try:
+        with urllib_request.urlopen(request, data=data, timeout=timeout_seconds) as response:
+            response_body = response.read().decode("utf-8", errors="replace")
+            return {
+                "status": "success",
+                "stdout": response_body.strip(),
+                "stderr": "",
+                "exit_code": response.getcode(),
+                "headers": dict(response.headers.items()),
+            }
+    except urllib_error.HTTPError as exc:
+        return {
+            "status": "failed",
+            "stdout": (exc.read().decode("utf-8", errors="replace") if exc.fp else "").strip(),
+            "stderr": str(exc),
+            "exit_code": exc.code,
+            "headers": dict(exc.headers.items()) if exc.headers else {},
+        }
+    except urllib_error.URLError as exc:
+        return {
+            "status": "failed",
+            "stdout": "",
+            "stderr": str(exc),
+            "exit_code": None,
+            "headers": {},
+        }
+
+
+def _material_change(previous: str | None, current: str | None) -> bool:
+    if not previous or not current:
+        return False
+    if previous.strip() == current.strip():
+        return False
+    similarity = SequenceMatcher(a=previous.strip(), b=current.strip()).ratio()
+    return similarity < 0.98
 
 
 class ExecutorAdapter:
@@ -186,6 +242,25 @@ class BackendAdapter:
                     "exit_code": completed.returncode,
                     "command": final_command,
                 }
+            if backend.get("url") and action in {"http_get", "http_post", "http_request"}:
+                method = call.get("method") or ("POST" if action == "http_post" else "GET")
+                body = call.get("body")
+                if "json_body" in call:
+                    body = json.dumps(call.get("json_body"))
+                response = _http_invoke(
+                    call.get("url") or backend.get("url"),
+                    method,
+                    timeout_seconds,
+                    headers=dict(call.get("headers", {})),
+                    body=body,
+                )
+                return {
+                    "backend_id": backend.get("backend_id"),
+                    "summary": f"MCP HTTP backend `{backend.get('backend_id')}` returned {response.get('exit_code')}.",
+                    "url": call.get("url") or backend.get("url"),
+                    "method": method,
+                    **response,
+                }
             return {
                 "backend_id": backend.get("backend_id"),
                 "status": "success",
@@ -194,6 +269,90 @@ class BackendAdapter:
                 "stderr": "",
                 "exit_code": 0,
                 "endpoint": backend.get("url") or backend.get("command"),
+            }
+
+        if backend.get("kind") == "http_api":
+            if action not in {"http_get", "http_post", "http_request", "describe"}:
+                action = "http_request"
+            if action == "describe":
+                return {
+                    "backend_id": backend.get("backend_id"),
+                    "status": "success",
+                    "summary": f"HTTP backend `{backend.get('backend_id')}` resolved.",
+                    "stdout": "",
+                    "stderr": "",
+                    "exit_code": 0,
+                    "endpoint": backend.get("url"),
+                }
+            method = call.get("method") or ("POST" if action == "http_post" else "GET")
+            body = call.get("body")
+            if "json_body" in call:
+                body = json.dumps(call.get("json_body"))
+            response = _http_invoke(
+                call.get("url") or backend.get("url"),
+                method,
+                timeout_seconds,
+                headers=dict(call.get("headers", {})),
+                body=body,
+            )
+            return {
+                "backend_id": backend.get("backend_id"),
+                "summary": f"HTTP backend `{backend.get('backend_id')}` returned {response.get('exit_code')}.",
+                "url": call.get("url") or backend.get("url"),
+                "method": method,
+                **response,
+            }
+
+        if backend.get("kind") == "plugin":
+            if action == "emit_artifact":
+                target_path = call.get("path")
+                if not target_path:
+                    return {
+                        "backend_id": backend.get("backend_id"),
+                        "status": "failed",
+                        "summary": f"Plugin backend `{backend.get('backend_id')}` missing artifact path.",
+                        "stdout": "",
+                        "stderr": "",
+                        "exit_code": None,
+                    }
+                path = (root / target_path) if not Path(target_path).is_absolute() else Path(target_path)
+                path.parent.mkdir(parents=True, exist_ok=True)
+                content = call.get("content", "")
+                path.write_text(str(content), encoding="utf-8")
+                return {
+                    "backend_id": backend.get("backend_id"),
+                    "status": "success",
+                    "summary": f"Plugin backend `{backend.get('backend_id')}` wrote artifact `{path}`.",
+                    "stdout": str(path),
+                    "stderr": "",
+                    "exit_code": 0,
+                }
+            if action in {"http_get", "http_post", "http_request"} and call.get("url"):
+                method = call.get("method") or ("POST" if action == "http_post" else "GET")
+                body = call.get("body")
+                if "json_body" in call:
+                    body = json.dumps(call.get("json_body"))
+                response = _http_invoke(
+                    call["url"],
+                    method,
+                    timeout_seconds,
+                    headers=dict(call.get("headers", {})),
+                    body=body,
+                )
+                return {
+                    "backend_id": backend.get("backend_id"),
+                    "summary": f"Plugin backend `{backend.get('backend_id')}` returned {response.get('exit_code')}.",
+                    "url": call["url"],
+                    "method": method,
+                    **response,
+                }
+            return {
+                "backend_id": backend.get("backend_id"),
+                "status": "success",
+                "summary": f"Plugin backend `{backend.get('backend_id')}` resolved.",
+                "stdout": "",
+                "stderr": "",
+                "exit_code": 0,
             }
 
         return {
@@ -222,6 +381,10 @@ def request_from_payload(payload: dict) -> ExecutionRequest:
         workdir=payload.get("workdir"),
         owner_id=payload.get("owner_id", "brain"),
         approve_risky=bool(payload.get("approve_risky", False)),
+        dispatch_mode=payload.get("dispatch_mode", "immediate"),
+        queue_name=payload.get("queue_name"),
+        not_before_at=payload.get("not_before_at"),
+        max_retries=int(payload.get("max_retries", 1)),
         selected_executor_id=payload.get("selected_executor_id"),
         selected_router_id=payload.get("selected_router_id"),
         selected_backend_ids=list(payload.get("selected_backend_ids", [])),
@@ -242,6 +405,7 @@ def _route_payload(request: ExecutionRequest) -> dict:
         "requires_tools": request.requires_tools,
         "high_stakes": request.high_stakes,
         "force_expert": request.force_expert,
+        "dispatch_mode": request.dispatch_mode,
     }
 
 
@@ -265,6 +429,12 @@ def _approval_required(request: ExecutionRequest, executor: dict | None, backend
     if any(_risky_backend(backend) for backend in backends):
         return True, "risky_backend_selected"
     return False, "not_required"
+
+
+def _queue_required(request: ExecutionRequest, executor: dict | None) -> bool:
+    if request.dispatch_mode in {"deferred", "remote_worker"}:
+        return True
+    return bool(executor and executor.get("kind") == "remote_worker")
 
 
 def _load_yaml_list(path: Path, key: str) -> tuple[dict, list[dict]]:
@@ -298,19 +468,34 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
             "run_count": 0,
             "success_count": 0,
             "critic_pass_count": 0,
+            "verified_execution_count": 0,
             "replay_candidate_count": 0,
             "avg_confidence": 0.0,
+            "avg_latency_ms": 0.0,
+            "queued_run_count": 0,
+            "remote_dispatch_count": 0,
             "last_executor_id": run.selected_executor_id,
             "last_router_id": run.selected_router_id,
         },
     )
     task_metric["run_count"] += 1
+    task_metric.setdefault("critic_pass_count", 0)
+    task_metric.setdefault("verified_execution_count", 0)
+    task_metric.setdefault("replay_candidate_count", 0)
+    task_metric.setdefault("avg_latency_ms", 0.0)
+    task_metric.setdefault("queued_run_count", 0)
+    task_metric.setdefault("remote_dispatch_count", 0)
     task_metric["success_count"] += 1 if result.status == "success" else 0
     task_metric["critic_pass_count"] += 1 if result.critic_status == "passed" else 0
+    task_metric["verified_execution_count"] += 1 if result.outputs.get("verified_execution", False) else 0
     task_metric["replay_candidate_count"] += 1 if result.outputs.get("replay_eligible", False) else 0
     prior_conf = float(task_metric.get("avg_confidence", 0.0))
+    prior_latency = float(task_metric.get("avg_latency_ms", 0.0))
     count = max(1, int(task_metric["run_count"]))
     task_metric["avg_confidence"] = round(((prior_conf * (count - 1)) + result.confidence) / count, 4)
+    task_metric["avg_latency_ms"] = round(((prior_latency * (count - 1)) + int(result.latency_ms)) / count, 2)
+    task_metric["queued_run_count"] += 1 if request.dispatch_mode == "deferred" else 0
+    task_metric["remote_dispatch_count"] += 1 if request.dispatch_mode == "remote_worker" else 0
     task_metric["last_executor_id"] = run.selected_executor_id
     task_metric["last_router_id"] = run.selected_router_id
     task_metric["updated_at"] = utc_now()
@@ -325,11 +510,21 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
                 "task_family": request.task_family,
                 "run_count": 0,
                 "success_count": 0,
+                "critic_pass_count": 0,
+                "avg_latency_ms": 0.0,
                 "last_used_at": None,
             },
         )
+        model_metric.setdefault("critic_pass_count", 0)
+        model_metric.setdefault("avg_latency_ms", 0.0)
         model_metric["run_count"] += 1
         model_metric["success_count"] += 1 if result.status == "success" else 0
+        model_metric["critic_pass_count"] += 1 if result.critic_status == "passed" else 0
+        model_metric["avg_latency_ms"] = round(
+            ((float(model_metric.get("avg_latency_ms", 0.0)) * (model_metric["run_count"] - 1)) + int(result.latency_ms))
+            / max(1, int(model_metric["run_count"])),
+            2,
+        )
         model_metric["last_used_at"] = utc_now()
 
     if run.selected_executor_id:
@@ -348,6 +543,9 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
             },
         )
         agent_metric["run_count"] += 1
+        agent_metric.setdefault("critic_failure_count", 0)
+        agent_metric.setdefault("avg_confidence", 0.0)
+        agent_metric.setdefault("avg_latency_ms", 0.0)
         agent_metric["success_count"] += 1 if result.status == "success" else 0
         agent_metric["critic_failure_count"] += 1 if result.critic_status == "failed" else 0
         agent_metric["avg_confidence"] = round(
@@ -361,7 +559,41 @@ def _update_benchmarks(root: Path, request: ExecutionRequest, run: ExecutionRun,
         agent_metric["value_add_per_token"] = round(result.confidence, 4)
         agent_metric["critic_rejection_rate"] = round(critic_failure_count / run_count, 4)
         agent_metric["ignored_edit_rate"] = 0.0
+        agent_metric["avg_latency_ms"] = round(
+            ((float(agent_metric.get("avg_latency_ms", 0.0)) * (run_count - 1)) + int(result.latency_ms)) / run_count,
+            2,
+        )
         agent_metric["updated_at"] = utc_now()
+
+    for backend_call in result.backend_calls:
+        backend_id = backend_call.get("backend_id")
+        if not backend_id:
+            continue
+        adapter_metric = upsert(
+            payload["adapter_benchmarks"],
+            "adapter_id",
+            f"backend:{backend_id}:{request.task_family}",
+            {
+                "adapter_id": f"backend:{backend_id}:{request.task_family}",
+                "task_family": request.task_family,
+                "run_count": 0,
+                "success_count": 0,
+                "avg_latency_ms": 0.0,
+                "dispatch_mode": request.dispatch_mode,
+                "last_status": None,
+            },
+        )
+        adapter_metric.setdefault("avg_latency_ms", 0.0)
+        adapter_metric["run_count"] += 1
+        adapter_metric["success_count"] += 1 if backend_call.get("status") == "success" else 0
+        adapter_metric["avg_latency_ms"] = round(
+            ((float(adapter_metric.get("avg_latency_ms", 0.0)) * (adapter_metric["run_count"] - 1))
+             + int(backend_call.get("latency_ms", result.latency_ms))) / max(1, int(adapter_metric["run_count"])),
+            2,
+        )
+        adapter_metric["dispatch_mode"] = request.dispatch_mode
+        adapter_metric["last_status"] = backend_call.get("status")
+        adapter_metric["updated_at"] = utc_now()
 
     payload["last_updated"] = datetime.now(timezone.utc).date().isoformat()
     dump_yaml_file(path, payload)
@@ -454,21 +686,28 @@ def _update_routes_and_triplets(root: Path, request: ExecutionRequest, run: Exec
         "executor_id": run.selected_executor_id,
         "router_id": run.selected_router_id,
         "backend_ids": run.selected_backend_ids,
+        "dispatch_mode": request.dispatch_mode,
+        "queue_name": request.queue_name,
         "quality_target": request.quality_target,
         "risk_level": request.risk_level,
         "confidence": result.confidence,
         "critic_status": result.critic_status,
+        "verified_execution": result.outputs.get("verified_execution", False),
         "replay_eligible": result.outputs.get("replay_eligible", False),
+        "replay_score": result.outputs.get("replay_score", 0.0),
+        "latency_ms": int(result.latency_ms),
+        "backend_success_count": len([call for call in result.backend_calls if call.get("status") == "success"]),
+        "backend_failure_count": len([call for call in result.backend_calls if call.get("status") == "failed"]),
         "timestamp": utc_now(),
     }
     routes.append(route_record)
 
-    if request.bad_output and request.expert_correction and request.bad_output != request.expert_correction:
+    if request.verified_correction and _material_change(request.bad_output, request.expert_correction):
         triplets.append(
             {
                 "triplet_id": f"triplet-{uuid.uuid4().hex[:10]}",
                 "task_family": request.task_family,
-                "verified": bool(request.verified_correction),
+                "verified": True,
                 "initial_prompt": request.description,
                 "bad_output": request.bad_output,
                 "expert_correction": request.expert_correction,
@@ -487,9 +726,14 @@ def record_learning(root: Path, request: ExecutionRequest, run: ExecutionRun, re
     _update_memory(root, request, run, result)
 
 
-def execute_request(repo_root: str | None, payload: dict) -> dict:
+def execute_request(repo_root: str | None, payload: dict, *, force_immediate: bool = False) -> dict:
     root = repo_root_from(repo_root)
     request = request_from_payload(payload)
+    if force_immediate:
+        request.dispatch_mode = "immediate"
+        request.queue_name = None
+        if request.selected_executor_id == "remote-worker":
+            request.selected_executor_id = None
     runtime_registry = build_runtime_registry(root, write=True)
     route = plan_execution(root, _route_payload(request), runtime_registry=runtime_registry)
     blackboard = BlackboardStore(root)
@@ -548,6 +792,8 @@ def execute_request(repo_root: str | None, payload: dict) -> dict:
         selected_executor_id=executor.get("executor_id") if executor else None,
         selected_router_id=router.get("router_id") if router else None,
         selected_backend_ids=selected_backend_ids,
+        dispatch_mode=request.dispatch_mode,
+        queue_name=request.queue_name,
         current_step="routing",
         confidence=effective_route.get("confidence", 0.0),
     )
@@ -616,11 +862,39 @@ def execute_request(repo_root: str | None, payload: dict) -> dict:
             "route": effective_route,
         }
 
+    if _queue_required(request, executor):
+        queue_name = request.queue_name or ("remote-workers" if request.dispatch_mode == "remote_worker" else "deferred")
+        run.queue_name = queue_name
+        queue_item = control_plane.enqueue_request(
+            task_id=request.task_id,
+            run_id=run.run_id,
+            payload=payload,
+            dispatch_mode=request.dispatch_mode,
+            queue_name=queue_name,
+            not_before_at=request.not_before_at,
+            max_attempts=request.max_retries,
+        )
+        run.status = "queued"
+        run.current_step = "queued"
+        run.updated_at = utc_now()
+        control_plane.append_run(asdict(run))
+        task["state"] = "queued"
+        task["updated_at"] = utc_now()
+        control_plane.upsert_task(task)
+        control_plane.release_lease(request.task_id, request.owner_id)
+        return {
+            "status": "queued",
+            "run": asdict(run),
+            "queue_item": queue_item,
+            "route": effective_route,
+        }
+
     router_result = RouterAdapter().resolve(router, effective_route)
     run.current_step = "execution"
     run.updated_at = utc_now()
     control_plane.append_run(asdict(run))
 
+    started = time.perf_counter()
     executor_result = ExecutorAdapter().invoke(root, executor or {}, request)
     backend_calls = []
     backend_adapter = BackendAdapter()
@@ -630,7 +904,11 @@ def execute_request(repo_root: str | None, payload: dict) -> dict:
         if backend is None:
             backend_calls.append({"backend_id": backend_id, "status": "skipped", "summary": "Backend not selected."})
             continue
-        backend_calls.append(backend_adapter.invoke(root, backend, call))
+        call_started = time.perf_counter()
+        backend_result = backend_adapter.invoke(root, backend, call)
+        backend_result["latency_ms"] = int((time.perf_counter() - call_started) * 1000)
+        backend_calls.append(backend_result)
+    latency_ms = int((time.perf_counter() - started) * 1000)
 
     overall_success = executor_result.get("status") == "success" and all(
         call.get("status") in {"success", "skipped"} for call in backend_calls
@@ -729,9 +1007,13 @@ def execute_request(repo_root: str | None, payload: dict) -> dict:
         },
         outputs={
             "replay_eligible": overall_success and critic_status == "passed",
+            "verified_execution": overall_success and critic_status == "passed",
+            "replay_score": round(min(1.0, effective_route.get("confidence", 0.0) * (1.0 if critic_status == "passed" else 0.5)), 4),
+            "latency_ms": latency_ms,
             "executor_command": executor_result.get("command"),
         },
         critic_status=critic_status,
+        latency_ms=latency_ms,
     )
     record_learning(root, request, run, result)
     control_plane.release_lease(request.task_id, request.owner_id)

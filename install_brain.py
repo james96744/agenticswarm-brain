@@ -98,11 +98,13 @@ last_updated: "{date}"
 description: Route telemetry store for replay, structural plasticity, and model-tier optimization.
 
 routes: []
+route_preferences: []
 plasticity_recommendations: []
 training_triplets: []
 
 notes:
   - Append route records here or partition by date in larger repositories.
+  - Use `route_preferences` to store verified high-signal route summaries for replay-aware planning.
   - Use `plasticity_recommendations` for merge and prune proposals before applying topology changes.
 """
 
@@ -118,13 +120,15 @@ notes:
 
 CONTROL_PLANE_TEMPLATE = """version: "1.0"
 last_updated: "{date}"
-description: File-first control plane for tasks, runs, approvals, artifacts, and leases.
+description: File-first control plane for tasks, runs, approvals, artifacts, leases, queues, and workers.
 
 tasks: []
 runs: []
 approvals: []
 artifacts: []
 leases: []
+queue_items: []
+workers: []
 
 notes:
   - This file is the durable control-plane state for guarded-autonomy execution.

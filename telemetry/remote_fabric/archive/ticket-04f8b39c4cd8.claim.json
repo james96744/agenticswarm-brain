@@ -1,0 +1,40 @@
+{
+  "claimed_at": "2026-03-30T00:19:20.209772+00:00",
+  "completed_at": null,
+  "created_at": "2026-03-30T00:19:15.280582+00:00",
+  "dispatch_mode": "remote_worker",
+  "dispatch_run_id": "run-95a5f4ddc1a0",
+  "payload": {
+    "description": "Exercise transport-backed remote worker dispatch",
+    "dispatch_mode": "remote_worker",
+    "inputs": {
+      "backend_requests": [
+        {
+          "action": "raw_command",
+          "args": [
+            "--files"
+          ],
+          "backend_id": "cli-rg"
+        }
+      ],
+      "command": [
+        "python3",
+        "-c",
+        "print('remote fabric ok')"
+      ]
+    },
+    "risk_level": "low",
+    "selected_backend_ids": [
+      "cli-rg"
+    ],
+    "selected_executor_id": "remote-worker",
+    "task_family": "boilerplate_code",
+    "task_id": "remote-fabric-demo"
+  },
+  "queue_item_id": "queue-9937ec600247",
+  "queue_name": "remote-workers",
+  "state": "claimed",
+  "task_id": "remote-fabric-demo",
+  "ticket_id": "ticket-04f8b39c4cd8",
+  "worker_id": "remote-fabric-worker"
+}

@@ -27,7 +27,7 @@ def main() -> int:
     payload = load_request((root / args.request_file) if not Path(args.request_file).is_absolute() else Path(args.request_file))
     result = execute_request(str(root), payload)
     dump_json_stdout(result)
-    return 0 if result.get("status") in {"success", "awaiting_approval"} else 1
+    return 0 if result.get("status") in {"success", "awaiting_approval", "queued"} else 1
 
 
 if __name__ == "__main__":

@@ -45,6 +45,7 @@ DISCOVERED_PATH_CHECKS = (
 
 MODEL_TIERS = {"tier_0_router", "tier_1_worker", "tier_2_critic", "tier_3_expert"}
 ANATOMY_KEYS = {"cerebrum", "cerebellum", "limbic_system", "neurons", "dendrites", "brainstem"}
+PACKAGING_TIERS = {"community", "advanced", "enterprise"}
 
 
 def require_jsonschema():
@@ -157,6 +158,26 @@ def semantic_checks(root: Path) -> list[str]:
         errors.append(
             "brain.schema.yaml:policies.require_human_approval_for must match orchestrator/policies.yaml human_in_the_loop.required_for"
         )
+
+    brain_tier = brain.get("repository_profile", {}).get("distribution_tier")
+    packaging_profile = policies.get("packaging_profile", {})
+    policy_tier = packaging_profile.get("active_tier")
+    tier_defs = packaging_profile.get("tiers", {})
+    if brain_tier and brain_tier not in PACKAGING_TIERS:
+        errors.append(f"brain.schema.yaml:repository_profile.distribution_tier has unsupported tier `{brain_tier}`")
+    if policy_tier and policy_tier not in PACKAGING_TIERS:
+        errors.append(f"orchestrator/policies.yaml:packaging_profile.active_tier has unsupported tier `{policy_tier}`")
+    if brain_tier and policy_tier and brain_tier != policy_tier:
+        errors.append("brain.schema.yaml:repository_profile.distribution_tier must match orchestrator/policies.yaml packaging_profile.active_tier")
+    for tier_name in PACKAGING_TIERS:
+        if tier_name not in tier_defs:
+            errors.append(f"orchestrator/policies.yaml:packaging_profile.tiers is missing `{tier_name}`")
+    allowed_modes = set(tier_defs.get(policy_tier or "", {}).get("allowed_remote_transport_modes", []))
+    remote_mode = policies.get("remote_worker_policy", {}).get("transport_mode")
+    if policy_tier == "community" and remote_mode and remote_mode != "shared_filesystem_fabric":
+        errors.append("orchestrator/policies.yaml:community tier must use shared_filesystem_fabric as the configured remote transport")
+    if remote_mode and allowed_modes and remote_mode not in allowed_modes:
+        errors.append("orchestrator/policies.yaml:remote_worker_policy.transport_mode must be allowed by the active packaging tier")
 
     schema_refs = policies.get("blackboard_policy", {}).get("event_schema_refs", {})
     event_types = set(policies.get("blackboard_policy", {}).get("event_types", []))

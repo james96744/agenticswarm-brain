@@ -14,7 +14,7 @@ except ModuleNotFoundError:
 
 RISK_ORDER = {"low": 0, "medium": 1, "high": 2, "critical": 3}
 COMPLEXITY_ORDER = {"low": 0, "medium": 1, "high": 2}
-SAFE_TOOL_CATEGORIES = {"search", "test", "data", "network", "mcp", "observability", "integration"}
+SAFE_TOOL_CATEGORIES = {"search", "test", "data", "network", "mcp", "observability", "integration", "storage"}
 PROVIDER_API_PROVIDERS = {"openai", "anthropic", "google", "azure_openai", "cohere", "mistral"}
 LOCAL_RUNTIME_PROVIDERS = {"ollama", "vllm"}
 PROVIDER_SECRET_REQUIREMENTS = {
@@ -194,6 +194,29 @@ def discover_agent_executors(cli_entries: list[dict]) -> list[dict]:
             }
         )
 
+    results.append(
+        {
+            "executor_id": "remote-worker",
+            "enabled": True,
+            "kind": "remote_worker",
+            "command": None,
+            "path": None,
+            "runtime": "queued_dispatch",
+            "scope": "global",
+            "source": "runtime_template",
+            "supports_code": True,
+            "supports_tools": True,
+            "supports_streaming": False,
+            "supports_direct_invocation": False,
+            "invocation_mode": "queued_dispatch",
+            "supported_task_families": ["coding", "research", "review", "security_sensitive", "architecture_decision", "data_migration"],
+            "strengths": ["deferred_execution", "remote_capacity", "queue_dispatch"],
+            "auth_required": False,
+            "secret_requirements": [],
+            "health_status": "ready",
+        }
+    )
+
     return dedupe(results, "executor_id")
 
 
@@ -261,11 +284,14 @@ def discover_tool_backends(mcp_entries: list[dict], plugins: list[dict], cli_ent
     results = []
 
     for entry in mcp_entries:
+        backend_kind = "mcp_server" if entry.get("kind") == "server_definition" else "mcp_config"
+        if entry.get("transport") == "http" and entry.get("url"):
+            backend_kind = "http_api"
         results.append(
             {
                 "backend_id": f"mcp-{entry.get('mcp_id')}",
                 "enabled": bool(entry.get("enabled", True)),
-                "kind": "mcp_server" if entry.get("kind") == "server_definition" else "mcp_config",
+                "kind": backend_kind,
                 "category": backend_category_for_mcp(entry),
                 "scope": entry.get("scope", "global"),
                 "source": f"mcp:{entry.get('source', 'unknown')}",
@@ -278,7 +304,7 @@ def discover_tool_backends(mcp_entries: list[dict], plugins: list[dict], cli_ent
                 "auth_required": bool(entry.get("auth_required", False)) or bool(entry.get("url")),
                 "secret_requirements": entry.get("secret_requirements", []),
                 "destructive_capabilities": [],
-                "supports_direct_invocation": entry.get("kind") == "server_definition",
+                "supports_direct_invocation": entry.get("kind") == "server_definition" and bool(entry.get("command") or entry.get("url")),
                 "health_status": (
                     "ready"
                     if entry.get("kind") == "server_definition" and entry.get("enabled", True)
@@ -304,7 +330,7 @@ def discover_tool_backends(mcp_entries: list[dict], plugins: list[dict], cli_ent
                 "auth_required": plugin.get("auth_required", "depends") not in {False, "false"},
                 "secret_requirements": plugin.get("secret_requirements", []),
                 "destructive_capabilities": plugin.get("destructive_capabilities", []),
-                "supports_direct_invocation": False,
+                "supports_direct_invocation": True,
                 "health_status": "ready" if plugin.get("enabled", True) else "disabled",
             }
         )
@@ -349,21 +375,22 @@ def observed_success_maps(benchmarks_payload: dict, routes_payload: dict) -> dic
         if route.get("simulated", False):
             continue
         task_family = route.get("task_family")
+        replay_score = float(route.get("replay_score", 0.0))
         successful = route.get("status") == "success" and route.get("critic_status") == "passed"
         executor_id = route.get("executor_id")
         router_id = route.get("router_id")
         if task_family and executor_id:
             key = (task_family, executor_id)
             executor_counts[key]["total"] += 1
-            executor_counts[key]["success"] += 1 if successful else 0
+            executor_counts[key]["success"] += replay_score if replay_score else (1 if successful else 0)
         if task_family and router_id:
             key = (task_family, router_id)
             router_counts[key]["total"] += 1
-            router_counts[key]["success"] += 1 if successful else 0
+            router_counts[key]["success"] += replay_score if replay_score else (1 if successful else 0)
         for backend_id in route.get("backend_ids", []):
             key = (task_family, backend_id)
             backend_counts[key]["total"] += 1
-            backend_counts[key]["success"] += 1 if successful else 0
+            backend_counts[key]["success"] += replay_score if replay_score else (1 if successful else 0)
 
     for key, counts in executor_counts.items():
         executor_rates[key] = counts["success"] / max(1, counts["total"])
@@ -389,10 +416,47 @@ def observed_success_maps(benchmarks_payload: dict, routes_payload: dict) -> dic
                 float(item.get("success_count", 0)) / max(1, int(item.get("run_count", 0))),
             )
 
-    replay_ready = [
-        route for route in routes_payload.get("routes", [])
-        if not route.get("simulated", False) and route.get("replay_eligible")
-    ]
+    for preference in routes_payload.get("route_preferences", []):
+        task_family = preference.get("task_family")
+        pref_score = float(preference.get("avg_replay_score", 0.0))
+        executor_id = preference.get("executor_id")
+        router_id = preference.get("router_id")
+        if task_family and executor_id:
+            executor_rates[(task_family, executor_id)] = max(
+                executor_rates.get((task_family, executor_id), 0.0),
+                pref_score,
+            )
+        if task_family and router_id:
+            router_rates[(task_family, router_id)] = max(
+                router_rates.get((task_family, router_id), 0.0),
+                pref_score,
+            )
+        for backend_id in preference.get("backend_ids", []):
+            backend_rates[(task_family, backend_id)] = max(
+                backend_rates.get((task_family, backend_id), 0.0),
+                pref_score,
+            )
+
+    replay_ready = sorted(
+        [
+            route for route in routes_payload.get("routes", [])
+            if not route.get("simulated", False) and route.get("replay_eligible")
+        ]
+        + [
+            {
+                "task_family": item.get("task_family"),
+                "run_id": item.get("last_run_id"),
+                "executor_id": item.get("executor_id"),
+                "router_id": item.get("router_id"),
+                "backend_ids": item.get("backend_ids", []),
+                "replay_score": item.get("avg_replay_score", 0.0),
+            }
+            for item in routes_payload.get("route_preferences", [])
+            if float(item.get("avg_replay_score", 0.0)) >= 0.7 and float(item.get("success_rate", 0.0)) >= 0.75
+        ],
+        key=lambda item: float(item.get("replay_score", 0.0)),
+        reverse=True,
+    )
 
     return {
         "executor_rates": executor_rates,
@@ -449,6 +513,8 @@ def select_executor(executors: list[dict], task: dict, observed: dict) -> tuple[
         if not executor.get("enabled", True) or executor.get("health_status") != "ready":
             continue
         score = 0.35
+        if task.get("dispatch_mode") == "remote_worker":
+            score += 0.5 if executor.get("executor_id") == "remote-worker" else -0.25
         if executor.get("executor_id") in profile["preferred_executor_ids"]:
             score += 0.3
         if task.get("requires_code", False):
@@ -548,6 +614,8 @@ def backend_score(backend: dict, desired_category: str, task: dict, observed: di
         score += 0.25
     if backend.get("kind") == "mcp_server":
         score += 0.1
+    if backend.get("kind") == "http_api":
+        score += 0.12
     if backend.get("kind") == "mcp_config":
         score -= 0.05
     if desired_category == "security" and "security" in " ".join(map(str, backend.get("capabilities", []))).lower():
@@ -645,6 +713,7 @@ def plan_execution(root: Path, task: dict, *, runtime_registry: dict | None = No
         "task_family": task.get("task_family", "unknown"),
         "quality_target": task.get("quality_target", "balanced"),
         "risk_level": task.get("risk_level", "medium"),
+        "dispatch_mode": task.get("dispatch_mode", "immediate"),
         "requires_code": bool(task.get("requires_code", False)),
         "requires_tools": bool(task.get("requires_tools", False)),
         "model_tier_path": tier_path,
@@ -686,6 +755,7 @@ def main() -> int:
     parser.add_argument("--complexity", default="medium")
     parser.add_argument("--risk-level", default="medium")
     parser.add_argument("--quality-target", default="balanced")
+    parser.add_argument("--dispatch-mode", default="immediate")
     parser.add_argument("--requires-code", action="store_true")
     parser.add_argument("--requires-tools", action="store_true")
     parser.add_argument("--high-stakes", action="store_true")
@@ -704,6 +774,7 @@ def main() -> int:
                 "complexity": args.complexity,
                 "risk_level": args.risk_level,
                 "quality_target": args.quality_target,
+                "dispatch_mode": args.dispatch_mode,
                 "requires_code": args.requires_code,
                 "requires_tools": args.requires_tools,
                 "high_stakes": args.high_stakes,

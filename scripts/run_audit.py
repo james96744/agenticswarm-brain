@@ -30,6 +30,10 @@ RUNTIME_CHECKS = (
     "scripts/update_featureset.py",
     "scripts/runtime_bridge.py",
     "scripts/operator_status.py",
+    "scripts/maintain_approvals.py",
+    "scripts/run_remote_worker.py",
+    "scripts/rebuild_learning.py",
+    "scripts/run_scheduler.py",
     "scripts/simulate_swarm.py",
     "scripts/reconcile_memory.py",
     "scripts/prune_topology.py",
@@ -38,6 +42,7 @@ RUNTIME_CHECKS = (
 
 MAINTENANCE_SCRIPTS = (
     ("scripts/update_featureset.py", "update_featureset"),
+    ("scripts/maintain_approvals.py", "maintain_approvals"),
     ("scripts/reconcile_memory.py", "reconcile_memory"),
     ("scripts/prune_topology.py", "prune_topology"),
     ("scripts/prepare_distillation.py", "prepare_distillation"),

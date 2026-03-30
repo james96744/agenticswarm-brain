@@ -1,37 +1,104 @@
 version: '1.0'
-last_updated: '2026-03-29'
+last_updated: '2026-03-30'
 description: Benchmark and telemetry rollup store for task-family routing, pruning,
   and adapter activation.
 task_family_benchmarks:
 - task_family: boilerplate_code
-  run_count: 4
-  success_count: 4
-  critic_pass_count: 4
-  replay_candidate_count: 4
-  avg_confidence: 0.92
+  run_count: 18
+  success_count: 18
+  critic_pass_count: 18
+  verified_execution_count: 18
+  replay_candidate_count: 18
+  avg_confidence: 0.8939
+  avg_latency_ms: 35.16
+  queued_run_count: 0
+  remote_dispatch_count: 0
   last_executor_id: python-workflow-runner
   last_router_id: anthropic-router
-  updated_at: '2026-03-29T23:26:39.711604+00:00'
+  updated_at: '2026-03-30T01:03:59.484909+00:00'
+- task_family: data_migration
+  run_count: 2
+  success_count: 2
+  critic_pass_count: 2
+  verified_execution_count: 2
+  replay_candidate_count: 2
+  avg_confidence: 0.985
+  avg_latency_ms: 246.5
+  queued_run_count: 0
+  remote_dispatch_count: 0
+  last_executor_id: python-workflow-runner
+  last_router_id: anthropic-router
+  updated_at: '2026-03-29T23:47:10.885926+00:00'
 model_benchmarks:
 - model_id: anthropic-router
   task_family: boilerplate_code
-  run_count: 4
-  success_count: 4
-  last_used_at: '2026-03-29T23:26:39.711610+00:00'
+  run_count: 18
+  success_count: 18
+  critic_pass_count: 18
+  avg_latency_ms: 35.16
+  last_used_at: '2026-03-30T01:03:59.484913+00:00'
+- model_id: anthropic-router
+  task_family: data_migration
+  run_count: 2
+  success_count: 2
+  critic_pass_count: 2
+  avg_latency_ms: 246.5
+  last_used_at: '2026-03-29T23:47:10.885926+00:00'
 agent_pair_metrics: []
 agent_value_metrics:
-- agent_id: python-workflow-runner
+- agent_id: codex-cli
   task_family: boilerplate_code
-  run_count: 4
-  success_count: 4
+  run_count: 2
+  success_count: 2
   critic_failure_count: 0
-  avg_confidence: 0.92
+  avg_confidence: 0.865
+  avg_latency_ms: 58.5
   prune_protected: false
-  value_add_per_token: 0.84
+  value_add_per_token: 0.89
   critic_rejection_rate: 0.0
   ignored_edit_rate: 0.0
-  updated_at: '2026-03-29T23:26:39.711618+00:00'
-adapter_benchmarks: []
+  updated_at: '2026-03-30T00:19:20.948973+00:00'
+- agent_id: python-workflow-runner
+  task_family: boilerplate_code
+  run_count: 16
+  success_count: 16
+  critic_failure_count: 0
+  avg_confidence: 0.8974
+  avg_latency_ms: 32.25
+  prune_protected: false
+  value_add_per_token: 0.89
+  critic_rejection_rate: 0.0
+  ignored_edit_rate: 0.0
+  updated_at: '2026-03-30T01:03:59.484919+00:00'
+- agent_id: python-workflow-runner
+  task_family: data_migration
+  run_count: 2
+  success_count: 2
+  critic_failure_count: 0
+  avg_confidence: 0.985
+  avg_latency_ms: 246.5
+  prune_protected: false
+  value_add_per_token: 0.985
+  critic_rejection_rate: 0.0
+  ignored_edit_rate: 0.0
+  updated_at: '2026-03-29T23:47:10.885926+00:00'
+adapter_benchmarks:
+- adapter_id: backend:cli-rg:boilerplate_code
+  task_family: boilerplate_code
+  run_count: 18
+  success_count: 18
+  avg_latency_ms: 19.22
+  dispatch_mode: immediate
+  last_status: success
+  updated_at: '2026-03-30T01:03:59.484922+00:00'
+- adapter_id: backend:mcp-vercel:data_migration
+  task_family: data_migration
+  run_count: 2
+  success_count: 2
+  avg_latency_ms: 246.5
+  dispatch_mode: immediate
+  last_status: success
+  updated_at: '2026-03-29T23:47:10.885926+00:00'
 notes:
 - Store observed quality, cost, latency, and critic-pass rates by task family.
 - Use `agent_pair_metrics` to drive merge recommendations and zombie-agent pruning.

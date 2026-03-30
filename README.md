@@ -13,12 +13,25 @@ It provides:
 - repository and environment discovery
 - capability registries for agents, skills, plugins, MCP, CLI tools, and models
 - runtime planning and direct execution adapters
+- direct invocation for CLI, HTTP-backed MCP, plugin, and queued remote-worker paths
 - a blackboard and control plane for events, runs, approvals, artifacts, and leases
+- a scheduler abstraction for deferred and remote-worker queue processing
+- a transport abstraction for remote workers, with shared-fabric and Redis-broker backends
 - git-aware self-maintenance and featureset refresh
-- learning surfaces for route replay, benchmark scoring, and training triplets
+- learning surfaces for route replay, benchmark scoring, verified route preferences, and training triplets
 - anatomy-based wrapper entrypoints so the system can think in brain terms without renaming the real implementation
 
 The result is a reusable brain scaffold that can be installed into many repos and then adapt itself to each one.
+
+## Distribution Tiers
+
+The architecture is now packaged explicitly in three tiers:
+
+- `Community`: filesystem-only remote transport, no external services, zero-hosting default
+- `Advanced`: same free core plus optional BYO Redis broker for stronger cross-host dispatch
+- `Enterprise`: reserved pluggable-broker tier for future NATS/SQS-style transports
+
+The active tier is declared in [`orchestrator/policies.yaml`](./orchestrator/policies.yaml) under `packaging_profile.active_tier` and mirrored in [`brain.schema.yaml`](./brain.schema.yaml) as `repository_profile.distribution_tier`.
 
 ## Core Idea
 
@@ -59,14 +72,22 @@ The runtime layer can:
 - resolve discovered inventory into executor, router, and backend candidates
 - plan task-family-specific execution bundles
 - invoke selected executors and backends directly
+- queue deferred and remote-worker dispatch through a file-first scheduler
+- dispatch remote-worker tasks into a shared transport fabric and import remote results back into the queue ledger
+- switch the remote-worker transport backend between shared filesystem and Redis without changing scheduler or worker entrypoints
 - gate risky or high-impact execution behind approvals
-- record runs, artifacts, backend calls, and critic outcomes
+- record runs, artifacts, backend calls, critic outcomes, latency, replay score, and verified execution telemetry
+- rebuild benchmark rollups and preferred route bundles from accumulated verified telemetry
 
 Key runtime components:
 
 - [`scripts/runtime_bridge.py`](./scripts/runtime_bridge.py)
 - [`scripts/execution_engine.py`](./scripts/execution_engine.py)
 - [`scripts/execute_task.py`](./scripts/execute_task.py)
+- [`scripts/run_scheduler.py`](./scripts/run_scheduler.py)
+- [`scripts/run_remote_worker.py`](./scripts/run_remote_worker.py)
+- [`scripts/maintain_approvals.py`](./scripts/maintain_approvals.py)
+- [`scripts/rebuild_learning.py`](./scripts/rebuild_learning.py)
 - [`capabilities/runtime.yaml`](./capabilities/runtime.yaml)
 
 ### Control Plane And Blackboard
@@ -74,7 +95,7 @@ Key runtime components:
 The system includes a durable file-first coordination layer:
 
 - [`telemetry/blackboard.yaml`](./telemetry/blackboard.yaml): append-only event log
-- [`telemetry/control_plane.yaml`](./telemetry/control_plane.yaml): tasks, runs, approvals, artifacts, leases
+- [`telemetry/control_plane.yaml`](./telemetry/control_plane.yaml): tasks, runs, approvals, artifacts, leases, queue items, workers
 - [`scripts/control_plane.py`](./scripts/control_plane.py): store interfaces and lease handling
 - [`scripts/operator_status.py`](./scripts/operator_status.py): compact operator view
 
@@ -101,6 +122,7 @@ The current scaffold records enough information to support:
 
 - route replay
 - benchmark rollups by task family
+- verified route preferences ranked from real execution history
 - critic pass/fail tracking
 - contradiction-aware memory updates
 - training triplet accumulation
@@ -139,7 +161,11 @@ training/       adapter and distillation job planning
 
 - [`scripts/runtime_bridge.py`](./scripts/runtime_bridge.py): runtime registry and planning
 - [`scripts/execute_task.py`](./scripts/execute_task.py): live execution entrypoint
+- [`scripts/run_scheduler.py`](./scripts/run_scheduler.py): queue dispatcher and remote-result importer
+- [`scripts/run_remote_worker.py`](./scripts/run_remote_worker.py): remote-fabric worker poller
+- [`scripts/maintain_approvals.py`](./scripts/maintain_approvals.py): stale approval expiry and approval-state cleanup
 - [`scripts/operator_status.py`](./scripts/operator_status.py): runtime and learning summary
+- [`scripts/rebuild_learning.py`](./scripts/rebuild_learning.py): rebuild benchmark rollups and replay preferences from route history
 - [`scripts/update_featureset.py`](./scripts/update_featureset.py): git-aware featureset refresh
 
 ### Anatomy Wrappers
@@ -228,6 +254,34 @@ That first audit handles discovery, validation, runtime checks, maintenance, tel
 ./.venv/bin/python scripts/update_featureset.py --repo-root . --dry-run
 ```
 
+### Process Deferred Or Remote Work
+
+```bash
+./.venv/bin/python scripts/run_scheduler.py --repo-root . --dry-run
+./.venv/bin/python scripts/run_scheduler.py --repo-root . --dispatch-mode remote_worker --process-limit 1
+./.venv/bin/python scripts/run_remote_worker.py --repo-root . --process-limit 1
+```
+
+The scheduler can dispatch `remote_worker` jobs either into the shared fabric under [`telemetry/remote_fabric`](./telemetry/remote_fabric) or into a Redis broker when the active packaging tier allows it and `remote_worker_policy.transport_mode` is set to `redis_broker`. The remote worker consumes those transport envelopes, executes them, and writes results back for the scheduler to reconcile into the control plane.
+
+### Expire Stale Approvals
+
+```bash
+./.venv/bin/python scripts/maintain_approvals.py --repo-root . --dry-run
+./.venv/bin/python scripts/maintain_approvals.py --repo-root .
+```
+
+This converts stale pending approvals into explicit `expired` state and closes the corresponding approval-gated dispatch runs instead of leaving them permanently pending.
+
+### Rebuild Learning From Verified Telemetry
+
+```bash
+./.venv/bin/python scripts/rebuild_learning.py --repo-root . --dry-run
+./.venv/bin/python scripts/rebuild_learning.py --repo-root .
+```
+
+This compacts accumulated real execution telemetry into refreshed benchmark rollups and ranked `route_preferences` inside [`telemetry/routes.yaml`](./telemetry/routes.yaml), which the planner can then reuse for replay-aware routing.
+
 ### Exercise Anatomy Wrappers
 
 ```bash
@@ -303,9 +357,9 @@ The repository currently provides:
 - a live runtime planning and execution layer
 - a durable blackboard and control plane
 - an anatomy-based orchestration model with wrapper entrypoints
-- git-aware self-maintenance and route-learning surfaces
+- git-aware self-maintenance, queued remote work, and replay-aware learning surfaces
 
-The main expansion areas from here are broader backend coverage, richer remote-worker scheduling, and deeper learning loops built from larger volumes of verified execution telemetry.
+The main expansion areas from here are even broader backend adapters, richer remote-worker transport beyond the local file-first scheduler, and larger-scale verified telemetry ingestion for future route adaptation.
 
 ## Repository
 

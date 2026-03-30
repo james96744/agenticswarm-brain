@@ -5,6 +5,7 @@
   "properties": {
     "version": { "type": "string" },
     "routes": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "route_preferences": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
     "plasticity_recommendations": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
     "training_triplets": { "type": "array", "items": { "type": "object", "additionalProperties": true } }
   },

@@ -229,6 +229,8 @@ Run it with:
 ./.venv/bin/python scripts/execute_task.py --repo-root . --request-file request.yaml
 ```
 
+To queue work instead of running it immediately, add `dispatch_mode: deferred` or `dispatch_mode: remote_worker` to the request.
+
 This writes live task, run, approval, artifact, and event data into:
 
 - [`telemetry/blackboard.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/blackboard.yaml)
@@ -251,10 +253,62 @@ Use:
 This reports:
 
 - runtime executor/router/backend readiness
+- active packaging tier and allowed transport modes
 - recent runs and failures
 - pending approvals
-- route replay quality
+- scheduler queue depth and worker heartbeat state
+- transport fabric inbox, claim, result, and remote worker presence
+- route replay quality and ranked route preferences
 - benchmark and learning rollups
+
+## 10A. Process Deferred And Remote-Worker Queues
+
+Use:
+
+```bash
+./.venv/bin/python scripts/run_scheduler.py --repo-root . --dry-run
+./.venv/bin/python scripts/run_scheduler.py --repo-root . --dispatch-mode remote_worker --process-limit 1
+./.venv/bin/python scripts/run_remote_worker.py --repo-root . --process-limit 1
+```
+
+This claims pending queue items from [`telemetry/control_plane.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/control_plane.yaml), registers worker heartbeats, and either executes them locally or dispatches `remote_worker` jobs into the configured transport backend.
+
+The default backend is the shared fabric under [`telemetry/remote_fabric`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/remote_fabric). You can also select Redis by setting `remote_worker_policy.transport_mode: redis_broker` in [`orchestrator/policies.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/orchestrator/policies.yaml) and exporting `REDIS_URL`, or by passing `--transport-mode redis` to the scheduler and remote worker commands.
+
+Tier behavior:
+
+- `community`: only `shared_filesystem_fabric` is allowed
+- `advanced`: `shared_filesystem_fabric` or optional BYO `redis_broker`
+- `enterprise`: reserved for future pluggable brokers such as NATS and SQS
+
+The remote worker consumes those transport envelopes, executes the task, and writes result envelopes so the scheduler can close the original dispatch run and queue item cleanly.
+
+## 10B. Expire Stale Pending Approvals
+
+Use:
+
+```bash
+./.venv/bin/python scripts/maintain_approvals.py --repo-root . --dry-run
+./.venv/bin/python scripts/maintain_approvals.py --repo-root .
+```
+
+This converts long-lived pending approvals into explicit `expired` state and updates the corresponding task and run records so the control plane no longer carries abandoned approval-gated work as indefinitely pending.
+
+## 10C. Rebuild Learning From Verified Telemetry
+
+Use:
+
+```bash
+./.venv/bin/python scripts/rebuild_learning.py --repo-root . --dry-run
+./.venv/bin/python scripts/rebuild_learning.py --repo-root .
+```
+
+This compacts accumulated real route telemetry into:
+
+- refreshed rollups in [`capabilities/benchmarks.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/capabilities/benchmarks.yaml)
+- ranked `route_preferences` in [`telemetry/routes.yaml`](/Users/j/Desktop/Lahaolesolutions/agenticswarm%20creation/telemetry/routes.yaml)
+
+Use this after larger batches of verified executions when you want the planner to bias more strongly toward historically successful executor, router, and backend bundles.
 
 ## 11. Reconcile Memory Conflicts
 
@@ -340,4 +394,5 @@ Use this order in practice:
 - `update_featureset.py` adds git-aware featureset refresh and safe fast-forward behavior.
 - `simulate_swarm.py` exercises policy logic; it does not call real models.
 - `prepare_distillation.py` prepares jobs; it does not train adapters itself.
+- `rebuild_learning.py` is the batch rollup path for replay-aware learning from accumulated verified telemetry.
 - Keep dry-run as the default for first contact with any unfamiliar repository.

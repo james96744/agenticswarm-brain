@@ -68,11 +68,15 @@ def main() -> int:
         ("cerebellum", "simulate", ["--repo-root", str(root), "--dry-run"]),
         ("cerebellum", "prune", ["--repo-root", str(root), "--dry-run"]),
         ("cerebellum", "distill", ["--repo-root", str(root), "--dry-run"]),
+        ("limbic_system", "learn", ["--repo-root", str(root), "--dry-run"]),
         ("limbic_system", "reconcile", ["--repo-root", str(root), "--dry-run"]),
         ("neurons", "execute", ["--repo-root", str(root), "--request-file", request_file]),
         ("dendrites", "map", ["--repo-root", str(root), "--dry-run"]),
         ("dendrites", "refresh", ["--repo-root", str(root), "--dry-run"]),
         ("brainstem", "execute", ["--repo-root", str(root), "--request-file", request_file]),
+        ("brainstem", "approvals", ["--repo-root", str(root), "--dry-run"]),
+        ("brainstem", "remote", ["--repo-root", str(root), "--dry-run"]),
+        ("brainstem", "schedule", ["--repo-root", str(root), "--dry-run"]),
         ("brainstem", "status", ["--repo-root", str(root)]),
     ]
 

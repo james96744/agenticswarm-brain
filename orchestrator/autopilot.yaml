@@ -11,6 +11,7 @@ autopilot:
   runtime_checks_on_startup_recheck: false
   maintenance:
     update_featureset: true
+    maintain_approvals: true
     reconcile_memory: true
     prune_topology: true
     prepare_distillation: true
@@ -32,12 +33,14 @@ autopilot:
         - telemetry/control_plane.lock
         - telemetry/autopilot.stdout.log
         - telemetry/autopilot.stderr.log
+        - telemetry/remote_fabric/**
       ignore_for_update_check:
         - telemetry/blackboard.yaml
         - telemetry/control_plane.yaml
         - telemetry/routes.yaml
         - telemetry/discovery_state.yaml
         - telemetry/autopilot_state.yaml
+        - telemetry/remote_fabric/**
         - memory/conflicts.yaml
         - training/jobs.yaml
         - training/adapters.yaml

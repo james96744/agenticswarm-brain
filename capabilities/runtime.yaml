@@ -1,5 +1,5 @@
 version: '1.0'
-last_updated: '2026-03-29'
+last_updated: '2026-03-30'
 description: Runtime registry that resolves discovered capabilities into executable
   agent runtimes, model routers, and tool backends.
 registry_defaults:
@@ -172,6 +172,33 @@ agent_executors:
   auth_required: false
   secret_requirements: []
   health_status: ready
+- executor_id: remote-worker
+  enabled: true
+  kind: remote_worker
+  command: null
+  path: null
+  runtime: queued_dispatch
+  scope: global
+  source: runtime_template
+  supports_code: true
+  supports_tools: true
+  supports_streaming: false
+  supports_direct_invocation: false
+  invocation_mode: queued_dispatch
+  supported_task_families:
+  - coding
+  - research
+  - review
+  - security_sensitive
+  - architecture_decision
+  - data_migration
+  strengths:
+  - deferred_execution
+  - remote_capacity
+  - queue_dispatch
+  auth_required: false
+  secret_requirements: []
+  health_status: ready
 model_routers:
 - router_id: anthropic-router
   enabled: true
@@ -289,7 +316,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-vercel
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -306,7 +333,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-stripe
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -323,7 +350,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-supabase
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -340,7 +367,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-cloudflare-api
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -357,7 +384,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-hf-mcp-server
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -544,7 +571,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-huggingface-skills
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -561,7 +588,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-adspirer
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -663,7 +690,7 @@ tool_backends:
   health_status: configured
 - backend_id: mcp-slack
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -680,7 +707,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-canva
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -697,7 +724,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-figma
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -714,7 +741,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-hubspot
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -731,7 +758,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-amplitude
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -748,7 +775,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-notion
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -765,7 +792,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-ahrefs
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -782,7 +809,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-similarweb
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -799,7 +826,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-klaviyo
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -816,7 +843,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-google-calendar
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -833,7 +860,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-gmail
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -850,7 +877,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-close
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -867,7 +894,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-clay
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -884,7 +911,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-zoominfo
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -901,7 +928,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-atlassian
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -918,7 +945,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-fireflies
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -935,7 +962,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-ms365
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -952,7 +979,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-apollo
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -969,7 +996,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-outreach
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -986,7 +1013,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-asana
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1003,7 +1030,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-linear
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1020,7 +1047,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-monday
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1037,7 +1064,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-clickup
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1054,7 +1081,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-pendo
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1071,7 +1098,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-intercom
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1101,7 +1128,7 @@ tool_backends:
   auth_required: false
   secret_requirements: []
   destructive_capabilities: []
-  supports_direct_invocation: true
+  supports_direct_invocation: false
   health_status: ready
 - backend_id: mcp-databricks
   enabled: true
@@ -1118,11 +1145,11 @@ tool_backends:
   auth_required: false
   secret_requirements: []
   destructive_capabilities: []
-  supports_direct_invocation: true
+  supports_direct_invocation: false
   health_status: ready
 - backend_id: mcp-bigquery
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1139,7 +1166,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-hex
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1156,7 +1183,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-box
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1173,7 +1200,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-egnyte
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1190,7 +1217,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-docusign
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1207,7 +1234,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-guru
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1224,7 +1251,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-github
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1241,7 +1268,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-pagerduty
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1258,7 +1285,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-datadog
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1275,7 +1302,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-pubmed
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1292,7 +1319,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-biorender
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1309,7 +1336,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-biorxiv
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1326,7 +1353,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-c-trials
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1343,7 +1370,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-chembl
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1360,7 +1387,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-synapse
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1377,7 +1404,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-wiley
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1394,7 +1421,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-owkin
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1411,7 +1438,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-ot
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1441,11 +1468,11 @@ tool_backends:
   auth_required: false
   secret_requirements: []
   destructive_capabilities: []
-  supports_direct_invocation: true
+  supports_direct_invocation: false
   health_status: ready
 - backend_id: mcp-servicenow
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1462,7 +1489,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-gong
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1479,7 +1506,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-microsoft-365
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1496,7 +1523,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-granola
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config
@@ -1513,7 +1540,7 @@ tool_backends:
   health_status: ready
 - backend_id: mcp-common-room
   enabled: true
-  kind: mcp_server
+  kind: http_api
   category: mcp
   scope: global
   source: mcp:global_mcp_config

@@ -8,7 +8,9 @@
     "runs": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
     "approvals": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
     "artifacts": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
-    "leases": { "type": "array", "items": { "type": "object", "additionalProperties": true } }
+    "leases": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "queue_items": { "type": "array", "items": { "type": "object", "additionalProperties": true } },
+    "workers": { "type": "array", "items": { "type": "object", "additionalProperties": true } }
   },
   "additionalProperties": true
 }

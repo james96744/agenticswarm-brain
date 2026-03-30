@@ -208,6 +208,51 @@ plugin_trust_policy:
   require_data_classification: true
   human_approval_for_destructive_plugins: true
 
+packaging_profile:
+  active_tier: community
+  tiers:
+    community:
+      description: Free default distribution with filesystem-only transport and no external services.
+      allows_external_services: false
+      byo_infrastructure: false
+      allowed_remote_transport_modes:
+        - shared_filesystem_fabric
+      default_remote_transport_mode: shared_filesystem_fabric
+    advanced:
+      description: Free core plus optional BYO Redis broker for stronger cross-host dispatch.
+      allows_external_services: true
+      byo_infrastructure: true
+      allowed_remote_transport_modes:
+        - shared_filesystem_fabric
+        - redis_broker
+      default_remote_transport_mode: shared_filesystem_fabric
+    enterprise:
+      description: Future pluggable broker tier for Redis, NATS, SQS, and other managed transports.
+      allows_external_services: true
+      byo_infrastructure: true
+      allowed_remote_transport_modes:
+        - shared_filesystem_fabric
+        - redis_broker
+        - nats_broker
+        - sqs_broker
+      default_remote_transport_mode: redis_broker
+
+remote_worker_policy:
+  transport_mode: shared_filesystem_fabric
+  fabric_root: telemetry/remote_fabric
+  allow_local_fallback: true
+  heartbeat_timeout_seconds: 300
+  claim_timeout_seconds: 900
+  redis:
+    url_env_var: REDIS_URL
+    url: null
+    queue_prefix: agenticswarm-brain
+
+approval_policy:
+  expire_stale_pending: true
+  stale_after_minutes: 30
+  expiry_actor: brainstem-maintenance
+
 blackboard_policy:
   required_fields:
     - event_type

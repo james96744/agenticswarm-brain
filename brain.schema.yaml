@@ -5,6 +5,7 @@ brain_manifest:
     stack: []
     risk_level: medium
     orchestration_profile: adaptive
+    distribution_tier: community
   anatomy_registry:
     path: orchestrator/anatomy_registry.yaml
     wrapper_entrypoints:

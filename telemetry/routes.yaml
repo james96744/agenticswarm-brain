@@ -1,5 +1,5 @@
 version: '1.0'
-last_updated: '2026-03-29'
+last_updated: '2026-03-30'
 description: Route telemetry store for replay, structural plasticity, and model-tier
   optimization.
 routes:
@@ -115,9 +115,459 @@ routes:
   critic_status: passed
   replay_eligible: true
   timestamp: '2026-03-29T23:26:39.705145+00:00'
+- task_id: http-backend-demo
+  run_id: run-c092f7348289
+  task_family: data_migration
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  - tier_2_critic
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - mcp-vercel
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.97
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.97
+  latency_ms: 374
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-29T23:46:35.347161+00:00'
+- task_id: http-backend-demo
+  run_id: run-06883ac249d1
+  task_family: data_migration
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  - tier_2_critic
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - mcp-vercel
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 1.0
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 1.0
+  latency_ms: 119
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-29T23:47:10.885926+00:00'
+- task_id: remote-queue-demo
+  run_id: run-c8447e78686a
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: codex-cli
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.84
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.84
+  latency_ms: 77
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-29T23:47:11.074328+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-0ec484666c37
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 61
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-29T23:49:21.442181+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-abb62699ee94
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 51
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-29T23:49:24.437936+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-72d5743c3ec5
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 62
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-29T23:59:52.813111+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-ba443615325d
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 51
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-29T23:59:55.960273+00:00'
+- task_id: remote-fabric-demo
+  run_id: run-f567e44f2b51
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: codex-cli
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 40
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-30T00:19:20.938950+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-26ea06db8fc0
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 45
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-30T00:21:12.944829+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-ec36ffaab86f
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 30
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-30T00:21:15.282475+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-a90eceb9c205
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 34
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-30T00:22:37.577157+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-08596b4e9ec9
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 31
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-30T00:22:40.177971+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-e09699de142d
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 57
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-30T01:02:50.104863+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-7d31331e4fe3
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 29
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-30T01:02:52.532780+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-4838556a0c6e
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 34
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-30T01:03:56.857468+00:00'
+- task_id: anatomy-wrapper-safe-demo
+  run_id: run-808872e5a90c
+  task_family: boilerplate_code
+  simulated: false
+  status: success
+  model_tier_path:
+  - tier_0_router
+  - tier_1_worker
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  queue_name: null
+  quality_target: balanced
+  risk_level: low
+  confidence: 0.89
+  critic_status: passed
+  verified_execution: true
+  replay_eligible: true
+  replay_score: 0.89
+  latency_ms: 31
+  backend_success_count: 1
+  backend_failure_count: 0
+  timestamp: '2026-03-30T01:03:59.471139+00:00'
 plasticity_recommendations: []
 training_triplets: []
+route_preferences:
+- task_family: boilerplate_code
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  run_count: 6
+  verified_execution_count: 6
+  replay_candidate_count: 6
+  success_rate: 1.0
+  avg_replay_score: 0.9633
+  avg_latency_ms: 18.67
+  last_run_id: run-abb62699ee94
+  updated_at: '2026-03-29T23:49:24.437936+00:00'
+  rank: 1
+- task_family: boilerplate_code
+  executor_id: codex-cli
+  router_id: anthropic-router
+  backend_ids:
+  - cli-rg
+  dispatch_mode: immediate
+  run_count: 1
+  verified_execution_count: 1
+  replay_candidate_count: 1
+  success_rate: 1.0
+  avg_replay_score: 0.84
+  avg_latency_ms: 77.0
+  last_run_id: run-c8447e78686a
+  updated_at: '2026-03-29T23:47:11.074328+00:00'
+  rank: 2
+- task_family: data_migration
+  executor_id: python-workflow-runner
+  router_id: anthropic-router
+  backend_ids:
+  - mcp-vercel
+  dispatch_mode: immediate
+  run_count: 2
+  verified_execution_count: 2
+  replay_candidate_count: 2
+  success_rate: 1.0
+  avg_replay_score: 0.985
+  avg_latency_ms: 246.5
+  last_run_id: run-06883ac249d1
+  updated_at: '2026-03-29T23:47:10.885926+00:00'
+  rank: 1
 notes:
 - Append route records here or partition by date in larger repositories.
+- Use `route_preferences` to store verified high-signal route summaries for replay-aware
+  planning.
 - Use `plasticity_recommendations` for merge and prune proposals before applying topology
   changes.

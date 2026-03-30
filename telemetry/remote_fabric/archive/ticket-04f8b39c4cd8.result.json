@@ -1,0 +1,11 @@
+{
+  "completed_at": "2026-03-30T00:19:20.998272+00:00",
+  "dispatch_run_id": "run-95a5f4ddc1a0",
+  "linked_run_id": "run-f567e44f2b51",
+  "queue_item_id": "queue-9937ec600247",
+  "reason": null,
+  "status": "success",
+  "task_id": "remote-fabric-demo",
+  "ticket_id": "ticket-04f8b39c4cd8",
+  "worker_id": "remote-fabric-worker"
+}
